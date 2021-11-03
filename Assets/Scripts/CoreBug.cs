@@ -6,13 +6,10 @@ public class CoreBug : MonoBehaviour
 {
     public float bug_movement_speed = 1f;
 
-    [SerializeField]
     public HiveGenerator hiveGrid;
 
-    [SerializeField]
-    public HiveCell destionation;
+    public HiveCell destination;
 
-    [SerializeField]
     public HiveCell current_cell;
 
     [SerializeField]
@@ -45,27 +42,27 @@ public class CoreBug : MonoBehaviour
         {
             if (current_cell == null)
                 current_cell = walkable_cells[Random.Range(0, walkable_cells.Count - 1 )];
-                destionation = walkable_cells[Random.Range(0, walkable_cells.Count - 1)];
+                destination = walkable_cells[Random.Range(0, walkable_cells.Count - 1)];
         }
     }
 
     public void MoveToCell()
     {
-        if (destionation == null || current_cell == null)
+        if (destination == null || current_cell == null)
         {
             Debug.Log("new path");
             MoveAround();
             return;
         }
 
-        if (current_cell != destionation)
+        if (current_cell != destination)
         {
             // move to
             Debug.Log("start to move");
 
             if (path.Count == 0)
             {
-                path = AiController.GetPath(current_cell, destionation);
+                path = AiController.GetPath(current_cell, destination);
                 Debug.Log("generating new path " + path.Count);
 
             }
@@ -95,14 +92,14 @@ public class CoreBug : MonoBehaviour
             else
             {
                 Debug.Log("path empty");
-                destionation = null;
+                destination = null;
                 path.Clear();
             }
         }
         else
         {
             Debug.Log("same");
-            destionation = null;
+            destination = null;
         }
 
 
