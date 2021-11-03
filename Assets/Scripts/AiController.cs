@@ -63,7 +63,8 @@ public class AiController : MonoBehaviour
                     neighbour.gCost = newMovementCost;
                     neighbour.hCost = GetNodeDistance(neighbour, targetNode);
 
-                    parents.Add(neighbour, currentNode);
+                    if(!parents.ContainsKey(neighbour))
+                        parents.Add(neighbour, currentNode);
 
                     if (openSet.Contains(neighbour) == false)
                     {
