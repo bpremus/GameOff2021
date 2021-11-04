@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: GrassMaterial
+  m_Shader: {fileID: -6465566751694194690, guid: 672230026b3e91f45872a6c56e3dfc95, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_7efa504971e34a85ab3f2a56952b4ebb:
+        m_Texture: {fileID: 2800000, guid: 7790ac0d66430cb4898ad0ab3c15b30f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_fbcbb56bad0b4f85accc54be2e8e05c2:
+        m_Texture: {fileID: 2800000, guid: a23628079ba08854fa94ac42f4229264, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_ffbfd705d246467c9b952c7e72ec0d41:
+        m_Texture: {fileID: 2800000, guid: 37a06b8c970eb2a48a869fd643cf6fb1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_a05572fa251840c089d2e24e1fba8ef7: 0.18
+    - Vector1_acdd9feb0f9a497cad2fa4ff33fbd1aa: 0.8
+    m_Colors:
+    - Vector2_529ad6cb8c144336a495b8d04c4bb92c: {r: 3, g: 3, b: 0, a: 0}
+  m_BuildTextureStacks: []

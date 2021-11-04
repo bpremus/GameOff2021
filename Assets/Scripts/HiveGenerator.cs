@@ -32,7 +32,7 @@ public class HiveGenerator : MonoBehaviour
             List<HiveCell> rows = new List<HiveCell>(); 
             for (int j = 0; j < height; j++)
             {             
-                Vector3 pos = new Vector3(i * offset, 0, j * offset);
+                Vector3 pos = new Vector3(i * offset - width / 2, j * offset - height , 0);
                 HiveCell c = CreateTile(pos);
                 c.SetNode(i, j);
                 rows.Add(c);

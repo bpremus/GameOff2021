@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 276049932383703695}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0.1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8152721848560356806}
   m_RootOrder: 0
@@ -128,6 +128,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   room_prefabs:
   - {fileID: 5241716969265901155, guid: 2e8664277a4c4704182458a771c84c73, type: 3}
+  x: 0
+  y: 0
+  gCost: 0
+  hCost: 0
+  walkable: 0
+  dbg_select: 0
+  neighbour_cells:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!65 &-2081067011476754601
 BoxCollider:
   m_ObjectHideFlags: 0
