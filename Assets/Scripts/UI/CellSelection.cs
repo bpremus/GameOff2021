@@ -13,6 +13,7 @@ public class CellSelection : MonoBehaviour
     [SerializeField] private Color clickColor;
     [SerializeField] private Sprite hoverImage;
     [SerializeField] private Sprite selectionImage;
+    [SerializeField] private Vector3 selectionScaleanimation;
     private CanvasGroup cgroup;
     private BuildManager buildManager;
     private bool inSelection;
@@ -26,6 +27,7 @@ public class CellSelection : MonoBehaviour
     {
         selectedCell = null;
         cgroup.alpha = 0;
+        ScaleUp();
     }
     private void Update()
     {
@@ -54,6 +56,7 @@ public class CellSelection : MonoBehaviour
 
 
                 cellSelectionImg.SetActive(true);
+                
                 cgroup.alpha = 1;
 
             }
@@ -76,6 +79,15 @@ public class CellSelection : MonoBehaviour
             cellSelectionImg.SetActive(false);
         }
     }
+    private void ScaleUp()
+    {
+        cellSelectionImg.transform.LeanScale(selectionScaleanimation, 1.2f).setOnComplete(ScaleDown);
+    }
+    private void ScaleDown()
+    {
+        cellSelectionImg.transform.LeanScale(new Vector3(1, 1, 1), 0.8f).setOnComplete(ScaleUp);
+    }
+
     public void Unselect()
     {
         selectedCell = null;
