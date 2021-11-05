@@ -1,0 +1,9 @@
+<?xml version='1.0'?>
+<WwiseSettings>
+    <CreateWwiseGlobal>true</CreateWwiseGlobal>
+    <CreateWwiseListener>true</CreateWwiseListener>
+    <SoundbankPath>Audio/GeneratedSoundBanks</SoundbankPath>
+    <WwiseProjectPath>../../Wwise_GameOff2021/Wwise_GameOff2021.wproj</WwiseProjectPath>
+    <WwiseInstallationPathWindows>C:\Program Files (x86)\Audiokinetic\Wwise 2019.2.13.7577</WwiseInstallationPathWindows>
+    <WwiseInstallationPathMac></WwiseInstallationPathMac>
+</WwiseSettings>
