@@ -14,8 +14,8 @@ public class CellBuildUI : MonoBehaviour
     private void Awake()
     {
         cellSelection = FindObjectOfType<CellSelection>();
-        offScreenPos = Screen.width + 10;
-        targetPos = offScreenPos - 160f;
+      //  offScreenPos = Screen.width + 180;
+     //   targetPos = offScreenPos - 50f;
     }
     private void Start()
     {
@@ -34,7 +34,7 @@ public class CellBuildUI : MonoBehaviour
         windowActive = true;
         buildMenu.SetActive(true);
         LeanTween.alphaCanvas(buildMenu.GetComponent<CanvasGroup>(), 1, 0.35f);
-        LeanTween.moveLocalX(buildMenu, targetPos, 0.2f).setEase(ease);
+     //   LeanTween.moveLocalX(buildMenu, targetPos, 0.2f).setEase(ease);
     }
     [ContextMenu("Manual UI Hide")]
     public void HideUI()
@@ -42,7 +42,7 @@ public class CellBuildUI : MonoBehaviour
         if (!windowActive) return;
         windowActive = false;
         cellSelection.selectedCell = null;
-        LeanTween.moveLocalX(buildMenu, offScreenPos, 0.2f);
+    //    LeanTween.moveLocalX(buildMenu, offScreenPos, 0.2f);
         LeanTween.alphaCanvas(buildMenu.GetComponent<CanvasGroup>(), 0, 0.15f).setOnComplete(DisableGO);
     }
     private void DisableGO() => buildMenu.SetActive(false);
