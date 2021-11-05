@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7700387160754370543}
   - component: {fileID: 1158478787794897669}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HiveRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4740273766890056758}
   - component: {fileID: 6809154615757576166}
   - component: {fileID: 7715150281733135621}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
