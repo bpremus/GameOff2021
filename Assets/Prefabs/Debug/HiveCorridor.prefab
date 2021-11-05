@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7700387160754370543}
   - component: {fileID: 1158478787794897669}
   m_Layer: 6
-  m_Name: HiveRoom
+  m_Name: HiveCorridor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -103,7 +103,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ab6c593e687a078478a4ac2064f17c44, type: 2}
+  - {fileID: 2100000, guid: 595173958820a434cb0dd0dc928b36fc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

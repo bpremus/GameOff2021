@@ -20,9 +20,9 @@ public class HiveGenerator : MonoBehaviour
     public void Start()
     {
         BuildGrid();
-        BuildTopLevel();
-        BuildOusideEntry();
-        Setneighbours();
+     //   BuildTopLevel();
+     //   BuildOusideEntry();
+     //   Setneighbours();
     }
 
     public void BuildGrid()

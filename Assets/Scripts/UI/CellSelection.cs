@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 public class CellSelection : MonoBehaviour
 {
@@ -13,8 +14,14 @@ public class CellSelection : MonoBehaviour
     [SerializeField] private Sprite hoverImage;
     [SerializeField] private Sprite selectionImage;
     private CanvasGroup cgroup;
+    private BuildManager buildManager;
     private bool inSelection;
-    private void Awake() => cgroup = cellSelectionImg.GetComponent<CanvasGroup>();
+    private void Awake() 
+    { 
+        cgroup = cellSelectionImg.GetComponent<CanvasGroup>();
+        buildManager = FindObjectOfType<BuildManager>();
+        if (buildManager == null) Debug.LogError("Build manager not found!");
+    }
     private void Start()
     {
         selectedCell = null;
@@ -24,6 +31,7 @@ public class CellSelection : MonoBehaviour
     {
         //needs to be optimized
 
+        if (EventSystem.current.IsPointerOverGameObject()) return;
 
         //Check if player is aiming at cell
         RaycastHit hit;
@@ -68,6 +76,10 @@ public class CellSelection : MonoBehaviour
             cellSelectionImg.SetActive(false);
         }
     }
+    public void Unselect()
+    {
+        selectedCell = null;
+    }
     private void SwitchSelection(GameObject objHit)
     {
         //*Aiming at cell and clicked*
@@ -103,6 +115,7 @@ public class CellSelection : MonoBehaviour
         cellSelectionImg.GetComponent<Image>().sprite = selectionImage;
         cellSelectionImg.GetComponent<RectTransform>().sizeDelta = new Vector2(1.3f, 1.3f);
 
+        buildManager.SetCell(selectedCell);
     }
 
 
