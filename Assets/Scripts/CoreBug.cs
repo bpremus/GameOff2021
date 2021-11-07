@@ -5,110 +5,104 @@ using UnityEngine;
 public class CoreBug : BugMovement
 {
 
-    /*
+    public Queue<HiveCell> path = new Queue<HiveCell>();
+    public HiveCell current_cell = null;
+    public HiveCell destination_cell = null;
+    public HiveCell target_cell = null;
+    public HiveCell asigned_cell = null;
 
-    public float bug_movement_speed = 1f;
+    Vector3 z_offset = new Vector3(0, 0, 1);
 
-    public HiveGenerator hiveGrid;
-
-    public HiveCell destination;
-
-    public HiveCell current_cell;
-
-    [SerializeField]
-    List<HiveCell> path = new List<HiveCell>();
-
-    public void Update()
+    public virtual void AssignToAroom(HiveCell cell)
     {
-        MoveToCell();
+
     }
 
-
-    // Prototype movent, need to be optimized
-
-    public void MoveAround()
+    public void CurrentPositon(HiveCell position)
     {
-        List<HiveCell> walkable_cells = new List<HiveCell>();
-        for (int i = 0; i < hiveGrid.cells.Count; i++)
-        {
-            for (int j = 0; j < hiveGrid.cells[i].Count; j++)
-            {
-                HiveCell c = hiveGrid.cells[i][j];
-                if (c.walkable == 1)
-                {
-                    walkable_cells.Add(c);
-                }
-            }
-        }
-     
-        if (walkable_cells.Count > 0)
-        {
-            if (current_cell == null)
-                current_cell = walkable_cells[Random.Range(0, walkable_cells.Count - 1 )];
-                destination = walkable_cells[Random.Range(0, walkable_cells.Count - 1)];
-        }
+        current_cell = position;
+        transform.position = current_cell.transform.position + z_offset;
+        this.target = current_cell.transform.position;
     }
 
-    public void MoveToCell()
+    public void GoToAndBack(HiveCell start, HiveCell destination, float wait_timer = 0)
     {
-        if (destination == null || current_cell == null)
+        target_cell = destination;
+        destination_cell = start;
+
+        List<HiveCell> move_path = AiController.GetPath(start, destination);
+        for (int i = 0; i < move_path.Count; i++)
         {
-            Debug.Log("new path");
-            MoveAround();
-            return;
+            path.Enqueue(move_path[i]);
         }
 
-        if (current_cell != destination)
+        path.Enqueue(destination);
+        move_path.Reverse();
+
+        for (int i = 0; i < move_path.Count; i++)
         {
-            // move to
-            Debug.Log("start to move");
+            path.Enqueue(move_path[i]);
+        }
 
-            if (path.Count == 0)
+        this.target = current_cell.transform.position + z_offset;
+    }
+
+    public void GoTo(HiveCell destination)
+    {
+        target_cell = destination;
+        destination_cell = destination;
+
+        List<HiveCell> move_path = AiController.GetPath(current_cell, destination);
+        for (int i = 0; i < move_path.Count; i++)
+        {
+            path.Enqueue(move_path[i]);
+        }
+
+        this.target = current_cell.transform.position + z_offset;
+    }
+
+    public override void WalkPath()
+    {
+        if (path.Count > 0)
+        {
+            HiveCell c = path.Peek();    
+            float t = Vector3.Distance(c.transform.position + z_offset, transform.position);
+            if (t <= 0.5f)
             {
-                path = AiController.GetPath(current_cell, destination);
-                Debug.Log("generating new path " + path.Count);
-
-            }
-
-            // move slowly 
-            Debug.Log("p " + path.Count);
-            if (path.Count > 1)
-            {
-                Debug.Log("path ok");
-
-                float d = Vector3.Distance(transform.position, path[0].transform.position);
-                if (d < 0.2f)
+                current_cell = path.Dequeue();
+                if (path.Count > 0)
                 {
-                    Debug.Log("dist ok " + d);
-                    current_cell = path[0];
-                    path.RemoveAt(0);
-                    return;
+                    if (target_cell == current_cell)
+                    {
+                        OnTargetReach();
+                    }
                 }
-
-                Debug.Log("move");
-
-                Vector3 dir = path[0].transform.position - transform.position;
-                dir = dir.normalized;
-
-                transform.position += dir * bug_movement_speed * Time.deltaTime;
+                else
+                {
+                    OnDestinationReach();
+                }
+                return;
             }
-            else
-            {
-                Debug.Log("path empty");
-                destination = null;
-                path.Clear();
-            }
+            this.target = c.transform.position + z_offset;
         }
         else
         {
-            Debug.Log("same");
-            destination = null;
+            if (destination_cell != null)
+            this.target = destination_cell.transform.position + z_offset;
         }
-
-
     }
 
-    */
+    public void OnDestinationReach()
+    {
+
+        Debug.Log("destination reached");
+        
+    }
+
+    public void OnTargetReach()
+    {
+        Debug.Log("target reached");
+    }
 
 
 }

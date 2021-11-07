@@ -8,7 +8,7 @@ public class BugMovement : MonoBehaviour
     Vector3 position = Vector3.zero;
 
     [SerializeField]
-    public Transform target;
+    public Vector3 target;
 
     [SerializeField]
     float rotation_speed = 10f;
@@ -75,14 +75,23 @@ public class BugMovement : MonoBehaviour
 
     public void Update()
     {
-        if (target != null)
-        MoveBugToPosition(target.position);
+        MoveToPosition();
         SetAnimation();
         FaceBugUp();
+        WalkPath();
     }
 
-    
-    public void MoveBugToPosition(Vector3 destination)
+    public virtual void MoveToPosition()
+    {
+        MoveBugToPosition(target);
+    }
+
+    public virtual void WalkPath()
+    {
+        Debug.LogError(this.name + " bug doesnt know how to walk, but you want it to walk anyways ");
+    }
+
+    protected void MoveBugToPosition(Vector3 destination)
     { 
         Vector3 direction = transform.position - destination;
         // direction.y = 0;
@@ -91,28 +100,31 @@ public class BugMovement : MonoBehaviour
             OnIdle();
             return;
         }
-        Quaternion look_direction = Quaternion.LookRotation(direction);
-
+        
+        Quaternion look_direction = Quaternion.LookRotation(direction, Vector3.forward); // replace me with a normal
         transform.rotation = Quaternion.Slerp(transform.rotation, look_direction, Time.deltaTime * rotation_speed);
+
         // transform.position = Vector3.Lerp(transform.position, transform.position - direction, Time.deltaTime * move_speed);
 
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1);
-        foreach (var hitCollider in hitColliders)
-        {
-            BugMovement bm = hitCollider.GetComponent<BugMovement>();
-            if (bm == null)
-            {           
-                continue;
-            }
-            if (bm == this) continue;
-
-            direction = bm.transform.position - transform.position;
-            direction = direction.normalized * stop_distance / 2;
-        }
+      //  Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1);
+      //  foreach (var hitCollider in hitColliders)
+      //  {
+      //      BugMovement bm = hitCollider.GetComponent<BugMovement>();
+      //      if (bm == null)
+      //      {           
+      //          continue;
+      //      }
+      //      if (bm == this) continue;
+      //
+      //      direction = bm.transform.position - transform.position;
+      //      direction = direction.normalized * stop_distance / 2;
+      //  }
    
         float d = Vector3.Distance(transform.position, destination);
         if (d > stop_distance)
         {
+            direction = direction.normalized * move_speed;
+
             transform.position = Vector3.Lerp(transform.position, transform.position - direction, Time.deltaTime * move_speed);
             OnWalk();
         }
@@ -162,16 +174,7 @@ public class BugMovement : MonoBehaviour
         //     Vector3 normal = GetMeshColliderNormal(rayHit);
         //     Debug.DrawRay(transform.position, normal * 10f, Color.blue);
         //      transform.position = rayHit.point + normal.normalized * 0.11f;
-        //     transform.rotation = Quaternion.LookRotation(normal) * Quaternion.FromToRotation(Vector3.up, Vector3.forward);
+        //      transform.rotation = Quaternion.LookRotation(normal) * Quaternion.FromToRotation(Vector3.up, Vector3.forward);
         //  }
-
-        Vector3 normal = Vector3.left; //the normal of the surface, using 'up' for demo purposes
-
-        Quaternion deltaRot = Quaternion.FromToRotation(this.transform.up, normal);
-        Quaternion targRot = deltaRot * this.transform.rotation;
-        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, targRot, Time.deltaTime * speed);
-
-
-
     }
 }

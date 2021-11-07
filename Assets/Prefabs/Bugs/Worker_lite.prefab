@@ -2775,15 +2775,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0, z: 0}
-  target: {fileID: 0}
+  target: {x: 0, y: 0, z: 0}
   rotation_speed: 10
   move_speed: 2
   BodyAnimator: {fileID: 3115249272810132156}
   LegsAnimator: {fileID: 3115249272411924258}
   wings: {fileID: 3115249272887588316}
-  stop_distance: 5
+  stop_distance: 0.1
   bugAnimation: 0
   speed: 0
+  current_cell: {fileID: 0}
 --- !u!95 &3115249272810132156
 Animator:
   serializedVersion: 3

@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class HiveCorridor : CoreRoom
 {
-
+    [SerializeField]
+    public CoreBug[] assigned_bugs;
 }

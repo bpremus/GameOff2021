@@ -94,7 +94,8 @@ public class BuildManager : MonoBehaviour
     private void ClearSelection()
     {
         selectedCell = null;
-        cellSelection.Unselect();
+        if (cellSelection != null)
+            cellSelection.Unselect();
     }
 
 
