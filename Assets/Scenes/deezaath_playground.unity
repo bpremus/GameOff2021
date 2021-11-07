@@ -982,6 +982,7 @@ MonoBehaviour:
   height: 10
   offset: 1
   cell_prefab: {fileID: 4738200789068448637, guid: 27143e290afd82444918b9a40886f7ee, type: 3}
+  dbg_rooms: []
 --- !u!1 &934139312
 GameObject:
   m_ObjectHideFlags: 0

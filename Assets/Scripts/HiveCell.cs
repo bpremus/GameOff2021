@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+[System.Serializable]
 public class HiveCell : MonoBehaviour
 {
 
@@ -43,8 +43,15 @@ public class HiveCell : MonoBehaviour
         if (isCellEmpty)
         {
             Vector3 pos = transform.position;
+
+            // each room prefab inherit from core room
             currentRoom = Instantiate(room, pos, Quaternion.identity);
-            currentRoom.transform.parent = transform.parent;
+            currentRoom.transform.SetParent(transform.parent);
+            CoreRoom newRoom = currentRoom.GetComponent<CoreRoom>(); // calling the base class
+            if (newRoom)
+            {
+                newRoom.cell = this;
+            }
             walkable = 1;
             isCellEmpty = false;
         }

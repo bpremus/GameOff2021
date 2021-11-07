@@ -19,20 +19,41 @@ public class HiveGenerator : MonoBehaviour
 
     public void Start()
     {
+        //  BuildGrid();
+        //  Setneighbours();
+        //  BuildTopLevel();
+        //  BuildOusideEntry();
+        //  BuildDebugPath();
+    }
+
+    public void DeleteGrid()
+    {
+
+        for (int i = 0; i < this.transform.childCount; i++)
+        {
+            DestroyImmediate(this.transform.GetChild(i).gameObject);
+        }
+
+        cells.Clear();
+    }
+
+    public void GenerateStaticGrid()
+    {
+        // grid does not change
         BuildGrid();
-     //   BuildTopLevel();
-     //   BuildOusideEntry();
-     //   Setneighbours();
+        Setneighbours();
+      //  BuildDebugPath();
+
     }
 
     public void BuildGrid()
     {
         for (int i = 0; i < width; i++)
         {
-            List<HiveCell> rows = new List<HiveCell>(); 
+            List<HiveCell> rows = new List<HiveCell>();
             for (int j = 0; j < height; j++)
-            {             
-                Vector3 pos = new Vector3(i * offset - width / 2, j * offset - height , 0);
+            {
+                Vector3 pos = new Vector3(i * offset - width / 2, j * offset - height, 0);
                 HiveCell c = CreateTile(pos);
                 c.SetNode(i, j);
                 rows.Add(c);
@@ -50,15 +71,14 @@ public class HiveGenerator : MonoBehaviour
                 HiveCell hc = cells[i][j];
                 if (hc)
                 {
-                    if (j + 1 < width)
-                        hc.Setneighbour(cells[i][j+1], 0);
-                    if (i + 1 < height)
-                        hc.Setneighbour(cells[i+1][j], 1);
+                    if (j + 1 < height)
+                        hc.Setneighbour(cells[i][j + 1], 0);
+                    if (i + 1 < width)
+                        hc.Setneighbour(cells[i + 1][j], 1);
                     if (j - 1 > 0)
-                        hc.Setneighbour(cells[i][j-1], 2);
+                        hc.Setneighbour(cells[i][j - 1], 2);
                     if (i - 1 > 0)
-                        hc.Setneighbour(cells[i-1][j], 3);
-
+                        hc.Setneighbour(cells[i - 1][j], 3);
                 }
             }
         }
@@ -71,27 +91,35 @@ public class HiveGenerator : MonoBehaviour
         {
             HiveCell c = g.GetComponent<HiveCell>();
             if (c)
-            { 
-                g.transform.parent = this.transform;
+            {
+                g.transform.SetParent(this.transform);
                 return c;
             }
         }
         return null;
     }
 
-    public void BuildTopLevel()
-    {
-        for (int i = 0; i < width; i++)
-        {
-            HiveCell entry = cells[i][height - 1];
-            entry.SetTopLevel();
-        }
-    }
+    [SerializeField]
+    GameObject[] dbg_rooms;
 
-    public void BuildOusideEntry()
+    public void BuildDebugPath()
     {
-        HiveCell entry = cells[3][height-2];
-        entry.SetEntry();
+        HiveCell a = cells[3][height - 1];
+        a.BuildRoom(dbg_rooms[0]);
+        a = cells[3][height - 2];
+        a.BuildRoom(dbg_rooms[0]);
+        a = cells[3][height - 3];
+        a.BuildRoom(dbg_rooms[0]);
+        a = cells[3][height - 4];
+        a.BuildRoom(dbg_rooms[0]);
+        a = cells[3][height - 5];
+        a.BuildRoom(dbg_rooms[0]);
+        a = cells[4][height - 5];
+        a.BuildRoom(dbg_rooms[0]);
+        a = cells[5][height - 5];
+        a.BuildRoom(dbg_rooms[0]);
+        a = cells[6][height - 5];
+        a.BuildRoom(dbg_rooms[1]);
     }
 
 }

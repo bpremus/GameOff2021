@@ -29,6 +29,8 @@ public class BuildManager : MonoBehaviour
             {
                 //check needed resources/costs etc...
 
+                //bps1: check also if room is connected to ousdie world, no orphan rooms
+
                 //Build room
                 cell.BuildRoom(room_prefabs[roomInd]);
                 ClearSelection();

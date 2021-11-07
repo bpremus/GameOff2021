@@ -75,6 +75,7 @@ public class BugMovement : MonoBehaviour
 
     public void Update()
     {
+        if (target != null)
         MoveBugToPosition(target.position);
         SetAnimation();
         FaceBugUp();

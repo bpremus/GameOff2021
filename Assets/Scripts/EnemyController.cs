@@ -21,11 +21,11 @@ public class EnemyController : MonoBehaviour
 
     public void SpawnBug()
     {
-        CoreBug cb = Instantiate(bug_prefabs[0], start_cell.transform.position, start_cell.transform.rotation);
-        if (cb != null)
-        {
-            cb.target = target_cell.transform;
-        }
+     //   CoreBug cb = Instantiate(bug_prefabs[0], start_cell.transform.position, start_cell.transform.rotation);
+     //   if (cb != null)
+     //   {
+     //       cb.target = target_cell.transform;
+     //   }
 
     }
 
