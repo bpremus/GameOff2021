@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoreBug : MonoBehaviour
+public class CoreBug : BugMovement
 {
+
+    /*
+
     public float bug_movement_speed = 1f;
 
     public HiveGenerator hiveGrid;
@@ -105,6 +108,7 @@ public class CoreBug : MonoBehaviour
 
     }
 
+    */
 
 
 }

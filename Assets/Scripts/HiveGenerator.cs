@@ -17,12 +17,14 @@ public class HiveGenerator : MonoBehaviour
     [SerializeField]
     public List<List<HiveCell>> cells = new List<List<HiveCell>>();
 
+    
     public void Start()
     {
         BuildGrid();
         BuildTopLevel();
         BuildOusideEntry();
         Setneighbours();
+        BuildFixedTiles(); // dbg
     }
 
     public void BuildGrid()
@@ -92,6 +94,24 @@ public class HiveGenerator : MonoBehaviour
     {
         HiveCell entry = cells[3][height-2];
         entry.SetEntry();
+    }
+
+    public void BuildFixedTiles()
+    {
+        HiveCell a = cells[3][height - 2];
+        a.OnSelect();
+        a = cells[3][height - 3];
+        a.OnSelect();
+        a = cells[3][height - 4];
+        a.OnSelect();
+        a = cells[3][height - 5];
+        a.OnSelect();
+        a = cells[3][height - 6];
+        a.OnSelect();
+        a = cells[4][height - 6];
+        a.OnSelect();
+        a = cells[5][height - 6];
+        a.OnSelect();
     }
 
 }

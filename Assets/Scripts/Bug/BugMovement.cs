@@ -8,7 +8,7 @@ public class BugMovement : MonoBehaviour
     Vector3 position = Vector3.zero;
 
     [SerializeField]
-    Transform target;
+    public Transform target;
 
     [SerializeField]
     float rotation_speed = 10f;
@@ -77,13 +77,14 @@ public class BugMovement : MonoBehaviour
     {
         MoveBugToPosition(target.position);
         SetAnimation();
+        FaceBugUp();
     }
 
     
     public void MoveBugToPosition(Vector3 destination)
     { 
         Vector3 direction = transform.position - destination;
-        direction.y = 0;
+        // direction.y = 0;
         if (direction == Vector3.zero)
         {
             OnIdle();
@@ -98,7 +99,10 @@ public class BugMovement : MonoBehaviour
         foreach (var hitCollider in hitColliders)
         {
             BugMovement bm = hitCollider.GetComponent<BugMovement>();
-            if (bm == null) continue;
+            if (bm == null)
+            {           
+                continue;
+            }
             if (bm == this) continue;
 
             direction = bm.transform.position - transform.position;
@@ -129,4 +133,44 @@ public class BugMovement : MonoBehaviour
             bugAnimation = BugAnimation.idle;
     }
 
+
+    private Vector3 GetMeshColliderNormal(RaycastHit hit)
+    {
+        MeshCollider collider = (MeshCollider)hit.collider;
+        Mesh mesh = collider.sharedMesh;
+        Vector3[] normals = mesh.normals;
+        int[] triangles = mesh.triangles;
+
+        Vector3 n0 = normals[triangles[hit.triangleIndex * 3 + 0]];
+        Vector3 n1 = normals[triangles[hit.triangleIndex * 3 + 1]];
+        Vector3 n2 = normals[triangles[hit.triangleIndex * 3 + 2]];
+        Vector3 baryCenter = hit.barycentricCoordinate;
+        Vector3 interpolatedNormal = n0 * baryCenter.x + n1 * baryCenter.y + n2 * baryCenter.z;
+        interpolatedNormal.Normalize();
+        interpolatedNormal = hit.transform.TransformDirection(interpolatedNormal);
+        return interpolatedNormal;
+    }
+
+    public void FaceBugUp()
+    {
+        // unless its dead 
+        // RaycastHit rayHit;
+        // if (Physics.Raycast(transform.position, Vector3.down, out rayHit))
+        // {
+        //     Debug.Log("hit:" + rayHit.collider.name);
+        //     Vector3 normal = GetMeshColliderNormal(rayHit);
+        //     Debug.DrawRay(transform.position, normal * 10f, Color.blue);
+        //      transform.position = rayHit.point + normal.normalized * 0.11f;
+        //     transform.rotation = Quaternion.LookRotation(normal) * Quaternion.FromToRotation(Vector3.up, Vector3.forward);
+        //  }
+
+        Vector3 normal = Vector3.left; //the normal of the surface, using 'up' for demo purposes
+
+        Quaternion deltaRot = Quaternion.FromToRotation(this.transform.up, normal);
+        Quaternion targRot = deltaRot * this.transform.rotation;
+        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, targRot, Time.deltaTime * speed);
+
+
+
+    }
 }
