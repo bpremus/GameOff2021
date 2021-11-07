@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class BuildManager : MonoBehaviour
 {
+    // changed to singleton 
+    private static BuildManager _instance;
+    public static BuildManager Instance
+    {
+        get { return _instance; }
+    }
+
     [SerializeField] private GameObject[] room_prefabs;
     private GameObject selectedCell;
     private HiveCell cell;
@@ -12,11 +19,24 @@ public class BuildManager : MonoBehaviour
     private void Awake()
     {
         cellSelection = FindObjectOfType<CellSelection>();
+
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
+        _instance = this;
     }
-    public void SetCell(GameObject selectedCell) 
-    { 
+    public void SetCell(GameObject selectedCell)
+    {
         this.selectedCell = selectedCell;
         cell = selectedCell.GetComponent<HiveCell>();
+    }
+    public void SetCell(HiveCell selectedCell)
+    {
+        this.selectedCell = selectedCell.gameObject;
+        cell = selectedCell;
     }
 
     public void CreateNewRoom(int roomInd)
@@ -76,4 +96,7 @@ public class BuildManager : MonoBehaviour
         selectedCell = null;
         cellSelection.Unselect();
     }
+
+
+
 }

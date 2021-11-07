@@ -8,22 +8,30 @@ public class CellEditor : Editor
     {
         base.OnInspectorGUI();
 
-        HiveCell hc = (HiveCell)target;
         if (target == null) return;
+        HiveCell hc = (HiveCell)target;
+        if (hc == null) return;
+        
 
         // button delete the hive room
         if (GUILayout.Button("Delete room"))
         {
-
+            BuildManager bm = BuildManager.Instance;
+            bm.SetCell(hc);
+            bm.DestroyRoom();
         }
 
         if (GUILayout.Button("Create Cooridor"))
         {
-           // place room
+            BuildManager bm = BuildManager.Instance;
+            bm.SetCell(hc);
+            bm.CreateCorridor(0);
         }
         if (GUILayout.Button("Create Room"))
         {
-            // place room
+            BuildManager bm = BuildManager.Instance;
+            bm.SetCell(hc);
+            bm.CreateNewRoom(1);
         }
     }
 }
