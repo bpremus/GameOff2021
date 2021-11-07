@@ -6,9 +6,10 @@ using UnityEngine;
 public class HiveCell : MonoBehaviour
 {
 
-    [SerializeField]
-    GameObject[] room_prefabs;
+    public  bool isCellEmpty;
 
+    //debug
+    [SerializeField] private GameObject currentRoom;
 
     // pathfinding 
     // -------------------------
@@ -31,12 +32,40 @@ public class HiveCell : MonoBehaviour
         gCost = 0;
         hCost = 0;
         walkable = 0;
-
+        isCellEmpty = true;
         this.name = "call_" + x + "_" + y;
 
     }
 
 
+    public void BuildRoom(GameObject room)
+    {
+        if (isCellEmpty)
+        {
+            Vector3 pos = transform.position;
+            currentRoom = Instantiate(room, pos, Quaternion.identity);
+            currentRoom.transform.parent = transform.parent;
+            walkable = 1;
+            isCellEmpty = false;
+        }
+        else
+        {
+            Debug.LogError("Cell is already taken! You want to destroy?");
+        }
+    }
+    public void DestroyRoom()
+    {
+        if (isCellEmpty)
+        {
+            Debug.LogError("Nothing to destroy!");
+        }
+        else
+        {
+            Destroy(currentRoom);
+            walkable = 0;
+            isCellEmpty = true;
+        }
+    }
 
     public void OnHover()
     {
@@ -45,28 +74,34 @@ public class HiveCell : MonoBehaviour
 
     public void OnSelect()
     {
+        /*
         Vector3 pos = transform.position;
         GameObject g = Instantiate(room_prefabs[0], pos, Quaternion.identity);
         g.transform.parent = transform.parent;
-
-        // set node to be walkable
+         // set node to be walkable
         walkable = 1;
+        */
+
     }
 
     public void SetEntry()
     {
+        /*
         Vector3 pos = transform.position;
         GameObject g = Instantiate(room_prefabs[0], pos, Quaternion.identity);
         g.transform.parent = transform.parent;
         walkable = 1;
+        */
     }
 
     public void SetTopLevel()
     {
+        /*
         Vector3 pos = transform.position;
         GameObject g = Instantiate(room_prefabs[0], pos, Quaternion.identity);
         g.transform.parent = transform.parent;
         walkable = 1;
+        */
     }
 
     [SerializeField]
