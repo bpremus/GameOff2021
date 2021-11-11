@@ -230,6 +230,8 @@ public class HiveGenerator : MonoBehaviour
   
     public void SetFixedCells()
     {
+        return;
+
         // placing fixe cells like entrance
         List<List<GridSolver>> cell_mesh = new List<List<GridSolver>>();
         
