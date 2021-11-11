@@ -16,6 +16,25 @@ public class EnemyController : MonoBehaviour
 
     public void Start()
     {
+       
+    }
+
+    int max_bug = 2;
+    float spawn_timer = 0;
+    public void Update()
+    {
+        spawn_timer += Time.deltaTime;
+        if (spawn_timer > 2)
+        {
+            spawn_timer = 0;
+        }
+        else
+            return;
+
+        if (max_bug <= 0)
+            return;
+
+        max_bug--;
         SpawnBug();
     }
 
@@ -26,6 +45,8 @@ public class EnemyController : MonoBehaviour
        {
             cb.CurrentPositon(start_cell);
             cb.GoToAndBack(start_cell,target_cell);
+            cb.tag = "Enemy";
+            // cb.stop_and_fight = false;
             //cb.GoTo(target_cell);
         }
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-
+    /*
     [SerializeField]
     HiveGenerator hiveGenerator;
 
@@ -32,6 +32,6 @@ public class GameController : MonoBehaviour
             }
         }
     }
-
+    */
 
 }

@@ -77,7 +77,17 @@ public class CameraController : MonoBehaviour
     private bool isDragging = false;
     private Vector2 KeyboardInput
     {
-        get { return useKeyboardInput ? new Vector2(Input.GetAxis(horizontalAxis), Input.GetAxis(verticalAxis)) : Vector2.zero; }
+        // get { return useKeyboardInput ? new Vector2(Input.GetAxis(horizontalAxis), Input.GetAxis(verticalAxis)) : Vector2.zero; }
+        get {
+
+            int _x = 0;
+            int _y = 0;
+            if (Input.GetKey(KeyCode.W)) _y = 1;
+            if (Input.GetKey(KeyCode.S)) _y = -1;
+            if (Input.GetKey(KeyCode.A)) _x = 1;
+            if (Input.GetKey(KeyCode.D)) _y = -1;
+            return useKeyboardInput ? new Vector2(_x,_y) : Vector2.zero;
+        }
     }
 
     private Vector2 MouseInput
