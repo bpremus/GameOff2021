@@ -370,6 +370,63 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ffa2af26a27fe54398d664e4b34f7b3, type: 3}
+--- !u!1 &245790490
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 245790492}
+  - component: {fileID: 245790491}
+  m_Layer: 0
+  m_Name: WwiseGlobal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &245790491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245790490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a20690529029a5640ac2290fe839a2c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InitializationSettings: {fileID: 11400000, guid: 2b8368addf7a5b3449d2cd2b07d51062, type: 2}
+  basePath: 
+  language: 
+  defaultPoolSize: 0
+  lowerPoolSize: 0
+  streamingPoolSize: 0
+  memoryCutoffThreshold: 0
+  monitorPoolSize: 0
+  monitorQueuePoolSize: 0
+  callbackManagerBufferSize: 0
+  spatialAudioPoolSize: 0
+  maxSoundPropagationDepth: 0
+  diffractionFlags: 11
+  engineLogging: 0
+--- !u!4 &245790492
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245790490}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &579751012
 GameObject:
   m_ObjectHideFlags: 0
@@ -634,8 +691,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 10
   height: 10
-  offset: 1.1
+  offset: 2.2
   cell_prefab: {fileID: 4738200789068448637, guid: 27143e290afd82444918b9a40886f7ee, type: 3}
+  dbg_rooms: []
+  cell_mesh_prefabs:
+  - {fileID: 1686222347019909488, guid: de7f470550fce7b409356482ca14f68d, type: 3}
+  - {fileID: 4975368599651128561, guid: bc7cd275a38dff947ab67b17385594ee, type: 3}
+  - {fileID: 2372074614623027133, guid: 8a1a02a35d550d643b4c248ae3c6d13b, type: 3}
+  - {fileID: 467859816981354931, guid: 54fb1e88660ba0f49a9bc1ab272e32d1, type: 3}
+  - {fileID: 1749358476826940783, guid: 087c3d97a78071349a4435d3c08079d0, type: 3}
+  - {fileID: 8685064978711495726, guid: 70c09427284e725499efbc00fc4662d9, type: 3}
+  - {fileID: 6776169780675474854, guid: d424cdbe4319ce44d94f1d43942f0bb6, type: 3}
+  - {fileID: 5283823252225730610, guid: c6dd10fd845040f4f85d43206629171b, type: 3}
+  - {fileID: 8783985038906351069, guid: 7d789df51f87bfd4bb6cb6f987d674bb, type: 3}
+  - {fileID: 7407880696002331515, guid: ba319acd105c3ca4ab4be9a19502860c, type: 3}
+  - {fileID: 4683552139409918619, guid: 8bd3c590bd4e00349854323e0322e325, type: 3}
+  - {fileID: 4392733842937018182, guid: 5deada57f65a5924cb693cdc8e166752, type: 3}
+  - {fileID: 598243155476385132, guid: f065f371c985b5845b0a45d8a1b3c84d, type: 3}
+  - {fileID: 2183487239047798711, guid: 0f07ce3001668ea4690302b2755b317a, type: 3}
+  - {fileID: 7870985228973551931, guid: 9042c5f8a8b2f834aac2154e75d74e08, type: 3}
+  - {fileID: 4482020429459218105, guid: f99cf65e682132b4190d523130c21903, type: 3}
+  - {fileID: 8618959272512602566, guid: 2c88d61f91d88c74da023a86396d1484, type: 3}
+  - {fileID: 53618989941456153, guid: 6fd7355688ff4884198468ebf93f302f, type: 3}
+  - {fileID: 4470538469976683460, guid: b2ff74c5887cba74faaa556e0a028ed9, type: 3}
+  - {fileID: 5453045950657619224, guid: ad4f1777997f08942b06f4dd36c3ea50, type: 3}
+  - {fileID: 3187261327970656562, guid: 75def3e2507c2644ea46ee024ac1fe3d, type: 3}
+  - {fileID: 6148107189280027737, guid: c80a921e703cac94ea3e785bbd7fccac, type: 3}
+  - {fileID: 3045378031446858131, guid: 7c251e0c20d77fa43adea63befd8ef82, type: 3}
+  - {fileID: 2854851427583650143, guid: 593ccb40b1e144647a0ab8963a64d5b8, type: 3}
+  - {fileID: 2396499962570730334, guid: 8107708b8001d9640b9d61700e279e87, type: 3}
+  - {fileID: 3593268475567164037, guid: 178164be9be03644eb0d1c63bc153e0a, type: 3}
+  - {fileID: 600036384476775865, guid: 41c2fe25cf1537f43846717c2e109ba4, type: 3}
+  - {fileID: 643533100545294444, guid: 427c10c0e1ee2b848a8f44adc090412c, type: 3}
+  - {fileID: 3691155102684341695, guid: b4c5989c2d07e1244b66fad18f75043e, type: 3}
+  - {fileID: 5858120375999691402, guid: 18800c8b091683c438c92bbdd6a963c3, type: 3}
+  - {fileID: 1062863811736970746, guid: f36d2567a87886d49a844daa34a89f6a, type: 3}
+  - {fileID: 8314048150530319968, guid: 4d36532d764b9b445a54dce237ec6be4, type: 3}
+  - {fileID: 7520121270598284461, guid: 3d9064eac07d8fe4ba0e05e6ff8c76e6, type: 3}
 --- !u!1 &1054499840
 GameObject:
   m_ObjectHideFlags: 0
@@ -1139,8 +1231,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1687258585}
   - component: {fileID: 1687258584}
-  - component: {fileID: 1687258582}
   - component: {fileID: 1687258586}
+  - component: {fileID: 1687258583}
+  - component: {fileID: 1687258582}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1148,14 +1241,42 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1687258582
-AudioListener:
+--- !u!114 &1687258582
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687258581}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0932a395141fe3840b01256f8bf6f19b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDefaultListener: 1
+  listenerId: 0
+--- !u!114 &1687258583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687258581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40b708bf38fae5c41a91c6f55c826ca9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 0
+  isStaticObject: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
 --- !u!20 &1687258584
 Camera:
   m_ObjectHideFlags: 0
