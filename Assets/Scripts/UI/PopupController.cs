@@ -10,7 +10,11 @@ public class PopupController : MonoBehaviour
     [SerializeField] private GameObject activePopup;
 
     private BlurController blurController;
-
+    public bool isPopupActive()
+    {
+        if (activePopup != null) return true;
+        return false;
+    }
     private void Awake()
     {
         blurController = FindObjectOfType<BlurController>();
@@ -22,19 +26,19 @@ public class PopupController : MonoBehaviour
             //****************************** Debug setup ******************************
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                CreateNewPopup(0);
+                CreateNewWindow(0);
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                CreateNewPopup(1);
+                CreateNewWindow(1);
             }
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                CreateNewPopup(2);
+                CreateNewWindow(2);
             }
             if (Input.GetKeyDown(KeyCode.Alpha4))
             {
-                CreateNewPopup(3);
+                CreateNewWindow(3);
             }
 
             if (Input.GetKeyDown(KeyCode.T))
@@ -46,7 +50,7 @@ public class PopupController : MonoBehaviour
                 }
                 else
                 {
-                    CreateNewPopup(UnityEngine.Random.Range(0, popupsList.Count));
+                    CreateNewWindow(UnityEngine.Random.Range(0, popupsList.Count));
                     SetCurrentPopupHeader("New header text");
                     SetCurrentPopupContent("This is a changed content text");
                 }
@@ -74,7 +78,7 @@ public class PopupController : MonoBehaviour
         }
     }
 
-    public void CreateNewPopup(int id)
+    public void CreateNewWindow(int id)
     {
         if(activePopup == null)
         {
