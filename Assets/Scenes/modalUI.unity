@@ -7621,7 +7621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9b7862ba4cbb784fbdc307d1e6204b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showDebug: 0
+  showDebug: 1
   popupsList:
   - {fileID: 4906995389070465847, guid: 9772ad54b483b7e488fc706ef55bf4e1, type: 3}
   - {fileID: 9126191075786414649, guid: 4889859dfda60c74b8e77cd040839dfc, type: 3}
@@ -9386,13 +9386,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687258581}
-  m_LocalRotation: {x: 0.0000087072885, y: 1, z: -1.5163373e-10, w: -0.000017414575}
-  m_LocalPosition: {x: -5.9, y: 31.6, z: 30}
+  m_LocalRotation: {x: 0.0000087072885, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -5.9, y: 16.3, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180.002, z: 0.001}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0.001}
 --- !u!114 &1687258586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9440,29 +9440,28 @@ MonoBehaviour:
   keyboardMovementSpeed: 25
   screenEdgeMovementSpeed: 25
   followingSpeed: 15
-  autoHeight: 1
   groundMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  maxHeight: 20
-  minHeight: 8
-  heightDampening: 5
+  maxHeight: 40
+  minHeight: 12
   keyboardZoomingSensitivity: 2
   scrollWheelZoomingSensitivity: 50
-  limitMap: 1
+  limitEnabled: 1
   limitX: 50
   limitY: 50
   limitZ: 10
   targetFollow: {fileID: 0}
   targetOffset: {x: 0, y: 0, z: 0}
   useScreenEdgeInput: 1
-  screenEdgeBorder: 25
+  screenEdgeBorder: 22
   useKeyboardInput: 1
   horizontalAxis: Horizontal
   verticalAxis: Vertical
   useKeyboardZooming: 1
   zoomInKey: 101
   zoomOutKey: 113
+  stopFollowingKey: 27
   useScrollwheelZooming: 1
   zoomingAxis: Mouse ScrollWheel
 --- !u!1 &1705470372
@@ -11793,7 +11792,7 @@ Light:
     m_Strength: 1
     m_Bias: 0.02
     m_NormalBias: 0.1
-    m_NearPlane: 0.1
+    m_NearPlane: 10
     m_CullingMatrixOverride:
       e00: 1
       e01: 0

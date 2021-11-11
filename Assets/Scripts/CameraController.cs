@@ -2,42 +2,45 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    //
+    // Use SetTarget() and ResetTarget() to make camera follow passed Transform
+    // Target is reset when player moves camera or uses stopFollowingKey
+    //
+    #region Variables
     private Transform m_Transform; //camera tranform
 
     #region Movement
-
-    public float keyboardMovementSpeed = 5f; //speed with keyboard movement
-    public float screenEdgeMovementSpeed = 3f; //spee with screen edge movement
-    public float followingSpeed = 5f; //speed when following a target
+    [Header("Movement")]
+    public float keyboardMovementSpeed = 25f; //speed with keyboard movement
+    public float screenEdgeMovementSpeed = 25f; //spee with screen edge movement
+    public float followingSpeed = 15f; //speed when following a target
 
     #endregion
 
     #region Height
-
-    public bool autoHeight = true;
+    [Header("Height")]
     public LayerMask groundMask = -1; //layermask of ground or other objects that affect height
 
-    public float maxHeight = 10f; //maximal height
-    public float minHeight = 15f; //minimnal height
-    public float heightDampening = 5f;
+    public float maxHeight = 40f; //max height
+    public float minHeight = 12f; //min height
     public float keyboardZoomingSensitivity = 2f;
-    public float scrollWheelZoomingSensitivity = 25f;
+    public float scrollWheelZoomingSensitivity = 50f;
 
-    private float zoomPos = 0; 
+    private float zoomPos = 1; 
 
     #endregion
 
     #region MapLimits
-
-    public bool limitMap = true;
+    [Header("Limits")]
+    public bool limitEnabled = true;
     public float limitX = 50f; //x limit of map
     public float limitY = 50f; //y limit of map
-    public float limitZ = 30f;
+    public float limitZ = 10f; //z limit
 
     #endregion
 
     #region Targeting
-
+    [Header("Targeting")]
     public Transform targetFollow;
     public Vector3 targetOffset;
 
@@ -52,7 +55,7 @@ public class CameraController : MonoBehaviour
     #endregion
 
     #region Input
-
+    [Header("Inputs")]
     public bool useScreenEdgeInput = true;
     public float screenEdgeBorder = 25f;
 
@@ -64,7 +67,7 @@ public class CameraController : MonoBehaviour
     public bool useKeyboardZooming = true;
     public KeyCode zoomInKey = KeyCode.E;
     public KeyCode zoomOutKey = KeyCode.Q;
-
+    public KeyCode stopFollowingKey = KeyCode.Escape;
     public bool useScrollwheelZooming = true;
     public string zoomingAxis = "Mouse ScrollWheel";
 
@@ -103,7 +106,7 @@ public class CameraController : MonoBehaviour
 
 
     #endregion
-
+    #endregion
     #region Monobehaviours
 
     private void Start()
@@ -119,11 +122,30 @@ public class CameraController : MonoBehaviour
 
     #endregion
 
+    #region Public methods
+    public void SetTarget(Transform target)
+    {
+        targetFollow = target;
+    }
 
+
+    public void ResetTarget()
+    {
+        targetFollow = null;
+    }
+
+    #endregion
+
+    #region Private methods
     private void CameraUpdate()
     {
         if (FollowingTarget)
-            FollowTarget();
+        {
+            if (Input.GetKeyDown(stopFollowingKey) || KeyboardInput.x != 0 || KeyboardInput.y != 0) ResetTarget();
+            else
+              FollowTarget();
+        }
+          
         else
             Move();
 
@@ -136,7 +158,7 @@ public class CameraController : MonoBehaviour
     {
         if (useKeyboardInput)
         {
-            Vector3 desiredMove = new Vector3(KeyboardInput.x, 0, KeyboardInput.y);
+            Vector3 desiredMove = new Vector3(KeyboardInput.x, KeyboardInput.y, 0);
 
             desiredMove *= keyboardMovementSpeed;
             desiredMove *= Time.deltaTime;
@@ -170,25 +192,14 @@ public class CameraController : MonoBehaviour
 
     private void HeightCalculation()
     {
-        float distanceToGround = DistanceToGround();
         if (useScrollwheelZooming)
             zoomPos -= ScrollWheel * Time.deltaTime * scrollWheelZoomingSensitivity;
         if (useKeyboardZooming)
             zoomPos -= ZoomDirection * Time.deltaTime * keyboardZoomingSensitivity;
 
         zoomPos = Mathf.Clamp01(zoomPos);
-       
-
         float targetHeight = Mathf.Lerp(minHeight, maxHeight, zoomPos);
-        float difference = 0;
-
-        if (distanceToGround != targetHeight)
-            difference = targetHeight - distanceToGround;
-
-     //   m_Transform.position = Vector3.Lerp(m_Transform.position,
-       //    new Vector3(m_Transform.position.x, targetHeight + difference, m_Transform.position.z), Time.deltaTime * heightDampening);
-        Camera.main.orthographicSize = targetHeight + difference;
-    //    Camera.main.orthographicSize = zoomPos;
+        Camera.main.orthographicSize = targetHeight;
     }
 
 
@@ -200,31 +211,12 @@ public class CameraController : MonoBehaviour
 
     private void LimitPosition()
     {
-        if (!limitMap)
+        if (!limitEnabled)
             return;
 
         m_Transform.position = new Vector3(Mathf.Clamp(m_Transform.position.x, -limitX, limitX), Mathf.Clamp(m_Transform.position.y, -limitY, limitY), limitZ);
     }
-    private float DistanceToGround()
-    {
-        Ray ray = new Ray(m_Transform.position, Vector3.down);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, groundMask.value))
-            return (hit.point - m_Transform.position).magnitude;
 
-        return 0f;
-    }
-
-    public void SetTarget(Transform target)
-    {
-        targetFollow = target;
-    }
-
-
-    public void ResetTarget()
-    {
-        targetFollow = null;
-    }
-
+    #endregion
 
 }
