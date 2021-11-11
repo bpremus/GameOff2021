@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PopupController : MonoBehaviour
 {
+    [SerializeField] private bool showDebug = false;
     [SerializeField] private List<GameObject> popupsList;
     [SerializeField] private GameObject activePopup;
 
@@ -16,40 +17,43 @@ public class PopupController : MonoBehaviour
     }
     private void Update()
     {
-
-        //****************************** Debug setup ******************************
-        if (Input.GetKeyDown(KeyCode.Alpha1)) 
-        { 
-            CreateNewPopup(0); 
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (showDebug)
         {
-            CreateNewPopup(1);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            CreateNewPopup(2);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            CreateNewPopup(3);
-        }
-
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            if (activePopup) 
-            { 
-                SetCurrentPopupHeader("New header text");
-                SetCurrentPopupContent("This is a changed content text");
-            }
-            else
+            //****************************** Debug setup ******************************
+            if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                CreateNewPopup(UnityEngine.Random.Range(0, popupsList.Count));
-                SetCurrentPopupHeader("New header text");
-                SetCurrentPopupContent("This is a changed content text");
+                CreateNewPopup(0);
             }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                CreateNewPopup(1);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                CreateNewPopup(2);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                CreateNewPopup(3);
+            }
+
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                if (activePopup)
+                {
+                    SetCurrentPopupHeader("New header text");
+                    SetCurrentPopupContent("This is a changed content text");
+                }
+                else
+                {
+                    CreateNewPopup(UnityEngine.Random.Range(0, popupsList.Count));
+                    SetCurrentPopupHeader("New header text");
+                    SetCurrentPopupContent("This is a changed content text");
+                }
+            }
+            //*********************************************************
         }
-        //*********************************************************
+
     }
 
     //Set custom header text for current popup
