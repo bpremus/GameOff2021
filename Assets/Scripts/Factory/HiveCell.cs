@@ -6,10 +6,101 @@ using UnityEngine;
 public class HiveCell : MonoBehaviour
 {
 
-    public  bool isCellEmpty;
+    public bool isCellEmpty;
+    protected CoreRoom childRoom;
+    [SerializeField]
+    public CellMesh cell_mesh;
 
-    //debug
-    [SerializeField] private GameObject currentRoom;
+    public void SetNode(int x, int y)
+    {
+        // cell placement and pathfinding 
+        this.x = x;
+        this.y = y;
+
+        // pathfinding 
+        gCost = 0;
+        hCost = 0;
+        walkable = 0;
+
+        // room building
+        isCellEmpty = true;
+        this.name = "call_" + x + "_" + y;
+    }
+
+
+    // this will determine what kind of cell mesh (walls) are going to be drawn
+    public CellMesh.Cell_type cell_Type = CellMesh.Cell_type.dirt;
+    // cell still has a room that inside have a room mesh 
+
+
+    public void BuildRoom(GameObject room)
+    {
+        if (isCellEmpty)
+        {
+            Vector3 pos = transform.position;
+
+            // each room prefab inherit from core room
+            childRoom = Instantiate(room, pos, Quaternion.identity).GetComponent<CoreRoom>();
+            if (childRoom)
+            {
+                childRoom.cell = this;
+                childRoom.transform.SetParent(transform.parent);
+            }
+            walkable = 1;
+            isCellEmpty = false;
+        }
+        else
+        {
+            Debug.LogError("Cell is already taken! You want to destroy?");
+        }
+    }
+
+    public void DestroyRoom()
+    {
+        if (isCellEmpty)
+        {
+            Debug.LogError("Nothing to destroy!");
+        }
+        else
+        {
+            Destroy(childRoom);
+            walkable = 0;
+            isCellEmpty = true;
+        }
+    }
+
+    // drawing the room mesh 
+    #region room_mesh
+
+    public int GetX { get => x; }
+    public int GetY { get => y; }
+
+    public int mesh_index = -1;
+    int[] connections = new int[4] { -1, -1, -1, -1 };
+
+    public void SetConnection(int[] connections)
+    {
+        this.connections = connections;
+    }
+
+ 
+    public int GetConnectionInDirection(int index)
+    {
+        if (neighbour_cells[index] != null)
+        {
+            if (neighbour_cells[index].cell_Type == CellMesh.Cell_type.corridor) return 1;
+            if (neighbour_cells[index].cell_Type == CellMesh.Cell_type.room)     return 1;
+
+            if (index == 0) // up
+                if (neighbour_cells[index].cell_Type == CellMesh.Cell_type.entrance) return 1;
+        }
+        return 0;
+    }
+
+    #endregion
+
+    // Everything regarding pathfinding 
+    #region path_finding 
 
     // pathfinding 
     // -------------------------
@@ -23,92 +114,6 @@ public class HiveCell : MonoBehaviour
     public int fCost
     {
         get => gCost + hCost;
-    }
-
-    public void SetNode(int x, int y)
-    {
-        this.x = x;
-        this.y = y;
-        gCost = 0;
-        hCost = 0;
-        walkable = 0;
-        isCellEmpty = true;
-        this.name = "call_" + x + "_" + y;
-
-    }
-
-
-    public void BuildRoom(GameObject room)
-    {
-        if (isCellEmpty)
-        {
-            Vector3 pos = transform.position;
-
-            // each room prefab inherit from core room
-            currentRoom = Instantiate(room, pos, Quaternion.identity);
-            currentRoom.transform.SetParent(transform.parent);
-            CoreRoom newRoom = currentRoom.GetComponent<CoreRoom>(); // calling the base class
-            if (newRoom)
-            {
-                newRoom.cell = this;
-            }
-            walkable = 1;
-            isCellEmpty = false;
-        }
-        else
-        {
-            Debug.LogError("Cell is already taken! You want to destroy?");
-        }
-    }
-    public void DestroyRoom()
-    {
-        if (isCellEmpty)
-        {
-            Debug.LogError("Nothing to destroy!");
-        }
-        else
-        {
-            Destroy(currentRoom);
-            walkable = 0;
-            isCellEmpty = true;
-        }
-    }
-
-    public void OnHover()
-    {
-       
-    }
-
-    public void OnSelect()
-    {
-        /*
-        Vector3 pos = transform.position;
-        GameObject g = Instantiate(room_prefabs[0], pos, Quaternion.identity);
-        g.transform.parent = transform.parent;
-         // set node to be walkable
-        walkable = 1;
-        */
-
-    }
-
-    public void SetEntry()
-    {
-        /*
-        Vector3 pos = transform.position;
-        GameObject g = Instantiate(room_prefabs[0], pos, Quaternion.identity);
-        g.transform.parent = transform.parent;
-        walkable = 1;
-        */
-    }
-
-    public void SetTopLevel()
-    {
-        /*
-        Vector3 pos = transform.position;
-        GameObject g = Instantiate(room_prefabs[0], pos, Quaternion.identity);
-        g.transform.parent = transform.parent;
-        walkable = 1;
-        */
     }
 
     [SerializeField]
@@ -130,4 +135,6 @@ public class HiveCell : MonoBehaviour
 
         return list;
     }
+
+    #endregion
 }

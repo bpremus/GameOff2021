@@ -20,12 +20,9 @@ public class HiveGenerator : MonoBehaviour
 
     public void Start()
     {
-        BuildGrid();
-        //  Setneighbours();
-        //  BuildTopLevel();
-        //  BuildOusideEntry();
-        //  BuildDebugPath();
-        SetFixedCells();
+        // use the buttons in inspector of a grid editor to test 
+        // this initial placement will be reworked later
+        DebugGrid();
     }
 
     public void DeleteGrid()
@@ -42,8 +39,31 @@ public class HiveGenerator : MonoBehaviour
         // grid does not change
         BuildGrid();
         Setneighbours();
-      //  BuildDebugPath();
+        SetFixedCells();
+    }
 
+    public void CollecteCells()
+    {
+        // lazy collect untill i fix the lifeclycle
+
+        HiveCell[] firstList = GameObject.FindObjectsOfType<HiveCell>();
+        for (int i = 0; i < width; i++)
+        {
+            List<HiveCell> rows = new List<HiveCell>();
+            for (int j = 0; j < height; j++)
+            {
+                Vector3 pos = new Vector3(i * offset - width / 2, j * offset - height, 0);
+                for (int k = 0; k < firstList.Length; k++)
+                {
+                    HiveCell hc = firstList[k];
+                    if (hc.GetX == i && hc.GetY == j)
+                    {
+                        rows.Add(hc);
+                    }
+                }
+            }
+            cells.Add(rows);
+        }
     }
 
     public void BuildGrid()
@@ -74,11 +94,11 @@ public class HiveGenerator : MonoBehaviour
                     if (j + 1 < height)
                         hc.Setneighbour(cells[i][j + 1], 0);
                     if (i + 1 < width)
-                        hc.Setneighbour(cells[i + 1][j], 1);
+                        hc.Setneighbour(cells[i + 1][j], 3);
                     if (j - 1 > 0)
                         hc.Setneighbour(cells[i][j - 1], 2);
                     if (i - 1 > 0)
-                        hc.Setneighbour(cells[i - 1][j], 3);
+                        hc.Setneighbour(cells[i - 1][j], 1);
                 }
             }
         }
@@ -100,228 +120,142 @@ public class HiveGenerator : MonoBehaviour
     }
 
     [SerializeField]
-    GameObject[] dbg_rooms;
-
-    public void BuildDebugPath()
-    {
-        HiveCell a = cells[3][height - 1];
-        a.BuildRoom(dbg_rooms[0]);
-        a = cells[3][height - 2];
-        a.BuildRoom(dbg_rooms[0]);
-        a = cells[3][height - 3];
-        a.BuildRoom(dbg_rooms[0]);
-        a = cells[3][height - 4];
-        a.BuildRoom(dbg_rooms[0]);
-        a = cells[3][height - 5];
-        a.BuildRoom(dbg_rooms[0]);
-        a = cells[4][height - 5];
-        a.BuildRoom(dbg_rooms[0]);
-        a = cells[5][height - 5];
-        a.BuildRoom(dbg_rooms[0]);
-        a = cells[6][height - 5];
-        a.BuildRoom(dbg_rooms[1]);
-    }
-
-
-    [SerializeField]
     CellMesh[] cell_mesh_prefabs;
 
-   
-    public class GridSolver
-    {
-        public string name = "";
-        int x;
-        int y;
-        public GridSolver(int x, int y)
-        {
-            this.x = x;
-            this.y = y;
-
-            name = "CS_" + x + "_" + y;
-        }
-
-        public int GetX { get => x; }
-        public int GetY { get => y; }
-
-        // tile 
-        public int mesh_index = -1;
-        int[] connections = new int[4] { -1, -1, -1, -1 };
-        public CellMesh.Cell_type cell_Type = CellMesh.Cell_type.dirt;
-
-        public void SetConnection(int[] connections)
-        {
-            this.connections = connections;
-        }
-
-        public GridSolver[] bordering_tiles = new GridSolver[4]; // all null by default 
-        public void SetBorder(GridSolver solver, int index)
-        {
-            bordering_tiles[index] = solver;
-        }
-
-        public int GetConnectionInDirection(int index)
-        {
-            if (bordering_tiles[index] != null)
-            {
-                if (bordering_tiles[index].cell_Type == CellMesh.Cell_type.corridor) return 1;
-                if (bordering_tiles[index].cell_Type == CellMesh.Cell_type.room)     return 1;
-                
-                if (index == 0) // up
-                    if (bordering_tiles[index].cell_Type == CellMesh.Cell_type.entrance) return 1;
-            }
-            return 0;
-        }
-
-        public void Dump()
-        {
-
-            for (int i = 0; i < 4; i++)
-            {
-                if (bordering_tiles[i] != null)
-                    Debug.Log(bordering_tiles[i].name + " > " + bordering_tiles[i].cell_Type);
-            }
-        }
-            
-    }
-
-    public void PlaceCooridors(List<List<GridSolver>> cell_mesh)
+    public void PlaceCooridors(List<List<HiveCell>> cell_mesh)
     {
         for (int i = 0; i < cell_mesh.Count; i++)
         {
             for (int j = 0; j < cell_mesh[i].Count; j++)
             {
-                GridSolver gs = cell_mesh[i][j];
-                if (gs.cell_Type == CellMesh.Cell_type.corridor || gs.cell_Type == CellMesh.Cell_type.room)
-                {
-                    // get neighbouring tiles 
-                    // prepare connections 
-
-                    int[] connections = new int[4] { 0, 0, 0, 0 };
-                    for (int c = 0; c < 4; c++)
-                    {
-                        connections[c] = gs.GetConnectionInDirection(c);
-                        Debug.Log(c + " >> " + connections[c]);
-                    }
-
-                    // find best tile 
-                    for (int m = 0; m < cell_mesh_prefabs.Length; m++)
-                    {
-                        CellMesh cm = cell_mesh_prefabs[m];
-                        if (connections.SequenceEqual(cm.connections))
-                        {
-                            if (cm.cell_Type == gs.cell_Type)
-                            {
-                                gs.mesh_index = m;
-                                break;
-                            }
-                        }
-                    }
+                HiveCell gs = cell_mesh[i][j];
+                if (UpdateCell(gs)) 
+                { 
+                    // cell ok
                 }
                 else
                 {
                     // resolve rest 
                     if (gs.mesh_index == -1)
-                        gs.mesh_index = 1;
+                        gs.mesh_index = 0;
                 }
             }
         }
     }
 
-  
-    public void SetFixedCells()
+    public void DebugGrid()
     {
-        return;
 
-        // placing fixe cells like entrance
-        List<List<GridSolver>> cell_mesh = new List<List<GridSolver>>();
-        
-        // build inital grid 
-        for (int i = 0; i < width; i++)
+        CollecteCells();
+
+        cells[5][7].cell_Type = CellMesh.Cell_type.corridor;
+        cells[5][6].cell_Type = CellMesh.Cell_type.corridor;
+        cells[6][6].cell_Type = CellMesh.Cell_type.room;
+        cells[7][6].cell_Type = CellMesh.Cell_type.corridor;
+        cells[4][6].cell_Type = CellMesh.Cell_type.room;
+        cells[4][5].cell_Type = CellMesh.Cell_type.corridor;
+
+        RefreshAllCells();
+
+    }
+
+    public void RefreshAllCells()
+    {
+        for (int i = 0; i < cells.Count; i++)
         {
-            List<GridSolver> rows = new List<GridSolver>();
-            for (int j = 0; j < height; j++)
+            for (int j = 0; j < cells[i].Count; j++)
             {
-                //Vector3 pos = new Vector3(i * cell_offset - width / 2, j * cell_offset - height, 0);
-                //CellMesh cm = Instantiate(cell_mesh_prefabs[1], pos, Quaternion.identity);
-                GridSolver gs = new GridSolver(i,j);
-                // gs.SetConnection(cell_mesh_prefabs[gs.mesh_index].connections);
-                rows.Add(gs);
-            }
-            cell_mesh.Add(rows);
-        }
-
-        // map borders 
-        for (int i = 0; i < cell_mesh.Count; i++)
-        {
-            for (int j = 0; j < cell_mesh[i].Count; j++)
-            {
-                GridSolver gs = cell_mesh[i][j];
-                if (i + 1 < cell_mesh.Count)
-                {
-                    gs.SetBorder(cell_mesh[i + 1][j], 3);
-                }
-                if (i - 1 >= 0)
-                {
-                    gs.SetBorder(cell_mesh[i - 1][j], 1);
-                }
-
-                if (j + 1 < cell_mesh[i].Count)
-                {
-                    gs.SetBorder(cell_mesh[i][j +1], 0);
-                }
-                if (j - 1 >= 0)
-                {
-                    gs.SetBorder(cell_mesh[i][j - 1], 2);
-                }
+                HiveCell gs = cells[i][j];
+                UpdateCell(gs);
             }
         }
-
-        // fixed cells 
-        for (int i = 0; i < width; i++)
+        RedrawGrid();
+    }
+    
+    public bool UpdateCell(HiveCell cell)
+    {
+        if (cell.cell_Type == CellMesh.Cell_type.corridor || cell.cell_Type == CellMesh.Cell_type.room)
         {
-            cell_mesh[i][9].mesh_index = 0;
-            cell_mesh[i][9].cell_Type = CellMesh.Cell_type.top;
+            // get neighbouring tiles 
+            // prepare connections 
+
+            int[] connections = new int[4] { 0, 0, 0, 0 };
+            for (int c = 0; c < 4; c++)
+            {
+                connections[c] = cell.GetConnectionInDirection(c);
+            }
+
+            // find best tile 
+            for (int m = 0; m < cell_mesh_prefabs.Length; m++)
+            {
+                CellMesh cm = cell_mesh_prefabs[m];
+                if (connections.SequenceEqual(cm.connections))
+                {
+                    if (cm.cell_Type == cell.cell_Type)
+                    {
+                        cell.mesh_index = m;
+                        return true;
+                    }
+                }
+            }
         }
+        return false;
+    }
 
-        cell_mesh[5][9].mesh_index = 2;
-        cell_mesh[5][9].cell_Type = CellMesh.Cell_type.entrance;
-
-
-        // we need to solve non dirt first, or the one with lowest choices 
-        // we have simple solution as each tile can connect any other with corridor 
-        cell_mesh[5][8].cell_Type = CellMesh.Cell_type.corridor;
-        cell_mesh[5][7].cell_Type = CellMesh.Cell_type.corridor;
-        cell_mesh[5][6].cell_Type = CellMesh.Cell_type.corridor;
-        cell_mesh[6][6].cell_Type = CellMesh.Cell_type.room;
-        cell_mesh[7][6].cell_Type = CellMesh.Cell_type.corridor;
-        cell_mesh[4][6].cell_Type = CellMesh.Cell_type.room;
-        cell_mesh[4][5].cell_Type = CellMesh.Cell_type.corridor;
-
-        // solver 
-        PlaceCooridors(cell_mesh);
-
-
+    public void RedrawGrid()
+    {
         // solve grid 
-        for (int i = 0; i < cell_mesh.Count; i++)
+        for (int i = 0; i < cells.Count; i++)
         {
-            for (int j = 0; j < cell_mesh[i].Count; j++)
+            for (int j = 0; j < cells[i].Count; j++)
             {
-                GridSolver gs = cell_mesh[i][j];
+                HiveCell gs = cells[i][j];
                 int idx = gs.mesh_index;
                 if (idx < 0) continue;
+
+                if (gs.cell_mesh != null)
+                {
+                    Destroy(gs.cell_mesh.gameObject);
+                }
 
                 Vector3 pos = new Vector3(gs.GetX * offset - width / 2, gs.GetY * offset - height, 0);
                 CellMesh cm = Instantiate(cell_mesh_prefabs[idx], pos, Quaternion.identity);
                 cm.name = gs.name;
-                gs.Dump();
-
                 cm.transform.SetParent(this.transform);
-
+                gs.cell_mesh = cm;
             }
         }
-
     }
 
+    public void ShowGhostCell()
+    { 
+    
+    }
+  
+
+    public void SetFixedCells()
+    {
+        
+        // fixed cells 
+        for (int i = 0; i < width; i++)
+        {
+            cells[i][9].mesh_index = 32;
+            cells[i][9].cell_Type = CellMesh.Cell_type.top;
+        }
+
+        cells[5][9].mesh_index = 1;
+        cells[5][9].cell_Type = CellMesh.Cell_type.entrance;
+
+        // we need to solve non dirt first, or the one with lowest choices 
+        // we have simple solution as each tile can connect any other with corridor 
+        cells[5][8].cell_Type = CellMesh.Cell_type.corridor;
+
+        // solver 
+        PlaceCooridors(cells);
+
+        // redraw grid
+        RedrawGrid();
+    }
 
 }
 

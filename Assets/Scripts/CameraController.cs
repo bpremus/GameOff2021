@@ -83,7 +83,6 @@ public class CameraController : MonoBehaviour
             if (Input.GetKey(KeyCode.S)) _y = -1;
             if (Input.GetKey(KeyCode.A)) _x = 1;
             if (Input.GetKey(KeyCode.D)) _y = -1;
-
             return useKeyboardInput ? new Vector2(_x,_y) : Vector2.zero;
         }
     }
