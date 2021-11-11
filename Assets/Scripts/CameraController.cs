@@ -43,8 +43,10 @@ public class CameraController : MonoBehaviour
     #region MapLimits
     [Header("Limits")]
     public bool limitEnabled = true;
-    public float limitX = 50f; //x limit of map
-    public float limitY = 50f; //y limit of map
+    public float leftlimitX = 5f; //x limit of map
+    public float rightlimitX = 0f; //x limit of map
+    public float uplimitY = 10f; //y limit of map
+    public float downlimitY = 0f; //y limit of map
     public float limitZ = 10f; //z limit
 
     #endregion
@@ -175,7 +177,11 @@ public class CameraController : MonoBehaviour
 
     private void Move()
     {
-        if (popupController.isPopupActive()) return;
+        if(popupController != null)
+        {
+            if (popupController.isPopupActive()) return;
+        }
+
         if (useKeyboardInput)
         {
             Vector3 desiredMove = new Vector3(Input.GetAxis(horizontalAxis), Input.GetAxis(verticalAxis), 0);
@@ -249,7 +255,7 @@ public class CameraController : MonoBehaviour
         if (!limitEnabled)
             return;
 
-        m_Transform.position = new Vector3(Mathf.Clamp(m_Transform.position.x, -limitX, limitX), Mathf.Clamp(m_Transform.position.y, -limitY, limitY), limitZ);
+        m_Transform.position = new Vector3(Mathf.Clamp(m_Transform.position.x, leftlimitX, rightlimitX), Mathf.Clamp(m_Transform.position.y, downlimitY, uplimitY), limitZ);
     }
 
     #endregion

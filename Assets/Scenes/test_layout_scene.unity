@@ -3113,7 +3113,7 @@ MonoBehaviour:
   height: 10
   offset: 1.1
   cell_prefab: {fileID: 4738200789068448637, guid: 27143e290afd82444918b9a40886f7ee, type: 3}
-  dbg_rooms: []
+  cell_mesh_prefabs: []
 --- !u!1001 &821763165
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6585,9 +6585,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44569bd238264d047b9d7067c8601aed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useScreenEdgeInput: 1
+  useKeyboardInput: 1
+  useDragInput: 1
+  useKeyboardZooming: 1
+  useScrollwheelZooming: 1
   keyboardMovementSpeed: 25
   screenEdgeMovementSpeed: 25
   followingSpeed: 15
+  dragMovementSpeed: 35
   groundMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -6595,22 +6601,20 @@ MonoBehaviour:
   minHeight: 12
   keyboardZoomingSensitivity: 2
   scrollWheelZoomingSensitivity: 50
-  limitEnabled: 1
-  limitX: 50
-  limitY: 50
+  limitEnabled: 0
+  leftlimitX: 5
+  rightlimitX: 0
+  uplimitY: 10
+  downlimitY: 0
   limitZ: 10
   targetFollow: {fileID: 0}
   targetOffset: {x: 0, y: 0, z: 0}
-  useScreenEdgeInput: 1
   screenEdgeBorder: 25
-  useKeyboardInput: 1
   horizontalAxis: Horizontal
   verticalAxis: Vertical
-  useKeyboardZooming: 1
-  zoomInKey: 101
   zoomOutKey: 113
+  zoomInKey: 101
   stopFollowingKey: 27
-  useScrollwheelZooming: 1
   zoomingAxis: Mouse ScrollWheel
 --- !u!1 &1705470372
 GameObject:
@@ -8048,7 +8052,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 821834ac4c30639418547fcf645a0df4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hiveGenerator: {fileID: 748134861}
 --- !u!4 &2050323478
 Transform:
   m_ObjectHideFlags: 0

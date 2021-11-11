@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,14 +16,13 @@ public class RoombuildPanel : MonoBehaviour
     {
         //find and ask manager if player has needed resources for id room
 
-        //if so proceed and tell buildmanager to place room with this id
-
-        //play anim
+        //if player has needed resources proceed and tell buildmanager to place room with this id
+        //
+        Debug.Log("Selected room to build:" + roomID);
+        //play animation and hide build menu
         Clicked_Bought();
-        //hide build menu
 
-
-        GetComponentInParent<UIPopup>().DestroySelf();
+   
         //if no 
         //play animation 
       //  Clicked_CantBuy();
@@ -41,11 +41,22 @@ public class RoombuildPanel : MonoBehaviour
     }
     private void Clicked_Bought()
     {
-        LeanTween.scale(gameObject, scaleSize + new Vector3(0.05f,0.05f,0.05f), animTime).setEase(ease);
+        LeanTween.scale(gameObject, scaleSize + new Vector3(0.1f,0.1f,0.1f), animTime).setEase(ease).setOnComplete(Destroy);
     }
     private void Clicked_CantBuy()
     {
-
+        LeanTween.scale(gameObject, scaleSize + new Vector3(0.05f, 0.05f, 0.05f), animTime).setEase(ease).setOnComplete(ResetScale);
     }
+
+    private void ResetScale()
+    {
+        LeanTween.scale(gameObject, scaleSize, animTime);
+    }
+
     #endregion
+
+    private void Destroy()
+    {
+        GetComponentInParent<UIPopup>().DestroySelf();
+    }
 }
