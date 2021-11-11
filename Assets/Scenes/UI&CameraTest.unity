@@ -5374,7 +5374,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -112.29999, y: 170.711}
+  m_AnchoredPosition: {x: -112.30078, y: 170.71094}
   m_SizeDelta: {x: 121.48535, y: 121.48541}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &992631599
@@ -8063,7 +8063,7 @@ MonoBehaviour:
   - {fileID: 9126191075786414649, guid: 4889859dfda60c74b8e77cd040839dfc, type: 3}
   - {fileID: 2441277726443972122, guid: 7c9af9f753634d342b8a982d1d666cf6, type: 3}
   - {fileID: 4529433860017490842, guid: 743e089b91ca59c4a8a8e252a1227cb3, type: 3}
-  - {fileID: 7125373732460544295, guid: 988d3a3b8f9c34849b636ede0579a952, type: 3}
+  - {fileID: 1730555807637921842, guid: 988d3a3b8f9c34849b636ede0579a952, type: 3}
   activePopup: {fileID: 0}
 --- !u!1 &1418973516
 GameObject:
@@ -8700,7 +8700,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 113.441956, y: 170.711}
+  m_AnchoredPosition: {x: 113.44141, y: 170.71094}
   m_SizeDelta: {x: 121.48535, y: 121.48541}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1500161143
@@ -12386,7 +12386,7 @@ Light:
   m_BounceIntensity: 2
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: -1, y: 8, z: 9, w: -12}
+  m_BoundingSphereOverride: {x: 4.775446e-39, y: 9.1835e-41, z: 1.8e-43, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
