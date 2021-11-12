@@ -2,13 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class PopupController : MonoBehaviour
 {
     [SerializeField] private bool showDebug = false;
     [SerializeField] private List<GameObject> popupsList;
     [SerializeField] private GameObject activePopup;
-
+    [SerializeField] private GameObject buildMenuButton;
+    [SerializeField] private GameObject buildingIndicator;
     private BlurController blurController;
     public bool isPopupActive()
     {
@@ -59,7 +60,26 @@ public class PopupController : MonoBehaviour
         }
 
     }
-
+    public void ChangeCanvasGroup(float to)
+    {
+        if(buildMenuButton != null)
+        {
+            CanvasGroup canvasGroup =  buildMenuButton.GetComponent<CanvasGroup>();
+            canvasGroup.alpha = to;
+            if (to > 0)
+                buildMenuButton.GetComponent<Button>().interactable = true;
+            else
+                buildMenuButton.GetComponent<Button>().interactable = false;
+        }
+    }
+    public void DisplayBuildingIndicator()
+    {
+        buildingIndicator.SetActive(true);
+    }
+    public void HideBuildingIndicator()
+    {
+        buildingIndicator.SetActive(false);
+    }
     //Set custom header text for current popup
     public void SetCurrentPopupHeader(string text)
     {
@@ -96,6 +116,7 @@ public class PopupController : MonoBehaviour
         {
             if (blurController) blurController.DisableBlur();
             activePopup = null;
+            ChangeCanvasGroup(1);
         }
             
     }

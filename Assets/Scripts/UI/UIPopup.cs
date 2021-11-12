@@ -119,7 +119,10 @@ public class UIPopup : MonoBehaviour
     }
     public void DestroySelf()
     {
-        if (popupController) popupController.DeleteCurrentPopup();
+        if (popupController)
+        {
+            popupController.DeleteCurrentPopup();
+        }
         Destroy(gameObject);
     }
 

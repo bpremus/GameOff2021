@@ -19,8 +19,10 @@ public class RoombuildPanel : MonoBehaviour
         //if player has needed resources proceed and tell buildmanager to place room with this id
         //
         Debug.Log("Selected room to build:" + roomID);
+
         //play animation and hide build menu
         Clicked_Bought();
+        FindObjectOfType<PopupController>().DisplayBuildingIndicator();
 
    
         //if no 

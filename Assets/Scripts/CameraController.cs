@@ -17,6 +17,7 @@ public class CameraController : MonoBehaviour
     public bool useDragInput = true;
     public bool useKeyboardZooming = true;
     public bool useScrollwheelZooming = true;
+    public bool useRightMouseButtonToDrag = false;
 
     #region Movement
     [Header("Movement")]
@@ -215,8 +216,18 @@ public class CameraController : MonoBehaviour
         }
         if (useDragInput)
         {
-            if (Input.GetMouseButton(0)) isDragging = true;
-            else isDragging = false;
+            if (useRightMouseButtonToDrag)
+            {
+                if (Input.GetMouseButton(1)) isDragging = true;
+                else isDragging = false;
+            }
+            else
+            { 
+                if(Input.GetMouseButton(0)) isDragging = true;
+                else isDragging = false;
+            }
+
+  
 
             if (isDragging)
             {
