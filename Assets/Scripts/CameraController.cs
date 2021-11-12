@@ -8,12 +8,22 @@ public class CameraController : MonoBehaviour
     //
     #region Variables
     private Transform m_Transform; //camera tranform
+    private PopupController popupController;
+
+
+    [Header("Main Settings")]
+    public bool useScreenEdgeInput = false;
+    public bool useKeyboardInput = true;
+    public bool useDragInput = true;
+    public bool useKeyboardZooming = true;
+    public bool useScrollwheelZooming = true;
 
     #region Movement
     [Header("Movement")]
     public float keyboardMovementSpeed = 25f; //speed with keyboard movement
     public float screenEdgeMovementSpeed = 25f; //spee with screen edge movement
     public float followingSpeed = 15f; //speed when following a target
+    public float dragMovementSpeed = 35f; // speed when drag and click
 
     #endregion
 
@@ -33,8 +43,10 @@ public class CameraController : MonoBehaviour
     #region MapLimits
     [Header("Limits")]
     public bool limitEnabled = true;
-    public float limitX = 50f; //x limit of map
-    public float limitY = 50f; //y limit of map
+    public float leftlimitX = 5f; //x limit of map
+    public float rightlimitX = 0f; //x limit of map
+    public float uplimitY = 10f; //y limit of map
+    public float downlimitY = 0f; //y limit of map
     public float limitZ = 10f; //z limit
 
     #endregion
@@ -56,22 +68,15 @@ public class CameraController : MonoBehaviour
 
     #region Input
     [Header("Inputs")]
-    public bool useScreenEdgeInput = true;
     public float screenEdgeBorder = 25f;
-
-    public bool useKeyboardInput = true;
     public string horizontalAxis = "Horizontal";
     public string verticalAxis = "Vertical";
-
-
-    public bool useKeyboardZooming = true;
-    public KeyCode zoomInKey = KeyCode.E;
-    public KeyCode zoomOutKey = KeyCode.Q;
+    public KeyCode zoomOutKey = KeyCode.E;
+    public KeyCode zoomInKey = KeyCode.Q;
     public KeyCode stopFollowingKey = KeyCode.Escape;
-    public bool useScrollwheelZooming = true;
     public string zoomingAxis = "Mouse ScrollWheel";
 
-
+    private bool isDragging = false;
     private Vector2 KeyboardInput
     {
         // get { return useKeyboardInput ? new Vector2(Input.GetAxis(horizontalAxis), Input.GetAxis(verticalAxis)) : Vector2.zero; }
@@ -101,8 +106,8 @@ public class CameraController : MonoBehaviour
     {
         get
         {
-            bool zoomIn = Input.GetKey(zoomInKey);
-            bool zoomOut = Input.GetKey(zoomOutKey);
+            bool zoomIn = Input.GetKey(zoomOutKey);
+            bool zoomOut = Input.GetKey(zoomInKey);
             if (zoomIn && zoomOut)
                 return 0;
             else if (!zoomIn && zoomOut)
@@ -122,6 +127,7 @@ public class CameraController : MonoBehaviour
     private void Start()
     {
         m_Transform = transform;
+        popupController = FindObjectOfType<PopupController>();
     }
 
     private void Update()
@@ -129,7 +135,12 @@ public class CameraController : MonoBehaviour
       CameraUpdate();
     }
 
+    private void LateUpdate()
+    {
 
+
+
+    }
     #endregion
 
     #region Public methods
@@ -151,7 +162,7 @@ public class CameraController : MonoBehaviour
     {
         if (FollowingTarget)
         {
-            if (Input.GetKeyDown(stopFollowingKey) || KeyboardInput.x != 0 || KeyboardInput.y != 0) ResetTarget();
+            if (Input.GetKeyDown(stopFollowingKey) || Input.GetAxis(horizontalAxis) != 0 || Input.GetAxis(verticalAxis) != 0 || isDragging) ResetTarget();
             else
               FollowTarget();
         }
@@ -166,9 +177,14 @@ public class CameraController : MonoBehaviour
 
     private void Move()
     {
+        if(popupController != null)
+        {
+            if (popupController.isPopupActive()) return;
+        }
+
         if (useKeyboardInput)
         {
-            Vector3 desiredMove = new Vector3(KeyboardInput.x, KeyboardInput.y, 0);
+            Vector3 desiredMove = new Vector3(Input.GetAxis(horizontalAxis), Input.GetAxis(verticalAxis), 0);
 
             desiredMove *= keyboardMovementSpeed;
             desiredMove *= Time.deltaTime;
@@ -197,6 +213,21 @@ public class CameraController : MonoBehaviour
 
             m_Transform.Translate(desiredMove, Space.Self);
         }
+        if (useDragInput)
+        {
+            if (Input.GetMouseButton(0)) isDragging = true;
+            else isDragging = false;
+
+            if (isDragging)
+            {
+                Vector3 desiredMove = new Vector3(-Input.GetAxis("Mouse X"), -Input.GetAxis("Mouse Y"), 0f);
+                desiredMove *= dragMovementSpeed;
+                desiredMove *= Time.deltaTime;
+                m_Transform.Translate(desiredMove, Space.Self);
+            }
+        }
+
+
 
     }
 
@@ -224,7 +255,7 @@ public class CameraController : MonoBehaviour
         if (!limitEnabled)
             return;
 
-        m_Transform.position = new Vector3(Mathf.Clamp(m_Transform.position.x, -limitX, limitX), Mathf.Clamp(m_Transform.position.y, -limitY, limitY), limitZ);
+        m_Transform.position = new Vector3(Mathf.Clamp(m_Transform.position.x, leftlimitX, rightlimitX), Mathf.Clamp(m_Transform.position.y, downlimitY, uplimitY), limitZ);
     }
 
     #endregion

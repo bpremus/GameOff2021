@@ -30,10 +30,6 @@ public class UIPopup : MonoBehaviour
         canvasGroup = GetComponent<CanvasGroup>();
         popupController = FindObjectOfType<PopupController>();
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1)) ShowWindow(); //Debug
-    }
     [ContextMenu("Show window")]
     public void ShowWindow()
     {
@@ -121,7 +117,7 @@ public class UIPopup : MonoBehaviour
     {
         HideWindow();
     }
-    private void DestroySelf()
+    public void DestroySelf()
     {
         if (popupController) popupController.DeleteCurrentPopup();
         Destroy(gameObject);
