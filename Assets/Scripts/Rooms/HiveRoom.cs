@@ -7,26 +7,29 @@ public class HiveRoom : CoreRoom
     public float room_detect_distance = 3;
 
     [SerializeField]
-    protected GameObject[] assigned_bugs;
-
+    protected List<GameObject> assigned_bugs = new List<GameObject>();
     [SerializeField]
-    GameObject Dbg_destination;
+    protected int max_asigned_units = 3;
 
+    public void AssignBug(GameObject bug)
+    {
+        assigned_bugs.Add(bug);
+    }
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position, room_detect_distance);
-        Gizmos.color = Color.red;
+      //  Gizmos.DrawWireSphere(transform.position, room_detect_distance);
+      //  Gizmos.color = Color.red;
     }
 
     public override void Start()
     {
-        for (int i = 0; i < assigned_bugs.Length; i++)
+        for (int i = 0; i < max_asigned_units; i++)
         {
-            CoreBug b = assigned_bugs[i].GetComponent<CoreBug>();
-            b.CurrentPositon(this.parent_cell);
-            // b.GoTo(Dbg_destination.GetComponent<HiveCell>());
-
+            //  CoreBug b = assigned_bugs[i].GetComponent<CoreBug>();
+            //  b.CurrentPositon(this.parent_cell);
+            //  // b.GoTo(Dbg_destination.GetComponent<HiveCell>());
+           // assigned_bugs.Add(null);
         }
     }
 
@@ -34,7 +37,7 @@ public class HiveRoom : CoreRoom
     {
         Debug.DrawLine(transform.position, cell.transform.position);
 
-        if (assigned_bugs[0] == null) return;
+        if (assigned_bugs.Count == 0) return;
 
         CoreBug b = assigned_bugs[0].GetComponent<CoreBug>();
         if (b.destination_cell != cell)
@@ -45,15 +48,16 @@ public class HiveRoom : CoreRoom
 
     public void ReturnHome()
     {
-        CoreBug b = assigned_bugs[0].GetComponent<CoreBug>();
-        if (b.destination_cell == this.parent_cell)
-            return;
-
-        b.GoTo(this.parent_cell);
+      //  if (assigned_bugs.Count == 0) return;
+      //
+      //  CoreBug b = assigned_bugs[0].GetComponent<CoreBug>();
+      //  if (b.destination_cell == this.parent_cell)
+      //      return;
+      //
+      //  b.GoTo(this.parent_cell);
     }
 
 
-    [SerializeField]
     protected Collider[] hitColliders;
     public override void DetectEnemy()
     {

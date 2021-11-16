@@ -5,28 +5,51 @@ using UnityEngine;
 
 public class CoreBug : BugMovement
 {
-
+    [HideInInspector]
     public Queue<HiveCell> path = new Queue<HiveCell>();
+    [HideInInspector]
     public HiveCell current_cell = null;
+    [HideInInspector]
     public HiveCell destination_cell = null;
+    [HideInInspector]
     public HiveCell target_cell = null;
+    [HideInInspector]
     public HiveCell asigned_cell = null;
 
     // stats 
+    [Header("Bug stats")]
     public float health = 10f;
     public float damage = 1f;
     public float interraction_range = 3f;
 
     // offset to camera above cells 
     // may not be needed once tiles are replaced with mesh
-    protected Vector3 z_offset = new Vector3(0, 0, 1);
+    protected Vector3 z_offset = new Vector3(0, 0, -0.1f);
 
     public enum BugTask { none, fight, salvage }
     public BugTask bugTask = BugTask.none;
 
+    public enum Bug_action { idle, traveling, gathering, fighting, returning, dead };
+    public Bug_action bug_action = Bug_action.idle;
+
     public virtual void AssignToAroom(HiveCell cell)
     {
 
+    }
+    [SerializeField]
+    HiveCell[] dbg_path;
+    private void DumpPath()
+    {
+        dbg_path = path.ToArray();
+        if (dbg_path.Length == 0) return;
+        Vector3 p = dbg_path[0].transform.position;
+        for (int i = 1; i < dbg_path.Length; i++)
+        {
+            Vector3 p2 = dbg_path[i].transform.position;
+
+            Debug.DrawLine(p, p2, Color.green);
+            p = p2;
+        }
     }
 
     public virtual void OnInteract(CoreBug otherBug)
@@ -80,6 +103,8 @@ public class CoreBug : BugMovement
 
     public void GoToAndBack(HiveCell start, HiveCell destination, float wait_timer = 0)
     {
+       // if (destination_cell == start) return;
+
         path.Clear();
         target_cell = destination;
         destination_cell = start;
@@ -101,11 +126,20 @@ public class CoreBug : BugMovement
         this.target = current_cell.transform.position + z_offset;
     }
 
+    public void GoToAndIdle(HiveCell destination)
+    {
+        GoTo(destination);
+    }
+
     public void GoTo(HiveCell destination)
     {
+        if (destination_cell == destination) return;
+
         path.Clear();
-        target_cell = destination;
+        target_cell     = destination;
         destination_cell = destination;
+
+        path.Enqueue(current_cell);
 
         List<HiveCell> move_path = AiController.GetPath(current_cell, destination);
         for (int i = 1; i < move_path.Count; i++)
@@ -116,13 +150,42 @@ public class CoreBug : BugMovement
         this.target = current_cell.transform.position + z_offset;
     }
 
+    float _last_dist = 0;
     public override void WalkPath()
     {
+
         if (path.Count > 0)
         {
             HiveCell c = path.Peek();
-            float t = Vector3.Distance(c.transform.position + z_offset, transform.position);
-            if (t <= 0.5f)
+
+            Vector3 next_cell_pos = c.transform.position;
+           
+            // move bugs outside
+            if (c.cell_Type == CellMesh.Cell_type.outside)
+            {
+                // offset to bottom
+                next_cell_pos += new Vector3(0, -1, 0);
+            }
+
+            // inside 
+            if (c.cell_Type == CellMesh.Cell_type.corridor)
+            {
+                // slight offset in direction 
+
+                float ang = Vector3.SignedAngle(transform.forward, Vector3.up, z_offset);
+                if (ang > 0)
+                {
+                    next_cell_pos += new Vector3(-0.1f, -0.1f, 0);
+                }
+                else
+                {
+                    next_cell_pos += new Vector3(0.1f, 0.1f, 0);
+                }
+            }
+
+
+            float t = Vector3.Distance(next_cell_pos + z_offset, transform.position);
+            if (t <= stop_distance || _last_dist == t)
             {
                 current_cell = path.Dequeue();
                 if (path.Count > 0)
@@ -134,11 +197,15 @@ public class CoreBug : BugMovement
                 }
                 else
                 {
+                    current_cell = target_cell;
+                    target = current_cell.transform.position + z_offset;
                     OnDestinationReach();
                 }
                 return;
             }
-            this.target = c.transform.position + z_offset;
+
+            _last_dist = t;
+            this.target = next_cell_pos + z_offset;
         }
         else
         {
@@ -159,7 +226,9 @@ public class CoreBug : BugMovement
     Collider[] hitColliders;
 
     public virtual void InteractWithEnemy(CoreBug otherBug)
-    {     
+    {
+        return;
+
         if (_interact_t > 0.1f)
         {
             _interact_t = 0;

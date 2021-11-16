@@ -27,7 +27,7 @@ RectTransform:
   m_GameObject: {fileID: 4738200789068448637}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -50,7 +50,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCellEmpty: 0
-  currentRoom: {fileID: 0}
+  cell_mesh: {fileID: 0}
+  cell_Type: 0
+  hiveGenerator: {fileID: 0}
+  mesh_index: -1
   x: 0
   y: 0
   gCost: 0
@@ -73,5 +76,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1.1, y: 1.1, z: 1.1}
   m_Center: {x: 0, y: 0, z: 0}

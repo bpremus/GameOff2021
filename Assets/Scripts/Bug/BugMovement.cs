@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class BugMovement : MonoBehaviour
 {
-   
-    [SerializeField]
+    [Header("Bug movement")]
+
+    [HideInInspector]
     Vector3 position = Vector3.zero;
 
-    [SerializeField]
+    [HideInInspector]
     public Vector3 target;
 
     [SerializeField]
@@ -17,17 +18,13 @@ public class BugMovement : MonoBehaviour
     protected float move_speed     = 2f;
 
     [SerializeField]
-    protected Animator BodyAnimator;
+    protected Animator[] animators;
 
     [SerializeField]
-    protected Animator LegsAnimator;
+    protected bool Debug_movement_mode = false;
 
-    [SerializeField]
-    Transform wings;
 
-    
-
-    public enum BugAnimation { idle, walk, fly, dead };
+    public enum BugAnimation { idle, walk, fly, attack, dead };
 
     // move stop distance
     public float stop_distance = 1;
@@ -52,13 +49,33 @@ public class BugMovement : MonoBehaviour
     {
         position = transform.position;
         last_pos = transform.position;
+
+        animators = transform.GetComponentsInChildren<Animator>();
+
     }
 
-    [SerializeField]
     protected float speed = 0;
     private Vector3 last_pos = Vector3.zero;
-    public void SetAnimation()
+    public virtual void SetAnimation()
     {
+        if (bugAnimation == BugAnimation.idle)
+        {
+            animators[0].speed = 0;
+            animators[0].SetInteger("State", 0);
+            animators[1].SetInteger("State", 0);
+            animators[2].SetInteger("State", 0);
+        }
+
+        if (bugAnimation == BugAnimation.walk)
+        {
+            animators[0].speed = move_speed * 2;
+            animators[0].SetInteger("State", 0);
+            animators[1].SetInteger("State", 0);
+            animators[2].SetInteger("State", 0);
+        }
+
+
+        /*
         if (bugAnimation == BugAnimation.idle)
         {
             BodyAnimator.SetInteger("State", 0);
@@ -72,8 +89,8 @@ public class BugMovement : MonoBehaviour
         {
             BodyAnimator.SetInteger("State", 2);
             LegsAnimator.SetInteger("State", 2);
-            LegsAnimator.speed = Mathf.Clamp(speed,0,1.5f);
-            speed = (last_pos - transform.position).magnitude / Time.deltaTime;
+            LegsAnimator.speed = 1;  Mathf.Clamp(speed,0,1.5f);
+            //speed = (last_pos - transform.position).magnitude / Time.deltaTime;
             wings.gameObject.SetActive(false);
             //  if (speed < 5) speed = 0;
         }
@@ -93,7 +110,7 @@ public class BugMovement : MonoBehaviour
             speed = 0;
             wings.gameObject.SetActive(false);
         }
-        
+        */
         last_pos = transform.position;
     }
 
@@ -111,7 +128,8 @@ public class BugMovement : MonoBehaviour
             FlipBug();
         }
 
-            SetAnimation();
+        FaceBugUp();
+        SetAnimation();
 
     }
 
@@ -137,7 +155,9 @@ public class BugMovement : MonoBehaviour
     }
 
     protected void MoveBugToPosition(Vector3 destination)
-    { 
+    {
+        if (Debug_movement_mode) return;
+
         Vector3 direction = destination - transform.position;
         Vector3 normal_direction = new Vector3(0, 0, 1);
         Quaternion look_direction = transform.rotation;
@@ -145,33 +165,38 @@ public class BugMovement : MonoBehaviour
         {
             return;
         }
-        
+
+        if (orientation == 1)
+            normal_direction = new Vector3(0, 1, 0);
+
         look_direction = Quaternion.LookRotation(direction, normal_direction); // replace me with a normal
         transform.rotation = Quaternion.Slerp(transform.rotation, look_direction, Time.deltaTime * rotation_speed);
+        
 
- 
         // Debug.DrawRay(transform.position, transform.forward * 10, Color.green);
         // transform.position = Vector3.Lerp(transform.position, transform.position - direction, Time.deltaTime * move_speed);
 
-      //  Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1);
-      //  foreach (var hitCollider in hitColliders)
-      //  {
-      //      BugMovement bm = hitCollider.GetComponent<BugMovement>();
-      //      if (bm == null)
-      //      {           
-      //          continue;
-      //      }
-      //      if (bm == this) continue;
-      //
-      //      direction = bm.transform.position - transform.position;
-      //      direction = direction.normalized * stop_distance / 2;
-      //  }
-   
+        //  Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1);
+        //  foreach (var hitCollider in hitColliders)
+        //  {
+        //      BugMovement bm = hitCollider.GetComponent<BugMovement>();
+        //      if (bm == null)
+        //      {           
+        //          continue;
+        //      }
+        //      if (bm == this) continue;
+        //
+        //      direction = bm.transform.position - transform.position;
+        //      direction = direction.normalized * stop_distance / 2;
+        //  }
+
         float d = Vector3.Distance(transform.position, destination);
         if (d > stop_distance)
         {
             direction = direction.normalized * move_speed;
-            transform.position = Vector3.Lerp(transform.position, transform.position + direction, Time.deltaTime * move_speed);
+            Vector3 new_position = transform.position + direction;
+            
+            transform.position = Vector3.Lerp(transform.position, new_position, Time.deltaTime * move_speed);
 
             OnWalk();
         }
@@ -183,13 +208,24 @@ public class BugMovement : MonoBehaviour
 
     public void OnWalk()
     {
+        if (Debug_movement_mode)
+        {
+            return;
+        }
+
+
        if (bugAnimation != BugAnimation.fly)
        bugAnimation = BugAnimation.walk;
     }
 
     public void OnIdle()
     {
-       if (bugAnimation != BugAnimation.fly)
+        if (Debug_movement_mode)
+        {
+            return;
+        }
+
+        if (bugAnimation != BugAnimation.fly)
            bugAnimation = BugAnimation.idle;
     }
 
@@ -221,24 +257,60 @@ public class BugMovement : MonoBehaviour
         return interpolatedNormal;
     }
 
+
+    [SerializeField]
+    HiveCell _underlaying_cell = null;
+
+    int orientation = 0;
     public void FaceBugUp()
     {
-       // unless its dead 
-       // RaycastHit rayHit;
-       // if (Physics.Raycast(transform.position, new Vector3(0,0,-1), out rayHit))
-       // {
-       //
-       //     Debug.DrawRay(transform.position, new Vector3(0, 0, -5));
-       //     Debug.Log(rayHit.transform.name);
-       //     Vector3 normal = GetMeshColliderNormal(rayHit);
-       //  //  Debug.DrawRay(transform.position, normal * 10f, Color.blue);
-       //    //  transform.position = rayHit.point + normal.normalized * 0.11f;
-       //    //  transform.rotation = Quaternion.LookRotation(normal) * Quaternion.FromToRotation(Vector3.up, Vector3.forward);
-       //  }
+        Vector3 pos = transform.position;
+        if (pos.y < 8.4f)
+        {
+            orientation = 0;
+        }
+        else
+        {
+            orientation = 1;
+        }
+
+       // if (pos.y > 8.5) bugAnimation = BugAnimation.fly;
+
+
+        /*
+        // unless its dead 
+       RaycastHit rayHit;
+       if (Physics.Raycast(transform.position + new Vector3(0,0,5), new Vector3(0,0,-5), out rayHit, bug_cell_detection))
+       {
+            Debug.Log(rayHit.transform.name);
+            Debug.DrawRay(transform.position, new Vector3(0, 0, -5));
+            _underlaying_cell = rayHit.transform.GetComponent<HiveCell>();
+
+            if (_underlaying_cell != null)
+            {
+                if (_underlaying_cell.cell_Type == CellMesh.Cell_type.outside || _underlaying_cell.cell_Type == CellMesh.Cell_type.top)
+                {
+                    orientation = 1;
+                }
+                else
+                {
+                    orientation = 0;
+                }
+            }
+
+            //
+            //    
+            //    Debug.Log(rayHit.transform.name);
+            //    Vector3 normal = GetMeshColliderNormal(rayHit);
+            // //  Debug.DrawRay(transform.position, normal * 10f, Color.blue);
+            //   //  transform.position = rayHit.point + normal.normalized * 0.11f;
+            //   //  transform.rotation = Quaternion.LookRotation(normal) * Quaternion.FromToRotation(Vector3.up, Vector3.forward);
+       
+        }
 
         //Vector3 direction = transform.up;
         //Quaternion look_direction = Quaternion.LookRotation(direction, Vector3.forward); // replace me with a normal
-
+         */
 
     }
 }

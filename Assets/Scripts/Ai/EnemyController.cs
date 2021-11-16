@@ -16,13 +16,30 @@ public class EnemyController : MonoBehaviour
 
     public void Start()
     {
-       
+        
     }
 
+    public void SetAttack()
+    {
+        HiveGenerator hc = FindObjectOfType<HiveGenerator>();
+        if (hc)
+        {
+            if (hc.cells.Count > 0)
+            {
+                start_cell = hc.cells[9][9];
+                target_cell = hc.hive_cell;
+            }
+        }
+    }
+
+    [SerializeField]
     int max_bug = 2;
     float spawn_timer = 0;
     public void Update()
     {
+
+        SetAttack();
+
         spawn_timer += Time.deltaTime;
         if (spawn_timer > 2)
         {

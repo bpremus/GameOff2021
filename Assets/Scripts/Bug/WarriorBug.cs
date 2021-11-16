@@ -6,67 +6,95 @@ using UnityEngine;
 public class WarriorBug : CoreBug
 {
 
-    public float attack_speed = 0.1f;
-
-    public override void AssignToAroom(HiveCell cell)
+    public override void SetAnimation()
     {
-
-    }
-
-    public override void MoveToPosition()
-    {
-        MoveSiegedBug();
-    }
-
-
-    public override void OnInteract(CoreBug otherBug)
-    {
-        base.OnInteract(otherBug);
-    }
-
-    float _attack_t = 0;
-    public override void InteractWithEnemy(CoreBug otherBug)
-    {
-       
-        if (_attack_t > 0.1f)
+        if (bugAnimation == BugAnimation.idle)
         {
-            _attack_t = 0;
-        }
-        else
-            return;
-
-        otherBug.OnInteract(this);
-    }
-
-    public override void SetTimers()
-    {
-        base.SetTimers();
-        _attack_t += Time.deltaTime;
-    }
-
-
-    public void MoveSiegedBug()
-    {
-        Vector3 direction = target - transform.position;
-        Vector3 normal_direction = new Vector3(0, 0, 1);
-        Quaternion look_direction = transform.rotation;
-        if (direction == Vector3.zero)
-        {
-            return;
+            animators[0].speed = 0;
+            animators[0].SetInteger("State", 0);
+            animators[1].SetInteger("State", 0);
         }
 
-        look_direction = Quaternion.LookRotation(direction, normal_direction); // replace me with a normal
-        transform.rotation = Quaternion.Slerp(transform.rotation, look_direction, Time.deltaTime * rotation_speed);
+        if (bugAnimation == BugAnimation.walk)
+        {
+            animators[0].speed = move_speed;
+            animators[0].SetInteger("State", 0);
+            animators[1].SetInteger("State", 0);
+        }
+
+        if (bugAnimation == BugAnimation.attack)
+        {
+            animators[0].speed = 1;
+            animators[0].SetInteger("State", 2);
+            animators[1].SetInteger("State", 2);
+        }
 
     }
 
 
-    public override void WalkPath()
-    { 
-        
+
+        /*
+        public float attack_speed = 0.1f;
+
+        public override void AssignToAroom(HiveCell cell)
+        {
+
+        }
+
+        public override void MoveToPosition()
+        {
+            MoveSiegedBug();
+        }
+
+
+        public override void OnInteract(CoreBug otherBug)
+        {
+            base.OnInteract(otherBug);
+        }
+
+        float _attack_t = 0;
+        public override void InteractWithEnemy(CoreBug otherBug)
+        {
+
+            if (_attack_t > 0.1f)
+            {
+                _attack_t = 0;
+            }
+            else
+                return;
+
+            otherBug.OnInteract(this);
+        }
+
+        public override void SetTimers()
+        {
+            base.SetTimers();
+            _attack_t += Time.deltaTime;
+        }
+
+
+        public void MoveSiegedBug()
+        {
+            Vector3 direction = target - transform.position;
+            Vector3 normal_direction = new Vector3(0, 0, 1);
+            Quaternion look_direction = transform.rotation;
+            if (direction == Vector3.zero)
+            {
+                return;
+            }
+
+            look_direction = Quaternion.LookRotation(direction, normal_direction); // replace me with a normal
+            transform.rotation = Quaternion.Slerp(transform.rotation, look_direction, Time.deltaTime * rotation_speed);
+
+        }
+
+
+        public override void WalkPath()
+        { 
+
+        }
+        */
+
+
+
     }
-
-    
-
-
-}

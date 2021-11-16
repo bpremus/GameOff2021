@@ -12,7 +12,6 @@ public class CoreRoom : MonoBehaviour
         
     }
 
-
     public HiveCell cell{
         get { return this.parent_cell;  }
         set { this.parent_cell = value; }
@@ -23,7 +22,7 @@ public class CoreRoom : MonoBehaviour
 
     }
 
-    public void Update()
+    public virtual void Update()
     {
         DetectEnemy();
     }

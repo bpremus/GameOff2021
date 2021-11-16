@@ -22,10 +22,12 @@ public class RoombuildPanel : MonoBehaviour
         //play animation and hide build menu
         Clicked_Bought();
 
-   
+        CellSelectProto.Instance.SetBuildID(roomID);
+
+
         //if no 
         //play animation 
-      //  Clicked_CantBuy();
+        //  Clicked_CantBuy();
     }
 
     #endregion
