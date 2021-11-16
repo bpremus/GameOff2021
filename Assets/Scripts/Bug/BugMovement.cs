@@ -68,7 +68,7 @@ public class BugMovement : MonoBehaviour
 
         if (bugAnimation == BugAnimation.walk)
         {
-            animators[0].speed = move_speed * 2;
+            animators[0].speed = move_speed * 2.5f;
             animators[0].SetInteger("State", 0);
             animators[1].SetInteger("State", 0);
             animators[2].SetInteger("State", 0);
