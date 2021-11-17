@@ -50,7 +50,7 @@ MonoBehaviour:
   parent_cell: {fileID: 0}
   room_detect_distance: 3
   assigned_bugs: []
-  max_asigned_units: 3
+  max_asigned_units: 1
   spawn_bug_interval: 1
 --- !u!1001 &93858843591132520
 PrefabInstance:

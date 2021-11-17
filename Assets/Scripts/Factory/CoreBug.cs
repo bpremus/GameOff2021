@@ -52,6 +52,20 @@ public class CoreBug : BugMovement
         }
     }
 
+    public override void SetAnimation()
+    {
+        base.SetAnimation();
+        if (bugAnimation == BugAnimation.idle)
+        {
+
+        }
+
+        if (bugAnimation == BugAnimation.walk)
+        {
+
+        }
+    }
+
     public virtual void OnInteract(CoreBug otherBug)
     {
         Debug.Log("we got interraced by " + otherBug.name);

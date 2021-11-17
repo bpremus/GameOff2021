@@ -12,6 +12,9 @@ public class CellSelectProto : MonoBehaviour
         get { return _instance; }
     }
 
+    public enum SelectState { none, bug_selected, empty_cell_selected, room_selected, corridor_selected};
+    public SelectState selection_state;
+
     private void Awake()
     {
     
@@ -60,12 +63,17 @@ public class CellSelectProto : MonoBehaviour
     {
         if (hc)
         {
-            Debug.Log(hc.name);
+           // Debug.Log(hc.name);
             DumpPath(hc);
-
         }
     }
 
+
+    public void OnBugHover(CoreBug bug)
+    {
+        Debug.Log("bug however");
+    }
+    
  
     private void DumpPath(HiveCell destination)
     {
@@ -86,6 +94,11 @@ public class CellSelectProto : MonoBehaviour
         }
     }
 
+    CoreBug _selected_bug;
+    private void OnDrawGizmos()
+    {
+        
+    }
 
     private void Update()
     {
@@ -93,6 +106,14 @@ public class CellSelectProto : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit))
         {
+            CoreBug bug = hit.transform.GetComponent<CoreBug>();
+            if (bug)
+            {
+                OnBugHover(bug);
+                
+            }
+
+
             GameObject objectHit = hit.transform.gameObject;
             if (objectHit.layer == 6) //cell
             {

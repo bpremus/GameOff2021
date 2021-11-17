@@ -171,7 +171,7 @@ public class BugMovement : MonoBehaviour
 
         look_direction = Quaternion.LookRotation(direction, normal_direction); // replace me with a normal
         transform.rotation = Quaternion.Slerp(transform.rotation, look_direction, Time.deltaTime * rotation_speed);
-        
+
 
         // Debug.DrawRay(transform.position, transform.forward * 10, Color.green);
         // transform.position = Vector3.Lerp(transform.position, transform.position - direction, Time.deltaTime * move_speed);
@@ -190,6 +190,7 @@ public class BugMovement : MonoBehaviour
         //      direction = direction.normalized * stop_distance / 2;
         //  }
 
+        BugAnimation _bugAnimation = bugAnimation;
         float d = Vector3.Distance(transform.position, destination);
         if (d > stop_distance)
         {
@@ -199,26 +200,43 @@ public class BugMovement : MonoBehaviour
             transform.position = Vector3.Lerp(transform.position, new_position, Time.deltaTime * move_speed);
 
             OnWalk();
+
+            if (_bugAnimation != bugAnimation)
+                OnWalkStart();
         }
         else
         {
             OnIdle();
+
+            if (_bugAnimation != bugAnimation)
+                OnIdleStart();
         }
     }
 
-    public void OnWalk()
+    public virtual void OnWalkStart()
+    {
+        Debug.Log("Bug started walking");
+    }
+
+    public virtual void OnIdleStart()
+    {
+
+        Debug.Log("Bug is idle");
+    }
+
+    public virtual void OnWalk()
     {
         if (Debug_movement_mode)
         {
             return;
         }
-
+       
 
        if (bugAnimation != BugAnimation.fly)
        bugAnimation = BugAnimation.walk;
     }
 
-    public void OnIdle()
+    public virtual void OnIdle()
     {
         if (Debug_movement_mode)
         {
@@ -226,7 +244,8 @@ public class BugMovement : MonoBehaviour
         }
 
         if (bugAnimation != BugAnimation.fly)
-           bugAnimation = BugAnimation.idle;
+            bugAnimation = BugAnimation.idle;
+
     }
 
     protected void FlipBug()
