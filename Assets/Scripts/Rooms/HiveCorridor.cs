@@ -32,12 +32,12 @@ public class HiveCorridor : HiveRoom
             {
                 if (cb.current_cell != this.cell)
                 {
-                    cb.bug_action = CoreBug.Bug_action.traveling;
+                 //   cb.bug_action = CoreBug.Bug_action.traveling;
                     cb.GoToAndIdle(this.cell);
                 }
                 else
                 {
-                    cb.bug_action = CoreBug.Bug_action.idle;
+                  //  cb.bug_action = CoreBug.Bug_action.idle;
                 }
             }
         }

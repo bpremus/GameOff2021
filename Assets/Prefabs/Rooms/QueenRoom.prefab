@@ -50,7 +50,7 @@ MonoBehaviour:
   parent_cell: {fileID: 0}
   room_detect_distance: 3
   assigned_bugs: []
-  max_asigned_units: 1
+  max_asigned_units: 3
   spawn_bug_interval: 1
 --- !u!1001 &93858843591132520
 PrefabInstance:
@@ -193,7 +193,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5410943562843629073, guid: 37cda1c7505941c42a97a54926d54788, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 37cda1c7505941c42a97a54926d54788, type: 3}
 --- !u!4 &2592994743952051019 stripped
 Transform:

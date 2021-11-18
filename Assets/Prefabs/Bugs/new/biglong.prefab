@@ -1140,7 +1140,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6163468430259321298}
   - component: {fileID: 6163468430259321309}
-  m_Layer: 0
+  - component: {fileID: 7242933067365941963}
+  m_Layer: 7
   m_Name: biglong
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1156,7 +1157,7 @@ Transform:
   m_GameObject: {fileID: 6163468430259321299}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -67.16635, y: 0.6710993, z: 5.049999}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children:
   - {fileID: 2438647354709091485}
   - {fileID: 2764481900405264586}
@@ -1182,7 +1183,6 @@ MonoBehaviour:
   Debug_movement_mode: 0
   stop_distance: 1
   bugAnimation: 1
-  _underlaying_cell: {fileID: 0}
   current_cell: {fileID: 0}
   destination_cell: {fileID: 0}
   target_cell: {fileID: 0}
@@ -1192,8 +1192,21 @@ MonoBehaviour:
   interraction_range: 3
   bugTask: 0
   bug_action: 0
-  dbg_path: []
+  coalition: 0
   hitColliders: []
+--- !u!135 &7242933067365941963
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6163468430259321299}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6416469407285377213
 GameObject:
   m_ObjectHideFlags: 0

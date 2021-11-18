@@ -23,7 +23,6 @@ public class BugMovement : MonoBehaviour
     [SerializeField]
     protected bool Debug_movement_mode = false;
 
-
     public enum BugAnimation { idle, walk, fly, attack, dead };
 
     // move stop distance
@@ -45,13 +44,14 @@ public class BugMovement : MonoBehaviour
         return false;
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         position = transform.position;
         last_pos = transform.position;
 
         animators = transform.GetComponentsInChildren<Animator>();
 
+        this.gameObject.AddComponent<CoreColorShader>();
     }
 
     protected float speed = 0;
@@ -73,7 +73,13 @@ public class BugMovement : MonoBehaviour
             animators[1].SetInteger("State", 0);
             animators[2].SetInteger("State", 0);
         }
-
+        if (bugAnimation == BugAnimation.dead)
+        {
+            for (int i = 0; i < animators.Length; i++)
+            {
+                animators[0].speed = 0;
+            }
+        }
 
         /*
         if (bugAnimation == BugAnimation.idle)
@@ -130,9 +136,7 @@ public class BugMovement : MonoBehaviour
 
         FaceBugUp();
         SetAnimation();
-
     }
-
 
     public virtual void SetTimers()
     { 
@@ -215,13 +219,13 @@ public class BugMovement : MonoBehaviour
 
     public virtual void OnWalkStart()
     {
-        Debug.Log("Bug started walking");
+       // Debug.Log("Bug started walking");
     }
 
     public virtual void OnIdleStart()
     {
 
-        Debug.Log("Bug is idle");
+       // Debug.Log("Bug is idle");
     }
 
     public virtual void OnWalk()
@@ -254,10 +258,13 @@ public class BugMovement : MonoBehaviour
         Vector3 direction = transform.forward;
         Quaternion look_direction = Quaternion.LookRotation(direction, normal_direction); // replace me with a normal
         transform.rotation = Quaternion.Slerp(transform.rotation, look_direction, Time.deltaTime * rotation_speed);
-
+        Vector3 pos = transform.position;
+        pos.z = 0.1f;
+        transform.position = pos;
         bugAnimation = BugAnimation.dead;
     }
 
+    /*
     private Vector3 GetMeshColliderNormal(RaycastHit hit)
     {
   
@@ -275,10 +282,7 @@ public class BugMovement : MonoBehaviour
         interpolatedNormal = hit.transform.TransformDirection(interpolatedNormal);
         return interpolatedNormal;
     }
-
-
-    [SerializeField]
-    HiveCell _underlaying_cell = null;
+    */
 
     int orientation = 0;
     public void FaceBugUp()
@@ -292,44 +296,5 @@ public class BugMovement : MonoBehaviour
         {
             orientation = 1;
         }
-
-       // if (pos.y > 8.5) bugAnimation = BugAnimation.fly;
-
-
-        /*
-        // unless its dead 
-       RaycastHit rayHit;
-       if (Physics.Raycast(transform.position + new Vector3(0,0,5), new Vector3(0,0,-5), out rayHit, bug_cell_detection))
-       {
-            Debug.Log(rayHit.transform.name);
-            Debug.DrawRay(transform.position, new Vector3(0, 0, -5));
-            _underlaying_cell = rayHit.transform.GetComponent<HiveCell>();
-
-            if (_underlaying_cell != null)
-            {
-                if (_underlaying_cell.cell_Type == CellMesh.Cell_type.outside || _underlaying_cell.cell_Type == CellMesh.Cell_type.top)
-                {
-                    orientation = 1;
-                }
-                else
-                {
-                    orientation = 0;
-                }
-            }
-
-            //
-            //    
-            //    Debug.Log(rayHit.transform.name);
-            //    Vector3 normal = GetMeshColliderNormal(rayHit);
-            // //  Debug.DrawRay(transform.position, normal * 10f, Color.blue);
-            //   //  transform.position = rayHit.point + normal.normalized * 0.11f;
-            //   //  transform.rotation = Quaternion.LookRotation(normal) * Quaternion.FromToRotation(Vector3.up, Vector3.forward);
-       
-        }
-
-        //Vector3 direction = transform.up;
-        //Quaternion look_direction = Quaternion.LookRotation(direction, Vector3.forward); // replace me with a normal
-         */
-
     }
 }

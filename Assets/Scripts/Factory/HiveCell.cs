@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
+[ExecuteInEditMode]
 public class HiveCell : MonoBehaviour
 {
     public bool isCellEmpty;
+    [SerializeField]
     protected CoreRoom childRoom;
     [SerializeField]
     public CellMesh cell_mesh;
@@ -26,6 +27,53 @@ public class HiveCell : MonoBehaviour
 
         // set name 
         SetTileName();
+    }
+    Queue<CoreBug> bugs_to_assign = new Queue<CoreBug>();
+    public bool AssignDrone(CoreBug bug)
+    {
+        Debug.Log("assinging a bug to a new room");
+        bugs_to_assign.Enqueue(bug);
+        return true;
+    }
+
+    public void DetachDrone(CoreBug bug)
+    {
+        CoreRoom current_room = bug.asigned_cell.GetRoom();
+        if (current_room)
+        {
+            current_room.DetachBug(bug);
+        }
+    }
+
+    protected virtual void ProcessAssigments()
+    {
+        if (childRoom == null) return;
+
+        if (bugs_to_assign.Count > 0)
+        {
+            CoreBug bug = bugs_to_assign.Dequeue();
+            CoreRoom current_room = bug.asigned_cell.GetRoom();
+            if (current_room)
+            {
+                current_room.DetachBug(bug);
+            }
+
+            childRoom.AssignBug(bug);
+            bug.asigned_cell = this;
+        }
+    }
+
+    protected virtual void Update()
+    {
+        ProcessAssigments();
+    }
+
+    public CoreRoom GetRoom()
+    {
+        if (childRoom)
+            return childRoom;
+        else
+            return null;
     }
 
     public void SetTileName()
@@ -62,6 +110,7 @@ public class HiveCell : MonoBehaviour
     {
         isCellEmpty = true;
         cell_Type = CellMesh.Cell_type.corridor;
+        ArtPrefabsInstance art = ArtPrefabsInstance.Instance;
         BuildRoom(ArtPrefabsInstance.Instance.RoomPrefabs[2]);
         hiveGenerator.RefreshAllCells();
     }
@@ -99,7 +148,6 @@ public class HiveCell : MonoBehaviour
             BuildRoom(ArtPrefabsInstance.Instance.RoomPrefabs[3]);
         }
 
-
         if (hiveGenerator.rooms.Contains(this) == false)
         {
             hiveGenerator.rooms.Add(this);
@@ -118,6 +166,7 @@ public class HiveCell : MonoBehaviour
             {
                 childRoom.cell = this;
                 childRoom.transform.SetParent(transform.parent);
+                childRoom.gameObject.AddComponent<CoreColorShader>();
             }
             walkable = 1;
             isCellEmpty = false;

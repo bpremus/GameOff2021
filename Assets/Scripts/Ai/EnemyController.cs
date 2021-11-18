@@ -13,6 +13,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     HiveCell target_cell;
 
+    int coalition = 1;
 
     public void Start()
     {
@@ -26,7 +27,8 @@ public class EnemyController : MonoBehaviour
         {
             if (hc.cells.Count > 0)
             {
-                start_cell = hc.cells[9][9];
+                int[] size = hc.GetSize();
+                start_cell = hc.cells[size[0] -1][size[1] -1];
                 target_cell = hc.hive_cell;
             }
         }
@@ -63,6 +65,8 @@ public class EnemyController : MonoBehaviour
             cb.CurrentPositon(start_cell);
             cb.GoToAndBack(start_cell,target_cell);
             cb.tag = "Enemy";
+            cb.coalition = coalition; // same as tag 
+
             // cb.stop_and_fight = false;
             //cb.GoTo(target_cell);
         }

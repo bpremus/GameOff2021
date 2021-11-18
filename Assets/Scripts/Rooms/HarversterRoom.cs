@@ -12,7 +12,6 @@ public class HarversterRoom : HiveRoom
     // or we handle all bugs ate same time
     // we will go with version 2 for now 
     // later in polish phase we can ajust
-
     float _gather_t = 0;
 
     public override void Update()
@@ -31,12 +30,10 @@ public class HarversterRoom : HiveRoom
             Debug.Log("moving a bug");
         }
     }
-
     public void SendToCollect()
     {
         gather_destination = cell.hiveGenerator.cells[9][9];
     }
-
     public void OnBugReachGatheringSite(CoreBug bug)
     {
         Debug.Log("bugs are gathering");
@@ -45,6 +42,8 @@ public class HarversterRoom : HiveRoom
     public void OnBugReachHomeCell(CoreBug bug)
     {
         Debug.Log("bugs returned home");
+
+        DBG_TopUI.Instance.BringFood();
     }
 
     public void OnBugDepart(CoreBug bug)
@@ -53,10 +52,12 @@ public class HarversterRoom : HiveRoom
     }
 
     float _spread_timer = 0;
-    public void SendGathering()
+    protected void SendGathering()
     {
         if (gather_destination)
         {
+            Debug.Log("sending gathering");
+
             _spread_timer += Time.deltaTime;
             
             // send gathering 
@@ -67,35 +68,33 @@ public class HarversterRoom : HiveRoom
                 if (cb)
                 {
                     // moving to location 
-                    if (cb.bug_action == CoreBug.Bug_action.idle)
+                    if (cb.GetAction == CoreBug.Bug_action.idle)
                     {
                         if (_spread_timer < 0.5f) continue;
                         _spread_timer = 0;
 
-                        cb.GoTo(gather_destination);  
-                        cb.bug_action = CoreBug.Bug_action.traveling;
+                        cb.GoTo(gather_destination);
+                        cb.NextAction();
                         OnBugDepart(cb);
-                        continue;
-                        
+                        continue;                
                     }
 
                     // reached location
-                    if (cb.bug_action == CoreBug.Bug_action.traveling)
+                    if (cb.GetAction == CoreBug.Bug_action.traveling)
                     {
                         if (cb.current_cell == gather_destination)
                         {
-                            cb.bug_action = CoreBug.Bug_action.gathering;
+                            cb.NextAction();
                             OnBugReachGatheringSite(cb);
 
                             // start gathering 
                             _gather_t = 0;
-
                             continue;
                         }
                     }
 
                     // gathering and return back
-                    if (cb.bug_action == CoreBug.Bug_action.gathering)
+                    if (cb.GetAction == CoreBug.Bug_action.gathering)
                     {
                         if (cb.current_cell == gather_destination)
                         {
@@ -107,7 +106,7 @@ public class HarversterRoom : HiveRoom
                                 _spread_timer = 0;
 
                                 cb.GoTo(this.cell);
-                                cb.bug_action = CoreBug.Bug_action.returning;
+                                cb.NextAction();
                                 _spread_timer = 0;
                                 continue;
                             }
@@ -115,12 +114,12 @@ public class HarversterRoom : HiveRoom
                     }
 
                     // reched cell
-                    if (cb.bug_action == CoreBug.Bug_action.returning)
+                    if (cb.GetAction == CoreBug.Bug_action.returning)
                     {
                         if (cb.current_cell == this.cell)
                         {
                             OnBugReachHomeCell(cb);
-                            cb.bug_action = CoreBug.Bug_action.idle;
+                            cb.NextAction();
                             continue;
                         }
                     }
@@ -129,42 +128,10 @@ public class HarversterRoom : HiveRoom
         }
         else
         {
-            // keep in the room
-            for (int i = 0; i < assigned_bugs.Count; i++)
-            {
-                CoreBug cb = assigned_bugs[i].GetComponent<CoreBug>();
-                if (cb)
-                {
-                    if (cb.current_cell != this.cell)
-                    {
-                        cb.bug_action = CoreBug.Bug_action.traveling;
-                        cb.GoToAndIdle(this.cell);
-                    }
-                    else
-                    {
-                        cb.bug_action = CoreBug.Bug_action.idle;
-                    }                
-                }
-            }
-
             SpreadBugs();
         }
     }
 
-    public void SpreadBugs()
-    {
-        for (int i = 0; i < assigned_bugs.Count; i++)
-        {
-            Vector3 move_to = new Vector3(0, -1, 0);
-            move_to = Quaternion.Euler(0, 0, 45 - (180 / max_asigned_units * i)) * move_to;
-            move_to = move_to.normalized;
-
-            CoreBug cb = assigned_bugs[i].GetComponent<CoreBug>();
-            if (cb.bug_action == CoreBug.Bug_action.idle)
-            {
-                cb.target = transform.position + move_to * 0.6f;
-            }
-        }
-    }
+   
 
 }

@@ -882,7 +882,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4275397217099037291}
-  m_Layer: 0
+  - component: {fileID: 5410943562843629073}
+  m_Layer: 7
   m_Name: queen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -898,13 +899,27 @@ Transform:
   m_GameObject: {fileID: 4275397217099037204}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -110.8, y: 4.1, z: 5.7}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children:
   - {fileID: 4275397217381397123}
   - {fileID: 4275397215714608839}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &5410943562843629073
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4275397217099037204}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7224772668637823135, guid: 81fea70525d3b74449395dcb1ffdb624, type: 3}
 --- !u!1 &4275397217131789372
 GameObject:
   m_ObjectHideFlags: 0

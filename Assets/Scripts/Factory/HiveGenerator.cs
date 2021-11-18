@@ -17,8 +17,14 @@ public class HiveGenerator : MonoBehaviour
 
     public List<List<HiveCell>> cells = new List<List<HiveCell>>();
     public List<HiveCell> rooms = new List<HiveCell>();
-    public HiveCell hive_cell;
-    public List<HiveCell> hive_entrance;
+    public HiveCell hive_cell = null;
+    public List<HiveCell> hive_entrance = new List<HiveCell>();
+
+    public int [] GetSize()
+    {
+        return new int[] { width, height };
+    }
+
 
     public void Start()
     {
@@ -76,7 +82,7 @@ public class HiveGenerator : MonoBehaviour
             List<HiveCell> rows = new List<HiveCell>();
             for (int j = 0; j < height; j++)
             {
-                Vector3 pos = new Vector3(i * offset - width / 2, j * offset - height, 0);
+                Vector3 pos = new Vector3(i * offset - width, (j * offset) - height * offset, 0);
                 HiveCell c = CreateTile(pos);
                 c.SetNode(i, j);
                 c.SetGenerator = this;
@@ -110,6 +116,8 @@ public class HiveGenerator : MonoBehaviour
 
     public HiveCell CreateTile(Vector3 position)
     {
+        position += transform.position;
+
         GameObject g = Instantiate(cell_prefab, position, Quaternion.identity);
         if (g)
         {
@@ -151,23 +159,25 @@ public class HiveGenerator : MonoBehaviour
     {
 
         CollecteCells();
+        
+        int d = width / 2;
+        cells[d    ][height - 3].BuildCooridor();
+        cells[d + 1][height - 4].BuildRoom(HiveCell.RoomContext.war);
+        cells[d + 2][height - 4].BuildCooridor();
+        cells[d + 2][height - 5].BuildCooridor();
+        cells[d - 1][height - 4].BuildRoom(HiveCell.RoomContext.queen);
+        cells[d - 1][height - 5].BuildCooridor();
+        cells[d - 2][height - 5].BuildRoom(HiveCell.RoomContext.harvester);
+        cells[d + 3][height - 5].BuildRoom(HiveCell.RoomContext.harvester);
+        cells[d + 2][height - 6].BuildCooridor();
+        cells[d + 1][height - 6].BuildCooridor();
+        cells[d    ][height - 6].BuildCooridor();
+        cells[d - 1][height - 6].BuildCooridor();
+        cells[d + 1][height - 3].BuildCooridor();
+        
 
-        cells[5][7].BuildCooridor();
-       // cells[5][6].BuildCooridor();
-        cells[6][6].BuildRoom(HiveCell.RoomContext.war);
-        cells[7][6].BuildCooridor();
-        cells[7][5].BuildCooridor();
-        cells[4][6].BuildRoom(HiveCell.RoomContext.queen);
-        cells[4][5].BuildCooridor();
-        cells[3][5].BuildRoom(HiveCell.RoomContext.harvester);
-        cells[8][5].BuildRoom(HiveCell.RoomContext.harvester);
-        cells[7][4].BuildCooridor();
-        cells[6][4].BuildCooridor();
-        cells[5][4].BuildCooridor();
-        cells[4][4].BuildCooridor();
-        cells[6][7].BuildCooridor();
         RefreshAllCells();
-
+        
     }
 
     public void RefreshAllCells()
@@ -251,7 +261,8 @@ public class HiveGenerator : MonoBehaviour
 
                 if (idx < 0) continue;
 
-                Vector3 pos = new Vector3(gs.GetX * offset - width / 2, gs.GetY * offset - height, 0);
+                Vector3 pos = new Vector3(gs.GetX * offset - width, (gs.GetY * offset) - height * offset, 0);
+                pos += transform.position;
                 CellMesh cm = Instantiate(cell_mesh_prefabs[idx], pos, Quaternion.identity);
                 cm.name = gs.name;
                 cm.transform.SetParent(this.transform);
@@ -271,24 +282,26 @@ public class HiveGenerator : MonoBehaviour
         // outside top row
         for (int i = 0; i < width; i++)
         {
-            cells[i][9].BuildOutside();
+            cells[i][height -1].BuildOutside();
         }
 
         // earh border row with opening 
         for (int i = 0; i < width; i++)
         {
-            cells[i][8].mesh_index = 32;
-            cells[i][8].cell_Type = CellMesh.Cell_type.top;
+            cells[i][height - 2].mesh_index = 32;
+            cells[i][height - 2].cell_Type = CellMesh.Cell_type.top;
         }
 
-        cells[5][8].mesh_index = 1;
-        cells[5][8].cell_Type = CellMesh.Cell_type.entrance;
-        hive_entrance.Add(cells[5][8]);
+        int d = width / 2;
+
+        cells[d][height - 2].mesh_index = 1;
+        cells[d][height - 2].cell_Type = CellMesh.Cell_type.entrance;
+        hive_entrance[0] = cells[d][height - 2];
 
 
         // we need to solve non dirt first, or the one with lowest choices 
         // we have simple solution as each tile can connect any other with corridor 
-        cells[5][7].BuildCooridor();
+        cells[d][height - 3].BuildCooridor();
 
         // solver 
         PlaceCooridors(cells);
