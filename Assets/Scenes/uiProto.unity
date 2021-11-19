@@ -21466,7 +21466,7 @@ MonoBehaviour:
   food: 18
   day_night_duration: 10
   isDay: 0
-  dayDuration: 61
+  dayDuration: 1
 --- !u!4 &1212630098
 Transform:
   m_ObjectHideFlags: 0
@@ -31040,15 +31040,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useScreenEdgeInput: 0
-  useKeyboardInput: 1
+  useKeyboardInput: 0
   useDragInput: 1
   useKeyboardZooming: 1
   useScrollwheelZooming: 1
-  useRightMouseButtonToDrag: 1
+  useRightMouseButtonToDrag: 0
   keyboardMovementSpeed: 12
   screenEdgeMovementSpeed: 5
   followingSpeed: 5
-  dragMovementSpeed: 8
+  dragMovementSpeed: 20
   groundMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -31057,10 +31057,10 @@ MonoBehaviour:
   keyboardZoomingSensitivity: 2
   scrollWheelZoomingSensitivity: 30
   limitEnabled: 1
-  leftlimitX: -2
-  rightlimitX: 12
-  uplimitY: 10
-  downlimitY: -4.5
+  leftlimitX: -8
+  rightlimitX: 8
+  uplimitY: 2
+  downlimitY: -8
   limitZ: 10
   targetFollow: {fileID: 0}
   targetOffset: {x: 0, y: 0, z: 0}
@@ -44761,7 +44761,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -1.7188721, y: 0.000009536743}
+  m_AnchoredPosition: {x: -1.71875, y: 0.000009536743}
   m_SizeDelta: {x: 78.9805, y: 609.7288}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4233563341129435650

@@ -178,6 +178,7 @@ public class CameraController : MonoBehaviour
 
     private void Move()
     {
+     
         if(popupController != null)
         {
             if (popupController.isPopupActive()) return;

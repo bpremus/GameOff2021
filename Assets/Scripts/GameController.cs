@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     // -----------------------------
     [SerializeField]
     int food = 20;
+    int wood = 100;
     int population = 2;
 
     // day and night cylces 

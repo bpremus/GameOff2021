@@ -182,12 +182,19 @@ public class CellSelectProto : MonoBehaviour
 
     public bool CheckRoomConnections(HiveCell imacted_cell)
     {
-        imacted_cell.walkable = 0;
+       
 
         // hive generator, find all room 
         // cheheck form each room to exit if its ok 
 
-            
+        QueenRoom qr = imacted_cell.GetComponent<QueenRoom>();
+        if (qr)
+        { 
+        
+        }
+        imacted_cell.walkable = 0;
+
+
 
         imacted_cell.walkable = 1;
         return false;
