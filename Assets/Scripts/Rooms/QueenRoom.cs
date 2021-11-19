@@ -73,7 +73,7 @@ public class QueenRoom : HiveRoom
                     cb.name = "b_" + name_index;
                     name_index++;
 
-                    DBG_TopUI.Instance.NewBug();
+                    GameController.Instance.OnNewBug();
 
 
                     // HiveCell hc = this.parent_cell;

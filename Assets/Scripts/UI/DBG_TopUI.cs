@@ -13,26 +13,7 @@ public class DBG_TopUI : MonoBehaviour
         get { return _instance; }
     }
 
-    public int food = 20;
-    public int population = 1;
-
-    public void ConsumeFood()
-    {
-        food -= 1;
-    }
-    public void BringFood()
-    {
-        food += 20;
-    }
-
-    public void NewBug()
-    {
-        population += 1;
-    }
-    public void BugDied()
-    {
-        population -= 1;
-    }
+  
 
 
 private void Awake()
@@ -54,22 +35,7 @@ private void Awake()
     [SerializeField]
     Text time_Text;
 
-    float _food_t = 0;
-    float food_conusme_thick = 5;
-    public void ConsumeFoodThick()
-    {
-        _food_t += Time.deltaTime;
-        if (_food_t > food_conusme_thick)
-        {
-            _food_t = 0;
-        }
-        else
-        {
-            return;
-        }
 
-        food -= population;
-    }
 
     GameController gc;
     public void DayOrNight()
@@ -96,10 +62,8 @@ private void Awake()
 
     public void Update()
     {
-        food_Text.text = food.ToString();
-        population_Text.text = population.ToString();
-
-        ConsumeFoodThick();
+        food_Text.text = GameController.Instance.GetFood().ToString();
+        population_Text.text = GameController.Instance.GetPopulation().ToString();
         DayOrNight();
     }
 

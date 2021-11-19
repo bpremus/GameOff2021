@@ -928,7 +928,7 @@ PrefabInstance:
     - target: {fileID: 2290125106946955865, guid: ff39edff40941804d8bffab139f2b5b5, type: 3}
       propertyPath: asigned_cell
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1163107887}
     - target: {fileID: 2290125106946955865, guid: ff39edff40941804d8bffab139f2b5b5, type: 3}
       propertyPath: stop_distance
       value: 0.1
@@ -22808,8 +22808,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c688d1e8c7c49114fa6d9163e5bf7a9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  food: 20
-  population: 1
   food_Text: {fileID: 1207862757}
   population_Text: {fileID: 1212924709}
   time_Text: {fileID: 2140817123}

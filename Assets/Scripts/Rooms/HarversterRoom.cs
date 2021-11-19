@@ -43,7 +43,7 @@ public class HarversterRoom : HiveRoom
     {
         Debug.Log("bugs returned home");
 
-        DBG_TopUI.Instance.BringFood();
+        GameController.Instance.OnBringFood();
     }
 
     public void OnBugDepart(CoreBug bug)

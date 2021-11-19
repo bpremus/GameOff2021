@@ -10,8 +10,9 @@ public class GameController : MonoBehaviour
 
     // Stats 
     // -----------------------------
-    int food = 0;
-    int population = 0;
+    [SerializeField]
+    int food = 20;
+    int population = 2;
 
     // day and night cylces 
     [SerializeField]
@@ -40,10 +41,34 @@ public class GameController : MonoBehaviour
     
     }
 
-    // Events 
+    public void OnConsumeFood()
+    {
+        food -= 1;
+    }
+    public void OnBringFood()
+    {
+        food += 20;
+    }
+
+    public void OnNewBug()
+    {
+        population += 1;
+    }
+    public void OnBugDied()
+    {
+        population -= 1;
+    }
+
+    // methods 
     // ------------------------------
-
-
+    public int GetFood()
+    {
+        return food;
+    }
+    public int GetPopulation()
+    {
+        return population;
+    }
 
     public float GetTimePercent()
     {
@@ -59,10 +84,31 @@ public class GameController : MonoBehaviour
     {
         TimeCycle();
         dayDuration = GetTimePercent();
+        ConsumeFoodThick();
     }
 
     // Protected
     // ------------------------------
+
+
+    float _food_t = 0;
+    float food_conusme_thick = 5;
+    public void ConsumeFoodThick()
+    {
+        _food_t += Time.deltaTime;
+        if (_food_t > food_conusme_thick)
+        {
+            _food_t = 0;
+        }
+        else
+        {
+            return;
+        }
+
+        food -= population;
+    }
+
+
     private float _t_day_duration = 0;
     protected void TimeCycle()
     {
