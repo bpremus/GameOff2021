@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 public class DBG_UnitUI : MonoBehaviour
 {
     // changed to singleton 
@@ -25,7 +25,7 @@ public class DBG_UnitUI : MonoBehaviour
     }
 
     [SerializeField]
-    Text bug_name;
+    TextMeshProUGUI bug_name;
 
     CoreBug bug;
     public void Show(CoreBug cb)

@@ -9,7 +9,9 @@ public class CellSelectProto : MonoBehaviour
     Transform frame_border;
     [SerializeField]
     GameObject path_sphere;
-
+    [SerializeField] private Sprite unselectedFrame;
+    [SerializeField] private Sprite selectedFrame;
+    private Vector3 borderStartSize;
     // changed to singleton 
     private static CellSelectProto _instance;
     public static CellSelectProto Instance
@@ -30,6 +32,8 @@ public class CellSelectProto : MonoBehaviour
         }
 
         _instance = this;
+
+        borderStartSize = frame_border.transform.localScale;
     }
 
     int last_selected_room_id = 0;
@@ -95,8 +99,11 @@ public class CellSelectProto : MonoBehaviour
         Debug.Log("cell select");
         _cellSelected = hc;
 
-        DBG_RoomUI.Instance.Show(hc);
+        Room_UI.Instance.Show(hc);
         DBG_UnitUI.Instance.Hide();
+
+        frame_border.GetComponent<SpriteRenderer>().sprite = selectedFrame;
+        frame_border.transform.localScale = borderStartSize;
     }
 
     public void OnBugSelect(CoreBug bug)
@@ -105,7 +112,8 @@ public class CellSelectProto : MonoBehaviour
         _bug_selected = bug;
 
         DBG_UnitUI.Instance.Show(bug);
-        DBG_RoomUI.Instance.Hide();
+        Room_UI.Instance.Hide();
+        frame_border.transform.localScale = new Vector3(0.5f,0.5f,0.5f);
     }
     public void OnPlaceBuilding(HiveCell cell)
     {
@@ -131,6 +139,7 @@ public class CellSelectProto : MonoBehaviour
         OnDeselect();
         OnCellSelect(cell);
         frame_border.transform.position = cell.transform.position + new Vector3(0, 0, 1);
+        frame_border.transform.localScale = borderStartSize;
     }
 
     public void OnAssignBug(HiveCell destination)
@@ -209,10 +218,11 @@ public class CellSelectProto : MonoBehaviour
         _cellSelected = null;
 
         DBG_UnitUI.Instance.Hide();
-        DBG_RoomUI.Instance.Hide();
+        Room_UI.Instance.Hide();
 
         frame_border.transform.position = new Vector3(0, 0, -5);
 
+        frame_border.GetComponent<SpriteRenderer>().sprite = unselectedFrame;
     }
 
     private void OnDrawGizmos()

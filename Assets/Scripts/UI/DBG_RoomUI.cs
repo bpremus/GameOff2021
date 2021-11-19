@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 public class DBG_RoomUI : MonoBehaviour
 {
     // changed to singleton 
@@ -30,7 +30,7 @@ public class DBG_RoomUI : MonoBehaviour
     [SerializeField]
     GameObject bug_button_prefab;
     [SerializeField]
-    Text room_name;
+    TextMeshProUGUI room_name;
 
     List<CoreBug> listed_bugs = new List<CoreBug>();
     public void BuildButtons()

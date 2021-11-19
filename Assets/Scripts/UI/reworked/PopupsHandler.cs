@@ -8,7 +8,7 @@ public class PopupsHandler : MonoBehaviour
     private List<GameObject> popupsList;
     [SerializeField] private GameObject activePopup;
     private BlurController blurController;
-
+    private GameObject callbackObj;
     private void Awake()
     {
         blurController = GetComponent<BlurController>();
@@ -18,11 +18,13 @@ public class PopupsHandler : MonoBehaviour
         if (activePopup != null) return true;
         return false;
     }
-    public void CreateNewPopup(int id, Transform parent,string header = default,string content = default)
+    public void CreateNewPopup(int id, Transform parent,string header = default,string content = default,GameObject callbackObj = null)
     {
         if (activePopup == null)
         {
-            if(id <= popupsList.Count)
+            if (callbackObj != null) this.callbackObj = callbackObj;
+
+            if (id <= popupsList.Count)
             {
                 activePopup = Instantiate(popupsList[id].gameObject, parent);
                 if(blurController)blurController.EnableBlur();
@@ -46,7 +48,7 @@ public class PopupsHandler : MonoBehaviour
             {
                 Debug.LogError("Popup with id " + id + "doesnt exist!");
             }
-             
+         
         }
         else
         {
@@ -59,11 +61,22 @@ public class PopupsHandler : MonoBehaviour
         {
             if (blurController) blurController.DisableBlur();
             activePopup = null;
-          
+            callbackObj = null;
         }
 
     }
+    public void GetChoice(bool b)
+    {
+        if (callbackObj)
+        {
+            if (callbackObj.GetComponent<Room_UI>() != null)
+            {
+                callbackObj.GetComponent<Room_UI>().DestroyRoom(b);
+            }
+        }
 
+        
+    }
     public void SetCurrentPopupHeader(string text)
     {
         if (activePopup != null)
