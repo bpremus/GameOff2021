@@ -877,7 +877,7 @@ GameObject:
   - component: {fileID: 1730555807637921846}
   - component: {fileID: 1730555807637921845}
   - component: {fileID: 1730555807637921844}
-  - component: {fileID: 1730555807637921847}
+  - component: {fileID: 1725087175199658024}
   - component: {fileID: 189646225685384986}
   m_Layer: 5
   m_Name: BuildMenu
@@ -974,7 +974,7 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &1730555807637921847
+--- !u!114 &1725087175199658024
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -983,17 +983,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1730555807637921842}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7d04933b35961b4e94d51e9ab6f68f2, type: 3}
+  m_Script: {fileID: 11500000, guid: bc12fc4e707bf3a4bb561b45863e43d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  headerText: {fileID: 0}
-  contentText: {fileID: 0}
-  enableAnimations: 1
-  scaleTime: 0.35
-  fadeTime: 0.25
-  ease: 32
-  onEnableAnim: 0
-  OnDisableAnim: 0
 --- !u!225 &189646225685384986
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -3736,7 +3728,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1730555807637921847}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UIPopup, Assembly-CSharp
         m_MethodName: HideWindow
         m_Mode: 1

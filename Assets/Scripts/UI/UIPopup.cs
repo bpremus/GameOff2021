@@ -5,6 +5,7 @@ using UnityEngine;
 using TMPro;
 public class UIPopup : MonoBehaviour
 {
+    [SerializeField] private GameObject popupWindow;
     [Header("Content")]
     [SerializeField] private TextMeshProUGUI headerText;
     [SerializeField] private TextMeshProUGUI contentText;
@@ -14,7 +15,7 @@ public class UIPopup : MonoBehaviour
     [SerializeField] private float fadeTime = 0.1f;
     [SerializeField] private LeanTweenType ease = LeanTweenType.easeSpring;
 
-    private PopupController popupController;
+    private PopupsHandler popupsHandler;
     private CanvasGroup canvasGroup;
     public enum AnimType
     {
@@ -28,7 +29,7 @@ public class UIPopup : MonoBehaviour
     private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
-        popupController = FindObjectOfType<PopupController>();
+        popupsHandler = FindObjectOfType<PopupsHandler>();
     }
     [ContextMenu("Show window")]
     public void ShowWindow()
@@ -41,25 +42,25 @@ public class UIPopup : MonoBehaviour
 
             if (onEnableAnim == AnimType.Scale)
             {
-                LeanTween.scale(gameObject, Vector3.zero, 0.01f);
+                LeanTween.scale(popupWindow, Vector3.zero, 0.01f);
                 canvasGroup.alpha = 1;
 
 
-                LeanTween.scale(gameObject, new Vector3(1, 1, 1), scaleTime).setEase(ease);
+                LeanTween.scale(popupWindow, new Vector3(1, 1, 1), scaleTime).setEase(ease);
             }
             else if (onEnableAnim == AnimType.Fade && canvasGroup)
             {
                 canvasGroup.alpha = 0;
-                LeanTween.scale(gameObject, new Vector3(1, 1, 1),0.01f);
+                LeanTween.scale(popupWindow, new Vector3(1, 1, 1),0.01f);
 
                 LeanTween.alphaCanvas(canvasGroup, 1, fadeTime).setEase(ease);
             }
             else if (onEnableAnim == AnimType.Both)
             {
                 canvasGroup.alpha = 0;
-                LeanTween.scale(gameObject, Vector3.zero, 0.01f);
+                LeanTween.scale(popupWindow, Vector3.zero, 0.01f);
 
-                LeanTween.scale(gameObject, new Vector3(1, 1, 1), scaleTime).setEase(ease).setEase(ease);
+                LeanTween.scale(popupWindow, new Vector3(1, 1, 1), scaleTime).setEase(ease).setEase(ease);
                 LeanTween.alphaCanvas(canvasGroup, 1, fadeTime);
             }
         }
@@ -73,28 +74,27 @@ public class UIPopup : MonoBehaviour
         {
             if (OnDisableAnim == AnimType.Scale)
             {
-                LeanTween.scale(gameObject, new Vector3(1, 1, 1), 0.01f);
+                LeanTween.scale(popupWindow, new Vector3(1, 1, 1), 0.01f);
 
                 // canvasGroup.alpha = 0;
-                LeanTween.scale(gameObject, Vector3.zero, scaleTime).setEase(ease).setOnComplete(DestroySelf);
+                LeanTween.scale(popupWindow, Vector3.zero, scaleTime).setEase(ease).setOnComplete(DestroySelf);
             }
             else if (OnDisableAnim == AnimType.Fade && canvasGroup)
             {
                 canvasGroup.alpha = 1;
-                LeanTween.scale(gameObject, new Vector3(1, 1, 1), 0.01f);
+                LeanTween.scale(popupWindow, new Vector3(1, 1, 1), 0.01f);
 
                 LeanTween.alphaCanvas(canvasGroup, 0, fadeTime).setOnComplete(DestroySelf);
             }
             else if(OnDisableAnim == AnimType.Both)
             {
                 canvasGroup.alpha = 1;
-                LeanTween.scale(gameObject, new Vector3(1, 1, 1), 0.01f);
+                LeanTween.scale(popupWindow, new Vector3(1, 1, 1), 0.01f);
 
-                LeanTween.scale(gameObject, Vector3.zero, scaleTime).setEase(ease).setOnComplete(DestroySelf);
+                LeanTween.scale(popupWindow, Vector3.zero, scaleTime).setEase(ease).setOnComplete(DestroySelf);
                 LeanTween.alphaCanvas(canvasGroup, 0, fadeTime);
             }
         }
-
     }
 
 
@@ -108,7 +108,6 @@ public class UIPopup : MonoBehaviour
         if (contentText != null) contentText.text = text;
     }
 
-
     private void OnEnable()
     {
         ShowWindow();
@@ -119,9 +118,9 @@ public class UIPopup : MonoBehaviour
     }
     public void DestroySelf()
     {
-        if (popupController)
+        if (popupsHandler)
         {
-            popupController.DeleteCurrentPopup();
+            popupsHandler.DeleteCurrentPopup();
         }
         Destroy(gameObject);
     }
