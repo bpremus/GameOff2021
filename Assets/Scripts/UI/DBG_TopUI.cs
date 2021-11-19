@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 
 public class DBG_TopUI : MonoBehaviour
 {
@@ -29,11 +29,13 @@ private void Awake()
     }
 
     [SerializeField]
-    Text food_Text;
+    TextMeshProUGUI food_Text;
     [SerializeField]
-    Text population_Text;
+    TextMeshProUGUI wood_text;
     [SerializeField]
-    Text time_Text;
+    TextMeshProUGUI population_Text;
+    [SerializeField]
+    TextMeshProUGUI time_Text;
 
 
 
@@ -56,7 +58,7 @@ private void Awake()
             str += " (Night)";
         }
 
-       
+       if(time_Text)
         time_Text.text = str;
     }
 
@@ -64,6 +66,7 @@ private void Awake()
     {
         food_Text.text = GameController.Instance.GetFood().ToString();
         population_Text.text = GameController.Instance.GetPopulation().ToString();
+        wood_text.text = 0.ToString();
         DayOrNight();
     }
 

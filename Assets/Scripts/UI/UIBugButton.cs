@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 public class UIBugButton : MonoBehaviour
 {
     public CoreBug bug;
-    Text text;
+    TextMeshProUGUI text;
 
 
     public void Start()
     {
-        Text t = GetComponentInChildren<Text>();
+        TextMeshProUGUI t = GetComponentInChildren<TextMeshProUGUI>();
         if (t)
         {
             text = t;

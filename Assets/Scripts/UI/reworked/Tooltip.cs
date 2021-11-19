@@ -13,7 +13,7 @@ public class Tooltip : MonoBehaviour
     public int characterWrapLimit;
 
     public RectTransform rectTransform;
-
+    public CanvasGroup canvasGroup;
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -49,4 +49,7 @@ public class Tooltip : MonoBehaviour
         }
         contentField.text = content;
     }
+
+
+
 }

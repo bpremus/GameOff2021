@@ -78,7 +78,7 @@ public class UIController : MonoBehaviour
 
         currentState = uiState;
     }
-    public void CreatePopup(int id, string header = default, string content = default) => popupsHandler.CreateNewPopup(id,mainCanvas,header,content);
+    public void CreatePopup(int id, string header = default, string content = default,GameObject callbackObj = null) => popupsHandler.CreateNewPopup(id,mainCanvas,header,content,callbackObj);
     public void OpenBuildMenu() => overlayHandler.OpenBuildMenu();
     public void CloseBuildMenu() => overlayHandler.CloseBuildMenu();
 

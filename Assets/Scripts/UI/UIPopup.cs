@@ -124,5 +124,14 @@ public class UIPopup : MonoBehaviour
         }
         Destroy(gameObject);
     }
-
+    public void ReturnFalse()
+    {
+        popupsHandler.GetChoice(false);
+        HideWindow();
+    }
+    public void ReturnTrue()
+    {
+        popupsHandler.GetChoice(true);
+        HideWindow();
+    }
 }
