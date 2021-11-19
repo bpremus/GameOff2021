@@ -21,6 +21,7 @@ public class CoreBug : BugMovement
     public float health = 10f;
     public float damage = 1f;
     public float interraction_range = 3f;
+    public int decayOnDeadTimer = 20;
 
     // offset to camera above cells 
     // may not be needed once tiles are replaced with mesh
@@ -96,7 +97,14 @@ public class CoreBug : BugMovement
     {
         // Debug.Log("died");
         FlipBug();
+        Invoke("OnLateDecay", decayOnDeadTimer);
     }
+
+    public void OnLateDecay()
+    {
+        Destroy(this.gameObject);
+    }
+
 
     public virtual void OnTargetReach()
     {

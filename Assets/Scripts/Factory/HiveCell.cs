@@ -96,29 +96,28 @@ public class HiveCell : MonoBehaviour
     public void BuildRoom()
     {
         Debug.Log("building room");
-
         // room is just a rooridor or room layout mesh 
         // we have some kind of room context 
         // Queen room 
         // harwaster room 
         SetTileName();
-
         hiveGenerator.RefreshAllCells();
     }
 
     public void BuildCooridor()
     {
-        isCellEmpty = true;
         cell_Type = CellMesh.Cell_type.corridor;
         ArtPrefabsInstance art = ArtPrefabsInstance.Instance;
         BuildRoom(ArtPrefabsInstance.Instance.RoomPrefabs[2]);
+        walkable = 1;
+        isCellEmpty = false;
+
         hiveGenerator.RefreshAllCells();
     }
 
     public void BuildOutside()
     {
         cell_Type = CellMesh.Cell_type.outside;
-
         walkable = 1;
         mesh_index = -2;
         isCellEmpty = false;
@@ -179,17 +178,23 @@ public class HiveCell : MonoBehaviour
 
     public void DestroyRoom()
     {
-        if (isCellEmpty)
-        {
-            Debug.LogError("Nothing to destroy!");
-        }
-        else
-        {
-            Destroy(childRoom);
-            walkable = 0;
-            isCellEmpty = true;
-            hiveGenerator.rooms.Remove(this);
-        }
+        // if (isCellEmpty)
+        // {
+        //     Debug.LogError("Nothing to destroy!");
+        // }
+        // else
+        // {
+        hiveGenerator.rooms.Remove(this);
+
+        cell_Type = CellMesh.Cell_type.dirt;
+        mesh_index = 0;
+        isCellEmpty = true;
+        walkable = 0;
+        Destroy(childRoom);
+
+
+        hiveGenerator.RefreshAllCells();
+        // }
     }
 
     // drawing the room mesh 

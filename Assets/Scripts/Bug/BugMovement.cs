@@ -288,7 +288,7 @@ public class BugMovement : MonoBehaviour
     public void FaceBugUp()
     {
         Vector3 pos = transform.position;
-        if (pos.y < 8.4f)
+        if (pos.y < 2f)
         {
             orientation = 0;
         }

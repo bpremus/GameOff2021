@@ -55,6 +55,8 @@ public class DBG_RoomUI : MonoBehaviour
             b.onClick.AddListener(delegate { OnBugSelected(bbc); });
             listed_bugs.Add(bugs[i]);
         }
+
+
     }
 
     void OnBugSelected(UIBugButton bugbutton)
@@ -93,6 +95,11 @@ public class DBG_RoomUI : MonoBehaviour
     public void OnSendGathering()
     { 
     
+    }
+
+    public void OnRoomDestroy()
+    {
+        CellSelectProto.Instance.SetDestroyRoom(hiveCell);
     }
 
     public void Show(HiveCell hc)

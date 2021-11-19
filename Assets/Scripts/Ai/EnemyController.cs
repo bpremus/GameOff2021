@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField]
-    CoreBug[] bug_prefabs;
 
     [SerializeField]
     HiveCell start_cell;
@@ -14,11 +12,73 @@ public class EnemyController : MonoBehaviour
     HiveCell target_cell;
 
     int coalition = 1;
+    int day_attack_number = 1;
+    int night_attack_number = 10;
+
+    GameController game_controller;
 
     public void Start()
     {
-        
+        game_controller = GameController.Instance;
     }
+
+    [SerializeField]
+    float spawn_timer = 0;
+
+    public void OnDayAttacks()
+    {
+        SetAttack();
+
+        spawn_timer += Time.deltaTime;
+        if (spawn_timer > 2)
+        {
+            spawn_timer = 0;
+        }
+        else
+            return;
+
+        SpawnBug();
+    }
+
+    public void OnNightAttacks()
+    {
+        SetAttack();
+
+        spawn_timer += Time.deltaTime;
+        if (spawn_timer > 2)
+        {
+            spawn_timer = 0;
+        }
+        else
+            return;
+
+        SpawnBug();
+    }
+
+
+    public void StageAttack()
+    {
+        // player condition have to be met 
+        // have a queen
+        // have a harvester 
+        // have one combat unit
+        // cycle will start
+
+        // day scout 
+        // ------------------------------
+        if (game_controller.ISDayCycle())
+        {
+            OnDayAttacks();
+        }
+        else
+        {
+            OnNightAttacks();
+        }
+    }
+
+  
+
+
 
     public void SetAttack()
     {
@@ -34,32 +94,17 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    [SerializeField]
-    int max_bug = 2;
-    float spawn_timer = 0;
+
     public void Update()
     {
-
-        SetAttack();
-
-        spawn_timer += Time.deltaTime;
-        if (spawn_timer > 2)
-        {
-            spawn_timer = 0;
-        }
-        else
-            return;
-
-        if (max_bug <= 0)
-            return;
-
-        max_bug--;
-        SpawnBug();
+        StageAttack();
     }
 
     public void SpawnBug()
     {
-       CoreBug cb = Instantiate(bug_prefabs[0], start_cell.transform.position, start_cell.transform.rotation);
+        GameObject bug_prefab = ArtPrefabsInstance.Instance.BugsPrefabs[0];
+
+        CoreBug cb = Instantiate(bug_prefab, start_cell.transform.position, start_cell.transform.rotation).GetComponent<CoreBug>();
        if (cb != null)
        {
             cb.CurrentPositon(start_cell);

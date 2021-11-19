@@ -69,7 +69,29 @@ private void Awake()
         }
 
         food -= population;
+    }
 
+    GameController gc;
+    public void DayOrNight()
+    {
+        if (gc == null)
+            gc = GameController.Instance;
+
+        string str = "";
+
+        str += " " + (100 - gc.GetTimePercent()) + "%";
+
+        if (gc.ISDayCycle())
+        {
+            str += " (Day)";
+        }
+        else
+        {
+            str += " (Night)";
+        }
+
+       
+        time_Text.text = str;
     }
 
     public void Update()
@@ -78,6 +100,7 @@ private void Awake()
         population_Text.text = population.ToString();
 
         ConsumeFoodThick();
+        DayOrNight();
     }
 
 }

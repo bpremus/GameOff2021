@@ -173,6 +173,27 @@ public class CellSelectProto : MonoBehaviour
         }
     }
 
+    public void SetDestroyRoom(HiveCell cell)
+    {
+        cell.DestroyRoom();
+        OnDeselect();
+    }
+
+
+    public bool CheckRoomConnections(HiveCell imacted_cell)
+    {
+        imacted_cell.walkable = 0;
+
+        // hive generator, find all room 
+        // cheheck form each room to exit if its ok 
+
+            
+
+        imacted_cell.walkable = 1;
+        return false;
+    }
+
+
     public void OnDeselect()
     {
         _hover_bug = null;
