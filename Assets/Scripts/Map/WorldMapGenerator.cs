@@ -4,81 +4,70 @@ using UnityEngine;
 
 public class WorldMapGenerator : MonoBehaviour
 {
-    public int max_zones = 10;
-    public float offset = 1;
 
-    public GameObject worldCellPrefab;
+    public GameObject Hexagon;
+    public uint Radius;
+    public float HexSideMultiplier = 1;
+    private const float sq3 = 1.7320508075688772935274463415059F;
 
-    List<WorldMapCell> cells = new List<WorldMapCell>();
-
-    public void Start()
+    List<Vector3> tiles = new List<Vector3>();
+    List<int> distance = new List<int>();
+    void Start()
     {
-        BuildSpiralMap(max_zones, max_zones);
-        SolveCells();
-    }
+        Vector3 currentPoint = transform.parent.position;
+       if (Hexagon.transform.localScale.x != Hexagon.transform.localScale.z) return;
+ 
+        Vector3[] mv = {
+            new Vector3(1.5f,0, -sq3*0.5f),       
+            new Vector3(0,0, -sq3),               
+            new Vector3(-1.5f,0, -sq3*0.5f),      
+            new Vector3(-1.5f,0, sq3*0.5f),       
+            new Vector3(0,0, sq3),                
+            new Vector3(1.5f,0, sq3*0.5f)         
+        };
 
-    void BuildSpiralMap(int X, int Y)
-    {
-        int index = 0;
-        int x, y, dx, dy;
-        x = y = dx = 0;
-        dy = -1;
-        int t = Mathf.Max(X, Y);
-        int maxI = t * t;
-        for (int i = 0; i < maxI; i++)
+        int lmv = mv.Length;
+        float HexSide = Hexagon.transform.localScale.x * HexSideMultiplier;
+        int range = 0;
+        for (int mult = 0; mult <= Radius; mult++)
         {
-            if ((-X / 2 <= x) && (x <= X / 2) && (-Y / 2 <= y) && (y <= Y / 2))
+            int hn = 0;
+            for (int j = 0; j < lmv; j++)
             {
-                Vector3 position = new Vector3(x * offset, 0, y * offset);
-                GameObject c = Instantiate(worldCellPrefab, position, Quaternion.identity);
-                c.name = "c_" + index;
-                c.transform.SetParent(this.transform);
-                WorldMapCell wc = c.GetComponent<WorldMapCell>();
-                wc.cell_distance = Mathf.Max(Mathf.Abs(x),Mathf.Abs(y));
-                cells.Add(wc);
-                index++;
+                for (int i = 0; i < mult; i++, hn++)
+                {
+                    distance.Add(range);
+                    tiles.Add(currentPoint);
+                    currentPoint += (mv[j] * HexSide);
+                }
+                if (j == 4)
+                {
+                    distance.Add(range);
+                    tiles.Add(currentPoint);
+                    currentPoint += (mv[j] * HexSide);
+                    hn++;
+
+                    range++;
+
+                    if (mult == Radius)
+                        break;   
+                }
             }
-            if ((x == y) || ((x < 0) && (x == -y)) || ((x > 0) && (x == 1 - y)))
-            {
-                t = dx;
-                dx = -dy;
-                dy = t;
-            }
-            x += dx;
-            y += dy;
-        }
-    }
-
-    public void SolveCells()
-    {
-        // 0 are we 
-
-        // 2 good fields
-        // 4 food fiels 
-        // 6 good fields 
-        // n ... 
-        for (int i = 0; i < cells.Count; i++)
-        {
-          
-            WorldMapCell c = cells[i];
-            if (i == 0)
-            {
-                // place us 
-                c.BuildTile(0);
-                continue;
-            }
-
-            // for the test 
-            int idx = Random.RandomRange(1, 3);
-            c.BuildTile(idx);
-            continue;
-
         }
 
 
+        // close enoug distance
+        for (int i = 0; i < tiles.Count; i++)
+        {
+            Vector3 pos = tiles[i];
+            Vector3 rot_pos = new Vector3(pos.x, pos.z, 0) + new Vector3(0, Screen.height / 2 , 0); 
+            GameObject wc = Instantiate(Hexagon, rot_pos, Quaternion.identity, transform);      
+           // wc.cell_distance = Mathf.FloorToInt(distance[i]);
+           // wc.name = "m_" + wc.cell_distance;
+           // wc.BuildTile(0);
+        }
 
+        
     }
-
-
 
 }

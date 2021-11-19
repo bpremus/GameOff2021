@@ -76,10 +76,6 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-  
-
-
-
     public void SetAttack()
     {
         HiveGenerator hc = FindObjectOfType<HiveGenerator>();
@@ -93,7 +89,6 @@ public class EnemyController : MonoBehaviour
             }
         }
     }
-
 
     public void Update()
     {

@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7057723685739884013}
   - component: {fileID: -8854561339453700906}
+  - component: {fileID: 7039583532406329145}
   m_Layer: 0
-  m_Name: WorldCell
+  m_Name: map_cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3454935119429831671}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.042244, y: 4.5509434, z: -0.00020778179}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -44,7 +45,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   worldCellPrefabs:
-  - {fileID: 3454935119429831671, guid: 16d173a4f15123248818ae03f8555bfa, type: 3}
-  - {fileID: 3454935119429831671, guid: b51525b9af3515d488841c5482764722, type: 3}
-  - {fileID: 3454935119429831671, guid: aa19d7266404130498e29312cb0e49ec, type: 3}
+  - {fileID: 4676022832687949840, guid: e772c7355cbe6ed45bff9c1433a47e8e, type: 3}
+  - {fileID: 6087137519011807297, guid: e6beaaa56175cad48b938f5723f16102, type: 3}
+  - {fileID: 4696771162736250252, guid: dd9c4c71f4219764dad26e0ac75c59ce, type: 3}
   cell_distance: 0
+--- !u!65 &7039583532406329145
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3454935119429831671}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

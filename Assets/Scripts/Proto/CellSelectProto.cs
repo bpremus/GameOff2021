@@ -238,7 +238,6 @@ public class CellSelectProto : MonoBehaviour
             Gizmos.color = Color.red;
             Gizmos.DrawSphere(_cellSelected.transform.position, 1);
         }
-
     }
 
     List<GameObject> path_spheres = new List<GameObject>();
@@ -262,6 +261,23 @@ public class CellSelectProto : MonoBehaviour
             GameObject g = Instantiate(path_sphere, pos, Quaternion.identity);
             path_spheres.Add(g);
         }
+    }
+
+    public void OnMapOpen()
+    { 
+    
+    }
+
+    public void OnMapHover(WorldMapCell map)
+    {
+        map.OnHover();
+    }
+
+    public void OnMapSelect(WorldMapCell selected_map)
+    {
+
+
+        OnDeselect();
     }
 
 
@@ -296,6 +312,12 @@ public class CellSelectProto : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit) && !isOverUI)
         {
+            WorldMapCell map = hit.collider.transform.GetComponent<WorldMapCell>();
+            if (map)
+            {
+                OnMapHover(map);
+                return;
+            }
 
             CoreBug bug = hit.collider.transform.GetComponent<CoreBug>();
             if (bug)

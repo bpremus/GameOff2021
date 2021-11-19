@@ -46,9 +46,10 @@ public class GameController : MonoBehaviour
     {
         food -= 1;
     }
-    public void OnBringFood()
+    public void OnBrigResources()
     {
         food += 20;
+        wood += 10;
     }
 
     public void OnNewBug()
