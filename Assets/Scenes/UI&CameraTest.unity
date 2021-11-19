@@ -9317,6 +9317,7 @@ MonoBehaviour:
   useDragInput: 1
   useKeyboardZooming: 1
   useScrollwheelZooming: 1
+  useRightMouseButtonToDrag: 0
   keyboardMovementSpeed: 25
   screenEdgeMovementSpeed: 25
   followingSpeed: 15
