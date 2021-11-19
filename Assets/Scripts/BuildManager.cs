@@ -11,7 +11,8 @@ public class BuildManager : MonoBehaviour
         get { return _instance; }
     }
 
-    [SerializeField] private GameObject[] room_prefabs;
+    [SerializeField] 
+    private GameObject[] room_prefabs;
     private GameObject selectedCell;
     private HiveCell cell;
     private CellSelection cellSelection;

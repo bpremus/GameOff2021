@@ -15,8 +15,16 @@ public class HiveGenerator : MonoBehaviour
     [SerializeField]
     GameObject cell_prefab;
 
-    [SerializeField]
     public List<List<HiveCell>> cells = new List<List<HiveCell>>();
+    public List<HiveCell> rooms = new List<HiveCell>();
+    public HiveCell hive_cell = null;
+    public List<HiveCell> hive_entrance = new List<HiveCell>();
+
+    public int [] GetSize()
+    {
+        return new int[] { width, height };
+    }
+
 
     public void Start()
     {
@@ -56,6 +64,7 @@ public class HiveGenerator : MonoBehaviour
                 for (int k = 0; k < firstList.Length; k++)
                 {
                     HiveCell hc = firstList[k];
+                    hc.SetGenerator = this;
                     if (hc.GetX == i && hc.GetY == j)
                     {
                         rows.Add(hc);
@@ -73,9 +82,10 @@ public class HiveGenerator : MonoBehaviour
             List<HiveCell> rows = new List<HiveCell>();
             for (int j = 0; j < height; j++)
             {
-                Vector3 pos = new Vector3(i * offset - width / 2, j * offset - height, 0);
+                Vector3 pos = new Vector3(i * offset - width, (j * offset) - height * offset, 0);
                 HiveCell c = CreateTile(pos);
                 c.SetNode(i, j);
+                c.SetGenerator = this;
                 rows.Add(c);
             }
             cells.Add(rows);
@@ -106,6 +116,8 @@ public class HiveGenerator : MonoBehaviour
 
     public HiveCell CreateTile(Vector3 position)
     {
+        position += transform.position;
+
         GameObject g = Instantiate(cell_prefab, position, Quaternion.identity);
         if (g)
         {
@@ -147,16 +159,31 @@ public class HiveGenerator : MonoBehaviour
     {
 
         CollecteCells();
+        
+        int d = width / 2;
+        /*
+        cells[d    ][height - 3].BuildCooridor();
+        cells[d + 1][height - 4].BuildRoom(HiveCell.RoomContext.war);
+        cells[d + 2][height - 4].BuildCooridor();
+        cells[d + 2][height - 5].BuildCooridor();
+        cells[d - 1][height - 4].BuildRoom(HiveCell.RoomContext.queen);
+        cells[d - 1][height - 5].BuildCooridor();
+        cells[d - 2][height - 5].BuildRoom(HiveCell.RoomContext.harvester);
+        cells[d + 3][height - 5].BuildRoom(HiveCell.RoomContext.harvester);
+        cells[d + 2][height - 6].BuildCooridor();
+        cells[d + 1][height - 6].BuildCooridor();
+        cells[d    ][height - 6].BuildCooridor();
+        cells[d - 1][height - 6].BuildCooridor();
+        cells[d + 1][height - 3].BuildCooridor();
+        */
 
-        cells[5][7].cell_Type = CellMesh.Cell_type.corridor;
-        cells[5][6].cell_Type = CellMesh.Cell_type.corridor;
-        cells[6][6].cell_Type = CellMesh.Cell_type.room;
-        cells[7][6].cell_Type = CellMesh.Cell_type.corridor;
-        cells[4][6].cell_Type = CellMesh.Cell_type.room;
-        cells[4][5].cell_Type = CellMesh.Cell_type.corridor;
+        cells[d][height - 3].BuildCooridor();
+        cells[d][height - 4].BuildCooridor();
+        cells[d][height - 5].BuildCooridor();
+        cells[d][height - 6].BuildRoom(HiveCell.RoomContext.queen);
 
         RefreshAllCells();
-
+        
     }
 
     public void RefreshAllCells()
@@ -178,7 +205,7 @@ public class HiveGenerator : MonoBehaviour
         {
             // get neighbouring tiles 
             // prepare connections 
-
+            cell.walkable = 1;
             int[] connections = new int[4] { 0, 0, 0, 0 };
             for (int c = 0; c < 4; c++)
             {
@@ -199,6 +226,23 @@ public class HiveGenerator : MonoBehaviour
                 }
             }
         }
+        if (cell.cell_Type == CellMesh.Cell_type.entrance)
+        {
+            cell.walkable = 1;
+            cell.mesh_index = 1;
+        }
+
+        if (cell.cell_Type == CellMesh.Cell_type.dirt)
+        {
+            cell.walkable = 0;
+            cell.mesh_index = 0;
+        }
+        if (cell.cell_Type == CellMesh.Cell_type.outside)
+        {
+            cell.mesh_index = -2;
+            cell.walkable = 1;
+        }
+
         return false;
     }
 
@@ -211,14 +255,20 @@ public class HiveGenerator : MonoBehaviour
             {
                 HiveCell gs = cells[i][j];
                 int idx = gs.mesh_index;
-                if (idx < 0) continue;
-
+               
                 if (gs.cell_mesh != null)
                 {
-                    Destroy(gs.cell_mesh.gameObject);
+                    if (Application.isEditor)
+                        DestroyImmediate(gs.cell_mesh.gameObject);
+                    else
+                        Destroy(gs.cell_mesh.gameObject);
+         
                 }
 
-                Vector3 pos = new Vector3(gs.GetX * offset - width / 2, gs.GetY * offset - height, 0);
+                if (idx < 0) continue;
+
+                Vector3 pos = new Vector3(gs.GetX * offset - width, (gs.GetY * offset) - height * offset, 0);
+                pos += transform.position;
                 CellMesh cm = Instantiate(cell_mesh_prefabs[idx], pos, Quaternion.identity);
                 cm.name = gs.name;
                 cm.transform.SetParent(this.transform);
@@ -231,24 +281,33 @@ public class HiveGenerator : MonoBehaviour
     { 
     
     }
-  
 
     public void SetFixedCells()
     {
-        
-        // fixed cells 
+
+        // outside top row
         for (int i = 0; i < width; i++)
         {
-            cells[i][9].mesh_index = 32;
-            cells[i][9].cell_Type = CellMesh.Cell_type.top;
+            cells[i][height -1].BuildOutside();
         }
 
-        cells[5][9].mesh_index = 1;
-        cells[5][9].cell_Type = CellMesh.Cell_type.entrance;
+        // earh border row with opening 
+        for (int i = 0; i < width; i++)
+        {
+            cells[i][height - 2].mesh_index = 32;
+            cells[i][height - 2].cell_Type = CellMesh.Cell_type.top;
+        }
+
+        int d = width / 2;
+
+        cells[d][height - 2].mesh_index = 1;
+        cells[d][height - 2].cell_Type = CellMesh.Cell_type.entrance;
+        hive_entrance[0] = cells[d][height - 2];
+
 
         // we need to solve non dirt first, or the one with lowest choices 
         // we have simple solution as each tile can connect any other with corridor 
-        cells[5][8].cell_Type = CellMesh.Cell_type.corridor;
+        cells[d][height - 3].BuildCooridor();
 
         // solver 
         PlaceCooridors(cells);

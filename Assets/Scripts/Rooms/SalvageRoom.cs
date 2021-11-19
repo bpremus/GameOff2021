@@ -6,7 +6,7 @@ public class SalvageRoom : HiveRoom
 {
     public override void Start()
     {
-        for (int i = 0; i < assigned_bugs.Length; i++)
+        for (int i = 0; i < assigned_bugs.Count; i++)
         {
             CoreBug b = assigned_bugs[i].GetComponent<CoreBug>();
             b.CurrentPositon(this.parent_cell);

@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
+[ExecuteInEditMode]
 public class HiveCell : MonoBehaviour
 {
-
     public bool isCellEmpty;
+    [SerializeField]
     protected CoreRoom childRoom;
     [SerializeField]
     public CellMesh cell_mesh;
@@ -24,14 +24,134 @@ public class HiveCell : MonoBehaviour
 
         // room building
         isCellEmpty = true;
-        this.name = "call_" + x + "_" + y;
+
+        // set name 
+        SetTileName();
+    }
+    Queue<CoreBug> bugs_to_assign = new Queue<CoreBug>();
+    public bool AssignDrone(CoreBug bug)
+    {
+        Debug.Log("assinging a bug to a new room");
+        bugs_to_assign.Enqueue(bug);
+        return true;
     }
 
+    public void DetachDrone(CoreBug bug)
+    {
+        CoreRoom current_room = bug.asigned_cell.GetRoom();
+        if (current_room)
+        {
+            current_room.DetachBug(bug);
+        }
+    }
+
+    protected virtual void ProcessAssigments()
+    {
+        if (childRoom == null) return;
+
+        if (bugs_to_assign.Count > 0)
+        {
+            CoreBug bug = bugs_to_assign.Dequeue();
+            CoreRoom current_room = bug.asigned_cell.GetRoom();
+            if (current_room)
+            {
+                current_room.DetachBug(bug);
+            }
+
+            childRoom.AssignBug(bug);
+            bug.asigned_cell = this;
+        }
+    }
+
+    protected virtual void Update()
+    {
+        ProcessAssigments();
+    }
+
+    public CoreRoom GetRoom()
+    {
+        if (childRoom)
+            return childRoom;
+        else
+            return null;
+    }
+
+    public void SetTileName()
+    {
+        this.name = "hive_cell_" + cell_Type.ToString() + "_" + x + "_" + y;
+    }
 
     // this will determine what kind of cell mesh (walls) are going to be drawn
     public CellMesh.Cell_type cell_Type = CellMesh.Cell_type.dirt;
-    // cell still has a room that inside have a room mesh 
 
+    public enum RoomContext { empty, queen, harvester, war };
+
+    // cell still has a room that inside have a room mesh 
+    public HiveGenerator hiveGenerator = null;
+    public HiveGenerator SetGenerator
+    {
+        set => hiveGenerator = value;
+    }
+
+    public void BuildRoom()
+    {
+        Debug.Log("building room");
+        // room is just a rooridor or room layout mesh 
+        // we have some kind of room context 
+        // Queen room 
+        // harwaster room 
+        SetTileName();
+        hiveGenerator.RefreshAllCells();
+    }
+
+    public void BuildCooridor()
+    {
+        cell_Type = CellMesh.Cell_type.corridor;
+        ArtPrefabsInstance art = ArtPrefabsInstance.Instance;
+        BuildRoom(ArtPrefabsInstance.Instance.RoomPrefabs[2]);
+        walkable = 1;
+        isCellEmpty = false;
+
+        hiveGenerator.RefreshAllCells();
+    }
+
+    public void BuildOutside()
+    {
+        cell_Type = CellMesh.Cell_type.outside;
+        walkable = 1;
+        mesh_index = -2;
+        isCellEmpty = false;
+    }
+
+    public void BuildRoom(RoomContext context)
+    {
+        // automatically set cell type to room
+        cell_Type = CellMesh.Cell_type.room;
+
+        // place interior room 
+        if (context == RoomContext.queen)
+        {
+            BuildRoom(ArtPrefabsInstance.Instance.RoomPrefabs[0]);
+            hiveGenerator.hive_cell = this;
+            return;
+        }
+
+        // any other room
+        if (context == RoomContext.harvester)
+        {
+            BuildRoom(ArtPrefabsInstance.Instance.RoomPrefabs[1]);
+        }
+
+        if (context == RoomContext.war)
+        {
+            BuildRoom(ArtPrefabsInstance.Instance.RoomPrefabs[3]);
+        }
+
+        if (hiveGenerator.rooms.Contains(this) == false)
+        {
+            hiveGenerator.rooms.Add(this);
+        }
+    }
 
     public void BuildRoom(GameObject room)
     {
@@ -45,6 +165,7 @@ public class HiveCell : MonoBehaviour
             {
                 childRoom.cell = this;
                 childRoom.transform.SetParent(transform.parent);
+                childRoom.gameObject.AddComponent<CoreColorShader>();
             }
             walkable = 1;
             isCellEmpty = false;
@@ -57,16 +178,23 @@ public class HiveCell : MonoBehaviour
 
     public void DestroyRoom()
     {
-        if (isCellEmpty)
-        {
-            Debug.LogError("Nothing to destroy!");
-        }
-        else
-        {
-            Destroy(childRoom);
-            walkable = 0;
-            isCellEmpty = true;
-        }
+        // if (isCellEmpty)
+        // {
+        //     Debug.LogError("Nothing to destroy!");
+        // }
+        // else
+        // {
+        hiveGenerator.rooms.Remove(this);
+
+        cell_Type = CellMesh.Cell_type.dirt;
+        mesh_index = 0;
+        isCellEmpty = true;
+        walkable = 0;
+        Destroy(childRoom);
+
+
+        hiveGenerator.RefreshAllCells();
+        // }
     }
 
     // drawing the room mesh 

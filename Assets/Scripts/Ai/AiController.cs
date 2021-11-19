@@ -50,6 +50,7 @@ public class AiController : MonoBehaviour
                 return nodes;
             }
 
+            if (currentNode == null) continue;
             foreach (HiveCell neighbour in currentNode.GetNeighbours())
             {
                 if (neighbour.walkable == 0 || closedSet.Contains(neighbour))
