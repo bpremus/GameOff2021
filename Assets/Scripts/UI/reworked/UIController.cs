@@ -69,6 +69,7 @@ public class UIController : MonoBehaviour
                     break;
                 case State.Following:
                     overlayHandler.ShowIndicator("Following bug");
+
                     break;
                 default:
                     break;

@@ -42,7 +42,7 @@ public class UIPopup : MonoBehaviour
 
             if (onEnableAnim == AnimType.Scale)
             {
-                LeanTween.scale(popupWindow, Vector3.zero, 0.01f);
+                popupWindow.transform.localScale = Vector3.zero;
                 canvasGroup.alpha = 1;
 
 
@@ -51,14 +51,13 @@ public class UIPopup : MonoBehaviour
             else if (onEnableAnim == AnimType.Fade && canvasGroup)
             {
                 canvasGroup.alpha = 0;
-                LeanTween.scale(popupWindow, new Vector3(1, 1, 1),0.01f);
-
+                popupWindow.transform.localScale = Vector3.one;
                 LeanTween.alphaCanvas(canvasGroup, 1, fadeTime).setEase(ease);
             }
             else if (onEnableAnim == AnimType.Both)
             {
                 canvasGroup.alpha = 0;
-                LeanTween.scale(popupWindow, Vector3.zero, 0.01f);
+                popupWindow.transform.localScale = Vector3.zero;
 
                 LeanTween.scale(popupWindow, new Vector3(1, 1, 1), scaleTime).setEase(ease).setEase(ease);
                 LeanTween.alphaCanvas(canvasGroup, 1, fadeTime);
@@ -74,7 +73,7 @@ public class UIPopup : MonoBehaviour
         {
             if (OnDisableAnim == AnimType.Scale)
             {
-                LeanTween.scale(popupWindow, new Vector3(1, 1, 1), 0.01f);
+                popupWindow.transform.localScale = Vector3.one;
 
                 // canvasGroup.alpha = 0;
                 LeanTween.scale(popupWindow, Vector3.zero, scaleTime).setEase(ease).setOnComplete(DestroySelf);
@@ -82,14 +81,14 @@ public class UIPopup : MonoBehaviour
             else if (OnDisableAnim == AnimType.Fade && canvasGroup)
             {
                 canvasGroup.alpha = 1;
-                LeanTween.scale(popupWindow, new Vector3(1, 1, 1), 0.01f);
+                popupWindow.transform.localScale = Vector3.one;
 
                 LeanTween.alphaCanvas(canvasGroup, 0, fadeTime).setOnComplete(DestroySelf);
             }
             else if(OnDisableAnim == AnimType.Both)
             {
                 canvasGroup.alpha = 1;
-                LeanTween.scale(popupWindow, new Vector3(1, 1, 1), 0.01f);
+                popupWindow.transform.localScale = Vector3.one;
 
                 LeanTween.scale(popupWindow, Vector3.zero, scaleTime).setEase(ease).setOnComplete(DestroySelf);
                 LeanTween.alphaCanvas(canvasGroup, 0, fadeTime);
