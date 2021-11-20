@@ -136,24 +136,20 @@ public class CameraController : MonoBehaviour
       CameraUpdate();
     }
 
-    private void LateUpdate()
-    {
-
-
-
-    }
     #endregion
 
     #region Public methods
     public void SetTarget(Transform target)
     {
         targetFollow = target;
+        Debug.Log("target assigned");
     }
 
 
     public void ResetTarget()
     {
         targetFollow = null;
+        Debug.Log("target reset");
     }
 
     #endregion
@@ -163,7 +159,7 @@ public class CameraController : MonoBehaviour
     {
         if (FollowingTarget)
         {
-            if (Input.GetKeyDown(stopFollowingKey) || Input.GetAxis(horizontalAxis) != 0 || Input.GetAxis(verticalAxis) != 0 || isDragging) ResetTarget();
+            if (Input.GetKeyDown(stopFollowingKey)) UIController.instance.SetDefaultState();
             else
               FollowTarget();
         }

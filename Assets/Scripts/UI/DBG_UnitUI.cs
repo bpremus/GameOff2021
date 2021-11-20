@@ -40,7 +40,11 @@ public class DBG_UnitUI : MonoBehaviour
     {
         this.transform.GetChild(0).gameObject.SetActive(false);
     }
-
+    public void FollowUnit()
+    {
+        FindObjectOfType<CameraController>().SetTarget(bug.transform);
+        Hide();
+    }
     public void Update()
     {
         if (Input.GetKey(KeyCode.A))

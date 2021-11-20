@@ -39,7 +39,6 @@ public class OverlayHandler : MonoBehaviour
             buildMenu.SetActive(true);
             ButtonInteractable(buildButton, false);
         }
-
     }
     public void CloseBuildMenu()
     {

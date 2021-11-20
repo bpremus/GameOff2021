@@ -18,7 +18,7 @@ public class UIController : MonoBehaviour
     {
         Default,
         Building,
-        Destroying
+        Following
     }
     public State uiState;
     private State currentState;
@@ -54,6 +54,7 @@ public class UIController : MonoBehaviour
     public bool isIndicatorActive() { return overlayHandler.isIndicatorActive(); }
     private void Update()
     {
+        if (Camera.main.gameObject.GetComponent<CameraController>().FollowingTarget) uiState = State.Following;
 
         if(currentState != uiState)
         {
@@ -66,10 +67,8 @@ public class UIController : MonoBehaviour
                     overlayHandler.ShowIndicator("Building mode");
                     if (isBuildMenuActive()) overlayHandler.CloseBuildMenu();
                     break;
-                case State.Destroying:
-                    overlayHandler.ShowIndicator("Destroying mode");
-                    CreatePopup(3, "Nothing to destroy", "Ok");
-                    if (isBuildMenuActive()) overlayHandler.CloseBuildMenu();
+                case State.Following:
+                    overlayHandler.ShowIndicator("Following bug");
                     break;
                 default:
                     break;
@@ -81,10 +80,15 @@ public class UIController : MonoBehaviour
     public void CreatePopup(int id, string header = default, string content = default,GameObject callbackObj = null) => popupsHandler.CreateNewPopup(id,mainCanvas,header,content,callbackObj);
     public void OpenBuildMenu() => overlayHandler.OpenBuildMenu();
     public void CloseBuildMenu() => overlayHandler.CloseBuildMenu();
-
+    public void HideRoomUI() => Room_UI.Instance.Hide();
 
     public void ExitBuildingMode() => SetDefaultState();
-    public void SetDefaultState() => SetState(State.Default);
+    public void SetDefaultState()
+    {
+        if (uiState == State.Following) Camera.main.gameObject.GetComponent<CameraController>().ResetTarget();
+
+        SetState(State.Default);
+    }
     //this will be called once player selects room to build
     public void Build_BuildRequest(int roomID)
     {
