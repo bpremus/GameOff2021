@@ -30,7 +30,7 @@ public class EnemyController : MonoBehaviour
         SetAttack();
 
         spawn_timer += Time.deltaTime;
-        if (spawn_timer > 2)
+        if (spawn_timer > 10)
         {
             spawn_timer = 0;
         }
@@ -45,7 +45,7 @@ public class EnemyController : MonoBehaviour
         SetAttack();
 
         spawn_timer += Time.deltaTime;
-        if (spawn_timer > 2)
+        if (spawn_timer > 0.2f)
         {
             spawn_timer = 0;
         }

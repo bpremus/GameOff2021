@@ -13520,6 +13520,7 @@ MonoBehaviour:
   - {fileID: 3720355283968207515, guid: a196748be28efcc46a241a5b5df0e3a3, type: 3}
   - {fileID: 4814530021195277145, guid: e3b4f5dddf0c6e944ab82ff71ba36f10, type: 3}
   - {fileID: 5339288632819550311, guid: 6dbe067cdb345c74390cf4522d1181cc, type: 3}
+  - {fileID: 576670934770808670, guid: 302eff5a42130c74eb121a74248a8d86, type: 3}
   BugsPrefabs:
   - {fileID: 3160248646930140246, guid: 8dbd9ff5ad79b9d4cb25e7293fd50e7c, type: 3}
   - {fileID: 658582526522619735, guid: 434f26ee5c194d54487a6a12baf9f3bf, type: 3}
@@ -21601,10 +21602,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 821834ac4c30639418547fcf645a0df4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  food: -70
+  food: -72
   day_night_duration: 10
   isDay: 0
-  dayDuration: 1
+  dayDuration: 0
 --- !u!4 &1212630098
 Transform:
   m_ObjectHideFlags: 0

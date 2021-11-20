@@ -102,8 +102,14 @@ public class WarriorBug : CoreBug
                 return;
             }
 
+        float rot_speed = rotation_speed;
+        if (bug_action == Bug_action.fighting)
+        {
+            rot_speed = 0.1f;
+        }
+
             look_direction = Quaternion.LookRotation(direction, normal_direction); // replace me with a normal
-            transform.rotation = Quaternion.Slerp(transform.rotation, look_direction, Time.deltaTime * rotation_speed);
+            transform.rotation = Quaternion.Slerp(transform.rotation, look_direction, Time.deltaTime * rot_speed);
         
     }
 

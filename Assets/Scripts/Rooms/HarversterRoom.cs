@@ -47,19 +47,19 @@ public class HarversterRoom : HiveRoom
     }
 
     public void OnBugDepart(CoreBug bug)
-    { 
-    
+    {
+
     }
 
     float _spread_timer = 0;
-    protected void SendGathering()
+    protected virtual void SendGathering()
     {
         if (gather_destination)
         {
             Debug.Log("sending gathering");
 
             _spread_timer += Time.deltaTime;
-            
+
             // send gathering 
             // keep in the room
             for (int i = 0; i < assigned_bugs.Count; i++)
@@ -76,7 +76,7 @@ public class HarversterRoom : HiveRoom
                         cb.GoTo(gather_destination);
                         cb.NextAction();
                         OnBugDepart(cb);
-                        continue;                
+                        continue;
                     }
 
                     // reached location
@@ -131,7 +131,5 @@ public class HarversterRoom : HiveRoom
             SpreadBugs();
         }
     }
-
-   
 
 }
