@@ -32,7 +32,10 @@ public class Room_UI : MonoBehaviour
 
         _instance = this;
     }
-
+    private void Update()
+    {
+        if (UIController.instance.isBuildMenuActive()) Hide();
+    }
     public void Show(HiveCell hc)
     {
         this.transform.GetChild(0).gameObject.SetActive(true);
@@ -45,6 +48,7 @@ public class Room_UI : MonoBehaviour
     public void Hide()
     {
         this.transform.GetChild(0).gameObject.SetActive(false);
+        TooltipSystem.Hide();
     }
 
     public void SetTask()

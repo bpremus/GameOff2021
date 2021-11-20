@@ -172,7 +172,7 @@ public class HiveCell : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Cell is already taken! You want to destroy?");
+         //   Debug.LogError("Cell is already taken! You want to destroy?");
         }
     }
 

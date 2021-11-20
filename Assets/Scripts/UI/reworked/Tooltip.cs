@@ -31,7 +31,7 @@ public class Tooltip : MonoBehaviour
         float pivotY = position.y / Screen.height;
 
         rectTransform.pivot = new Vector2(pivotX, pivotY);
-        transform.position = position;
+        transform.position = position; 
 
        layoutElement.enabled = (headerLength > characterWrapLimit || contentLength > characterWrapLimit) ? true : false;
     }

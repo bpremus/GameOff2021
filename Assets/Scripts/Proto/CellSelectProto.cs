@@ -18,7 +18,7 @@ public class CellSelectProto : MonoBehaviour
     {
         get { return _instance; }
     }
-
+    Vector2 selectionPosition = Vector2.zero;
     public enum SelectState { none, bug_selected, cell_selected, build_cell, bug_assign};
     public SelectState selection_state = SelectState.none;
 
@@ -81,7 +81,22 @@ public class CellSelectProto : MonoBehaviour
         _hover_cell = hc;
         _hover_bug = null;
 
+       
         frame_border.transform.position = hc.transform.position + new Vector3(0, 0, 1);
+    }
+    public void OnCellSelect(HiveCell hc)
+    {
+        _cellSelected = hc;
+        selectionPosition = hc.transform.position;
+        Room_UI.Instance.Show(hc);
+
+        DBG_UnitUI.Instance.Hide();
+
+        frame_border.GetComponent<SpriteRenderer>().sprite = selectedFrame;
+        frame_border.transform.localScale = borderStartSize;
+
+
+        SetRoomUIPosition();
     }
 
     public void OnBugHover(CoreBug bug)
@@ -89,32 +104,22 @@ public class CellSelectProto : MonoBehaviour
       //  Debug.Log("bug however");
         _hover_bug = bug;
         _hover_cell = null;
-
         frame_border.transform.position = bug.transform.position + new Vector3(0, 0, 1);
+      
 
     }
-
-    public void OnCellSelect(HiveCell hc)
-    {
-        Debug.Log("cell select");
-        _cellSelected = hc;
-
-        Room_UI.Instance.Show(hc);
-        DBG_UnitUI.Instance.Hide();
-
-        frame_border.GetComponent<SpriteRenderer>().sprite = selectedFrame;
-        frame_border.transform.localScale = borderStartSize;
-    }
-
     public void OnBugSelect(CoreBug bug)
     {
-        Debug.Log("bug select");
         _bug_selected = bug;
 
         DBG_UnitUI.Instance.Show(bug);
         Room_UI.Instance.Hide();
-        frame_border.transform.localScale = new Vector3(0.5f,0.5f,0.5f);
+        frame_border.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        if (selection_state != SelectState.cell_selected) selectionPosition = bug.transform.position;
+        SetUnitUIPosition();
     }
+
+
     public void OnPlaceBuilding(HiveCell cell)
     {
         Debug.Log("building placed");
@@ -420,6 +425,26 @@ public class CellSelectProto : MonoBehaviour
 
             }
         }
+    }
+    private void SetRoomUIPosition()
+    {
+        Vector2 position = Camera.main.WorldToScreenPoint(selectionPosition);
+        Vector2 corner = new Vector2(((position.x > (Screen.width / 2f)) ? 1f : 0f), ((position.y > (Screen.height / 2f)) ? 1f : 0f));
+        RectTransform rectTransform = Room_UI.Instance.gameObject.transform.GetChild(0).GetComponent<RectTransform>();
+        Room_UI.Instance.gameObject.transform.GetChild(0).position = position;
+        rectTransform.pivot = corner;
+      //  rectTransform.anchorMin = position;
+      //  rectTransform.anchorMax = position;
+    }
+    private void SetUnitUIPosition()
+    {
+        Vector2 position = Camera.main.WorldToScreenPoint(selectionPosition);
+        Vector2 corner = new Vector2(((position.x > (Screen.width / 2f)) ? 1f : 0f), ((position.y > (Screen.height / 2f)) ? 1f : 0f));
+        RectTransform rectTransform = DBG_UnitUI.Instance.gameObject.transform.GetChild(0).GetComponent<RectTransform>();
+        DBG_UnitUI.Instance.gameObject.transform.GetChild(0).position = position;
+        rectTransform.pivot = corner;
+     //  rectTransform.anchorMin = position;
+      //  rectTransform.anchorMax = position;
     }
 
 }

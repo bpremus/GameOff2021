@@ -40,13 +40,21 @@ public class DBG_UnitUI : MonoBehaviour
     {
         this.transform.GetChild(0).gameObject.SetActive(false);
     }
-
+    public void FollowUnit()
+    {
+        FindObjectOfType<CameraController>().SetTarget(bug.transform);
+        Hide();
+    }
     public void Update()
     {
+
+        if (UIController.instance.isBuildMenuActive()) Hide();
+
         if (Input.GetKey(KeyCode.A))
         {
             CellSelectProto.Instance.SetAssignBugState();
         }
+
     }
 
     public void SelectRoomFromBug()

@@ -22,7 +22,6 @@ public class Card_BuildMenu : MonoBehaviour,IPointerEnterHandler,IPointerExitHan
         LeanTween.cancel(scaleup.uniqueId);
         LeanTween.scale(gameObject, Vector3.one, pointerExitTime);  
     }
-
     void OnDisable()
     {
         LeanTween.scale(gameObject, Vector3.one, pointerExitTime);
