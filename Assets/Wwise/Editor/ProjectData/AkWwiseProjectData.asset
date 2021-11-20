@@ -49,7 +49,7 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: ab7a7d8fa7af904aad885e3b30a5f3e5
     GuidInternal: 
-    m_lastTime: -8585654728520185685
+    m_lastTime: -8585641933981339155
     List:
     - name: Main
       guid: c7ed1213001d794c9f3d34785e89ab38
@@ -68,8 +68,48 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: d2d748c853878f419a502ed6d2b53f2b
     GuidInternal: 
-    m_lastTime: -8585654763838213313
-    List: []
+    m_lastTime: -8585641981470060171
+    List:
+    - name: Play_Button_Click
+      guid: 046ae7eaa487d44dad9cf8d18b0f9bd8
+      id: 1149159311
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: UI
+        ObjectType: 4
+      - ElementName: Play_Button_Click
+        ObjectType: 3
+      Path: Default Work Unit\UI\Play_Button_Click
+      maxAttenuation: 0
+      maxDuration: 0.064369
+      minDuration: 0.060686
+    - name: Play_Button_Hover
+      guid: ce0312d62d14414082946d71a19b95b4
+      id: 4021863785
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: UI
+        ObjectType: 4
+      - ElementName: Play_Button_Hover
+        ObjectType: 3
+      Path: Default Work Unit\UI\Play_Button_Hover
+      maxAttenuation: 0
+      maxDuration: 0.198764
+      minDuration: 0.176874
+    - name: UI
+      guid: 5dd2f89ba4d0224391341edb198c2ab4
+      id: 1551306167
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: UI
+        ObjectType: 4
+      Path: Default Work Unit\UI
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
   RtpcWwu:
   - PhysicalPath: Game Parameters\Default Work Unit.wwu
     PathAndIcons:
@@ -78,8 +118,17 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: 53ecf202e82ccd47a2dd471471481431
     GuidInternal: 
-    m_lastTime: -8585654763838313064
-    List: []
+    m_lastTime: -8585644531167239119
+    List:
+    - name: Bug_Speed
+      guid: 33a1acc9ce1cc641aefc145a8ae502f4
+      id: 2497779717
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Bug_Speed
+        ObjectType: 13
+      Path: Default Work Unit\Bug_Speed
   StateWwu:
   - PhysicalPath: States\Default Work Unit.wwu
     PathAndIcons:
@@ -110,6 +159,7 @@ MonoBehaviour:
     GuidInternal: 
     m_lastTime: -8585654763839644713
     List: []
-  ExpandedItems: []
+  ExpandedItems:
+  - /Wwise_GameOff2021
   autoPopulateEnabled: 1
   CurrentPluginConfig: 
