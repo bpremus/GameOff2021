@@ -82,6 +82,7 @@ public class UIController : MonoBehaviour
     public void OpenBuildMenu() => overlayHandler.OpenBuildMenu();
     public void CloseBuildMenu() => overlayHandler.CloseBuildMenu();
     public void HideRoomUI() => Room_UI.Instance.Hide();
+    public void HideBugUI() => DBG_UnitUI.Instance.Hide();
 
     public void ExitBuildingMode() => SetDefaultState();
     public void SetDefaultState()

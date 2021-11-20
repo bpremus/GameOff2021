@@ -47,10 +47,14 @@ public class DBG_UnitUI : MonoBehaviour
     }
     public void Update()
     {
+
+        if (UIController.instance.isBuildMenuActive()) Hide();
+
         if (Input.GetKey(KeyCode.A))
         {
             CellSelectProto.Instance.SetAssignBugState();
         }
+
     }
 
     public void SelectRoomFromBug()
