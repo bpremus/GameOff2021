@@ -84,7 +84,7 @@ public class HiveCell : MonoBehaviour
     // this will determine what kind of cell mesh (walls) are going to be drawn
     public CellMesh.Cell_type cell_Type = CellMesh.Cell_type.dirt;
 
-    public enum RoomContext { empty, queen, harvester, war, salvage};
+    public enum RoomContext { empty, hive, queen, harvester, war, salvage};
 
     // cell still has a room that inside have a room mesh 
     public HiveGenerator hiveGenerator = null;
@@ -129,10 +129,16 @@ public class HiveCell : MonoBehaviour
         cell_Type = CellMesh.Cell_type.room;
 
         // place interior room 
-        if (context == RoomContext.queen)
+        if (context == RoomContext.hive)
         {
             BuildRoom(ArtPrefabsInstance.Instance.RoomPrefabs[0]);
             hiveGenerator.hive_cell = this;
+            return;
+        }
+
+        if (context == RoomContext.queen)
+        {
+            BuildRoom(ArtPrefabsInstance.Instance.RoomPrefabs[5]);
             return;
         }
 

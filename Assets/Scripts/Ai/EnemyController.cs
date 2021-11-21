@@ -15,6 +15,8 @@ public class EnemyController : MonoBehaviour
     int day_attack_number = 1;
     int night_attack_number = 10;
 
+    int stop_debug = 3;
+
     GameController game_controller;
 
     public void Start()
@@ -95,9 +97,12 @@ public class EnemyController : MonoBehaviour
         StageAttack();
     }
 
+    int d_idx = 0;
     public void SpawnBug()
     {
         GameObject bug_prefab = ArtPrefabsInstance.Instance.BugsPrefabs[0];
+
+        if (d_idx > stop_debug) return;
 
         CoreBug cb = Instantiate(bug_prefab, start_cell.transform.position, start_cell.transform.rotation).GetComponent<CoreBug>();
        if (cb != null)
@@ -106,6 +111,8 @@ public class EnemyController : MonoBehaviour
             cb.GoToAndBack(start_cell,target_cell);
             cb.tag = "Enemy";
             cb.coalition = coalition; // same as tag 
+
+            d_idx++;
 
             // cb.stop_and_fight = false;
             //cb.GoTo(target_cell);

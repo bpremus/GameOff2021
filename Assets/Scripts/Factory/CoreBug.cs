@@ -38,6 +38,14 @@ public class CoreBug : BugMovement
 
     public int coalition = 0;
 
+    //  moving to dead bug
+    protected CoreBug salvagedBug;
+    public CoreBug SalvageTask
+    {
+        set { salvagedBug = value; }
+        get { return salvagedBug; }
+    }
+
     public virtual void SetAction(Bug_action action)
     {
         bug_action = action;

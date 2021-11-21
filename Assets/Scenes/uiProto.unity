@@ -13521,6 +13521,7 @@ MonoBehaviour:
   - {fileID: 4814530021195277145, guid: e3b4f5dddf0c6e944ab82ff71ba36f10, type: 3}
   - {fileID: 5339288632819550311, guid: 6dbe067cdb345c74390cf4522d1181cc, type: 3}
   - {fileID: 576670934770808670, guid: 302eff5a42130c74eb121a74248a8d86, type: 3}
+  - {fileID: 2355617998115532096, guid: 668a35d8443374047ac0e9b443478431, type: 3}
   BugsPrefabs:
   - {fileID: 3160248646930140246, guid: 8dbd9ff5ad79b9d4cb25e7293fd50e7c, type: 3}
   - {fileID: 658582526522619735, guid: 434f26ee5c194d54487a6a12baf9f3bf, type: 3}
@@ -21602,10 +21603,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 821834ac4c30639418547fcf645a0df4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  food: -72
+  food: -102
   day_night_duration: 10
   isDay: 0
-  dayDuration: 0
+  dayDuration: 2
 --- !u!4 &1212630098
 Transform:
   m_ObjectHideFlags: 0
@@ -38382,6 +38383,7 @@ MonoBehaviour:
   assigned_bugs: []
   max_asigned_units: 3
   room_detect_distance: 3
+  hitColliders: []
 --- !u!1 &2016468955
 GameObject:
   m_ObjectHideFlags: 0
@@ -56814,7 +56816,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -263.3999, y: -26.199951}
+  m_AnchoredPosition: {x: -263.3999, y: -26.199768}
   m_SizeDelta: {x: 279.79712, y: 279.28003}
   m_Pivot: {x: 1, y: 0}
 --- !u!1 &3113532211401629534
