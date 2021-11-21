@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class BuildManager : MonoBehaviour
 {
+    //IDs: 
+    // 0 - corridor   1 - storage room  2 - warriors room  3 - resource room  4- queen room
+    [SerializeField] private int[] roomsIds;
+    [SerializeField] private int[,] roomsCost; // roomCost[food,wood]
+
     // changed to singleton 
     private static BuildManager _instance;
     public static BuildManager Instance
@@ -40,6 +45,22 @@ public class BuildManager : MonoBehaviour
         cell = selectedCell;
     }
 
+    public bool CanBuildRoom(int _roomInd)
+    {
+        if (_roomInd > roomsIds.Length){ Debug.LogError("room with index"+ _roomInd +" does not exists");return false; }
+      int food = GameController.Instance.GetFood();
+      int wood = GameController.Instance.GetWood();
+
+        //need to check for needed resources - maybe separate script which holds "database" of rooms costs / ghost room prefabs / amount of rooms      
+        // maybe switching to scriptable objects would simplify things? - deezaath
+
+        // case : not enough resources
+
+        //return false
+
+        //case : enough, send info back to uicontroller to display ghost room of roomid room
+        return true;
+    } 
     public void CreateNewRoom(int roomInd)
     {
         if (roomInd > room_prefabs.Length || roomInd < 0) { Debug.LogError("Room id with" + roomInd + " does not exists"); return; }
@@ -48,11 +69,6 @@ public class BuildManager : MonoBehaviour
         {
             if (cell.isCellEmpty)
             {
-                //check needed resources/costs etc...
-
-                //bps1: check also if room is connected to ousdie world, no orphan rooms
-
-                //Build room
                 cell.BuildRoom(room_prefabs[roomInd]);
                 ClearSelection();
             }

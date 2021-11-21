@@ -102,9 +102,15 @@ public class UIController : MonoBehaviour
         //ask game/build manager if player can build currently selected room (id of room)
 
         //then call Build_CanBuildRoom from build manager with either true or false
+        if (BuildManager.Instance.CanBuildRoom(roomID))
+        {
+            UI_SetBuildMode(true);
 
-        //for debug i call it here with true
-        UI_SetBuildMode(true);
+        }
+
+
+      //  if (roomID > 0) BuildManager.Instance.CreateCorridor(0);
+      //  else BuildManager.Instance.CreateNewRoom(roomID);
     }
     public void UI_SetBuildMode(bool canBuild) 
     {

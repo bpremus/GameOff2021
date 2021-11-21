@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class CellSelectProto : MonoBehaviour
 {
-
+    public enum SelectState { none, bug_selected, cell_selected, build_cell, bug_assign };
+    public SelectState selection_state = SelectState.none;
     [SerializeField]
     Transform frame_border;
     [SerializeField]
     GameObject path_sphere;
+    [Header("GFX")]
     [SerializeField] private Sprite unselectedFrame;
     [SerializeField] private Sprite selectedFrame;
     private Vector3 borderStartSize;
@@ -19,8 +21,6 @@ public class CellSelectProto : MonoBehaviour
         get { return _instance; }
     }
     Vector2 selectionPosition = Vector2.zero;
-    public enum SelectState { none, bug_selected, cell_selected, build_cell, bug_assign};
-    public SelectState selection_state = SelectState.none;
 
     private void Awake()
     {
@@ -44,7 +44,7 @@ public class CellSelectProto : MonoBehaviour
         OnDeselect();
         selection_state = SelectState.build_cell;
     }
-
+    public Vector3 GetFramePosition() { return frame_border.transform.position; }
     public void OnCellSelect_dep()
     {
        // if (hc)
@@ -74,29 +74,47 @@ public class CellSelectProto : MonoBehaviour
     HiveCell _hover_cell;
     CoreBug _bug_selected;
     HiveCell _cellSelected;
-
+    #region Selector GFX
+    //---------------------------------------------------------
+    private void GFX_SelectorCellHover()
+    {
+        if(_hover_cell != null)
+              frame_border.transform.position = _hover_cell.transform.position + new Vector3(0, 0, 1);
+    }
+    private void GFX_SelectorBugHover()
+    {
+        if(_hover_bug != null)
+             frame_border.transform.position = _hover_bug.transform.position + new Vector3(0, 0, 1);
+    }
+    private void GFX_SelectorCellSelect()
+    {
+        frame_border.GetComponent<SpriteRenderer>().sprite = selectedFrame;
+        frame_border.transform.localScale = borderStartSize;
+    }
+    private void GFX_SelectorBugSelect()
+    {
+        frame_border.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+    }
+    //-----------------------------------------------------------
+    #endregion
     public void OnCellHover(HiveCell hc)
     {
-     //   Debug.Log("cell however");
         _hover_cell = hc;
         _hover_bug = null;
 
-       
-        frame_border.transform.position = hc.transform.position + new Vector3(0, 0, 1);
+        GFX_SelectorCellHover();
+        
     }
     public void OnCellSelect(HiveCell hc)
     {
         _cellSelected = hc;
         selectionPosition = hc.transform.position;
+
         Room_UI.Instance.Show(hc);
-
         DBG_UnitUI.Instance.Hide();
-
-        frame_border.GetComponent<SpriteRenderer>().sprite = selectedFrame;
-        frame_border.transform.localScale = borderStartSize;
-
-
         SetRoomUIPosition();
+        GFX_SelectorCellSelect();
+       
     }
 
     public void OnBugHover(CoreBug bug)
@@ -104,9 +122,9 @@ public class CellSelectProto : MonoBehaviour
       //  Debug.Log("bug however");
         _hover_bug = bug;
         _hover_cell = null;
-        frame_border.transform.position = bug.transform.position + new Vector3(0, 0, 1);
       
 
+        GFX_SelectorBugHover();
     }
     public void OnBugSelect(CoreBug bug)
     {
@@ -114,8 +132,10 @@ public class CellSelectProto : MonoBehaviour
 
         DBG_UnitUI.Instance.Show(bug);
         Room_UI.Instance.Hide();
-        frame_border.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        
         if (selection_state != SelectState.cell_selected) selectionPosition = bug.transform.position;
+
+        GFX_SelectorBugSelect();
         SetUnitUIPosition();
     }
 
