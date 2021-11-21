@@ -151,7 +151,10 @@ public class CameraController : MonoBehaviour
         targetFollow = null;
         Debug.Log("target reset");
     }
-
+    public float GetZoomLevel()
+    {
+        return zoomPos;
+    }
     #endregion
 
     #region Private methods

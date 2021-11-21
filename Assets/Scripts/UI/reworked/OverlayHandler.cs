@@ -15,6 +15,9 @@ public class OverlayHandler : MonoBehaviour
     private GameObject buildMenu;
 
     [SerializeField]
+    private GameObject settingsMenu;
+
+    [SerializeField]
     private GameObject topIndicator;
     [SerializeField]
     private TextMeshProUGUI topIndicatorText;
@@ -53,8 +56,18 @@ public class OverlayHandler : MonoBehaviour
 
 
     }
-
-
+    public void OpenSettingsMenu()
+    {
+        settingsMenu.SetActive(true);
+    }
+    public void CloseSettingsMenu()
+    {
+        settingsMenu.SetActive(false);
+    }
+    public bool IsSettingsMenuActive()
+    {
+        return settingsMenu.activeInHierarchy;
+    }
     public void BuildingMode(bool building)
     {
         if (building)

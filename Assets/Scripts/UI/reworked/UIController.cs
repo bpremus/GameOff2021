@@ -8,6 +8,7 @@ public class UIController : MonoBehaviour
 
     [SerializeField] private Transform mainCanvas;
     [SerializeField] private GameObject buildMenu;
+
     private BlurController blurController;
     private PopupsHandler popupsHandler;
     [HideInInspector] public OverlayHandler overlayHandler;
@@ -50,6 +51,10 @@ public class UIController : MonoBehaviour
     {
         if (buildMenu.activeInHierarchy) return true;
         return false;
+    }
+    public bool isSettingsMenuActive()
+    {
+       return  overlayHandler.IsSettingsMenuActive();
     }
     public bool isIndicatorActive() { return overlayHandler.isIndicatorActive(); }
     private void Update()
