@@ -74,6 +74,7 @@ public class SalvageRoom : HiveRoom
                         _spread_timer = 0;
 
                         CoreBug dead = dead_bugs.Dequeue();
+                        dead.SetState(BugMovement.BugAnimation.dragged);
                         cb.SalvageTask = dead;
                         cb.GoTo(dead.current_cell);
                         cb.SetAction(CoreBug.Bug_action.traveling);
@@ -91,17 +92,42 @@ public class SalvageRoom : HiveRoom
                             // start gathering 
                             continue;
                         }
+                        if (cb.SalvageTask == null)
+                        {
+                            cb.SetAction(CoreBug.Bug_action.returning);
+                            cb.GoTo(this.cell);
+                        }
                     }
 
 
                     if (cb.GetAction == CoreBug.Bug_action.salvaging)
                     {
+                        if (cb.SalvageTask == null)
+                        {
                             cb.SetAction(CoreBug.Bug_action.returning);
                             cb.GoTo(this.cell);
+                            continue;
+                        }
+                       
+                        float d = Vector3.Distance(cb.transform.position, cb.SalvageTask.transform.position);
+                        if (d < 0.2f)
+                        {
+                            cb.SetAction(CoreBug.Bug_action.returning);
+                            cb.GoTo(this.cell);
+                        }
+                        else
+                        {
+                            cb.target = cb.SalvageTask.transform.position;
+                        }
+
                     }
 
                     if (cb.GetAction == CoreBug.Bug_action.returning)
                     {
+
+                        if (cb.SalvageTask != null)
+                            cb.SalvageTask.transform.position = cb.transform.position;
+
 
                         if (cb.current_cell == this.cell)
                         {

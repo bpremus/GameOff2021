@@ -23,7 +23,7 @@ public class BugMovement : MonoBehaviour
     [SerializeField]
     protected bool Debug_movement_mode = false;
 
-    public enum BugAnimation { idle, walk, fly, attack, dead };
+    public enum BugAnimation { idle, walk, fly, attack, dead, dragged };
 
     // move stop distance
     public float stop_distance = 1;
@@ -36,6 +36,11 @@ public class BugMovement : MonoBehaviour
     {
         return bugAnimation;
     }
+    public void SetState(BugAnimation animState)
+    {
+        bugAnimation = animState;
+    }
+
     public virtual bool IsValidState()
     {
         if (bugAnimation == BugAnimation.idle) return true;
