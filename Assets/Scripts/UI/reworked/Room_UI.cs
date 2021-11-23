@@ -64,6 +64,7 @@ public class Room_UI : MonoBehaviour
 
     public void SetTask()
     {
+        Debug.Log("start task");
         CoreRoom room = hiveCell.GetRoom();
         if (room)
         {

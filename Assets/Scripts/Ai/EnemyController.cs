@@ -90,7 +90,7 @@ public class EnemyController : MonoBehaviour
         for (int i = 0; i < night_attack_number; i++)
         {
             bugs_to_spawn.Enqueue(0);
-            bugs_to_spawn.Enqueue(3);
+           // bugs_to_spawn.Enqueue(3);
         }
 
     }
@@ -122,7 +122,7 @@ public class EnemyController : MonoBehaviour
         
         public void OnTargetReach()
         {
-            int idx = Random.Range(0, ArtPrefabsInstance.Instance.FoodAndWoodPrefabs.Length);
+            int idx = Random.Range(0, ArtPrefabsInstance.Instance.FoodAndWoodPrefabs.Length-1);
             GameObject food_wood = ArtPrefabsInstance.Instance.FoodAndWoodPrefabs[idx];
             Vector3 food_pos = bug.transform.position + bug.transform.up * 0.5f;
             GameObject g = Instantiate(food_wood, food_pos, Quaternion.identity);
@@ -146,8 +146,9 @@ public class EnemyController : MonoBehaviour
         else
             return;
 
-       int bud_index = bugs_to_spawn.Dequeue();
-       GameObject bug_prefab = ArtPrefabsInstance.Instance.BugsPrefabs[bud_index];
+       int bug_index = bugs_to_spawn.Dequeue();
+       // Debug.Log("int " + bug_index);
+       GameObject bug_prefab = ArtPrefabsInstance.Instance.BugsPrefabs[bug_index];
        CoreBug cb = Instantiate(bug_prefab, start_cell.transform.position, start_cell.transform.rotation).GetComponent<CoreBug>();
        if (cb != null)
        {
