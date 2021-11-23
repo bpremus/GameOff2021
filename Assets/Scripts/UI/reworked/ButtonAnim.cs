@@ -19,4 +19,6 @@ public class ButtonAnim : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         LeanTween.cancel(anim.uniqueId);
         LeanTween.scale(gameObject, baseScale, animInTime/2);
     }
+
+    void OnDisable() => transform.localScale = baseScale;
 }

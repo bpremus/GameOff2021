@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class CellSelectProto : MonoBehaviour
 {
-
+    public enum SelectState { none, bug_selected, cell_selected, build_cell, bug_assign };
+    public SelectState selection_state = SelectState.none;
     [SerializeField]
     Transform frame_border;
     [SerializeField]
     GameObject path_sphere;
+    [Header("GFX")]
     [SerializeField] private Sprite unselectedFrame;
     [SerializeField] private Sprite selectedFrame;
     private Vector3 borderStartSize;
@@ -19,8 +21,6 @@ public class CellSelectProto : MonoBehaviour
         get { return _instance; }
     }
     Vector2 selectionPosition = Vector2.zero;
-    public enum SelectState { none, bug_selected, cell_selected, build_cell, bug_assign};
-    public SelectState selection_state = SelectState.none;
 
     private void Awake()
     {
@@ -44,7 +44,7 @@ public class CellSelectProto : MonoBehaviour
         OnDeselect();
         selection_state = SelectState.build_cell;
     }
-
+    public Transform GetFrameTransform() { return frame_border.transform; }
     public void OnCellSelect_dep()
     {
        // if (hc)
@@ -74,29 +74,47 @@ public class CellSelectProto : MonoBehaviour
     HiveCell _hover_cell;
     CoreBug _bug_selected;
     HiveCell _cellSelected;
-
+    #region Selector GFX
+    //---------------------------------------------------------
+    private void GFX_SelectorCellHover()
+    {
+        if(_hover_cell != null)
+              frame_border.transform.position = _hover_cell.transform.position + new Vector3(0, 0, 1);
+    }
+    private void GFX_SelectorBugHover()
+    {
+        if(_hover_bug != null)
+             frame_border.transform.position = _hover_bug.transform.position + new Vector3(0, 0, 1);
+    }
+    private void GFX_SelectorCellSelect()
+    {
+        frame_border.GetComponent<SpriteRenderer>().sprite = selectedFrame;
+        frame_border.transform.localScale = borderStartSize;
+    }
+    private void GFX_SelectorBugSelect()
+    {
+        frame_border.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+    }
+    //-----------------------------------------------------------
+    #endregion
     public void OnCellHover(HiveCell hc)
     {
-     //   Debug.Log("cell however");
         _hover_cell = hc;
         _hover_bug = null;
 
-       
-        frame_border.transform.position = hc.transform.position + new Vector3(0, 0, 1);
+        GFX_SelectorCellHover();
+        
     }
     public void OnCellSelect(HiveCell hc)
     {
         _cellSelected = hc;
         selectionPosition = hc.transform.position;
+
         Room_UI.Instance.Show(hc);
-
         DBG_UnitUI.Instance.Hide();
-
-        frame_border.GetComponent<SpriteRenderer>().sprite = selectedFrame;
-        frame_border.transform.localScale = borderStartSize;
-
-
-        SetRoomUIPosition();
+      //  SetRoomUIPosition();
+        GFX_SelectorCellSelect();
+       
     }
 
     public void OnBugHover(CoreBug bug)
@@ -104,9 +122,9 @@ public class CellSelectProto : MonoBehaviour
       //  Debug.Log("bug however");
         _hover_bug = bug;
         _hover_cell = null;
-        frame_border.transform.position = bug.transform.position + new Vector3(0, 0, 1);
       
 
+        GFX_SelectorBugHover();
     }
     public void OnBugSelect(CoreBug bug)
     {
@@ -114,9 +132,11 @@ public class CellSelectProto : MonoBehaviour
 
         DBG_UnitUI.Instance.Show(bug);
         Room_UI.Instance.Hide();
-        frame_border.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        
         if (selection_state != SelectState.cell_selected) selectionPosition = bug.transform.position;
-        SetUnitUIPosition();
+
+        GFX_SelectorBugSelect();
+      //  SetUnitUIPosition();
     }
 
 
@@ -125,8 +145,12 @@ public class CellSelectProto : MonoBehaviour
         Debug.Log("building placed");
         BuildOnCell(cell);
         selection_state = SelectState.none;
+        UIController.instance.SetDefaultState();
     }
-
+    public void SetBuildRoomState()
+    {
+        selection_state = SelectState.build_cell;
+    }
     public void SetAssignBugState()
     {
         selection_state = SelectState.bug_assign;
@@ -165,25 +189,31 @@ public class CellSelectProto : MonoBehaviour
     {
         if (hc.cell_Type == CellMesh.Cell_type.dirt)
         {
+          
             if (last_selected_room_id == 0)
             {
                 hc.BuildCooridor();
+                Debug.Log("Created corridor");
             }
             // if its a room 
             else if (last_selected_room_id == 1)
             {
                 hc.BuildRoom(HiveCell.RoomContext.harvester);
+                Debug.Log("Created harvester");
             }
             else if (last_selected_room_id == 2)
             {
                 hc.BuildRoom(HiveCell.RoomContext.war);
+                Debug.Log("Created barracks");
             }
             else if (last_selected_room_id >= 3)
             {
                 hc.BuildRoom(HiveCell.RoomContext.harvester);
+                Debug.Log("Created harvester");
             }
 
-            hc.BuildRoom();      
+            hc.BuildRoom();
+           
         }
     }
 
@@ -415,8 +445,17 @@ public class CellSelectProto : MonoBehaviour
                 else
                 {
                     if (selection_state == SelectState.build_cell)
-                    { 
+                    {
                         // we can hover a building we want to make 
+                        if (cell.cell_Type == CellMesh.Cell_type.dirt)
+                        {
+                            GhostRoomDisplayer.instance.Display_CanBuildHere();
+                        }
+                        else
+                        {
+                            GhostRoomDisplayer.instance.Display_CantBuildHere();
+                        }
+                          
                     }
 
                     OnCellHover(cell);

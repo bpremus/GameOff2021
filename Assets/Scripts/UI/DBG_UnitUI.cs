@@ -30,7 +30,13 @@ public class DBG_UnitUI : MonoBehaviour
     CoreBug bug;
     public void Show(CoreBug cb)
     {
-        this.transform.GetChild(0).gameObject.SetActive(true);
+        if (this.transform.GetChild(0).gameObject.activeInHierarchy)
+        {
+            this.transform.GetChild(0).gameObject.GetComponent<UIFader>().Show();
+        }
+        else
+            this.transform.GetChild(0).gameObject.SetActive(true);
+
         bug = cb;
 
         bug_name.text = bug.name;
@@ -39,6 +45,7 @@ public class DBG_UnitUI : MonoBehaviour
     public void Hide()
     {
         this.transform.GetChild(0).gameObject.SetActive(false);
+        TooltipSystem.Hide();
     }
     public void FollowUnit()
     {
@@ -50,10 +57,10 @@ public class DBG_UnitUI : MonoBehaviour
 
         if (UIController.instance.isBuildMenuActive()) Hide();
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            CellSelectProto.Instance.SetAssignBugState();
-        }
+     //   if (Input.GetKey(KeyCode.A))
+     //   {
+     //       CellSelectProto.Instance.SetAssignBugState();
+     //   }
 
     }
 

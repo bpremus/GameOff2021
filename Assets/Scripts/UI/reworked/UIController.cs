@@ -8,6 +8,7 @@ public class UIController : MonoBehaviour
 
     [SerializeField] private Transform mainCanvas;
     [SerializeField] private GameObject buildMenu;
+
     private BlurController blurController;
     private PopupsHandler popupsHandler;
     [HideInInspector] public OverlayHandler overlayHandler;
@@ -51,6 +52,10 @@ public class UIController : MonoBehaviour
         if (buildMenu.activeInHierarchy) return true;
         return false;
     }
+    public bool isSettingsMenuActive()
+    {
+       return  overlayHandler.IsSettingsMenuActive();
+    }
     public bool isIndicatorActive() { return overlayHandler.isIndicatorActive(); }
     private void Update()
     {
@@ -62,6 +67,7 @@ public class UIController : MonoBehaviour
             {
                 case State.Default:
                    overlayHandler.HideIndicator();
+                    GhostRoomDisplayer.instance.HideGhostRoom();
                     break;
                 case State.Building:
                     overlayHandler.ShowIndicator("Building mode");
@@ -97,9 +103,15 @@ public class UIController : MonoBehaviour
         //ask game/build manager if player can build currently selected room (id of room)
 
         //then call Build_CanBuildRoom from build manager with either true or false
+        if (BuildManager.Instance.CanBuildRoom(roomID))
+        {
+            UI_SetBuildMode(true);
+            GhostRoomDisplayer.instance.DisplayGhostRoom(roomID);
+        }
 
-        //for debug i call it here with true
-        UI_SetBuildMode(true);
+
+      //  if (roomID > 0) BuildManager.Instance.CreateCorridor(0);
+      //  else BuildManager.Instance.CreateNewRoom(roomID);
     }
     public void UI_SetBuildMode(bool canBuild) 
     {
