@@ -44,7 +44,7 @@ public class CellSelectProto : MonoBehaviour
         OnDeselect();
         selection_state = SelectState.build_cell;
     }
-    public Vector3 GetFramePosition() { return frame_border.transform.position; }
+    public Transform GetFrameTransform() { return frame_border.transform; }
     public void OnCellSelect_dep()
     {
        // if (hc)
@@ -112,7 +112,7 @@ public class CellSelectProto : MonoBehaviour
 
         Room_UI.Instance.Show(hc);
         DBG_UnitUI.Instance.Hide();
-        SetRoomUIPosition();
+      //  SetRoomUIPosition();
         GFX_SelectorCellSelect();
        
     }
@@ -136,7 +136,7 @@ public class CellSelectProto : MonoBehaviour
         if (selection_state != SelectState.cell_selected) selectionPosition = bug.transform.position;
 
         GFX_SelectorBugSelect();
-        SetUnitUIPosition();
+      //  SetUnitUIPosition();
     }
 
 
@@ -145,8 +145,12 @@ public class CellSelectProto : MonoBehaviour
         Debug.Log("building placed");
         BuildOnCell(cell);
         selection_state = SelectState.none;
+        UIController.instance.SetDefaultState();
     }
-
+    public void SetBuildRoomState()
+    {
+        selection_state = SelectState.build_cell;
+    }
     public void SetAssignBugState()
     {
         selection_state = SelectState.bug_assign;
@@ -185,25 +189,31 @@ public class CellSelectProto : MonoBehaviour
     {
         if (hc.cell_Type == CellMesh.Cell_type.dirt)
         {
+          
             if (last_selected_room_id == 0)
             {
                 hc.BuildCooridor();
+                Debug.Log("Created corridor");
             }
             // if its a room 
             else if (last_selected_room_id == 1)
             {
                 hc.BuildRoom(HiveCell.RoomContext.harvester);
+                Debug.Log("Created harvester");
             }
             else if (last_selected_room_id == 2)
             {
                 hc.BuildRoom(HiveCell.RoomContext.war);
+                Debug.Log("Created barracks");
             }
             else if (last_selected_room_id >= 3)
             {
                 hc.BuildRoom(HiveCell.RoomContext.harvester);
+                Debug.Log("Created harvester");
             }
 
-            hc.BuildRoom();      
+            hc.BuildRoom();
+           
         }
     }
 
@@ -435,8 +445,17 @@ public class CellSelectProto : MonoBehaviour
                 else
                 {
                     if (selection_state == SelectState.build_cell)
-                    { 
+                    {
                         // we can hover a building we want to make 
+                        if (cell.cell_Type == CellMesh.Cell_type.dirt)
+                        {
+                            GhostRoomDisplayer.instance.Display_CanBuildHere();
+                        }
+                        else
+                        {
+                            GhostRoomDisplayer.instance.Display_CantBuildHere();
+                        }
+                          
                     }
 
                     OnCellHover(cell);

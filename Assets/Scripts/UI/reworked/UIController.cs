@@ -67,6 +67,7 @@ public class UIController : MonoBehaviour
             {
                 case State.Default:
                    overlayHandler.HideIndicator();
+                    GhostRoomDisplayer.instance.HideGhostRoom();
                     break;
                 case State.Building:
                     overlayHandler.ShowIndicator("Building mode");
@@ -105,7 +106,7 @@ public class UIController : MonoBehaviour
         if (BuildManager.Instance.CanBuildRoom(roomID))
         {
             UI_SetBuildMode(true);
-
+            GhostRoomDisplayer.instance.DisplayGhostRoom(roomID);
         }
 
 

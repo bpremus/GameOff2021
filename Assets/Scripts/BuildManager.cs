@@ -59,6 +59,7 @@ public class BuildManager : MonoBehaviour
         //return false
 
         //case : enough, send info back to uicontroller to display ghost room of roomid room
+        CellSelectProto.Instance.SetBuildID(_roomInd);
         return true;
     } 
     public void CreateNewRoom(int roomInd)
