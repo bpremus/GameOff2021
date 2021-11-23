@@ -48,9 +48,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent_cell: {fileID: 0}
-  room_detect_distance: 3
   assigned_bugs: []
   max_asigned_units: 3
+  room_detect_distance: 3
+  hitColliders: []
   spawn_bug_interval: 1
 --- !u!1001 &93858843591132520
 PrefabInstance:

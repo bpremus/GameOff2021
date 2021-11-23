@@ -13,6 +13,16 @@ public class WarriorBug : CoreBug
 
     public override void SetAnimation()
     {
+        // if its dead just stop all
+        if (_isDead)
+        {
+            for (int i = 0; i < animators.Length; i++)
+            {
+                animators[0].speed = 0;
+            }
+            return;
+        }
+
         if (bugAnimation == BugAnimation.idle)
         {
            animators[0].speed = 0;
@@ -67,7 +77,7 @@ public class WarriorBug : CoreBug
         bugAnimation = BugAnimation.idle;
     }
 
-    float _attack_t = 0;
+    protected float _attack_t = 0;
     public override void InteractWithEnemy(CoreBug otherBug)
     {
         target = otherBug.transform.position;
@@ -92,15 +102,15 @@ public class WarriorBug : CoreBug
 
     public void MoveSiegedBug()
     {
-       
-            Vector3 direction = target - transform.position;
-            direction.z = 0;
-            Vector3 normal_direction = new Vector3(0, 0, 1);
-            Quaternion look_direction = transform.rotation;
-            if (direction == Vector3.zero)
-            {
-                return;
-            }
+
+        Vector3 direction = target - transform.position;
+        direction.z = 0;
+        Vector3 normal_direction = new Vector3(0, 0, 1);
+        Quaternion look_direction = transform.rotation;
+        if (direction == Vector3.zero)
+        {
+            return;
+        }
 
         float rot_speed = rotation_speed;
         if (bug_action == Bug_action.fighting)
@@ -108,9 +118,9 @@ public class WarriorBug : CoreBug
             rot_speed = 0.1f;
         }
 
-            look_direction = Quaternion.LookRotation(direction, normal_direction); // replace me with a normal
-            transform.rotation = Quaternion.Slerp(transform.rotation, look_direction, Time.deltaTime * rot_speed);
-        
+        look_direction = Quaternion.LookRotation(direction, normal_direction); // replace me with a normal
+        transform.rotation = Quaternion.Slerp(transform.rotation, look_direction, Time.deltaTime * rot_speed);
+
     }
 
 }

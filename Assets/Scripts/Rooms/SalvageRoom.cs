@@ -7,16 +7,17 @@ public class SalvageRoom : HiveRoom
     // how this room works
     // you assign units to it
     // if dead bugs are within the range of room, bugs will start collecting these 
+    [SerializeField]
     Queue<CoreBug> dead_bugs = new Queue<CoreBug>();
 
     public override void Start()
     {
-      //  for (int i = 0; i < assigned_bugs.Count; i++)
-      //  {
-      //      CoreBug b = assigned_bugs[i].GetComponent<CoreBug>();
-      //      b.CurrentPositon(this.parent_cell);
-      //      b.bugTask = CoreBug.BugTask.salvage;
-      //  }
+        //  for (int i = 0; i < assigned_bugs.Count; i++)
+        //  {
+        //      CoreBug b = assigned_bugs[i].GetComponent<CoreBug>();
+        //      b.CurrentPositon(this.parent_cell);
+        //      b.bugTask = CoreBug.BugTask.salvage;
+        //  }
     }
 
     private void OnDrawGizmos()
@@ -53,102 +54,128 @@ public class SalvageRoom : HiveRoom
     float _spread_timer = 0;
     public void SendGathering()
     {
-        if (dead_bugs.Count > 0)
+        _spread_timer += Time.deltaTime;
+        for (int i = 0; i < assigned_bugs.Count; i++)
         {
-            //Debug.DrawLine(transform.position, cell.transform.position);
-            _spread_timer += Time.deltaTime;
-            for (int i = 0; i < assigned_bugs.Count; i++)
+            CoreBug cb = assigned_bugs[i].GetComponent<CoreBug>();
+            if (cb)
             {
-                CoreBug cb = assigned_bugs[i].GetComponent<CoreBug>();
-                if (cb)
-                {
-                    // set task
-                    cb.bugTask = CoreBug.BugTask.salvage;
+                // set task
+                cb.bugTask = CoreBug.BugTask.salvage;
 
+                if (dead_bugs.Count > 0)
+                {
                     // moving to location 
                     if (cb.GetAction == CoreBug.Bug_action.idle)
                     {
-                        if (cb.SalvageTask != null) continue;
-
+                        if (cb.salvage_object != null) continue;
                         if (_spread_timer < 0.5f) continue;
                         _spread_timer = 0;
 
+
                         CoreBug dead = dead_bugs.Dequeue();
-                        dead.SetState(BugMovement.BugAnimation.dragged);
-                        cb.SalvageTask = dead;
-                        cb.GoTo(dead.current_cell);
-                        cb.SetAction(CoreBug.Bug_action.traveling);
-                        OnBugDepart(cb);
-                    }
-
-                    // reached location
-                    if (cb.GetAction == CoreBug.Bug_action.traveling)
-                    {
-                        if (cb.current_cell == cb.SalvageTask.current_cell)
+                        if (dead != null)
                         {
-                            cb.SetAction(CoreBug.Bug_action.salvaging);
-                            OnBugReachGatheringSite(cb);
+                            Debug.Log(cb.name + " is going to salvage " + dead.name);
+                            dead.SetState(BugMovement.BugAnimation.dragged);
+                            cb.salvage_object = dead;
+                            dead.current_cell = dead.GetUndelayingCell();
 
-                            // start gathering 
-                            continue;
-                        }
-                        if (cb.SalvageTask == null)
-                        {
-                            cb.SetAction(CoreBug.Bug_action.returning);
-                            cb.GoTo(this.cell);
+                            cb.GoTo(dead.current_cell);
+                            cb.SetAction(CoreBug.Bug_action.traveling);
+                            OnBugDepart(cb);
                         }
                     }
-
-
-                    if (cb.GetAction == CoreBug.Bug_action.salvaging)
+                }
+                else
+                {
+                    if (cb.GetAction == CoreBug.Bug_action.idle)
                     {
-                        if (cb.SalvageTask == null)
-                        {
-                            cb.SetAction(CoreBug.Bug_action.returning);
-                            cb.GoTo(this.cell);
-                            continue;
-                        }
-                       
-                        float d = Vector3.Distance(cb.transform.position, cb.SalvageTask.transform.position);
-                        if (d < 0.2f)
-                        {
-                            cb.SetAction(CoreBug.Bug_action.returning);
-                            cb.GoTo(this.cell);
-                        }
-                        else
-                        {
-                            cb.target = cb.SalvageTask.transform.position;
-                        }
+                        if (cb.salvage_object != null) continue;
 
+                        // spread bug
+                        SpreadBugs();
+                    }
+                }
+
+                // reached location
+                if (cb.GetAction == CoreBug.Bug_action.traveling)
+                {
+
+                    Debug.Log("traveling");
+                    if (cb.current_cell == cb.salvage_object.current_cell)
+                    {
+                        Debug.Log("ready to salvage");
+                        cb.SetAction(CoreBug.Bug_action.salvaging);
+                        OnBugReachGatheringSite(cb);
+
+                        // start gathering 
+                        continue;
+                    }
+                    if (cb.salvage_object == null)
+                    {
+                        cb.SetAction(CoreBug.Bug_action.returning);
+                        cb.GoTo(this.cell);
                     }
 
-                    if (cb.GetAction == CoreBug.Bug_action.returning)
+                }
+
+
+                if (cb.GetAction == CoreBug.Bug_action.salvaging)
+                {
+                    if (cb.salvage_object == null)
                     {
+                        cb.SetAction(CoreBug.Bug_action.returning);
+                        cb.GoTo(this.cell);
+                        continue;
+                    }
 
-                        if (cb.SalvageTask != null)
-                            cb.SalvageTask.transform.position = cb.transform.position;
+                  // if (cb.current_cell != cb.salvage_object.current_cell)
+                  // { 
+                        //  float d = Vector3.Distance(cb.transform.position, cb.salvage_object.transform.position);
+                        //  if (d < 0.2f)
+                        //  {
+                        cb.SetAction(CoreBug.Bug_action.returning);
+                        cb.GoTo(this.cell);
+                        // }
+                        // else
+                        // {
+                        //     cb.target = cb.salvage_object.transform.position;
+                        // }
+                   // }
 
+                }
 
-                        if (cb.current_cell == this.cell)
+                if (cb.GetAction == CoreBug.Bug_action.returning)
+                {
+
+                    if (cb.salvage_object != null)
+                        cb.salvage_object.transform.position = cb.transform.position + cb.transform.up * 0.5f;
+
+                    if (cb.underlaying_cell == this.cell)
+                    {
+                        OnBugReachHomeCell(cb);
+                        cb.SetAction(CoreBug.Bug_action.idle);
+                        if (cb.salvage_object != null)
                         {
-                            OnBugReachHomeCell(cb);
-                            cb.SetAction(CoreBug.Bug_action.idle);
-                            if (cb.SalvageTask != null)
-                            {
-                                Destroy(cb.SalvageTask.gameObject);
-                                cb.SalvageTask = null;
-                            }
-                            continue;
+                            cb.salvage_object.OnLateDecay();
+                            cb.salvage_object = null;
                         }
+                        continue;
                     }
                 }
             }
         }
-        else
-        {
-            SpreadBugs();
-        }
+
+
+        
+        // {
+        //     SpreadBugs();
+        // }
+
     }
+
+
 
     public override void DetectEnemy()
     {
@@ -163,7 +190,11 @@ public class SalvageRoom : HiveRoom
                 if (cb.GetState() == BugMovement.BugAnimation.dead)
                 {
                     if (dead_bugs.Contains(cb) == false)
+                    {
                         dead_bugs.Enqueue(cb);
+                    //    Debug.Log("Dead bug in range " + cb.name);
+                    }
+                    
                     return;
                 }
             }

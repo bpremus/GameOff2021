@@ -35,6 +35,13 @@ public class HiveCell : MonoBehaviour
         bugs_to_assign.Enqueue(bug);
         return true;
     }
+    public int GetAvailableAssignSlots()
+    {
+        int max_u = childRoom.GetMAxAssignUnits();
+        int cur_u = childRoom.GetAssignedBugs().Count;
+
+        return max_u - cur_u;
+    }
 
     public void DetachDrone(CoreBug bug)
     {

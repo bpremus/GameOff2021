@@ -15,7 +15,11 @@ public class BugMovement : MonoBehaviour
     [SerializeField]
     protected float rotation_speed = 10f;
     [SerializeField]
-    protected float move_speed     = 2f;
+    protected float move_speed = 2f;
+
+    protected float slow_penalty_speed = 0;
+
+    protected bool _isDead = false;
 
     [SerializeField]
     protected Animator[] animators;
@@ -41,6 +45,8 @@ public class BugMovement : MonoBehaviour
         bugAnimation = animState;
     }
 
+    public float GetDefinedSpeed { get => move_speed; }
+
     public virtual bool IsValidState()
     {
         if (bugAnimation == BugAnimation.idle) return true;
@@ -63,6 +69,18 @@ public class BugMovement : MonoBehaviour
     private Vector3 last_pos = Vector3.zero;
     public virtual void SetAnimation()
     {
+        // if its dead just stop all
+        if (_isDead)
+        {
+            for (int i = 0; i < animators.Length; i++)
+            {
+                animators[0].speed = 0;
+            }
+            return;
+        }
+
+        // idle 
+
         if (bugAnimation == BugAnimation.idle)
         {
             animators[0].speed = 0;
@@ -71,6 +89,8 @@ public class BugMovement : MonoBehaviour
             animators[2].SetInteger("State", 0);
         }
 
+        // walking
+
         if (bugAnimation == BugAnimation.walk)
         {
             animators[0].speed = move_speed * 2.5f;
@@ -78,79 +98,46 @@ public class BugMovement : MonoBehaviour
             animators[1].SetInteger("State", 0);
             animators[2].SetInteger("State", 0);
         }
-        if (bugAnimation == BugAnimation.dead)
-        {
-            for (int i = 0; i < animators.Length; i++)
-            {
-                animators[0].speed = 0;
-            }
-        }
-
-        /*
-        if (bugAnimation == BugAnimation.idle)
-        {
-            BodyAnimator.SetInteger("State", 0);
-            LegsAnimator.SetInteger("State", 0);
-            LegsAnimator.speed = 1f;
-            speed = 0;
-            wings.gameObject.SetActive(false);
-        }
-
-        if (bugAnimation == BugAnimation.walk)
-        {
-            BodyAnimator.SetInteger("State", 2);
-            LegsAnimator.SetInteger("State", 2);
-            LegsAnimator.speed = 1;  Mathf.Clamp(speed,0,1.5f);
-            //speed = (last_pos - transform.position).magnitude / Time.deltaTime;
-            wings.gameObject.SetActive(false);
-            //  if (speed < 5) speed = 0;
-        }
-
-        if (bugAnimation == BugAnimation.fly)
-        {
-            BodyAnimator.SetInteger("State", 4);
-            LegsAnimator.SetInteger("State", 0);
-            wings.gameObject.SetActive(true);
-        }
-
-        if (bugAnimation == BugAnimation.dead)
-        {
-            BodyAnimator.SetInteger("State", 0);
-            LegsAnimator.SetInteger("State", 0);
-            LegsAnimator.speed = 1f;
-            speed = 0;
-            wings.gameObject.SetActive(false);
-        }
-        */
+        
         last_pos = transform.position;
     }
 
     public void Update()
     {
-        if (bugAnimation != BugAnimation.dead)
+        if (!_isDead) // Alive
         {
             MoveToPosition();
             WalkPath();
             DetectEnemy();
             SetTimers();
+            OnCanRangeShoot();
         }
-        if (bugAnimation == BugAnimation.dead)
+        if (_isDead) // dead
         {
             FlipBug();
         }
 
         FaceBugUp();
         SetAnimation();
+
+        // dbg
+        // GetUndelayingCell();
+
+    }
+
+    protected virtual void OnCanRangeShoot()
+    { 
+    
     }
 
     public virtual void SetTimers()
-    { 
-    
+    {
+
     }
 
     public virtual void DetectEnemy()
-    { 
-    
+    {
+
     }
 
     public virtual void MoveToPosition()
@@ -205,8 +192,11 @@ public class BugMovement : MonoBehaviour
         {
             direction = direction.normalized * move_speed;
             Vector3 new_position = transform.position + direction;
-            
-            transform.position = Vector3.Lerp(transform.position, new_position, Time.deltaTime * move_speed);
+
+            float final_speed = move_speed - slow_penalty_speed;
+            slow_penalty_speed = 0;
+
+            transform.position = Vector3.Lerp(transform.position, new_position, Time.deltaTime * final_speed);
 
             OnWalk();
 
@@ -222,15 +212,21 @@ public class BugMovement : MonoBehaviour
         }
     }
 
+    public void OnBugSlowdown(float speed = 0.5f)
+    {
+        slow_penalty_speed = speed;
+    }
+
+
     public virtual void OnWalkStart()
     {
-       // Debug.Log("Bug started walking");
+        // Debug.Log("Bug started walking");
     }
 
     public virtual void OnIdleStart()
     {
 
-       // Debug.Log("Bug is idle");
+        // Debug.Log("Bug is idle");
     }
 
     public virtual void OnWalk()
@@ -239,10 +235,10 @@ public class BugMovement : MonoBehaviour
         {
             return;
         }
-       
 
-       if (bugAnimation != BugAnimation.fly)
-       bugAnimation = BugAnimation.walk;
+
+        if (bugAnimation != BugAnimation.fly)
+            bugAnimation = BugAnimation.walk;
     }
 
     public virtual void OnIdle()
@@ -266,7 +262,7 @@ public class BugMovement : MonoBehaviour
         Vector3 pos = transform.position;
         pos.z = 0.1f;
         transform.position = pos;
-        bugAnimation = BugAnimation.dead;
+        //bugAnimation = BugAnimation.dead;
     }
 
     /*
@@ -300,6 +296,26 @@ public class BugMovement : MonoBehaviour
         else
         {
             orientation = 1;
+            
         }
+    }
+
+    public HiveCell GetUndelayingCell()
+    {
+        RaycastHit hit;
+        int layerId   = 6; //cells
+        int layerMask = 1 << layerId;
+        Vector3 pos = transform.position + new Vector3(0, 0, 5f);
+        //Debug.DrawRay(pos, new Vector3(0, 0, -1) * 10f);
+        if (Physics.Raycast(pos, new Vector3(0, 0, -1), out hit, 10f, layerMask))
+        {
+            HiveCell hc = hit.transform.GetComponent<HiveCell>();
+            if (hc)
+            {
+                return hc;
+            }
+                
+        }
+        return null;
     }
 }

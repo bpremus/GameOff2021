@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1175946443047106057}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -86.37, y: 0.6710993, z: 2.38}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children:
   - {fileID: 2997197592412350814}
@@ -51,19 +51,22 @@ MonoBehaviour:
   move_speed: 2
   animators: []
   Debug_movement_mode: 0
-  stop_distance: 1
+  stop_distance: 0.01
   bugAnimation: 1
   current_cell: {fileID: 0}
   destination_cell: {fileID: 0}
   target_cell: {fileID: 0}
   asigned_cell: {fileID: 0}
+  underlaying_cell: {fileID: 0}
   health: 10
   damage: 1
-  interraction_range: 3
+  interraction_range: 1
+  decayOnDeadTimer: 20
   bugTask: 0
-  bug_action: 0
+  bug_action: 3
   coalition: 0
   hitColliders: []
+  splash_dmg: 1
 --- !u!135 &7942784070867363946
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -76,7 +79,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 2
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!95 &9217590078873784934
 Animator:
   serializedVersion: 3
@@ -109,7 +112,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4881968544825393321, guid: 4bff8866dd30ff242bba32a478ff2494, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 36.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4881968544825393321, guid: 4bff8866dd30ff242bba32a478ff2494, type: 3}
       propertyPath: m_LocalPosition.y
@@ -268,7 +271,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a56de3fc2c452534b9cb222c9a4c520c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 36.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a56de3fc2c452534b9cb222c9a4c520c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -276,7 +279,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a56de3fc2c452534b9cb222c9a4c520c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.5
+      value: -2.63
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a56de3fc2c452534b9cb222c9a4c520c, type: 3}
       propertyPath: m_LocalRotation.w

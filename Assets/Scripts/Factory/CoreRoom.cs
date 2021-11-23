@@ -12,6 +12,8 @@ public class CoreRoom : MonoBehaviour
     [SerializeField]
     protected int max_asigned_units = 3;
 
+    public int GetMAxAssignUnits() { return max_asigned_units; }
+
     public List<CoreBug> GetAssignedBugs()
     {
         List<CoreBug> cbgus = new List<CoreBug>();

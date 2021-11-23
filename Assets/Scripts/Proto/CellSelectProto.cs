@@ -96,7 +96,7 @@ public class CellSelectProto : MonoBehaviour
         frame_border.transform.localScale = borderStartSize;
 
 
-        SetRoomUIPosition();
+      //  SetRoomUIPosition();
     }
 
     public void OnBugHover(CoreBug bug)
@@ -116,7 +116,7 @@ public class CellSelectProto : MonoBehaviour
         Room_UI.Instance.Hide();
         frame_border.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         if (selection_state != SelectState.cell_selected) selectionPosition = bug.transform.position;
-        SetUnitUIPosition();
+     //   SetUnitUIPosition();
     }
 
 
@@ -132,6 +132,7 @@ public class CellSelectProto : MonoBehaviour
         selection_state = SelectState.bug_assign;
     }
 
+ 
     public void SetBugSelection(CoreBug bug)
     {
         OnDeselect();
@@ -150,10 +151,28 @@ public class CellSelectProto : MonoBehaviour
     public void OnAssignBug(HiveCell destination)
     {
         Debug.Log("Asigning bugs");
-       
-        if (destination.AssignDrone(_bug_selected))
+        if (_bug_selected)
         {
-            _bug_selected.GoTo(destination);
+            if (destination.AssignDrone(_bug_selected))
+            {
+                _bug_selected.GoTo(destination);
+            }
+        }
+        else if (_cellSelected)
+        {
+
+            // we can asign all bugs, but only if desination room can accpt it
+            CoreRoom room = _cellSelected.GetRoom();
+            List<CoreBug> cbs = room.GetAssignedBugs();
+            int avb_size = destination.GetAvailableAssignSlots();
+            for (int i = 0; i < avb_size && i < cbs.Count; i++)
+            {
+                if (destination.AssignDrone(cbs[i]))
+                {
+                    cbs[i].GoTo(destination);
+                }
+            }
+
         }
 
         selection_state = SelectState.none;

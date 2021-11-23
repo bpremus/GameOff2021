@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     // -----------------------------
     [SerializeField]
     int food = 20;
+    [SerializeField]
     int wood = 100;
     int population = 2;
 
@@ -50,6 +51,11 @@ public class GameController : MonoBehaviour
     {
         food += 20;
         wood += 10;
+    }
+
+    public void OnStolenFood()
+    {
+        food -= 1;
     }
 
     public void OnNewBug()

@@ -32,11 +32,24 @@ public class HarversterRoom : HiveRoom
     }
     public void SendToCollect()
     {
-        gather_destination = cell.hiveGenerator.cells[9][9];
+        int[] hive_size = cell.hiveGenerator.GetSize();
+        gather_destination = cell.hiveGenerator.cells[hive_size[0] - 1][hive_size[1]-1];
     }
     public void OnBugReachGatheringSite(CoreBug bug)
     {
         Debug.Log("bugs are gathering");
+        if (bug.harvest_object != null)
+        {
+            Destroy(bug.harvest_object);
+            bug.harvest_object = null;
+        }
+
+
+        int idx = Random.Range(0, ArtPrefabsInstance.Instance.FoodAndWoodPrefabs.Length);
+        GameObject food_wood = ArtPrefabsInstance.Instance.FoodAndWoodPrefabs[idx];
+        Vector3 food_pos = new Vector3(0, 0, -5);
+        GameObject g =  Instantiate(food_wood, food_pos, Quaternion.identity);
+        bug.harvest_object = g;
     }
 
     public void OnBugReachHomeCell(CoreBug bug)
@@ -46,6 +59,7 @@ public class HarversterRoom : HiveRoom
         GameController.Instance.OnBrigResources();
     }
 
+   
     public void OnBugDepart(CoreBug bug)
     {
 
@@ -67,6 +81,11 @@ public class HarversterRoom : HiveRoom
                 CoreBug cb = assigned_bugs[i].GetComponent<CoreBug>();
                 if (cb)
                 {
+
+                    // set task
+                    cb.bugTask = CoreBug.BugTask.harvesting;
+
+
                     // moving to location 
                     if (cb.GetAction == CoreBug.Bug_action.idle)
                     {
@@ -116,10 +135,16 @@ public class HarversterRoom : HiveRoom
                     // reched cell
                     if (cb.GetAction == CoreBug.Bug_action.returning)
                     {
-                        if (cb.current_cell == this.cell)
+                     
+                        if (cb.underlaying_cell == this.cell)
                         {
                             OnBugReachHomeCell(cb);
                             cb.NextAction();
+
+
+                            Destroy(cb.harvest_object);
+                            cb.harvest_object = null;
+
                             continue;
                         }
                     }

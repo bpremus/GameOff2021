@@ -24,6 +24,7 @@ public class ArtPrefabsInstance : MonoBehaviour
     
     public GameObject[] RoomPrefabs;
     public GameObject[] BugsPrefabs;
+    public GameObject[] FoodAndWoodPrefabs;
 
 
     public enum BugEvolution { drone, warrior, claw, spike };

@@ -35,6 +35,11 @@ public class Room_UI : MonoBehaviour
     private void Update()
     {
         if (UIController.instance.isBuildMenuActive()) Hide();
+        if (Input.GetKey(KeyCode.A))
+        {
+            CellSelectProto.Instance.SetAssignBugState();
+        }
+
     }
     public void Show(HiveCell hc)
     {
@@ -65,6 +70,7 @@ public class Room_UI : MonoBehaviour
             }
         }
     }
+
     public void BuildButtons()
     {
         int size = bug_lis_cell.transform.childCount;

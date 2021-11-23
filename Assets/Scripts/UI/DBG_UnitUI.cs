@@ -52,7 +52,7 @@ public class DBG_UnitUI : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A))
         {
-            CellSelectProto.Instance.SetAssignBugState();
+            AssignBug();
         }
 
     }
