@@ -31,7 +31,7 @@ public class HiveCell : MonoBehaviour
     Queue<CoreBug> bugs_to_assign = new Queue<CoreBug>();
     public bool AssignDrone(CoreBug bug)
     {
-        Debug.Log("assinging a bug to a new room");
+        // Debug.Log("assinging a bug to a new room");
         bugs_to_assign.Enqueue(bug);
         return true;
     }
@@ -55,7 +55,6 @@ public class HiveCell : MonoBehaviour
     protected virtual void ProcessAssigments()
     {
         if (childRoom == null) return;
-
         if (bugs_to_assign.Count > 0)
         {
             CoreBug bug = bugs_to_assign.Dequeue();

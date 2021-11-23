@@ -17248,10 +17248,12 @@ MonoBehaviour:
   - {fileID: 4814530021195277145, guid: e3b4f5dddf0c6e944ab82ff71ba36f10, type: 3}
   - {fileID: 5339288632819550311, guid: 6dbe067cdb345c74390cf4522d1181cc, type: 3}
   - {fileID: 576670934770808670, guid: 302eff5a42130c74eb121a74248a8d86, type: 3}
+  - {fileID: 2355617998115532096, guid: 668a35d8443374047ac0e9b443478431, type: 3}
   BugsPrefabs:
   - {fileID: 3160248646930140246, guid: 8dbd9ff5ad79b9d4cb25e7293fd50e7c, type: 3}
   - {fileID: 658582526522619735, guid: 434f26ee5c194d54487a6a12baf9f3bf, type: 3}
   - {fileID: 2290125106946955862, guid: ff39edff40941804d8bffab139f2b5b5, type: 3}
+  FoodAndWoodPrefabs: []
 --- !u!4 &774315382
 Transform:
   m_ObjectHideFlags: 0
@@ -23110,7 +23112,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1109520776}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4bc2904f4ec53a419db44d759e3963b, type: 3}
   m_Name: 
@@ -23118,6 +23120,7 @@ MonoBehaviour:
   start_cell: {fileID: 0}
   target_cell: {fileID: 0}
   spawn_timer: 0
+  bug_separation: 1
 --- !u!4 &1109520778
 Transform:
   m_ObjectHideFlags: 0
@@ -25818,9 +25821,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   food: -298
+  wood: 100
   day_night_duration: 10
   isDay: 1
-  dayDuration: 12
+  dayDuration: 1
 --- !u!4 &1212630098
 Transform:
   m_ObjectHideFlags: 0

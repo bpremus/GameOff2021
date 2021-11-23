@@ -173,12 +173,38 @@ public class CellSelectProto : MonoBehaviour
 
     public void OnAssignBug(HiveCell destination)
     {
-        Debug.Log("Asigning bugs");
-       
-        if (destination.AssignDrone(_bug_selected))
+      //  Debug.Log("Asigning bugs");
+      //  Debug.Log("Dest:" + destination.name);
+
+        if (_bug_selected != null)
         {
-            _bug_selected.GoTo(destination);
+            int max_assign = destination.GetAvailableAssignSlots();
+            if (max_assign > 0)
+            {
+                if (destination.AssignDrone(_bug_selected))
+                {
+                    _bug_selected.GoTo(destination);
+                }
+            }
         }
+        if (_cellSelected != null)
+        {
+            CoreRoom room = _cellSelected.GetRoom();
+            if (room)
+            {
+                int max_assign = destination.GetAvailableAssignSlots();
+
+                List<CoreBug> bugs = room.GetAssignedBugs();
+                for (int i = 0; i < bugs.Count && i < max_assign; i++)
+                {
+                    if (destination.AssignDrone(bugs[i]))
+                    {
+                        bugs[i].GoTo(destination);
+                    }
+                }
+            }
+        }
+
 
         selection_state = SelectState.none;
 

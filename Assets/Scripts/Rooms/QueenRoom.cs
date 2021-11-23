@@ -18,7 +18,7 @@ public class QueenRoom : HiveRoom
     public override void DetachBug(CoreBug bug)
     {
         assigned_bugs.Remove(bug.gameObject);
-        Debug.Log("deatching a bug from " + this.name);
+      //  Debug.Log("deatching a bug from " + this.name);
         SpreadBugs();
 
     }

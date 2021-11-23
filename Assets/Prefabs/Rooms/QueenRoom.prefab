@@ -47,8 +47,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent_cell: {fileID: 0}
   assigned_bugs: []
-  max_asigned_units: 1
+  max_asigned_units: 2
   room_detect_distance: 3
+  hitColliders: []
   spawn_bug_interval: 1
 --- !u!1 &7607369287985050167
 GameObject:
