@@ -73,6 +73,10 @@ public class GameController : MonoBehaviour
     {
         return food;
     }
+    public int GetWood()
+    {
+        return wood;
+    }
     public int GetPopulation()
     {
         return population;

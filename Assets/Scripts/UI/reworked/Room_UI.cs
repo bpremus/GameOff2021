@@ -19,7 +19,7 @@ public class Room_UI : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI room_name;
     [SerializeField]
-    TextMeshProUGUI noBugsText;
+    GameObject assignedBugsHolder;
     List<CoreBug> listed_bugs = new List<CoreBug>();
     private void Awake()
     {
@@ -43,7 +43,13 @@ public class Room_UI : MonoBehaviour
     }
     public void Show(HiveCell hc)
     {
-        this.transform.GetChild(0).gameObject.SetActive(true);
+        if (this.transform.GetChild(0).gameObject.activeInHierarchy)
+        {
+            this.transform.GetChild(0).gameObject.GetComponent<UIFader>().Show();
+        }
+        else
+             this.transform.GetChild(0).gameObject.SetActive(true);
+
         hiveCell = hc;
         BuildButtons();
 
@@ -87,7 +93,7 @@ public class Room_UI : MonoBehaviour
 
         if(bugs.Count > 0)
         {
-            noBugsText.gameObject.SetActive(false);
+            assignedBugsHolder.SetActive(true);
             for (int i = 0; i < bugs.Count; i++)
             {
                 GameObject g = Instantiate(bug_button_prefab, bug_lis_cell.transform);
@@ -100,7 +106,7 @@ public class Room_UI : MonoBehaviour
         }
         else
         {
-            noBugsText.gameObject.SetActive(true);
+            assignedBugsHolder.SetActive(false);
         }
 
 
