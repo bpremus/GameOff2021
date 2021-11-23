@@ -198,7 +198,7 @@ public class CellSelectProto : MonoBehaviour
             // if its a room 
             else if (last_selected_room_id == 1)
             {
-                hc.BuildRoom(HiveCell.RoomContext.harvester);
+                hc.BuildRoom(HiveCell.RoomContext.salvage);
                 Debug.Log("Created harvester");
             }
             else if (last_selected_room_id == 2)

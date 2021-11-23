@@ -25820,7 +25820,7 @@ MonoBehaviour:
   food: -298
   day_night_duration: 10
   isDay: 1
-  dayDuration: 5
+  dayDuration: 12
 --- !u!4 &1212630098
 Transform:
   m_ObjectHideFlags: 0
@@ -45495,6 +45495,7 @@ MonoBehaviour:
   assigned_bugs: []
   max_asigned_units: 3
   room_detect_distance: 3
+  hitColliders: []
 --- !u!1 &2016468955
 GameObject:
   m_ObjectHideFlags: 0
@@ -47760,7 +47761,7 @@ Light:
   m_BounceIntensity: 2
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: -1.2246296e+23, z: 4.5905e-41, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 1e-45, z: 1.6114932e-38, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
