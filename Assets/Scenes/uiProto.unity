@@ -2201,6 +2201,9 @@ MonoBehaviour:
   path_sphere: {fileID: 7735398793723162309, guid: 6030455834c257d46b7f3adfe77fc87b, type: 3}
   unselectedFrame: {fileID: 21300000, guid: 831ed94086fb4814282630c0c30b0d9b, type: 3}
   selectedFrame: {fileID: 21300000, guid: 1bcd954f2c9b4284dbb98bf66117a18c, type: 3}
+  onClickFrameScale: {x: 1.9, y: 1.9, z: 1.9}
+  onClickFrameAnimtime: 0.1
+  onClickFrameEase: 32
 --- !u!222 &127741326
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -27113,7 +27116,7 @@ MonoBehaviour:
   wood: 100
   day_night_duration: 10
   isDay: 0
-  dayDuration: 6
+  dayDuration: 1
 --- !u!4 &1212630098
 Transform:
   m_ObjectHideFlags: 0

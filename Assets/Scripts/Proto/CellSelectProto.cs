@@ -14,6 +14,9 @@ public class CellSelectProto : MonoBehaviour
     [SerializeField] private Sprite unselectedFrame;
     [SerializeField] private Sprite selectedFrame;
     private Vector3 borderStartSize;
+    [SerializeField] private Vector3 onClickFrameScale = new Vector3(1.1f, 1.1f, 1.1f);
+    [SerializeField] private float onClickFrameAnimtime = 0.2f;
+    [SerializeField] private LeanTweenType onClickFrameEase;
     // changed to singleton 
     private static CellSelectProto _instance;
     public static CellSelectProto Instance
@@ -100,6 +103,7 @@ public class CellSelectProto : MonoBehaviour
             }
 
             frame_border.transform.position = _hover_cell.transform.position + new Vector3(0, 0, 1);
+            SetDefaultFrameSize();
         }
 
 
@@ -111,11 +115,21 @@ public class CellSelectProto : MonoBehaviour
         //enable overlay shader on bug?
 
     }
+    private void SetDefaultFrameSize()
+    {
+        frame_border.transform.localScale = borderStartSize;
+    }
     private void GFX_SelectorCellSelect()
     {
         frame_border.GetComponent<SpriteRenderer>().sprite = selectedFrame;
         frame_border.gameObject.SetActive(true);
-        frame_border.transform.localScale = borderStartSize;
+        SetDefaultFrameSize();
+
+        //play animation
+
+        LeanTween.scale(frame_border.gameObject, onClickFrameScale, onClickFrameAnimtime)
+            .setEase(onClickFrameEase)
+            .setOnComplete(() => LeanTween.scale(frame_border.gameObject, borderStartSize, onClickFrameAnimtime).setEase(LeanTweenType.linear));
     }
     private void GFX_SelectorBugSelect()
     {
@@ -401,7 +415,10 @@ public class CellSelectProto : MonoBehaviour
         {
             DrawPath(null, null);
         }
-
+        if(selection_state == SelectState.none)
+        {
+            SetDefaultFrameSize();
+        }
 
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
