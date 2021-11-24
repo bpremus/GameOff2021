@@ -10,6 +10,9 @@ public class SalvageRoom : HiveRoom
     [SerializeField]
     Queue<CoreBug> dead_bugs = new Queue<CoreBug>();
 
+
+    public string roomName { get; private set; } = "Salvage room";
+
     public override void Start()
     {
         //  for (int i = 0; i < assigned_bugs.Count; i++)
