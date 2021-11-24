@@ -216,16 +216,33 @@ public class CameraController : MonoBehaviour
         }
         if (useDragInput)
         {
-            if (useRightMouseButtonToDrag)
+
+
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            LayerMask selection_mask = 0;
+            //selection_mask = 1 << 6 | 1 << 7;
+            bool isOverUI = UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject();
+            if (isOverUI)
             {
-                if (Input.GetMouseButton(1)) isDragging = true;
-                else isDragging = false;
+              
             }
-            else
-            { 
-                if(Input.GetMouseButton(0)) isDragging = true;
-                else isDragging = false;
+            if (Physics.Raycast(ray, out hit) && !isOverUI)
+            {
+
+                if (useRightMouseButtonToDrag)
+                {
+                    if (Input.GetMouseButton(1)) isDragging = true;
+                    else isDragging = false;
+                }
+                else
+                {
+                    if (Input.GetMouseButton(0)) isDragging = true;
+                    else isDragging = false;
+                }
             }
+
+
 
   
 
