@@ -35,6 +35,8 @@ public class OverlayHandler : MonoBehaviour
     {
         uiController = GetComponent<UIController>();
     }
+    public void DisableBuildButton() => ButtonInteractable(buildButton, false);
+    public void EnableBuildButton() =>  ButtonInteractable(buildButton, true);
     public void OpenBuildMenu()
     {
         if (!uiController.isBuildMenuActive())
@@ -49,6 +51,7 @@ public class OverlayHandler : MonoBehaviour
         {
             if (uiController.isBuildMenuActive())
             {
+                Debug.Log("closing menu");
                 buildMenu.SetActive(false);
                 ButtonInteractable(buildButton, true);
             }
@@ -74,11 +77,13 @@ public class OverlayHandler : MonoBehaviour
         {
             CloseBuildMenu();
             ShowIndicator("Building mode");
-            ButtonInteractable(buildButton, true);
+            ButtonInteractable(buildButton, false);
         }
         else
         {
             //Failed to build (no resources) - Animation ?
+            ButtonInteractable(buildButton, true);
+            HideIndicator();
             return;
         }
     }

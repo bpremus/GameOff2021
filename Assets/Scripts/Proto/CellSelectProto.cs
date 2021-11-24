@@ -44,6 +44,7 @@ public class CellSelectProto : MonoBehaviour
         OnDeselect();
         selection_state = SelectState.build_cell;
     }
+    public void ClearSelectionState() => selection_state = SelectState.none;
     public Transform GetFrameTransform() { return frame_border.transform; }
     public void OnCellSelect_dep()
     {
@@ -76,24 +77,50 @@ public class CellSelectProto : MonoBehaviour
     HiveCell _cellSelected;
     #region Selector GFX
     //---------------------------------------------------------
-    private void GFX_SelectorCellHover()
+    private void GFX_SelectorCellHover(HiveCell cell)
     {
-        if(_hover_cell != null)
-              frame_border.transform.position = _hover_cell.transform.position + new Vector3(0, 0, 1);
+
+        if (_hover_cell != null)
+        {
+            if (UIController.instance.inBuildingMode)
+            {
+                frame_border.gameObject.SetActive(true);
+
+            }
+            else
+            {
+                if (cell.cell_Type == CellMesh.Cell_type.dirt)
+                {
+                    frame_border.gameObject.SetActive(false);
+                }
+                else if (cell.cell_Type == CellMesh.Cell_type.room || cell.cell_Type == CellMesh.Cell_type.corridor)
+                {
+                    frame_border.gameObject.SetActive(true);
+                }
+            }
+
+            frame_border.transform.position = _hover_cell.transform.position + new Vector3(0, 0, 1);
+        }
+
+
     }
     private void GFX_SelectorBugHover()
     {
         if(_hover_bug != null)
              frame_border.transform.position = _hover_bug.transform.position + new Vector3(0, 0, 1);
+        //enable overlay shader on bug?
+
     }
     private void GFX_SelectorCellSelect()
     {
         frame_border.GetComponent<SpriteRenderer>().sprite = selectedFrame;
+        frame_border.gameObject.SetActive(true);
         frame_border.transform.localScale = borderStartSize;
     }
     private void GFX_SelectorBugSelect()
     {
         frame_border.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        //enable overlay shader on bug?
     }
     //-----------------------------------------------------------
     #endregion
@@ -102,7 +129,7 @@ public class CellSelectProto : MonoBehaviour
         _hover_cell = hc;
         _hover_bug = null;
 
-        GFX_SelectorCellHover();
+        GFX_SelectorCellHover(hc);
         
     }
     public void OnCellSelect(HiveCell hc)
@@ -225,17 +252,22 @@ public class CellSelectProto : MonoBehaviour
             else if (last_selected_room_id == 1)
             {
                 hc.BuildRoom(HiveCell.RoomContext.salvage);
-                Debug.Log("Created harvester");
+                Debug.Log("Created Storage");
             }
             else if (last_selected_room_id == 2)
             {
                 hc.BuildRoom(HiveCell.RoomContext.war);
                 Debug.Log("Created barracks");
             }
-            else if (last_selected_room_id >= 3)
+            else if (last_selected_room_id == 3)
             {
                 hc.BuildRoom(HiveCell.RoomContext.harvester);
                 Debug.Log("Created harvester");
+            }
+            else if (last_selected_room_id == 4)
+            {
+                hc.BuildRoom(HiveCell.RoomContext.queen);
+                Debug.Log("Created Queen room");
             }
 
             hc.BuildRoom();
@@ -282,8 +314,8 @@ public class CellSelectProto : MonoBehaviour
         Room_UI.Instance.Hide();
 
         frame_border.transform.position = new Vector3(0, 0, -5);
-
-        frame_border.GetComponent<SpriteRenderer>().sprite = unselectedFrame;
+       // frame_border.GetComponent<SpriteRenderer>().sprite = unselectedFrame;
+        frame_border.transform.localScale = borderStartSize;
     }
 
     private void OnDrawGizmos()
@@ -381,29 +413,36 @@ public class CellSelectProto : MonoBehaviour
             frame_border.transform.position = new Vector3(0, 0, -5);
         }
 
+
+
         if (Physics.Raycast(ray, out hit) && !isOverUI)
         {
-            WorldMapCell map = hit.collider.transform.GetComponent<WorldMapCell>();
-            if (map)
-            {
-                OnMapHover(map);
-                return;
-            }
 
-            CoreBug bug = hit.collider.transform.GetComponent<CoreBug>();
-            if (bug)
+            if (UIController.instance.GetUIState() == UIController.State.Default)
             {
-                if (bug.GetState() == BugMovement.BugAnimation.dead) return;
-
-                if (Input.GetMouseButtonDown(0))
+                WorldMapCell map = hit.collider.transform.GetComponent<WorldMapCell>();
+                if (map)
                 {
-                    selection_state = SelectState.bug_selected;
-                    OnDeselect();
-                    OnBugSelect(bug);
+                    OnMapHover(map);
+                    return;
                 }
-                else
-                    OnBugHover(bug);
+
+                CoreBug bug = hit.collider.transform.GetComponent<CoreBug>();
+                if (bug)
+                {
+                    if (bug.GetState() == BugMovement.BugAnimation.dead) return;
+
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        selection_state = SelectState.bug_selected;
+                        OnDeselect();
+                        OnBugSelect(bug);
+                    }
+                    else
+                        OnBugHover(bug);
+                }
             }
+
 
             HiveCell cell = hit.collider.transform.GetComponent<HiveCell>();
             if (cell)
@@ -470,6 +509,7 @@ public class CellSelectProto : MonoBehaviour
                 }
                 else
                 {
+                    //Hovering
                     if (selection_state == SelectState.build_cell)
                     {
                         // we can hover a building we want to make 

@@ -67,15 +67,19 @@ public class UIController : MonoBehaviour
             {
                 case State.Default:
                    overlayHandler.HideIndicator();
+                    CellSelectProto.Instance.ClearSelectionState();
                     GhostRoomDisplayer.instance.HideGhostRoom();
+                    overlayHandler.BuildingMode(false);
+                    inBuildingMode = false;
                     break;
                 case State.Building:
-                    overlayHandler.ShowIndicator("Building mode");
-                    if (isBuildMenuActive()) overlayHandler.CloseBuildMenu();
+                    overlayHandler.BuildingMode(true);
+                    inBuildingMode = true;
                     break;
                 case State.Following:
                     overlayHandler.ShowIndicator("Following bug");
-
+                    inBuildingMode = false;
+                    overlayHandler.DisableBuildButton();
                     break;
                 default:
                     break;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,8 +27,22 @@ public class GhostRoomDisplayer : MonoBehaviour
             Destroy(this);
         }
 
+      //  InitGhostRoomArray();
+
         cellSelectProto = GetComponent<CellSelectProto>();
     }
+
+    private void InitGhostRoomArray()
+    {
+       GameObject[] roomPrefabs = ArtPrefabsInstance.Instance.RoomPrefabs;
+
+        ghostPrefabs[0] = roomPrefabs[2];
+        ghostPrefabs[1] = roomPrefabs[4];
+        ghostPrefabs[2] = roomPrefabs[3];
+        ghostPrefabs[3] = roomPrefabs[1];
+        ghostPrefabs[4] = roomPrefabs[5];
+    }
+
     private void Update()
     {
         selectionTransform = cellSelectProto.GetFrameTransform();
@@ -43,7 +58,7 @@ public class GhostRoomDisplayer : MonoBehaviour
         if(currentRoom == null)
         {
            currentRoom = Instantiate(ghostPrefabs[roomID], selectionTransform, false);
-
+            currentRoom.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             cellSelectProto.SetBuildRoomState();
         }
         else
@@ -55,14 +70,14 @@ public class GhostRoomDisplayer : MonoBehaviour
     {
         if(currentRoom != null)
         {
-            currentRoom.GetComponent<MeshRenderer>().material = canBuild_overlay;
+            currentRoom.GetComponentInChildren<MeshRenderer>().material = canBuild_overlay;
         }
     }
     public void Display_CantBuildHere()
     {
         if (currentRoom != null)
         {
-            currentRoom.GetComponent<MeshRenderer>().material = cantBuild_overlay;
+            currentRoom.GetComponentInChildren<MeshRenderer>().material = cantBuild_overlay;
         }
     }
     public void HideGhostRoom()
