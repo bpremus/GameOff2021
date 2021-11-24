@@ -66,7 +66,7 @@ private void Awake()
     {
         food_Text.text = GameController.Instance.GetFood().ToString();
         population_Text.text = GameController.Instance.GetPopulation().ToString();
-        wood_text.text = 0.ToString();
+        wood_text.text = GameController.Instance.GetWood().ToString();
         DayOrNight();
     }
 

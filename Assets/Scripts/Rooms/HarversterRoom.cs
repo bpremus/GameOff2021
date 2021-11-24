@@ -70,7 +70,7 @@ public class HarversterRoom : HiveRoom
     {
         if (gather_destination)
         {
-            Debug.Log("sending gathering");
+           // Debug.Log("sending gathering");
 
             _spread_timer += Time.deltaTime;
 

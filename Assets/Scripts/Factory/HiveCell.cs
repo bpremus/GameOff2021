@@ -90,7 +90,7 @@ public class HiveCell : MonoBehaviour
     // this will determine what kind of cell mesh (walls) are going to be drawn
     public CellMesh.Cell_type cell_Type = CellMesh.Cell_type.dirt;
 
-    public enum RoomContext { empty, hive, queen, harvester, war, salvage};
+    public enum RoomContext { empty, hive, queen, harvester, war, salvage, corridor};
 
     // cell still has a room that inside have a room mesh 
     public HiveGenerator hiveGenerator = null;
