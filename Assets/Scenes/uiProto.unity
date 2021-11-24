@@ -27112,11 +27112,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 821834ac4c30639418547fcf645a0df4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  food: -370
-  wood: 100
+  food: 100
+  wood: 50
+  population: 2
   day_night_duration: 10
   isDay: 0
-  dayDuration: 3
+  dayDuration: 2
+  room_corridor_cost: 0500000001000000
+  room_harvester_cost: 0a00000003000000
+  room_salvage_cost: 0a00000005000000
+  room_war_cost: 0a00000005000000
+  bug_return_resources: 050000000a000000
 --- !u!4 &1212630098
 Transform:
   m_ObjectHideFlags: 0
@@ -61124,7 +61130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   food_Text: {fileID: 2715893578202041215}
   wood_text: {fileID: 1857399412}
-  population_Text: {fileID: 2715893578202041215}
+  population_Text: {fileID: 1295468315}
   time_Text: {fileID: 0}
 --- !u!114 &2715893576843591531
 MonoBehaviour:

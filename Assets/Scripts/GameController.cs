@@ -27,12 +27,13 @@ public class GameController : MonoBehaviour
     float dayDuration = 0;
 
     // costs                 wood, food 
-    int[] room_corridor_cost = { 5, 1 };
-    int[] room_harvester_cost = { 10, 3 };
-    int[] room_salvage_cost = { 10, 5 };
-    int[] room_war_cost = { 10, 5 };
 
-    int[] bug_return_resources = { 5, 10 };
+    [SerializeField] int[] room_corridor_cost = { 5, 1 };
+    [SerializeField] int[] room_harvester_cost = { 10, 3 };
+    [SerializeField] int[] room_salvage_cost = { 10, 5 };
+    [SerializeField] int[] room_war_cost = { 10, 5 };
+
+    [SerializeField] int[] bug_return_resources = { 5, 10 };
 
     // consume resources
 
@@ -164,8 +165,10 @@ public class GameController : MonoBehaviour
     }
     public void OnBrigResources()
     {
-        food += 20;
-        wood += 10;
+        food += bug_return_resources[0];
+        wood += bug_return_resources[1];
+        
+
     }
     public void OnStolenFood()
     {
@@ -215,7 +218,6 @@ public class GameController : MonoBehaviour
     // Protected
     // ------------------------------
 
-
     float _food_t = 0;
     float food_conusme_thick = 5;
     public void ConsumeFoodThick()
@@ -232,7 +234,6 @@ public class GameController : MonoBehaviour
 
         food -= population;
     }
-
 
     private float _t_day_duration = 0;
     protected void TimeCycle()
@@ -254,7 +255,6 @@ public class GameController : MonoBehaviour
         }
     }
 
-  
     private static GameController _instance;
     public static GameController Instance
     {
