@@ -129,6 +129,13 @@ public class CoreBug : BugMovement
         Invoke("OnLateDecay", decayOnDeadTimer);
         _isDead = true;
 
+        OnBugIsDead();
+
+    }
+
+    public virtual void OnBugIsDead()
+    {
+
     }
 
     public void OnLateDecay()

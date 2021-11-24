@@ -13,13 +13,14 @@ namespace AK
 {
     namespace EVENTS
     {
-        static const AkUniqueID BUG_MOVEMENT = 2354742931U;
         static const AkUniqueID PLAY_AMBIENT_DAY = 2953607465U;
         static const AkUniqueID PLAY_AMBIENT_NIGHT = 894712109U;
         static const AkUniqueID PLAY_BUTTON_CLICK = 1149159311U;
         static const AkUniqueID PLAY_BUTTON_HOVER = 4021863785U;
+        static const AkUniqueID PLAY_SMALL_BUG_MOVEMENT = 1017378692U;
         static const AkUniqueID STOP_AMBIENT_DAY = 1199206671U;
         static const AkUniqueID STOP_AMBIENT_NIGHT = 1512937371U;
+        static const AkUniqueID STOP_SMALL_BUG_MOVEMENT = 4052991490U;
     } // namespace EVENTS
 
     namespace GAME_PARAMETERS
