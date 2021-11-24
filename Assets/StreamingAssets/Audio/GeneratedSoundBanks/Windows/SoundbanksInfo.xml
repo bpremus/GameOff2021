@@ -11,16 +11,43 @@
 	<StreamedFiles/>
 	<MediaFilesNotInAnyBank/>
 	<SoundBanks>
-		<SoundBank Id="1355168291" Language="SFX" Hash="2640259673">
+		<SoundBank Id="1355168291" Language="SFX" Hash="2391500253">
 			<ObjectPath>Init</ObjectPath>
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
+			<GameParameters>
+				<GameParameter Id="3866931204" Name="Camera_Y" ObjectPath="\Game Parameters\Default Work Unit\Camera_Y"/>
+			</GameParameters>
 		</SoundBank>
-		<SoundBank Id="3161908922" Language="SFX" Hash="929300517">
+		<SoundBank Id="3161908922" Language="SFX" Hash="315749634">
 			<ObjectPath>\SoundBanks\Default Work Unit\Main</ObjectPath>
 			<ShortName>Main</ShortName>
 			<Path>Main.bnk</Path>
 			<IncludedEvents>
+				<Event Id="2354742931" Name="Bug_Movement" ObjectPath="\Events\Default Work Unit\Bug_Movement" MaxAttenuation="2.000000" DurationType="Infinite">
+					<IncludedMemoryFiles>
+						<File Id="98690955" Language="SFX">
+							<ShortName>Bug_Movement_1.wav</ShortName>
+							<Path>SFX\Bug_Movement_1_D79FB2B7.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="2953607465" Name="Play_Ambient_Day" ObjectPath="\Events\Default Work Unit\Ambient\Play_Ambient_Day" DurationType="Infinite">
+					<IncludedMemoryFiles>
+						<File Id="1051585042" Language="SFX">
+							<ShortName>Ambience_Day.wav</ShortName>
+							<Path>SFX\Ambience_Day_D79FB2B7.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="894712109" Name="Play_Ambient_Night" ObjectPath="\Events\Default Work Unit\Ambient\Play_Ambient_Night" DurationType="Infinite">
+					<IncludedMemoryFiles>
+						<File Id="86493557" Language="SFX">
+							<ShortName>Ambient_Night.wav</ShortName>
+							<Path>SFX\Ambient_Night_D79FB2B7.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
 				<Event Id="1149159311" Name="Play_Button_Click" ObjectPath="\Events\Default Work Unit\UI\Play_Button_Click" DurationType="OneShot" DurationMin="0.060686" DurationMax="0.064369">
 					<IncludedMemoryFiles>
 						<File Id="252928958" Language="SFX">
@@ -37,6 +64,8 @@
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
+				<Event Id="1199206671" Name="Stop_Ambient_Day" ObjectPath="\Events\Default Work Unit\Ambient\Stop_Ambient_Day" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="1512937371" Name="Stop_Ambient_Night" ObjectPath="\Events\Default Work Unit\Ambient\Stop_Ambient_Night" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 			</IncludedEvents>
 		</SoundBank>
 	</SoundBanks>

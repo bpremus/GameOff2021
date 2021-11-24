@@ -27116,7 +27116,7 @@ MonoBehaviour:
   wood: 100
   day_night_duration: 10
   isDay: 0
-  dayDuration: 1
+  dayDuration: 3
 --- !u!4 &1212630098
 Transform:
   m_ObjectHideFlags: 0

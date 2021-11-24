@@ -30,12 +30,16 @@ public class GameController : MonoBehaviour
 
     public void OnDayStart() 
     {
+        AkSoundEngine.PostEvent("Stop_Ambient_Night", gameObject);
 
+        AkSoundEngine.PostEvent("Play_Ambient_Day", gameObject);
     }
 
     public void OnNightStart()
     {
+        AkSoundEngine.PostEvent("Stop_Ambient_Day", gameObject);
 
+        AkSoundEngine.PostEvent("Play_Ambient_Night", gameObject);
     }
 
     public void OnAttackStart()

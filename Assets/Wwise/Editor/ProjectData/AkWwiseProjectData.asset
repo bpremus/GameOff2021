@@ -30,8 +30,17 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: 68b9c5ee75f6ff4c894e5e3569cfca5c
     GuidInternal: 
-    m_lastTime: -8585654763838362920
+    m_lastTime: -8585638229514119834
     List:
+    - name: Ambient
+      guid: aba08822e6e424439feea3439ef6bf1c
+      id: 77978275
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Ambient
+        ObjectType: 2
+      Path: Default Work Unit\Ambient
     - name: Master Audio Bus
       guid: d8a41415a61d2a41a17e75ca0c2149f3
       id: 3803692087
@@ -49,7 +58,7 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: ab7a7d8fa7af904aad885e3b30a5f3e5
     GuidInternal: 
-    m_lastTime: -8585641933981339155
+    m_lastTime: -8585638252884955184
     List:
     - name: Main
       guid: c7ed1213001d794c9f3d34785e89ab38
@@ -68,8 +77,60 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: d2d748c853878f419a502ed6d2b53f2b
     GuidInternal: 
-    m_lastTime: -8585641981470060171
+    m_lastTime: -8585638266815789487
     List:
+    - name: Ambient
+      guid: fd4e3f4d2b5b3f408bd25e3289266b50
+      id: 77978275
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Ambient
+        ObjectType: 4
+      Path: Default Work Unit\Ambient
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Bug_Movement
+      guid: 93ea9da30216b849a6b1bb57bf1d3825
+      id: 2354742931
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Bug_Movement
+        ObjectType: 3
+      Path: Default Work Unit\Bug_Movement
+      maxAttenuation: 2
+      maxDuration: -1
+      minDuration: -1
+    - name: Play_Ambient_Day
+      guid: 579ffa6f39e4134bbd8e05056ebda692
+      id: 2953607465
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Ambient
+        ObjectType: 4
+      - ElementName: Play_Ambient_Day
+        ObjectType: 3
+      Path: Default Work Unit\Ambient\Play_Ambient_Day
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Play_Ambient_Night
+      guid: b7830e0b34c2094bb2677e9af02f5b77
+      id: 894712109
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Ambient
+        ObjectType: 4
+      - ElementName: Play_Ambient_Night
+        ObjectType: 3
+      Path: Default Work Unit\Ambient\Play_Ambient_Night
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
     - name: Play_Button_Click
       guid: 046ae7eaa487d44dad9cf8d18b0f9bd8
       id: 1149159311
@@ -98,6 +159,34 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0.198764
       minDuration: 0.176874
+    - name: Stop_Ambient_Day
+      guid: 34fc14b8e80f5d4489d11e6e47e7b1ec
+      id: 1199206671
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Ambient
+        ObjectType: 4
+      - ElementName: Stop_Ambient_Day
+        ObjectType: 3
+      Path: Default Work Unit\Ambient\Stop_Ambient_Day
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Stop_Ambient_Night
+      guid: 34c208e0f1576646a31501c275b07f9e
+      id: 1512937371
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Ambient
+        ObjectType: 4
+      - ElementName: Stop_Ambient_Night
+        ObjectType: 3
+      Path: Default Work Unit\Ambient\Stop_Ambient_Night
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
     - name: UI
       guid: 5dd2f89ba4d0224391341edb198c2ab4
       id: 1551306167
@@ -118,7 +207,7 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: 53ecf202e82ccd47a2dd471471481431
     GuidInternal: 
-    m_lastTime: -8585644531167239119
+    m_lastTime: -8585638230204304942
     List:
     - name: Bug_Speed
       guid: 33a1acc9ce1cc641aefc145a8ae502f4
@@ -129,6 +218,15 @@ MonoBehaviour:
       - ElementName: Bug_Speed
         ObjectType: 13
       Path: Default Work Unit\Bug_Speed
+    - name: Camera_Y
+      guid: 285a506b4a818449b5d3a6298ca77b95
+      id: 3866931204
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Camera_Y
+        ObjectType: 13
+      Path: Default Work Unit\Camera_Y
   StateWwu:
   - PhysicalPath: States\Default Work Unit.wwu
     PathAndIcons:
@@ -159,7 +257,6 @@ MonoBehaviour:
     GuidInternal: 
     m_lastTime: -8585654763839644713
     List: []
-  ExpandedItems:
-  - /Wwise_GameOff2021
+  ExpandedItems: []
   autoPopulateEnabled: 1
   CurrentPluginConfig: 

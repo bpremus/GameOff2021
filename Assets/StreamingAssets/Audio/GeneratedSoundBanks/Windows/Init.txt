@@ -1,4 +1,8 @@
+Game Parameter	ID	Name			Wwise Object Path	Notes
+	3866931204	Camera_Y			\Default Work Unit\Camera_Y	
+
 Audio Bus	ID	Name			Wwise Object Path	Notes
+	77978275	Ambient			\Default Work Unit\Ambient	
 	3803692087	Master Audio Bus			\Default Work Unit\Master Audio Bus	
 
 Audio Devices	ID	Name	Type				Notes
