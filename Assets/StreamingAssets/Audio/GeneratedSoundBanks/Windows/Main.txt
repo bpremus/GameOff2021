@@ -1,11 +1,19 @@
 Event	ID	Name			Wwise Object Path	Notes
+	894712109	Play_Ambient_Night			\Default Work Unit\Ambient\Play_Ambient_Night	
 	1149159311	Play_Button_Click			\Default Work Unit\UI\Play_Button_Click	
+	1199206671	Stop_Ambient_Day			\Default Work Unit\Ambient\Stop_Ambient_Day	
+	1512937371	Stop_Ambient_Night			\Default Work Unit\Ambient\Stop_Ambient_Night	
+	2354742931	Bug_Movement			\Default Work Unit\Bug_Movement	
+	2953607465	Play_Ambient_Day			\Default Work Unit\Ambient\Play_Ambient_Day	
 	4021863785	Play_Button_Hover			\Default Work Unit\UI\Play_Button_Hover	
 
 Effect plug-ins	ID	Name	Type				Notes
 	1008402193	Low_Pass_20KHz	Wwise Parametric EQ			
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	86493557	Ambient_Night	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Ambient_Night_D79FB2B7.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ambient\Ambient_Night		20340064
+	98690955	Bug_Movement_1	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Bug_Movement_1_D79FB2B7.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bug_SFX\Bug_Movement\Bug_Movement_1		5736064
 	252928958	SFX_Button_Click	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\SFX_Button_Click_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI_SFX\Button_Click\SFX_Button_Click		6064
 	651579877	SFX_Button_Hover	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\SFX_Button_Hover_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI_SFX\Button_Hover\SFX_Button_Hover		36064
+	1051585042	Ambience_Day	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Ambience_Day_D79FB2B7.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ambient\Ambience_Day		21660064
 

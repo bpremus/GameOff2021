@@ -27114,10 +27114,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   food: -370
   wood: 100
-  population: 2
   day_night_duration: 10
   isDay: 0
-  dayDuration: 5
+  dayDuration: 3
 --- !u!4 &1212630098
 Transform:
   m_ObjectHideFlags: 0
@@ -61125,7 +61124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   food_Text: {fileID: 2715893578202041215}
   wood_text: {fileID: 1857399412}
-  population_Text: {fileID: 1295468315}
+  population_Text: {fileID: 2715893578202041215}
   time_Text: {fileID: 0}
 --- !u!114 &2715893576843591531
 MonoBehaviour:
@@ -61930,7 +61929,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -263.39844, y: -26.200165}
+  m_AnchoredPosition: {x: -263.39844, y: -26.200195}
   m_SizeDelta: {x: 279.79712, y: 279.28003}
   m_Pivot: {x: 1, y: 0}
 --- !u!1 &3113532211401629534
