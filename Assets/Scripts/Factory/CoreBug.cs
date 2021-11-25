@@ -131,6 +131,11 @@ public class CoreBug : BugMovement
         OnBugIsDead(); // will be called once 
     }
 
+    public bool IsDead()
+    {
+        return _isDead;
+    }
+
     public virtual void OnBugIsDead()
     { 
         // you can override this one instead 
@@ -179,6 +184,11 @@ public class CoreBug : BugMovement
         current_cell = position;
         transform.position = current_cell.transform.position + z_offset;
         this.target = transform.position;
+    }
+
+    public void StopPath()
+    {
+        path.Clear();
     }
 
     public void GoToAndBack(HiveCell start, HiveCell destination, float wait_timer = 0)
@@ -334,16 +344,14 @@ public class CoreBug : BugMovement
 
     public virtual void InteractWithEnemy(CoreBug otherBug)
     {
-        /*
-        if (_interact_t > 0.1f)
-        {
-            _interact_t = 0;
-        }
-        else
-            return;
-        otherBug.OnInteract(this);
-        */
+        // single enemy
     }
+
+    public virtual void InteractWithEnemies(List<CoreBug> othrBugs)
+    {
+       // multiple enemies at the same time
+    }
+
 
     float _interact_t = 0;
     public override void SetTimers()
@@ -364,6 +372,8 @@ public class CoreBug : BugMovement
         hitColliders = hitColliders.OrderBy((d) => (d.transform.position -
         transform.position).sqrMagnitude).ToArray();
 
+        List<CoreBug> bugs_to_interract = new List<CoreBug>();
+
         int cnt = 0;
         foreach (var hitCollider in hitColliders)
         {
@@ -377,21 +387,22 @@ public class CoreBug : BugMovement
                 if (bugTask == BugTask.fight)
                 {
                     // enemy is dead 
-                    if (cb.GetState() == BugAnimation.dead) continue;
+                    if (cb._isDead == true) continue;
                     if (cb.coalition == coalition) continue;
                     
                     bug_action = Bug_action.fighting;
                     InteractWithEnemy(cb);
+                    bugs_to_interract.Add(cb);
                     cnt++;
-
-                    if (splash_dmg <= cnt)
-                    return;
                 }
             }
         }
 
+        if (cnt > 0)
+            InteractWithEnemies(bugs_to_interract);
+
         // if we are here we stop
-        if (bug_action == Bug_action.fighting)
+        if (bug_action == Bug_action.fighting && cnt == 0)
         {
             bug_action = Bug_action.idle;
             StopInteracitonWithEnemy();

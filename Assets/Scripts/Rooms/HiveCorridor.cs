@@ -7,13 +7,7 @@ public class HiveCorridor : HiveRoom
   
     public void GetBugsFromWarRoom()
     {
-        WarRoom wr = FindObjectOfType<WarRoom>();
-        if (wr)
-        {
-            GameObject bug = wr.GetBugFroTransfer(0);
-            assigned_bugs.Add(bug);
-            Debug.Log("moving a bug");
-        }
+
     }
 
     public override void Update()

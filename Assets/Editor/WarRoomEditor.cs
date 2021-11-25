@@ -13,7 +13,6 @@ public class WarRoomEditor : Editor
         if (GUILayout.Button("Get a Bug from hive"))
         {
             WarRoom hr = (WarRoom)this.target;
-            hr.GetBugsFromHive();
         }
     }
 }

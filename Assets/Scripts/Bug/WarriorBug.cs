@@ -41,9 +41,9 @@ public class WarriorBug : CoreBug
 
         if (bugAnimation == BugAnimation.idle)
         {
-           animators[0].speed = 0;
-           animators[0].SetInteger("State", 0);
-           animators[1].SetInteger("State", 0);
+            animators[0].speed = 0;
+            animators[0].SetInteger("State", 0);
+            animators[1].SetInteger("State", 0);
         }
 
         if (bugAnimation == BugAnimation.walk)
@@ -67,6 +67,7 @@ public class WarriorBug : CoreBug
     {
         if (siege_mode)
         {
+            // sieged bug will just turn 
             MoveSiegedBug();
         }
         else
@@ -85,10 +86,25 @@ public class WarriorBug : CoreBug
         bugAnimation = BugAnimation.idle;
     }
 
-    protected float _attack_t = 0;
-    public override void InteractWithEnemy(CoreBug otherBug)
+    public override void InteractWithEnemies(List<CoreBug> othrBugs)
     {
-        target = otherBug.transform.position;
+        //target = underlaying_cell.transform.position + z_offset;
+
+        if (asigned_cell.IsInTheRoomRange(othrBugs[0].transform.position))
+        {
+            if (othrBugs[0].underlaying_cell != underlaying_cell)
+                GoTo(othrBugs[0].underlaying_cell);
+            else
+            {
+                StopPath();
+                target = othrBugs[0].transform.position;
+            }
+        }
+        else
+        {
+            GoTo(asigned_cell);
+        }
+        
 
         bugAnimation = BugAnimation.idle;
         if (_attack_t > 0.1f)
@@ -97,9 +113,18 @@ public class WarriorBug : CoreBug
         }
         else
             return;
-       
-        bugAnimation = BugAnimation.attack;
-        otherBug.OnInteract(this);
+
+        for (int i = 0; i < othrBugs.Count; i++)
+        {
+            bugAnimation = BugAnimation.attack;
+            othrBugs[i].OnInteract(this);
+        }
+    }
+
+    protected float _attack_t = 0;
+    public override void InteractWithEnemy(CoreBug otherBug)
+    {
+
     }
 
     public override void SetTimers()

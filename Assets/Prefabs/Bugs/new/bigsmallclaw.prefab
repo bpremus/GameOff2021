@@ -63,7 +63,7 @@ MonoBehaviour:
   damage: 1
   interraction_range: 1
   decayOnDeadTimer: 20
-  bugTask: 0
+  bugTask: 1
   bug_action: 0
   coalition: 0
   hitColliders: []

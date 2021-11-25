@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class HiveRoom : CoreRoom
 {
-    public float room_detect_distance = 3;
-
-
-
+   
     public override void Start()
     {
         for (int i = 0; i < max_asigned_units; i++)
@@ -29,23 +26,6 @@ public class HiveRoom : CoreRoom
         if (assigned_bugs.Count > max_asigned_units) return false;
         assigned_bugs.Add(bug.gameObject);
         return true;
-    }
-
-  
-
-    public virtual void SendBugToIntercept(HiveCell cell)
-    {
-    }
-
-    public void ReturnHome()
-    {
-      //  if (assigned_bugs.Count == 0) return;
-      //
-      //  CoreBug b = assigned_bugs[0].GetComponent<CoreBug>();
-      //  if (b.destination_cell == this.parent_cell)
-      //      return;
-      //
-      //  b.GoTo(this.parent_cell);
     }
 
     [SerializeField]

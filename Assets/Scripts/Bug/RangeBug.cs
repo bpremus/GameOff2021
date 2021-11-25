@@ -11,9 +11,26 @@ public class RangeBug : WarriorBug
         base.Start();
     }
 
-    public override void InteractWithEnemy(CoreBug otherBug)
+
+    public override void InteractWithEnemies(List<CoreBug> othrBugs)
     {
-        // target = otherBug.transform.position;
+        //target = underlaying_cell.transform.position + z_offset;
+
+        if (asigned_cell.IsInTheRoomRange(othrBugs[0].transform.position))
+        {
+            if (othrBugs[0].underlaying_cell != underlaying_cell)
+                GoTo(othrBugs[0].underlaying_cell);
+            else
+            {
+                StopPath();
+                target = othrBugs[0].transform.position;
+            }
+        }
+        else
+        {
+            GoTo(asigned_cell);
+        }
+
 
         bugAnimation = BugAnimation.idle;
         if (_attack_t > 0.1f)
@@ -22,19 +39,22 @@ public class RangeBug : WarriorBug
         }
         else
             return;
-       
-        bugAnimation = BugAnimation.attack;
-        otherBug.OnInteract(this);
 
-        Vector3 dir = otherBug.transform.position - transform.position;
-        Debug.DrawRay(transform.position, dir * interraction_range);
+        for (int i = 0; i < othrBugs.Count; i++)
+        {
+            bugAnimation = BugAnimation.attack;
 
-        // shoot bug
-        // slow down bug 
+            // flame thrower like animation
+            bugAnimation = BugAnimation.attack;
+            othrBugs[i].OnInteract(this);
 
-        // flame thrower like animation
-        //  otherBug.OnBugSlowdown(GetDefinedSpeed * 0.5f);
-        //  shoot_vfx.Play();
+            Vector3 dir = othrBugs[i].transform.position - transform.position;
+            Debug.DrawRay(transform.position, dir * interraction_range);
+        }
+    }
+    public override void InteractWithEnemy(CoreBug otherBug)
+    {
+
     }
 
     protected override void OnCanRangeShoot()

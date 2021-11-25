@@ -11,15 +11,48 @@ public class CCSlowBug : WarriorBug
         base.Start();
     }
 
+    public override void InteractWithEnemies(List<CoreBug> othrBugs)
+    {
+        //target = underlaying_cell.transform.position + z_offset;
+
+        if (asigned_cell.IsInTheRoomRange(othrBugs[0].transform.position))
+        {
+            if (othrBugs[0].underlaying_cell != underlaying_cell)
+                GoTo(othrBugs[0].underlaying_cell);
+            else
+            {
+                StopPath();
+                target = othrBugs[0].transform.position;
+            }
+        }
+        else
+        {
+            GoTo(asigned_cell);
+        }
+
+
+     // bugAnimation = BugAnimation.idle;
+     // if (_attack_t > 0.1f)
+     // {
+     //     _attack_t = 0;
+     // }
+     // else
+     //     return;
+
+        for (int i = 0; i < othrBugs.Count; i++)
+        {
+            bugAnimation = BugAnimation.attack;
+
+            // flame thrower like animation
+            othrBugs[i].OnBugSlowdown(GetDefinedSpeed * 0.5f);
+            Debug.DrawLine(transform.position, othrBugs[i].transform.position, Color.red);
+
+        }
+    }
+
+ 
     public override void InteractWithEnemy(CoreBug otherBug)
     {
-        //target = otherBug.transform.position;
-        bugAnimation = BugAnimation.attack;
-     
-        // flame thrower like animation
-        otherBug.OnBugSlowdown(GetDefinedSpeed * 0.5f);
-        Debug.DrawLine(transform.position, otherBug.transform.position, Color.red);
-
     }
 
     protected override void OnCanRangeShoot()

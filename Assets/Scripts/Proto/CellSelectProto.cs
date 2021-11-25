@@ -314,11 +314,12 @@ public class CellSelectProto : MonoBehaviour
 
         imacted_cell.walkable = 1;
         return false;
-    }
+    }   
 
 
     public void OnDeselect()
     {
+        Debug.Log("deselect");
         _hover_bug = null;
         _hover_cell = null;
         _bug_selected = null;
@@ -392,7 +393,6 @@ public class CellSelectProto : MonoBehaviour
 
     public void OnMapSelect(WorldMapCell selected_map)
     {
-
 
         OnDeselect();
     }

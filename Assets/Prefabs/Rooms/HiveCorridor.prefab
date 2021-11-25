@@ -142,5 +142,5 @@ MonoBehaviour:
   parent_cell: {fileID: 0}
   assigned_bugs: []
   max_asigned_units: 1
-  room_detect_distance: 1
+  room_detect_distance: 3
   hitColliders: []

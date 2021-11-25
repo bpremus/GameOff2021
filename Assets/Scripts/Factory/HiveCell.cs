@@ -69,6 +69,12 @@ public class HiveCell : MonoBehaviour
         }
     }
 
+    public bool IsInTheRoomRange(Vector3 target)
+    {
+        if (childRoom == null) return false;
+        return childRoom.IsInTheRoomRange(target);
+    }
+
     protected virtual void Update()
     {
         ProcessAssigments();

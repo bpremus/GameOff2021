@@ -105,7 +105,7 @@ public class SalvageRoom : HiveRoom
                 if (cb.GetAction == CoreBug.Bug_action.traveling)
                 {
 
-                    Debug.Log("traveling");
+                   // Debug.Log("traveling");
                     if (cb.current_cell == cb.salvage_object.current_cell)
                     {
                         Debug.Log("ready to salvage");

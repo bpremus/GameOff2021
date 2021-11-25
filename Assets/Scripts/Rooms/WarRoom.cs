@@ -4,58 +4,125 @@ using UnityEngine;
 
 public class WarRoom : HiveRoom
 {
-    public void GetBugsFromHive()
+    // if bugs are close to room, we will intercept these 
+
+    [SerializeField]
+    HiveCell last_detected_cell;
+
+    public string roomName { get; private set; } = "Salvage room";
+
+    public override void Start()
     {
-        QueenRoom qr = FindObjectOfType<QueenRoom>();
-        if (qr)
-        {
-            GameObject bug = qr.GetBugFroTransfer(0);
-            assigned_bugs.Add(bug);
-            Debug.Log("moving a bug");
-        }
+
     }
 
-    public GameObject GetBugFroTransfer(int index)
+    private void OnDrawGizmos()
     {
-        if (index < assigned_bugs.Count)
-        {
-            GameObject g = assigned_bugs[index];
-            assigned_bugs.RemoveAt(index);
-            SpreadBugs();
-            return g;
-        }
-        return null;
+        Gizmos.DrawWireSphere(transform.position, room_detect_distance);
+        Gizmos.color = Color.red;
     }
-
 
     public override void Update()
     {
         base.Update();
-        GuardRoom();
+        SendGathering();
     }
 
-    public void GuardRoom()
+
+    public void OnBugDepart(CoreBug bug)
     {
 
-        // keep in the room
+    }
+
+    public void OnBugReachGatheringSite(CoreBug bug)
+    {
+        Debug.Log("bugs are gathering");
+    }
+
+    public void OnBugReachHomeCell(CoreBug bug)
+    {
+        Debug.Log("bugs returned home");
+
+        GameController.Instance.OnBrigResources();
+    }
+
+
+    float _spread_timer = 0;
+    public void SendGathering()
+    {
+        _spread_timer += Time.deltaTime;
         for (int i = 0; i < assigned_bugs.Count; i++)
         {
             CoreBug cb = assigned_bugs[i].GetComponent<CoreBug>();
             if (cb)
             {
-                if (cb.current_cell != this.cell)
+                // set task
+                cb.bugTask = CoreBug.BugTask.fight;
+
+                //   if (_spread_timer < 0.5f) continue;
+                //   _spread_timer = 0;
+
+                if (last_detected_cell != null)
                 {
-                 //   cb.bug_action = CoreBug.Bug_action.traveling;
-                    cb.GoToAndIdle(this.cell);
+                    Debug.DrawLine(cb.transform.position, last_detected_cell.transform.position);
+                    if (cb.GetAction == CoreBug.Bug_action.idle)
+                    {
+                        cb.GoTo(last_detected_cell);
+                        cb.SetAction(CoreBug.Bug_action.traveling);
+                    }
+                    if (cb.GetAction == CoreBug.Bug_action.fighting)
+                    {
+                       // cb.StopPath();
+                    }
                 }
                 else
                 {
-                  //  cb.bug_action = CoreBug.Bug_action.idle;
+                    //  cb.GoTo(cb.asigned_cell);
+                    //  cb.SetState(BugMovement.BugAnimation.walk);
+                    Debug.DrawLine(cb.transform.position, cb.asigned_cell.transform.position);
+                    if (cb.GetAction == CoreBug.Bug_action.idle)
+                    {
+                        
+                        if (cb.underlaying_cell != cb.asigned_cell)
+                            cb.GoTo(cb.asigned_cell);
+                        else
+                            SpreadBugs();
+                    }
                 }
             }
-
-            SpreadBugs();
         }
     }
 
+
+    public override void DetectEnemy()
+    {
+        if (assigned_bugs.Count == 0) return;
+
+        int layerId = 7; //bugs
+        int layerMask = 1 << layerId;
+        hitColliders = Physics.OverlapSphere(transform.position, room_detect_distance, layerMask);
+        foreach (var hitCollider in hitColliders)
+        {
+            CoreBug cb = hitCollider.GetComponent<CoreBug>();
+            if (cb)
+            {
+                if (cb.IsDead()) continue;
+                if (coalition == cb.coalition) continue;
+
+                // keep the fight inside hive
+                if (cb.underlaying_cell.cell_Type == CellMesh.Cell_type.corridor ||
+                    cb.underlaying_cell.cell_Type == CellMesh.Cell_type.room ||
+                    cb.underlaying_cell.cell_Type == CellMesh.Cell_type.entrance)
+                {
+                    Debug.DrawLine(transform.position, cb.underlaying_cell.transform.position, Color.yellow);
+                    last_detected_cell = cb.underlaying_cell;
+                    return;
+                }
+               
+            }
+        }
+
+        last_detected_cell = null;
+    }
+  
 }

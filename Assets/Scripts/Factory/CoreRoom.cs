@@ -9,8 +9,13 @@ public class CoreRoom : MonoBehaviour
 
     [SerializeField]
     protected List<GameObject> assigned_bugs = new List<GameObject>();
+    
     [SerializeField]
     protected int max_asigned_units = 3;
+    [SerializeField]
+    protected float room_detect_distance = 2;
+
+    public int coalition = 0;
 
     public int GetMAxAssignUnits() { return max_asigned_units; }
 
@@ -27,6 +32,14 @@ public class CoreRoom : MonoBehaviour
     public virtual void Start()
     {
         
+    }
+
+    public bool IsInTheRoomRange(Vector3 target)
+    {
+        float dist = Vector3.Distance(transform.position, target);
+        if (dist < room_detect_distance)
+            return true;
+        return false;
     }
 
     public virtual void DetachBug(CoreBug bug)
