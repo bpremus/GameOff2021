@@ -19,19 +19,11 @@
 				<GameParameter Id="3866931204" Name="Camera_Y" ObjectPath="\Game Parameters\Default Work Unit\Camera_Y"/>
 			</GameParameters>
 		</SoundBank>
-		<SoundBank Id="3161908922" Language="SFX" Hash="315749634">
+		<SoundBank Id="3161908922" Language="SFX" Hash="1367229424">
 			<ObjectPath>\SoundBanks\Default Work Unit\Main</ObjectPath>
 			<ShortName>Main</ShortName>
 			<Path>Main.bnk</Path>
 			<IncludedEvents>
-				<Event Id="2354742931" Name="Bug_Movement" ObjectPath="\Events\Default Work Unit\Bug_Movement" MaxAttenuation="2.000000" DurationType="Infinite">
-					<IncludedMemoryFiles>
-						<File Id="98690955" Language="SFX">
-							<ShortName>Bug_Movement_1.wav</ShortName>
-							<Path>SFX\Bug_Movement_1_D79FB2B7.wem</Path>
-						</File>
-					</IncludedMemoryFiles>
-				</Event>
 				<Event Id="2953607465" Name="Play_Ambient_Day" ObjectPath="\Events\Default Work Unit\Ambient\Play_Ambient_Day" DurationType="Infinite">
 					<IncludedMemoryFiles>
 						<File Id="1051585042" Language="SFX">
@@ -64,8 +56,17 @@
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
+				<Event Id="1017378692" Name="Play_Small_Bug_Movement" ObjectPath="\Events\Default Work Unit\Bugs\Play_Small_Bug_Movement" MaxAttenuation="5.000000" DurationType="Infinite">
+					<IncludedMemoryFiles>
+						<File Id="588016348" Language="SFX">
+							<ShortName>Movement_Small_Bug.wav</ShortName>
+							<Path>SFX\Movement_Small_Bug_D79FB2B7.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
 				<Event Id="1199206671" Name="Stop_Ambient_Day" ObjectPath="\Events\Default Work Unit\Ambient\Stop_Ambient_Day" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 				<Event Id="1512937371" Name="Stop_Ambient_Night" ObjectPath="\Events\Default Work Unit\Ambient\Stop_Ambient_Night" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="4052991490" Name="Stop_Small_Bug_Movement" ObjectPath="\Events\Default Work Unit\Bugs\Stop_Small_Bug_Movement" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 			</IncludedEvents>
 		</SoundBank>
 	</SoundBanks>

@@ -63,6 +63,8 @@ public class CoreBug : BugMovement
         bug_action = action;
     }
 
+
+
     public virtual void NextAction()
     {
         if (bug_action == CoreBug.Bug_action.idle)
@@ -113,6 +115,7 @@ public class CoreBug : BugMovement
       //  Debug.Log("destination reached");
     }
 
+
     public virtual void OnLateDie()
     {
         // Debug.Log("died");
@@ -146,6 +149,7 @@ public class CoreBug : BugMovement
     {
         Destroy(this.gameObject);
     }
+
 
     public virtual void OnTargetReach()
     {
@@ -394,6 +398,9 @@ public class CoreBug : BugMovement
                     InteractWithEnemy(cb);
                     bugs_to_interract.Add(cb);
                     cnt++;
+
+                    if (splash_dmg <= cnt)
+                    return;
                 }
             }
         }
