@@ -31,6 +31,14 @@ public class UIPopup : MonoBehaviour
         canvasGroup = GetComponent<CanvasGroup>();
         popupsHandler = FindObjectOfType<PopupsHandler>();
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ReturnFalse();
+        }
+    }
     [ContextMenu("Show window")]
     public void ShowWindow()
     {
