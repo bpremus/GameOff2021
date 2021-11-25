@@ -171,7 +171,6 @@ public class HiveCell : MonoBehaviour
             BuildRoom(ArtPrefabsInstance.Instance.RoomPrefabs[4]);
         }
 
-
         if (hiveGenerator.rooms.Contains(this) == false)
         {
             hiveGenerator.rooms.Add(this);

@@ -160,6 +160,8 @@ public class EnemyController : MonoBehaviour
             AITask task = new AITask(cb);
             cb.SetAITask(task);
 
+            cb.SetBugColor(1, 0.5f, 0.5f);
+
 
             d_idx++;
             cb.name = "en_" + d_idx;

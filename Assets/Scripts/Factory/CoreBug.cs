@@ -414,12 +414,23 @@ public class CoreBug : BugMovement
         }      
     }
 
+    private MaterialPropertyBlock _block;
+    private Renderer[] _renderer;
 
-    public void SetColor(int coalition)
-    { 
-    
-    
+    protected virtual void Awake()
+    {
+        _block = new MaterialPropertyBlock();
+        _renderer = GetComponentsInChildren<Renderer>();
     }
 
+    public void SetBugColor(float r, float g, float b)
+    {
+        Color bug_col = new Color(r, g, b);
+        _block.SetColor("_baseColor", bug_col);
+        for (int i = 0; i < _renderer.Length; i++)
+        {
+            _renderer[i].SetPropertyBlock(_block);
+        }
+    }
 
 }

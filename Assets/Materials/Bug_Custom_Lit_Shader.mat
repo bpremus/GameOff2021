@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BaseMaterialShader
+  m_Name: Bug_Custom_Lit_Shader
   m_Shader: {fileID: -6465566751694194690, guid: 0bea6823e516fe4469b350ab0cb87e98, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -40,9 +40,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_30b180313fd84652bfce9873cb6d5629: 2
+    - Vector1_30b180313fd84652bfce9873cb6d5629: 0
     - _bugGlow: 1
     m_Colors:
+    - Color_4b6e887e9201405d99c2c1ab62bdfe29: {r: 1, g: 1, b: 1, a: 0}
     - Color_65b3efa59bd24b1ca0eee4991351ba5a: {r: 1, g: 1, b: 1, a: 0}
     - Color_d5107fe666af422197f7c7942732f68f: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 0}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
