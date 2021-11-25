@@ -110,11 +110,15 @@ public class HiveCell : MonoBehaviour
     public virtual void OnRoomPlaced()
     {
         Debug.Log("Room has been built");
+
+        AkSoundEngine.PostEvent("Play_Room_Placement", gameObject);
     }
 
     public virtual void OnRoomDestroyed()
     {
         Debug.Log("Room has been destroyed");
+
+        AkSoundEngine.PostEvent("Play_Room_Destruction", gameObject);
     }
 
     public void BuildRoom()

@@ -58,7 +58,7 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: ab7a7d8fa7af904aad885e3b30a5f3e5
     GuidInternal: 
-    m_lastTime: -8585638145687829599
+    m_lastTime: -8585637314778839007
     List:
     - name: Main
       guid: c7ed1213001d794c9f3d34785e89ab38
@@ -77,7 +77,7 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: d2d748c853878f419a502ed6d2b53f2b
     GuidInternal: 
-    m_lastTime: -8585638145835189446
+    m_lastTime: -8585637316382707227
     List:
     - name: Ambient
       guid: fd4e3f4d2b5b3f408bd25e3289266b50
@@ -159,6 +159,34 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0.198764
       minDuration: 0.176874
+    - name: Play_Room_Destruction
+      guid: fb67399008f52e4fb7b06dea7c40f996
+      id: 1444742574
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Rooms
+        ObjectType: 4
+      - ElementName: Play_Room_Destruction
+        ObjectType: 3
+      Path: Default Work Unit\Rooms\Play_Room_Destruction
+      maxAttenuation: 0
+      maxDuration: 1.192585
+      minDuration: 1.061245
+    - name: Play_Room_Placement
+      guid: 4bc99154b79c484a986f12df77e41328
+      id: 1954657867
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Rooms
+        ObjectType: 4
+      - ElementName: Play_Room_Placement
+        ObjectType: 3
+      Path: Default Work Unit\Rooms\Play_Room_Placement
+      maxAttenuation: 0
+      maxDuration: 0.861311
+      minDuration: 0.766455
     - name: Play_Small_Bug_Movement
       guid: 98496e72556df944b31eb86dbb03e35f
       id: 1017378692
@@ -170,7 +198,19 @@ MonoBehaviour:
       - ElementName: Play_Small_Bug_Movement
         ObjectType: 3
       Path: Default Work Unit\Bugs\Play_Small_Bug_Movement
-      maxAttenuation: 5
+      maxAttenuation: 8
+      maxDuration: -1
+      minDuration: -1
+    - name: Rooms
+      guid: 9239e5d16ba9284697bd4e5870ce485a
+      id: 1359360203
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Rooms
+        ObjectType: 4
+      Path: Default Work Unit\Rooms
+      maxAttenuation: 0
       maxDuration: -1
       minDuration: -1
     - name: Stop_Ambient_Day

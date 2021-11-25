@@ -19,7 +19,7 @@
 				<GameParameter Id="3866931204" Name="Camera_Y" ObjectPath="\Game Parameters\Default Work Unit\Camera_Y"/>
 			</GameParameters>
 		</SoundBank>
-		<SoundBank Id="3161908922" Language="SFX" Hash="1367229424">
+		<SoundBank Id="3161908922" Language="SFX" Hash="4252743284">
 			<ObjectPath>\SoundBanks\Default Work Unit\Main</ObjectPath>
 			<ShortName>Main</ShortName>
 			<Path>Main.bnk</Path>
@@ -56,7 +56,23 @@
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
-				<Event Id="1017378692" Name="Play_Small_Bug_Movement" ObjectPath="\Events\Default Work Unit\Bugs\Play_Small_Bug_Movement" MaxAttenuation="5.000000" DurationType="Infinite">
+				<Event Id="1444742574" Name="Play_Room_Destruction" ObjectPath="\Events\Default Work Unit\Rooms\Play_Room_Destruction" DurationType="OneShot" DurationMin="1.061245" DurationMax="1.192585">
+					<IncludedMemoryFiles>
+						<File Id="650900727" Language="SFX">
+							<ShortName>Room_Destruction.wav</ShortName>
+							<Path>SFX\Room_Destruction_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1954657867" Name="Play_Room_Placement" ObjectPath="\Events\Default Work Unit\Rooms\Play_Room_Placement" DurationType="OneShot" DurationMin="0.766455" DurationMax="0.861311">
+					<IncludedMemoryFiles>
+						<File Id="501597484" Language="SFX">
+							<ShortName>Room_Placement.wav</ShortName>
+							<Path>SFX\Room_Placement_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1017378692" Name="Play_Small_Bug_Movement" ObjectPath="\Events\Default Work Unit\Bugs\Play_Small_Bug_Movement" MaxAttenuation="8.000000" DurationType="Infinite">
 					<IncludedMemoryFiles>
 						<File Id="588016348" Language="SFX">
 							<ShortName>Movement_Small_Bug.wav</ShortName>

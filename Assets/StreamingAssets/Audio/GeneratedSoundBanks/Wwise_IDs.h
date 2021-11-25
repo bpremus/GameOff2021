@@ -17,6 +17,8 @@ namespace AK
         static const AkUniqueID PLAY_AMBIENT_NIGHT = 894712109U;
         static const AkUniqueID PLAY_BUTTON_CLICK = 1149159311U;
         static const AkUniqueID PLAY_BUTTON_HOVER = 4021863785U;
+        static const AkUniqueID PLAY_ROOM_DESTRUCTION = 1444742574U;
+        static const AkUniqueID PLAY_ROOM_PLACEMENT = 1954657867U;
         static const AkUniqueID PLAY_SMALL_BUG_MOVEMENT = 1017378692U;
         static const AkUniqueID STOP_AMBIENT_DAY = 1199206671U;
         static const AkUniqueID STOP_AMBIENT_NIGHT = 1512937371U;
