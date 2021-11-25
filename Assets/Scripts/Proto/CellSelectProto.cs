@@ -182,7 +182,7 @@ public class CellSelectProto : MonoBehaviour
 
     public void OnPlaceBuilding(HiveCell cell)
     {
-        Debug.Log("building placed");
+       // Debug.Log("building placed");
         BuildOnCell(cell);
         selection_state = SelectState.none;
         UIController.instance.SetDefaultState();

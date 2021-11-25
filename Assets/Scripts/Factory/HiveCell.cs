@@ -106,6 +106,17 @@ public class HiveCell : MonoBehaviour
         set => hiveGenerator = value;
     }
 
+
+    public virtual void OnRoomPlaced()
+    {
+        Debug.Log("Room has been built");
+    }
+
+    public virtual void OnRoomDestroyed()
+    {
+        Debug.Log("Room has been destroyed");
+    }
+
     public void BuildRoom()
     {
        // Debug.Log("building room");
@@ -124,6 +135,9 @@ public class HiveCell : MonoBehaviour
         BuildRoom(ArtPrefabsInstance.Instance.RoomPrefabs[2]);
         walkable = 1;
         isCellEmpty = false;
+
+        if (hiveGenerator.isGameStarted)
+            OnRoomPlaced();
 
         hiveGenerator.RefreshAllCells();
     }
@@ -175,6 +189,9 @@ public class HiveCell : MonoBehaviour
         {
             hiveGenerator.rooms.Add(this);
         }
+
+        if (hiveGenerator.isGameStarted)
+            OnRoomPlaced();
     }
 
     public void BuildRoom(GameObject room)
@@ -202,23 +219,32 @@ public class HiveCell : MonoBehaviour
 
     public void DestroyRoom()
     {
-        // if (isCellEmpty)
-        // {
-        //     Debug.LogError("Nothing to destroy!");
-        // }
-        // else
-        // {
+        Debug.Log("Destroy room");
+
+        if (childRoom)
+        {
+            List<CoreBug> bugs = childRoom.GetAssignedBugs();
+            Destroy(childRoom.gameObject);
+
+            for (int i = 0; i < bugs.Count; i++)
+            {
+                bugs[i].GoTo(hiveGenerator.hive_entrance[0]);
+            }     
+        }
+            
         hiveGenerator.rooms.Remove(this);
 
+        // replace with dirt
         cell_Type = CellMesh.Cell_type.dirt;
         mesh_index = 0;
         isCellEmpty = true;
         walkable = 0;
-        Destroy(childRoom);
+
+        if (hiveGenerator.isGameStarted)
+            OnRoomDestroyed();
 
 
         hiveGenerator.RefreshAllCells();
-        // }
     }
 
     // drawing the room mesh 

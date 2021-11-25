@@ -20,6 +20,7 @@ public class HiveGenerator : MonoBehaviour
     public HiveCell hive_cell = null;
     public List<HiveCell> hive_entrance = new List<HiveCell>();
 
+    public bool isGameStarted = false;
     public int [] GetSize()
     {
         return new int[] { width, height };
@@ -31,6 +32,8 @@ public class HiveGenerator : MonoBehaviour
         // use the buttons in inspector of a grid editor to test 
         // this initial placement will be reworked later
         DebugGrid();
+
+        isGameStarted = true;
     }
 
     public void DeleteGrid()
