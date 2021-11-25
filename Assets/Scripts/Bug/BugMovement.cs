@@ -171,22 +171,22 @@ public class BugMovement : MonoBehaviour
 
          // Debug.DrawRay(transform.position, transform.forward * 10, Color.green);
          // transform.position = Vector3.Lerp(transform.position, transform.position - direction, Time.deltaTime * move_speed);
-         Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1);
-         foreach (var hitCollider in hitColliders)
-         {
-             BugMovement bm = hitCollider.GetComponent<BugMovement>();
-             if (bm == null)
-             {           
-                 continue;
-             }
-             if (bm == this) continue;
-
-             // we are on top of other bug
-             if (transform.position == bm.transform.position)
-             {
-                direction = transform.forward * stop_distance / 2 ; // just move slightly
-             }
-         }
+         //  Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1);
+         //  foreach (var hitCollider in hitColliders)
+         //  {
+         //      BugMovement bm = hitCollider.GetComponent<BugMovement>();
+         //      if (bm == null)
+         //      {           
+         //          continue;
+         //      }
+         //      if (bm == this) continue;
+         //
+         //      // we are on top of other bug
+         //      if (transform.position == bm.transform.position)
+         //      {
+         //         direction = transform.forward * stop_distance / 2 ; // just move slightly
+         //      }
+         //  }
 
         BugAnimation _bugAnimation = bugAnimation;
         float d = Vector3.Distance(transform.position, destination);

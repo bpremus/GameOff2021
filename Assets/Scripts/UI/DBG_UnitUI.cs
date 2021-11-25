@@ -97,7 +97,7 @@ public class DBG_UnitUI : MonoBehaviour
     {
 
         if (bug == null) return;
-        Debug.Log("evolving a bug " + bug.name);
+      //  Debug.Log("evolving a bug " + bug.name);
 
         // drone => warrior
         if (bug.bug_evolution == CoreBug.BugEvolution.drone)

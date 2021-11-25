@@ -73,7 +73,7 @@ public class EnemyController : MonoBehaviour
     public void OnDayAttacks()
     {
         SetAttack();
-        Debug.Log("Day attack start");
+       // Debug.Log("Day attack start");
 
         for (int i = 0; i < day_attack_number; i++)
         {
@@ -85,7 +85,7 @@ public class EnemyController : MonoBehaviour
     public void OnNightAttacks()
     {
         SetAttack();
-        Debug.Log("Night attack start");
+       // Debug.Log("Night attack start");
 
         for (int i = 0; i < night_attack_number; i++)
         {

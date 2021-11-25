@@ -88,6 +88,8 @@ public class WarriorBug : CoreBug
 
     public override void InteractWithEnemies(List<CoreBug> othrBugs)
     {
+        Debug.Log("attacking");
+
         //target = underlaying_cell.transform.position + z_offset;
 
         if (asigned_cell.IsInTheRoomRange(othrBugs[0].transform.position))
@@ -105,7 +107,6 @@ public class WarriorBug : CoreBug
             GoTo(asigned_cell);
         }
         
-
         bugAnimation = BugAnimation.idle;
         if (_attack_t > 0.1f)
         {
@@ -113,6 +114,8 @@ public class WarriorBug : CoreBug
         }
         else
             return;
+
+       
 
         for (int i = 0; i < othrBugs.Count; i++)
         {

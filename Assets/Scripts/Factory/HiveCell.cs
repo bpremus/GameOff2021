@@ -57,6 +57,7 @@ public class HiveCell : MonoBehaviour
         if (childRoom == null) return;
         if (bugs_to_assign.Count > 0)
         {
+
             CoreBug bug = bugs_to_assign.Dequeue();
             CoreRoom current_room = bug.asigned_cell.GetRoom();
             if (current_room)
@@ -107,7 +108,7 @@ public class HiveCell : MonoBehaviour
 
     public void BuildRoom()
     {
-        Debug.Log("building room");
+       // Debug.Log("building room");
         // room is just a rooridor or room layout mesh 
         // we have some kind of room context 
         // Queen room 

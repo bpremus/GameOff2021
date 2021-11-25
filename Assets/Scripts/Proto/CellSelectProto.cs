@@ -180,7 +180,6 @@ public class CellSelectProto : MonoBehaviour
       //  SetUnitUIPosition();
     }
 
-
     public void OnPlaceBuilding(HiveCell cell)
     {
         Debug.Log("building placed");
@@ -212,6 +211,7 @@ public class CellSelectProto : MonoBehaviour
         frame_border.transform.localScale = borderStartSize;
     }
 
+    
     public void OnAssignBug(HiveCell destination)
     {
       //  Debug.Log("Asigning bugs");
@@ -228,6 +228,7 @@ public class CellSelectProto : MonoBehaviour
                 }
             }
         }
+
         if (_cellSelected != null)
         {
             CoreRoom room = _cellSelected.GetRoom();
@@ -238,18 +239,55 @@ public class CellSelectProto : MonoBehaviour
                 List<CoreBug> bugs = room.GetAssignedBugs();
                 for (int i = 0; i < bugs.Count && i < max_assign; i++)
                 {
-                    if (destination.AssignDrone(bugs[i]))
-                    {
-                        bugs[i].GoTo(destination);
-                    }
+
+                    Bug_batch_transfer bug_queue = new Bug_batch_transfer(bugs[i], destination);
+                    bug_batch_assign.Enqueue(bug_queue);
+                   // if (destination.AssignDrone(bugs[i]))
+                   // {
+                   //     bugs[i].GoTo(destination);
+                   // }
                 }
             }
         }
 
-
         selection_state = SelectState.none;
-
         DBG_UnitUI.Instance.Hide();
+    }
+
+    Queue<Bug_batch_transfer> bug_batch_assign = new Queue<Bug_batch_transfer>();
+    struct Bug_batch_transfer 
+    {
+        CoreBug  bug;
+        HiveCell destination;
+        public Bug_batch_transfer(CoreBug bug, HiveCell destination)
+        {
+            this.bug = bug;
+            this.destination = destination;
+        }
+        public void Assign()
+        {
+            if (destination.AssignDrone(bug))
+            {
+                bug.GoTo(destination);
+            }
+        }
+    }
+
+    float _t_separation = 0;
+    protected void QueueSendBugs()
+    {
+        _t_separation += Time.deltaTime;
+        if (bug_batch_assign.Count > 0)
+        {
+            if (_t_separation > 0.2f)
+            {
+                _t_separation = 0;
+            }
+            else
+                return;
+
+            bug_batch_assign.Dequeue().Assign();
+        }
     }
 
     protected void BuildOnCell(HiveCell hc)
@@ -295,31 +333,18 @@ public class CellSelectProto : MonoBehaviour
         OnDeselect();
     }
 
-
     public bool CheckRoomConnections(HiveCell imacted_cell)
     {
-       
-
         // hive generator, find all room 
         // cheheck form each room to exit if its ok 
 
-        QueenRoom qr = imacted_cell.GetComponent<QueenRoom>();
-        if (qr)
-        { 
-        
-        }
-        imacted_cell.walkable = 0;
-
-
-
-        imacted_cell.walkable = 1;
+ 
         return false;
     }   
 
-
     public void OnDeselect()
     {
-        Debug.Log("deselect");
+       // Debug.Log("deselect");
         _hover_bug = null;
         _hover_cell = null;
         _bug_selected = null;
@@ -397,7 +422,6 @@ public class CellSelectProto : MonoBehaviour
         OnDeselect();
     }
 
-
     private void Update()
     {
         if (Input.GetKey(KeyCode.Escape))
@@ -420,6 +444,10 @@ public class CellSelectProto : MonoBehaviour
             SetDefaultFrameSize();
         }
 
+        // send bugs that are in queue
+        QueueSendBugs();
+
+
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         LayerMask selection_mask = 0;
@@ -430,11 +458,8 @@ public class CellSelectProto : MonoBehaviour
             frame_border.transform.position = new Vector3(0, 0, -5);
         }
 
-
-
         if (Physics.Raycast(ray, out hit) && !isOverUI)
         {
-
             if (UIController.instance.GetUIState() == UIController.State.Default)
             {
                 WorldMapCell map = hit.collider.transform.GetComponent<WorldMapCell>();
@@ -537,14 +562,10 @@ public class CellSelectProto : MonoBehaviour
                         else
                         {
                             GhostRoomDisplayer.instance.Display_CantBuildHere();
-                        }
-                          
+                        }                      
                     }
-
                     OnCellHover(cell);
                 }
-                   
-
             }
         }
     }

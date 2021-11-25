@@ -153,7 +153,7 @@ public class CoreBug : BugMovement
 
     public virtual void OnTargetReach()
     {
-        Debug.Log("target reached");
+      //  Debug.Log("target reached");
 
         if (ai_task != null)
         {
@@ -399,8 +399,6 @@ public class CoreBug : BugMovement
                     bugs_to_interract.Add(cb);
                     cnt++;
 
-                    if (splash_dmg <= cnt)
-                    return;
                 }
             }
         }

@@ -78,7 +78,7 @@ public class HarversterRoom : HiveRoom
             // keep in the room
             for (int i = 0; i < assigned_bugs.Count; i++)
             {
-                CoreBug cb = assigned_bugs[i].GetComponent<CoreBug>();
+                WorkerBug cb = assigned_bugs[i].GetComponent<WorkerBug>();
                 if (cb)
                 {
 
@@ -148,6 +148,10 @@ public class HarversterRoom : HiveRoom
                             continue;
                         }
                     }
+                }
+                else
+                {
+                    SpreadBugs();
                 }
             }
         }

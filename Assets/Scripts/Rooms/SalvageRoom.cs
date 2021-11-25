@@ -60,7 +60,7 @@ public class SalvageRoom : HiveRoom
         _spread_timer += Time.deltaTime;
         for (int i = 0; i < assigned_bugs.Count; i++)
         {
-            CoreBug cb = assigned_bugs[i].GetComponent<CoreBug>();
+            WorkerBug cb = assigned_bugs[i].GetComponent<WorkerBug>();
             if (cb)
             {
                 // set task
@@ -105,7 +105,7 @@ public class SalvageRoom : HiveRoom
                 if (cb.GetAction == CoreBug.Bug_action.traveling)
                 {
 
-                   // Debug.Log("traveling");
+                    // Debug.Log("traveling");
                     if (cb.current_cell == cb.salvage_object.current_cell)
                     {
                         Debug.Log("ready to salvage");
@@ -133,19 +133,19 @@ public class SalvageRoom : HiveRoom
                         continue;
                     }
 
-                  // if (cb.current_cell != cb.salvage_object.current_cell)
-                  // { 
-                        //  float d = Vector3.Distance(cb.transform.position, cb.salvage_object.transform.position);
-                        //  if (d < 0.2f)
-                        //  {
-                        cb.SetAction(CoreBug.Bug_action.returning);
-                        cb.GoTo(this.cell);
-                        // }
-                        // else
-                        // {
-                        //     cb.target = cb.salvage_object.transform.position;
-                        // }
-                   // }
+                    // if (cb.current_cell != cb.salvage_object.current_cell)
+                    // { 
+                    //  float d = Vector3.Distance(cb.transform.position, cb.salvage_object.transform.position);
+                    //  if (d < 0.2f)
+                    //  {
+                    cb.SetAction(CoreBug.Bug_action.returning);
+                    cb.GoTo(this.cell);
+                    // }
+                    // else
+                    // {
+                    //     cb.target = cb.salvage_object.transform.position;
+                    // }
+                    // }
 
                 }
 
@@ -168,17 +168,12 @@ public class SalvageRoom : HiveRoom
                     }
                 }
             }
+            else
+            {
+                SpreadBugs();
+            }
         }
-
-
-        
-        // {
-        //     SpreadBugs();
-        // }
-
     }
-
-
 
     public override void DetectEnemy()
     {

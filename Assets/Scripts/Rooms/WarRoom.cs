@@ -8,32 +8,26 @@ public class WarRoom : HiveRoom
 
     [SerializeField]
     HiveCell last_detected_cell;
-
     public string roomName { get; private set; } = "Salvage room";
 
     public override void Start()
     {
 
     }
-
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, room_detect_distance);
         Gizmos.color = Color.red;
     }
-
     public override void Update()
     {
         base.Update();
         SendGathering();
     }
-
-
     public void OnBugDepart(CoreBug bug)
     {
 
     }
-
     public void OnBugReachGatheringSite(CoreBug bug)
     {
         Debug.Log("bugs are gathering");
@@ -46,20 +40,19 @@ public class WarRoom : HiveRoom
         GameController.Instance.OnBrigResources();
     }
 
-
     float _spread_timer = 0;
     public void SendGathering()
     {
         _spread_timer += Time.deltaTime;
         for (int i = 0; i < assigned_bugs.Count; i++)
         {
-            CoreBug cb = assigned_bugs[i].GetComponent<CoreBug>();
+            WarriorBug cb = assigned_bugs[i].GetComponent<WarriorBug>();
             if (cb)
             {
-                // set task
+                // set task if combat capable bug        
                 cb.bugTask = CoreBug.BugTask.fight;
 
-                //   if (_spread_timer < 0.5f) continue;
+                //if (_spread_timer < 0.5f) continue;
                 //   _spread_timer = 0;
 
                 if (last_detected_cell != null)
@@ -72,7 +65,7 @@ public class WarRoom : HiveRoom
                     }
                     if (cb.GetAction == CoreBug.Bug_action.fighting)
                     {
-                       // cb.StopPath();
+                        // cb.StopPath();
                     }
                 }
                 else
@@ -82,13 +75,17 @@ public class WarRoom : HiveRoom
                     Debug.DrawLine(cb.transform.position, cb.asigned_cell.transform.position);
                     if (cb.GetAction == CoreBug.Bug_action.idle)
                     {
-                        
+
                         if (cb.underlaying_cell != cb.asigned_cell)
                             cb.GoTo(cb.asigned_cell);
                         else
                             SpreadBugs();
                     }
                 }
+            }
+            else
+            {
+                SpreadBugs();
             }
         }
     }
