@@ -7,12 +7,13 @@ public class RangeBug : WarriorBug
 
     protected override void Start()
     {
+        bug_evolution = BugEvolution.range;
         base.Start();
     }
 
     public override void InteractWithEnemy(CoreBug otherBug)
     {
-        target = otherBug.transform.position;
+        // target = otherBug.transform.position;
 
         bugAnimation = BugAnimation.idle;
         if (_attack_t > 0.1f)
@@ -30,8 +31,6 @@ public class RangeBug : WarriorBug
 
         // shoot bug
         // slow down bug 
-
-
 
         // flame thrower like animation
         //  otherBug.OnBugSlowdown(GetDefinedSpeed * 0.5f);

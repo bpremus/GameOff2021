@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1175946443047106056}
-  - component: {fileID: 1175946443047106055}
+  - component: {fileID: -132572928028920146}
   - component: {fileID: 7942784070867363946}
   m_Layer: 7
   m_Name: bigsmallclaw
@@ -34,7 +34,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1175946443047106055
+--- !u!114 &-132572928028920146
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,30 +43,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 1175946443047106057}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01d3bd1379fc66847b3e0efe6a436a64, type: 3}
+  m_Script: {fileID: 11500000, guid: ed14602beff7755438b05f21eec537d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {x: 0, y: 0, z: 0}
   rotation_speed: 10
-  move_speed: 2
+  move_speed: 1.5
   animators: []
   Debug_movement_mode: 0
-  stop_distance: 0.01
-  bugAnimation: 1
+  stop_distance: 0.05
+  bugAnimation: 0
   current_cell: {fileID: 0}
   destination_cell: {fileID: 0}
   target_cell: {fileID: 0}
   asigned_cell: {fileID: 0}
   underlaying_cell: {fileID: 0}
+  bug_evolution: 0
   health: 10
   damage: 1
   interraction_range: 1
   decayOnDeadTimer: 20
   bugTask: 0
-  bug_action: 3
+  bug_action: 0
   coalition: 0
   hitColliders: []
   splash_dmg: 1
+  siege_mode: 0
+  attack_speed: 0.1
 --- !u!135 &7942784070867363946
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -78,8 +81,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Radius: 3
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!95 &9217590078873784934
 Animator:
   serializedVersion: 3

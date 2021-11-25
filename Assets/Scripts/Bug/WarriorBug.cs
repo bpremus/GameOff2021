@@ -11,6 +11,22 @@ public class WarriorBug : CoreBug
     [SerializeField]
     bool siege_mode = true;
 
+    public override void OnWalkStart()
+    {
+        // Debug.Log("Bug started walking");
+    }
+
+
+    protected override void Start()
+    {
+        bug_evolution = BugEvolution.warrior;
+
+        base.Start();
+        current_cell = asigned_cell;
+        target = asigned_cell.transform.position + z_offset;
+        AssignToAroom(asigned_cell);
+    }
+
     public override void SetAnimation()
     {
         // if its dead just stop all
@@ -43,14 +59,6 @@ public class WarriorBug : CoreBug
             animators[0].SetInteger("State", 2);
             animators[1].SetInteger("State", 2);
         }
-    }
-
-    protected override void Start()
-    {
-        base.Start();
-        current_cell = asigned_cell;
-        target = asigned_cell.transform.position + z_offset;
-        AssignToAroom(asigned_cell);
     }
 
     public float attack_speed = 0.1f;

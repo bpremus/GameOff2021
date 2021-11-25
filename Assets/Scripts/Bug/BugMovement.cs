@@ -30,7 +30,7 @@ public class BugMovement : MonoBehaviour
     public enum BugAnimation { idle, walk, fly, attack, dead, dragged };
 
     // move stop distance
-    public float stop_distance = 1;
+    public float stop_distance = 0.05f;
 
 
     [SerializeField]

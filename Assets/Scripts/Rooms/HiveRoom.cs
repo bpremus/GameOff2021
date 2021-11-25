@@ -21,7 +21,8 @@ public class HiveRoom : CoreRoom
 
     public override void DetachBug(CoreBug bug)
     {
-        assigned_bugs.Remove(bug.gameObject);
+        if (assigned_bugs.Contains(bug.gameObject))
+            assigned_bugs.Remove(bug.gameObject);
     }
     public override bool AssignBug(CoreBug bug)
     {

@@ -18,6 +18,8 @@ public class CoreBug : BugMovement
     [SerializeField]
     public HiveCell underlaying_cell = null;
 
+    public enum BugEvolution { drone, super_drone, warrior, claw, range, cc_bug };
+    public BugEvolution bug_evolution = BugEvolution.drone;
 
     // stats 
     [Header("Bug stats")]
@@ -60,8 +62,6 @@ public class CoreBug : BugMovement
     {
         bug_action = action;
     }
-
-
 
     public virtual void NextAction()
     {
@@ -113,7 +113,6 @@ public class CoreBug : BugMovement
       //  Debug.Log("destination reached");
     }
 
-
     public virtual void OnLateDie()
     {
         // Debug.Log("died");
@@ -129,13 +128,19 @@ public class CoreBug : BugMovement
         Invoke("OnLateDecay", decayOnDeadTimer);
         _isDead = true;
 
+        OnBugIsDead(); // will be called once 
     }
 
+    public virtual void OnBugIsDead()
+    { 
+        // you can override this one instead 
+
+    }
+ 
     public void OnLateDecay()
     {
         Destroy(this.gameObject);
     }
-
 
     public virtual void OnTargetReach()
     {

@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class WorkerBug : CoreBug
 {
+    protected override void Start()
+    {
+        bug_evolution = BugEvolution.drone;
+        base.Start();
+    }
+
     public override void InteractWithEnemy(CoreBug otherBug)
     {
         // workers ignore enemy

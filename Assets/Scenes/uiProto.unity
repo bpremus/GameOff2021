@@ -17990,6 +17990,8 @@ MonoBehaviour:
   - {fileID: 658582526522619735, guid: 434f26ee5c194d54487a6a12baf9f3bf, type: 3}
   - {fileID: 2290125106946955862, guid: ff39edff40941804d8bffab139f2b5b5, type: 3}
   - {fileID: 1175946443047106057, guid: 8ea5be6810593244a98fc692d3759893, type: 3}
+  - {fileID: 3270396882474652906, guid: e453a1e328baa5a4eb41f8ef43e1c274, type: 3}
+  - {fileID: 1664299985290156309, guid: 10a241a2ba46cf2469690ec88971a584, type: 3}
   FoodAndWoodPrefabs:
   - {fileID: 3861675669014948337, guid: 0acd77074adcbd141b43ff449fc02446, type: 3}
   - {fileID: 6071048527007354161, guid: 95a00b40ca02c7346b0c47bd0292c6ac, type: 3}
@@ -27093,6 +27095,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1212630098}
   - component: {fileID: 1212630097}
+  - component: {fileID: 1212630099}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -27112,12 +27115,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 821834ac4c30639418547fcf645a0df4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  food: 100
+  food: 98
   wood: 50
   population: 2
   day_night_duration: 10
   isDay: 0
-  dayDuration: 2
+  dayDuration: 28
   room_corridor_cost: 0500000001000000
   room_harvester_cost: 0a00000003000000
   room_salvage_cost: 0a00000005000000
@@ -27137,6 +27140,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1212630099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1212630096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40b708bf38fae5c41a91c6f55c826ca9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 1
+  isStaticObject: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
 --- !u!1 &1214063141
 GameObject:
   m_ObjectHideFlags: 0

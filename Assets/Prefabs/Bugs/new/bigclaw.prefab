@@ -375,6 +375,7 @@ MonoBehaviour:
   target_cell: {fileID: 0}
   asigned_cell: {fileID: 0}
   underlaying_cell: {fileID: 0}
+  bug_evolution: 0
   health: 10
   damage: 1
   interraction_range: 1
@@ -383,6 +384,7 @@ MonoBehaviour:
   bug_action: 0
   coalition: 0
   hitColliders: []
+  splash_dmg: 3
   siege_mode: 0
   attack_speed: 0.1
 --- !u!135 &-3888619306148898028

@@ -54,14 +54,25 @@ public class DBG_UnitUI : MonoBehaviour
     }
     public void Update()
     {
-
         if (UIController.instance.isBuildMenuActive()) Hide();
+        //   if (Input.GetKey(KeyCode.A))
+        //   {
+        //       CellSelectProto.Instance.SetAssignBugState();
+        //   }
 
-     //   if (Input.GetKey(KeyCode.A))
-     //   {
-     //       CellSelectProto.Instance.SetAssignBugState();
-     //   }
-
+        // Debug test of evolving bugs 
+        if (Input.GetKey(KeyCode.F1))
+        {
+            EvolveBug(1);
+        }
+        if (Input.GetKey(KeyCode.F2))
+        {
+            EvolveBug(2);
+        }
+        if (Input.GetKey(KeyCode.F3))
+        {
+            EvolveBug(3);
+        }
     }
 
     public void SelectRoomFromBug()
@@ -81,6 +92,56 @@ public class DBG_UnitUI : MonoBehaviour
     {
         ArtPrefabsInstance.Instance.EvolveBug(bug,0);
         Hide();
+    }
+    public void EvolveBug(int index)
+    {
+
+        if (bug == null) return;
+        Debug.Log("evolving a bug " + bug.name);
+
+        // drone => warrior
+        if (bug.bug_evolution == CoreBug.BugEvolution.drone)
+        {
+            ArtPrefabsInstance.Instance.EvolveBug(bug, 3); // => drone to warrior bug
+            // or drone to super drone 
+        }
+
+        if (bug.bug_evolution == CoreBug.BugEvolution.super_drone)
+        {
+          
+        }
+
+        // warrior => ranged, slow claw 
+        else
+        if (bug.bug_evolution == CoreBug.BugEvolution.warrior)
+        {
+
+            if (index == 1)
+                ArtPrefabsInstance.Instance.EvolveBug(bug, 3); // => to warrior to claw 
+            if (index == 2)
+                ArtPrefabsInstance.Instance.EvolveBug(bug, 5); // => to warrior to ranged
+            if (index == 3)
+                ArtPrefabsInstance.Instance.EvolveBug(bug, 4); // => to warrior to cc
+
+        }
+        // claw, mele splash => can siege
+        else
+        if (bug.bug_evolution == CoreBug.BugEvolution.claw)
+        {
+
+        }
+        // ranged shoot, mele splash => can siege
+        else
+        if (bug.bug_evolution == CoreBug.BugEvolution.range)
+        {
+
+        }
+        // cc bug bug slow targets => can siege
+        else
+        if (bug.bug_evolution == CoreBug.BugEvolution.cc_bug)
+        {
+
+        }
 
     }
 
