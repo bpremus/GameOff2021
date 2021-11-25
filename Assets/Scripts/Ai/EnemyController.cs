@@ -20,7 +20,9 @@ public class EnemyController : MonoBehaviour
     float spawn_timer = 0;
 
     int coalition = 1;
+    [SerializeField]
     int day_attack_number = 1;
+    [SerializeField]
     int night_attack_number = 10;
     public int bug_separation = 1;
     GameController game_controller;
