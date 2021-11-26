@@ -39,5 +39,7 @@ public class WorkerBug : CoreBug
     {
 
         AkSoundEngine.PostEvent("Stop_Small_Bug_Movement", gameObject);
+
+        AkSoundEngine.PostEvent("Play_Small_Bug_Death", gameObject);
     }
 }

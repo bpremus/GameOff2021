@@ -30,7 +30,7 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: 68b9c5ee75f6ff4c894e5e3569cfca5c
     GuidInternal: 
-    m_lastTime: -8585638229514119834
+    m_lastTime: -8585636611721663034
     List:
     - name: Ambient
       guid: aba08822e6e424439feea3439ef6bf1c
@@ -58,7 +58,7 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: ab7a7d8fa7af904aad885e3b30a5f3e5
     GuidInternal: 
-    m_lastTime: -8585637314778839007
+    m_lastTime: -8585636613591351353
     List:
     - name: Main
       guid: c7ed1213001d794c9f3d34785e89ab38
@@ -77,7 +77,7 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: d2d748c853878f419a502ed6d2b53f2b
     GuidInternal: 
-    m_lastTime: -8585637316382707227
+    m_lastTime: -8585636613863548501
     List:
     - name: Ambient
       guid: fd4e3f4d2b5b3f408bd25e3289266b50
@@ -187,6 +187,20 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0.861311
       minDuration: 0.766455
+    - name: Play_Small_Bug_Death
+      guid: 45ee6578ccd23743ab404ebd21a7fa88
+      id: 735132331
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Bugs
+        ObjectType: 4
+      - ElementName: Play_Small_Bug_Death
+        ObjectType: 3
+      Path: Default Work Unit\Bugs\Play_Small_Bug_Death
+      maxAttenuation: 9
+      maxDuration: 0.326592
+      minDuration: 0.180196
     - name: Play_Small_Bug_Movement
       guid: 98496e72556df944b31eb86dbb03e35f
       id: 1017378692
@@ -198,7 +212,7 @@ MonoBehaviour:
       - ElementName: Play_Small_Bug_Movement
         ObjectType: 3
       Path: Default Work Unit\Bugs\Play_Small_Bug_Movement
-      maxAttenuation: 8
+      maxAttenuation: 9
       maxDuration: -1
       minDuration: -1
     - name: Rooms
