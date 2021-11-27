@@ -35,6 +35,7 @@ namespace AK
     {
         static const AkUniqueID BUG_SPEED = 2497779717U;
         static const AkUniqueID CAMERA_Y = 3866931204U;
+        static const AkUniqueID MASTER_VOLUME = 4179668880U;
     } // namespace GAME_PARAMETERS
 
     namespace BANKS

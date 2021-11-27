@@ -11,12 +11,13 @@
 	<StreamedFiles/>
 	<MediaFilesNotInAnyBank/>
 	<SoundBanks>
-		<SoundBank Id="1355168291" Language="SFX" Hash="1047045362">
+		<SoundBank Id="1355168291" Language="SFX" Hash="130536484">
 			<ObjectPath>Init</ObjectPath>
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
 			<GameParameters>
 				<GameParameter Id="3866931204" Name="Camera_Y" ObjectPath="\Game Parameters\Default Work Unit\Camera_Y"/>
+				<GameParameter Id="4179668880" Name="Master_Volume" ObjectPath="\Game Parameters\Default Work Unit\VolumeSliders\Master_Volume"/>
 			</GameParameters>
 		</SoundBank>
 		<SoundBank Id="3161908922" Language="SFX" Hash="1434003898">

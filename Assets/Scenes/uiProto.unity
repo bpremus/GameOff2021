@@ -11378,9 +11378,45 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slider (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 114306075799811430, guid: a94dc0ecfccb9294393d90e62d10f953, type: 3}
+      propertyPath: m_Value
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 114306075799811430, guid: a94dc0ecfccb9294393d90e62d10f953, type: 3}
+      propertyPath: m_MaxValue
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114306075799811430, guid: a94dc0ecfccb9294393d90e62d10f953, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114306075799811430, guid: a94dc0ecfccb9294393d90e62d10f953, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114306075799811430, guid: a94dc0ecfccb9294393d90e62d10f953, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1571090013}
+    - target: {fileID: 114306075799811430, guid: a94dc0ecfccb9294393d90e62d10f953, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114306075799811430, guid: a94dc0ecfccb9294393d90e62d10f953, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: MasterVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 114306075799811430, guid: a94dc0ecfccb9294393d90e62d10f953, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MasterVolumeSlider, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 114306075799811430, guid: a94dc0ecfccb9294393d90e62d10f953, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 224088588453411778, guid: a94dc0ecfccb9294393d90e62d10f953, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 224088588453411778, guid: a94dc0ecfccb9294393d90e62d10f953, type: 3}
       propertyPath: m_AnchorMax.y
@@ -11388,7 +11424,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 224249555390867250, guid: a94dc0ecfccb9294393d90e62d10f953, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 224249555390867250, guid: a94dc0ecfccb9294393d90e62d10f953, type: 3}
       propertyPath: m_AnchorMax.y
@@ -11396,7 +11432,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 224249555390867250, guid: a94dc0ecfccb9294393d90e62d10f953, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 224585062908054090, guid: a94dc0ecfccb9294393d90e62d10f953, type: 3}
       propertyPath: m_Pivot.x
@@ -27338,7 +27374,7 @@ MonoBehaviour:
   day_night_duration: 60
   isDay: 1
   dayDuration: 0
-  day_count: 43
+  day_count: 47
   room_corridor_cost: 0500000001000000
   room_harvester_cost: 0a00000003000000
   room_salvage_cost: 0a00000005000000
@@ -36089,6 +36125,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1567168555}
   m_Mesh: {fileID: -1550514412580984892, guid: 72158295efcb11343ab1aa6e13141530, type: 3}
+--- !u!1 &1571090012 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1140875577130006, guid: a94dc0ecfccb9294393d90e62d10f953, type: 3}
+  m_PrefabInstance: {fileID: 504177799}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1571090013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571090012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f2bb5cfc0944a04ba872cbb416f7692, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1576734991
 GameObject:
   m_ObjectHideFlags: 0

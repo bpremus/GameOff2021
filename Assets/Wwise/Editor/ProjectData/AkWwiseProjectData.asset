@@ -30,17 +30,19 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: 68b9c5ee75f6ff4c894e5e3569cfca5c
     GuidInternal: 
-    m_lastTime: -8585636611721663034
+    m_lastTime: -8585635586543275962
     List:
     - name: Ambient
-      guid: aba08822e6e424439feea3439ef6bf1c
+      guid: f861f3201f42bb48a0d2325e0c659cb2
       id: 77978275
       PathAndIcons:
       - ElementName: Default Work Unit
         ObjectType: 12
+      - ElementName: Master Audio Bus
+        ObjectType: 2
       - ElementName: Ambient
         ObjectType: 2
-      Path: Default Work Unit\Ambient
+      Path: Default Work Unit\Master Audio Bus\Ambient
     - name: Master Audio Bus
       guid: d8a41415a61d2a41a17e75ca0c2149f3
       id: 3803692087
@@ -359,7 +361,7 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: 53ecf202e82ccd47a2dd471471481431
     GuidInternal: 
-    m_lastTime: -8585638230204304942
+    m_lastTime: -8585635617633335274
     List:
     - name: Bug_Speed
       guid: 33a1acc9ce1cc641aefc145a8ae502f4
@@ -379,6 +381,26 @@ MonoBehaviour:
       - ElementName: Camera_Y
         ObjectType: 13
       Path: Default Work Unit\Camera_Y
+    - name: Master_Volume
+      guid: e0dc1d820069f14582d58afb47894331
+      id: 4179668880
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: VolumeSliders
+        ObjectType: 4
+      - ElementName: Master_Volume
+        ObjectType: 13
+      Path: Default Work Unit\VolumeSliders\Master_Volume
+    - name: VolumeSliders
+      guid: 7b03b045f682f14f8bd107eb3ef691b2
+      id: 260909787
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: VolumeSliders
+        ObjectType: 4
+      Path: Default Work Unit\VolumeSliders
   StateWwu:
   - PhysicalPath: States\Default Work Unit.wwu
     PathAndIcons:
