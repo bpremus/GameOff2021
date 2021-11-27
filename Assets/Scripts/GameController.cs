@@ -25,6 +25,9 @@ public class GameController : MonoBehaviour
     [SerializeField]
     float dayDuration = 0;
 
+    [SerializeField]
+    int day_count = 0;
+
     // costs                 wood, food 
     [SerializeField] int[] room_corridor_cost = { 5, 1 };
     [SerializeField] int[] room_harvester_cost = { 10, 3 };
@@ -140,6 +143,8 @@ public class GameController : MonoBehaviour
         AkSoundEngine.PostEvent("Stop_Ambient_Night", gameObject);
 
         AkSoundEngine.PostEvent("Play_Ambient_Day", gameObject);
+
+        day_count++;
     }
     public void OnNightStart()
     {
@@ -197,6 +202,11 @@ public class GameController : MonoBehaviour
     {
         return isDay;
     }
+    public int GetDayS()
+    {
+        return day_count;
+    }
+
     protected void Update()
     {
         TimeCycle();

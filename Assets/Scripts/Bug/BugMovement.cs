@@ -66,7 +66,7 @@ public class BugMovement : MonoBehaviour
     }
 
     protected float speed = 0;
-    private Vector3 last_pos = Vector3.zero;
+    protected Vector3 last_pos = Vector3.zero;
     public virtual void SetAnimation()
     {
         // if its dead just stop all

@@ -91,7 +91,7 @@ public class WarriorBug : CoreBug
         Debug.Log("attacking");
 
         //target = underlaying_cell.transform.position + z_offset;
-
+        if (othrBugs.Count == 0) return;
         if (asigned_cell.IsInTheRoomRange(othrBugs[0].transform.position))
         {
             if (othrBugs[0].underlaying_cell != underlaying_cell)

@@ -26,7 +26,37 @@ public class CoreBug : BugMovement
     public float health = 10f;
     public float damage = 1f;
     public float interraction_range = 1f;
-    public int decayOnDeadTimer = 20;
+    public int   decayOnDeadTimer = 20;
+    public int   bug_base_level = 1;
+
+    public void LevelUp() { bug_base_level++; }
+
+    protected void BoostSpeed(float speed_multiply)
+    {
+        if (speed_multiply == 0) return;
+        this.move_speed *= speed_multiply;
+    }
+    protected void BoostHealth(float health_multiply)
+    {
+        if (health_multiply == 0) return;
+        this.health *= health_multiply;
+    }
+    protected void BoostDamage(float dmg_multiply)
+    {
+        if (dmg_multiply == 0) return;
+        this.damage *= dmg_multiply;
+    }
+    protected void BoostRange(float range_multiply)
+    {
+        if (range_multiply == 0) return;
+        this.interraction_range *= range_multiply;
+    }
+
+    public void AIBoost(float speed, float health)
+    {
+        BoostRange(speed);
+        BoostHealth(health);
+    }
 
     // offset to camera above cells 
     // may not be needed once tiles are replaced with mesh
@@ -112,7 +142,12 @@ public class CoreBug : BugMovement
 
     public virtual void OnDestinationReach()
     {
-      //  Debug.Log("destination reached");
+        //  Debug.Log("destination reached");
+
+        if (ai_task != null)
+        {
+            ai_task.OnDestinationReach();
+        }
     }
 
 
@@ -125,6 +160,12 @@ public class CoreBug : BugMovement
 
         if (harvest_object)
             Destroy(harvest_object);
+
+        // enemy bug report where they died 
+        if (coalition > 0)
+        {
+            underlaying_cell.dCost++; // deadly cell
+        }
 
         // else 
         bugAnimation = BugAnimation.dead;
@@ -203,7 +244,7 @@ public class CoreBug : BugMovement
         target_cell = destination;
         destination_cell = start;
 
-        List<HiveCell> move_path = AiController.GetPath(start, destination);
+        List<HiveCell> move_path = AiController.GetPath(start, destination, coalition); // use different path for enemy 
         for (int i = 0; i < move_path.Count; i++)
         {
             path.Enqueue(move_path[i]);

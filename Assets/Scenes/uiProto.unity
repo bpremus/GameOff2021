@@ -1515,6 +1515,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 317860135}
   - {fileID: 235848205}
@@ -1853,6 +1854,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 380293374}
   - {fileID: 2121011330}
@@ -2010,6 +2012,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1759181411}
   - {fileID: 432443395}
@@ -2395,6 +2398,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1648234133}
   - {fileID: 0}
@@ -2834,6 +2838,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 1
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 0}
   - {fileID: 201653491}
@@ -3036,6 +3041,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1923242860}
   - {fileID: 677762492}
@@ -3425,6 +3431,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 521286772}
   - {fileID: 1938817513}
@@ -3698,6 +3705,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 1
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 0}
   - {fileID: 1014401707}
@@ -3745,6 +3753,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 468626713}
   - {fileID: 0}
@@ -3951,6 +3960,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1348352790}
   - {fileID: 661928744}
@@ -4062,6 +4072,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 1
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 0}
   - {fileID: 1050010456}
@@ -4678,6 +4689,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 922784268}
   - {fileID: 1004510505}
@@ -5024,6 +5036,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1326759708}
   - {fileID: 1538394493}
@@ -5071,6 +5084,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1121393914}
   - {fileID: 666836902}
@@ -5865,6 +5879,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 836688555}
   - {fileID: 1326759708}
@@ -6365,6 +6380,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 617900431}
   - {fileID: 1566661454}
@@ -6863,6 +6879,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1004510505}
   - {fileID: 1678875831}
@@ -7020,6 +7037,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 2146715346}
   - {fileID: 922784268}
@@ -7067,6 +7085,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 904001292}
   - {fileID: 809614777}
@@ -7308,6 +7327,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1174239349}
   - {fileID: 665336021}
@@ -7747,6 +7767,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1938817513}
   - {fileID: 1362842256}
@@ -8083,6 +8104,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1794746806}
   - {fileID: 0}
@@ -8369,6 +8391,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 413871472}
   - {fileID: 1268904783}
@@ -8471,6 +8494,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1618633018}
   - {fileID: 1907434768}
@@ -9001,6 +9025,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1654439949}
   - {fileID: 1354933623}
@@ -9308,6 +9333,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1434094867}
   - {fileID: 1407763600}
@@ -9595,6 +9621,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 920620123}
   - {fileID: 472734266}
@@ -10217,6 +10244,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 249187775}
   - {fileID: 1549586892}
@@ -10646,6 +10674,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1339865367}
   - {fileID: 0}
@@ -10879,6 +10908,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1691448528}
   - {fileID: 380293374}
@@ -11295,6 +11325,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 619250858}
   - {fileID: 1720134146}
@@ -12170,6 +12201,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1895242443}
   - {fileID: 1009972438}
@@ -12520,6 +12552,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 1
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 0}
   - {fileID: 1695210422}
@@ -12886,6 +12919,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 472734266}
   - {fileID: 117887091}
@@ -13046,6 +13080,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1606513646}
   - {fileID: 1885843869}
@@ -13351,6 +13386,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 941815633}
   - {fileID: 2025429902}
@@ -13479,6 +13515,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 786789410}
   - {fileID: 904863020}
@@ -13785,6 +13822,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 1
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 0}
   - {fileID: 524827359}
@@ -14026,6 +14064,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 661928744}
   - {fileID: 556702833}
@@ -15007,6 +15046,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1648163765}
   - {fileID: 121720984}
@@ -15274,6 +15314,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1590372630}
   - {fileID: 1701289483}
@@ -15846,6 +15887,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 2054465810}
   - {fileID: 1856823525}
@@ -15925,6 +15967,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1654486815}
   - {fileID: 941815633}
@@ -16085,6 +16128,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 349884864}
   - {fileID: 1003834368}
@@ -16210,6 +16254,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 416679137}
   - {fileID: 541653802}
@@ -16335,6 +16380,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1222560466}
   - {fileID: 552112011}
@@ -16638,6 +16684,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1163107887}
   - {fileID: 851440188}
@@ -16717,6 +16764,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1809471253}
   - {fileID: 1889543165}
@@ -17561,6 +17609,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 562109061}
   - {fileID: 1794746806}
@@ -17689,6 +17738,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1892847134}
   - {fileID: 961193624}
@@ -17946,6 +17996,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 941462014}
   - {fileID: 1614400064}
@@ -18116,6 +18167,8 @@ MonoBehaviour:
   - {fileID: 658582526522619735, guid: 434f26ee5c194d54487a6a12baf9f3bf, type: 3}
   - {fileID: 2290125106946955862, guid: ff39edff40941804d8bffab139f2b5b5, type: 3}
   - {fileID: 1175946443047106057, guid: 8ea5be6810593244a98fc692d3759893, type: 3}
+  - {fileID: 8405167607926938731, guid: 088dbabcf83a5f5409ad38b81ab9f289, type: 3}
+  - {fileID: 6348623539465587848, guid: 16c9f6643496e9245b2b58a35c5f3e00, type: 3}
   FoodAndWoodPrefabs:
   - {fileID: 3861675669014948337, guid: 0acd77074adcbd141b43ff449fc02446, type: 3}
   - {fileID: 6071048527007354161, guid: 95a00b40ca02c7346b0c47bd0292c6ac, type: 3}
@@ -18212,6 +18265,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1003834368}
   - {fileID: 1635433298}
@@ -18361,6 +18415,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1266471453}
   - {fileID: 703077101}
@@ -18440,6 +18495,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 210881969}
   - {fileID: 1434094867}
@@ -18671,6 +18727,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 574103764}
   - {fileID: 1530697991}
@@ -18930,6 +18987,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 280174252}
   - {fileID: 245342659}
@@ -19720,6 +19778,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1566661454}
   - {fileID: 1654439949}
@@ -20076,6 +20135,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 958274183}
   - {fileID: 194789330}
@@ -20187,6 +20247,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 1
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 0}
   - {fileID: 210881969}
@@ -20234,6 +20295,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1635433298}
   - {fileID: 0}
@@ -20454,6 +20516,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 807749821}
   - {fileID: 1801527368}
@@ -20727,6 +20790,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 320878395}
   - {fileID: 1691448528}
@@ -20989,6 +21053,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 210680567}
   - {fileID: 583315844}
@@ -21036,6 +21101,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 695384277}
   - {fileID: 1590372630}
@@ -21288,6 +21354,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1538394493}
   - {fileID: 332060486}
@@ -21469,6 +21536,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1796304458}
   - {fileID: 1325104360}
@@ -21516,6 +21584,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1359907115}
   - {fileID: 486696417}
@@ -21741,6 +21810,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1695210422}
   - {fileID: 521286772}
@@ -21788,6 +21858,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1194661142}
   - {fileID: 562109061}
@@ -22631,6 +22702,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1362842256}
   - {fileID: 1500442668}
@@ -22710,6 +22782,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 583315844}
   - {fileID: 1135172470}
@@ -22821,6 +22894,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 2132698817}
   - {fileID: 941462014}
@@ -23143,6 +23217,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 1
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 0}
   - {fileID: 904001292}
@@ -23306,6 +23381,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1887031501}
   - {fileID: 755676383}
@@ -23625,6 +23701,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 1
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 0}
   - {fileID: 2054465810}
@@ -23972,6 +24049,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 299374718}
   - {fileID: 884385381}
@@ -24495,9 +24573,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   start_cell: {fileID: 0}
-  target_cell: {fileID: 0}
+  hive_cell: {fileID: 0}
+  harvester_cells: []
+  salvage_cells: []
   spawn_timer: 0
-  day_attack_number: 3
+  day_attack_number: 1
   night_attack_number: 60
   bug_separation: 1
 --- !u!4 &1109520778
@@ -24748,6 +24828,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1889543165}
   - {fileID: 416679137}
@@ -25302,6 +25383,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 556702833}
   - {fileID: 1757988960}
@@ -25831,6 +25913,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 1
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1856823525}
   - {fileID: 280174252}
@@ -26146,6 +26229,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 194789330}
   - {fileID: 349884864}
@@ -26779,6 +26863,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 665336021}
   - {fileID: 786789410}
@@ -27241,12 +27326,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 821834ac4c30639418547fcf645a0df4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  food: 92
+  food: 88
   wood: 50
   population: 2
   day_night_duration: 60
-  isDay: 1
+  isDay: 0
   dayDuration: 1
+  day_count: 20
   room_corridor_cost: 0500000001000000
   room_harvester_cost: 0a00000003000000
   room_salvage_cost: 0a00000005000000
@@ -27622,6 +27708,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1818199481}
   - {fileID: 1606513646}
@@ -28099,6 +28186,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1025361091}
   - {fileID: 1248549781}
@@ -28379,6 +28467,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 755676383}
   - {fileID: 1818199481}
@@ -28729,6 +28818,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 163571417}
   - {fileID: 1809471253}
@@ -28886,6 +28976,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1407763600}
   - {fileID: 695384277}
@@ -29060,6 +29151,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1614400064}
   - {fileID: 0}
@@ -29386,6 +29478,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1513273539}
   - {fileID: 0}
@@ -29525,6 +29618,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1530697991}
   - {fileID: 895785430}
@@ -29704,6 +29798,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 432443395}
   - {fileID: 2069404774}
@@ -29864,6 +29959,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1670681644}
   - {fileID: 0}
@@ -30126,6 +30222,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 117887091}
   - {fileID: 1654486815}
@@ -30173,6 +30270,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 2039338749}
   - {fileID: 99058168}
@@ -30411,6 +30509,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 928030859}
   - {fileID: 619250858}
@@ -30560,6 +30659,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 770856150}
   - {fileID: 1290873176}
@@ -31269,6 +31369,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 135523256}
   - {fileID: 0}
@@ -31630,6 +31731,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 202778614}
   - {fileID: 0}
@@ -32033,6 +32135,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 660549030}
   - {fileID: 1163107887}
@@ -32260,6 +32363,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1050010456}
   - {fileID: 660549030}
@@ -32339,6 +32443,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 884385381}
   - {fileID: 409340965}
@@ -32773,6 +32878,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 99058168}
   - {fileID: 1861003393}
@@ -33046,6 +33152,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1400044396}
   - {fileID: 0}
@@ -33320,6 +33427,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1354933623}
   - {fileID: 1459310869}
@@ -33716,6 +33824,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1290873176}
   - {fileID: 0}
@@ -34130,6 +34239,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 1
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 0}
   - {fileID: 0}
@@ -34730,6 +34840,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 524827359}
   - {fileID: 958274183}
@@ -34890,6 +35001,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 895785430}
   - {fileID: 1174239349}
@@ -35015,6 +35127,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1720134146}
   - {fileID: 1241213341}
@@ -35175,6 +35288,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 666836902}
   - {fileID: 1659558712}
@@ -35882,6 +35996,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 121720984}
   - {fileID: 1335610797}
@@ -36346,6 +36461,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 851440188}
   - {fileID: 2139182781}
@@ -36714,6 +36830,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1014401707}
   - {fileID: 320878395}
@@ -36793,6 +36910,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 754480546}
   - {fileID: 365538072}
@@ -37038,6 +37156,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1325104360}
   - {fileID: 0}
@@ -37368,6 +37487,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1543989107}
   - {fileID: 1719613313}
@@ -37856,6 +37976,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1500442668}
   - {fileID: 0}
@@ -38030,6 +38151,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 914753747}
   - {fileID: 1759181411}
@@ -38141,6 +38263,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 1
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 0}
   - {fileID: 0}
@@ -38431,6 +38554,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1335610797}
   - {fileID: 2039338749}
@@ -38510,6 +38634,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 2121011330}
   - {fileID: 1359907115}
@@ -38557,6 +38682,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1077160062}
   - {fileID: 1434505215}
@@ -38668,6 +38794,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 541653802}
   - {fileID: 1348352790}
@@ -38877,6 +39004,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 2077882215}
   - {fileID: 0}
@@ -39048,6 +39176,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1135172470}
   - {fileID: 1744053153}
@@ -39673,6 +39802,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 809614777}
   - {fileID: 413871472}
@@ -39766,6 +39896,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 1
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 0}
   - {fileID: 1895242443}
@@ -39973,6 +40104,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 2139182781}
   - {fileID: 1887031501}
@@ -40408,6 +40540,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1241213341}
   - {fileID: 1923242860}
@@ -40487,6 +40620,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1701289483}
   - {fileID: 1025361091}
@@ -40648,6 +40782,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1757988960}
   - {fileID: 395322747}
@@ -40878,6 +41013,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 2025429902}
   - {fileID: 1618633018}
@@ -40989,6 +41125,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1801527368}
   - {fileID: 249187775}
@@ -41887,6 +42024,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 904863020}
   - {fileID: 0}
@@ -41966,6 +42104,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 1
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 0}
   - {fileID: 1513273539}
@@ -42173,6 +42312,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 703077101}
   - {fileID: 1121393914}
@@ -42220,6 +42360,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 201653491}
   - {fileID: 1604826360}
@@ -42331,6 +42472,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 961193624}
   - {fileID: 754480546}
@@ -43345,6 +43487,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 1
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 2092249752}
   - {fileID: 836688555}
@@ -43685,6 +43828,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 235848205}
   - {fileID: 314249682}
@@ -43764,6 +43908,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 409340965}
   - {fileID: 1487660807}
@@ -44446,6 +44591,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 365538072}
   - {fileID: 0}
@@ -44557,6 +44703,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 932879767}
   - {fileID: 1892847134}
@@ -44636,6 +44783,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1604826360}
   - {fileID: 920620123}
@@ -44796,6 +44944,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 332060486}
   - {fileID: 1194661142}
@@ -44843,6 +44992,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 1
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 0}
   - {fileID: 2132698817}
@@ -45172,6 +45322,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1657354240}
   - {fileID: 2097102686}
@@ -45219,6 +45370,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1719613313}
   - {fileID: 165421361}
@@ -45823,6 +45975,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1248549781}
   - {fileID: 1222560466}
@@ -46435,6 +46588,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1009972438}
   - {fileID: 770856150}
@@ -47853,6 +48007,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 486696417}
   - {fileID: 1543989107}
@@ -47932,6 +48087,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 2069404774}
   - {fileID: 317860135}
@@ -48333,6 +48489,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 1
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 0}
   - {fileID: 2092249752}
@@ -48518,6 +48675,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1549586892}
   - {fileID: 2146715346}
@@ -48597,6 +48755,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1389293275}
   - {fileID: 0}
@@ -49036,6 +49195,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 1
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 0}
   - {fileID: 574103764}
@@ -49083,6 +49243,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1434505215}
   - {fileID: 1864208089}
@@ -49524,6 +49685,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1268904783}
   - {fileID: 928030859}
@@ -49730,6 +49892,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 1
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 0}
   - {fileID: 1796304458}
@@ -49915,6 +50078,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 245342659}
   - {fileID: 932879767}
@@ -49994,6 +50158,7 @@ MonoBehaviour:
   hCost: 0
   walkable: 0
   dbg_select: 0
+  dCost: 0
   neighbour_cells:
   - {fileID: 1659558712}
   - {fileID: 210680567}

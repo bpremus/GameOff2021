@@ -167,6 +167,9 @@ public class HiveGenerator : MonoBehaviour
         
         cells[d    ][height - 3].BuildCooridor();
         cells[d + 1][height - 4].BuildRoom(HiveCell.RoomContext.war);
+      //  cells[d + 1][height - 4].dCost = 20;
+      //  cells[d + 2][height - 3].BuildCooridor();
+
         cells[d + 2][height - 4].BuildCooridor();
         cells[d + 2][height - 5].BuildCooridor();
         cells[d - 1][height - 4].BuildRoom(HiveCell.RoomContext.hive);

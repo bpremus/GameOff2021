@@ -159,6 +159,9 @@ public class HiveCell : MonoBehaviour
         // automatically set cell type to room
         cell_Type = CellMesh.Cell_type.room;
 
+        // register rooms
+        hiveGenerator.rooms.Add(this);
+
         // place interior room 
         if (context == RoomContext.hive)
         {
@@ -170,7 +173,7 @@ public class HiveCell : MonoBehaviour
         if (context == RoomContext.queen)
         {
             BuildRoom(ArtPrefabsInstance.Instance.RoomPrefabs[5]);
-            return;
+            // return;
         }
 
         // any other room
@@ -189,13 +192,16 @@ public class HiveCell : MonoBehaviour
             BuildRoom(ArtPrefabsInstance.Instance.RoomPrefabs[4]);
         }
 
-        if (hiveGenerator.rooms.Contains(this) == false)
-        {
-            hiveGenerator.rooms.Add(this);
-        }
+       // if (hiveGenerator.rooms.Contains(this) == false)
+       // {
+       //     hiveGenerator.rooms.Add(this);
+       // }
 
         if (hiveGenerator.isGameStarted)
             OnRoomPlaced();
+
+
+
     }
 
     public void BuildRoom(GameObject room)
@@ -297,6 +303,13 @@ public class HiveCell : MonoBehaviour
     {
         get => gCost + hCost;
     }
+
+    public int fEnemyCost
+    {
+        get => gCost + hCost + dCost;
+    }
+    // death cost for enemy bugs 
+    public int dCost = 0;
 
     [SerializeField]
     protected HiveCell[] neighbour_cells = new HiveCell[4];

@@ -7,7 +7,7 @@ public class AiController : MonoBehaviour
     [SerializeField]
     HiveGenerator hiveGenerator;
 
-    static public List<HiveCell> GetPath(HiveCell startNode, HiveCell targetNode)
+    static public List<HiveCell> GetPath(HiveCell startNode, HiveCell targetNode, int coalition = 0)
     {
         List<HiveCell> nodes = new List<HiveCell>();
 
@@ -24,12 +24,21 @@ public class AiController : MonoBehaviour
             HiveCell currentNode = openSet[0];
             for (int i = 1; i < openSet.Count; i++)
             {
-                if (openSet[i].fCost < currentNode.fCost ||
-                    openSet[i].fCost == currentNode.fCost &&
-                    openSet[i].hCost < currentNode.hCost
-                    )
+                if (coalition == 0)
                 {
-                    currentNode = openSet[i];
+                    // we will use shortest path
+                    if (openSet[i].fCost < currentNode.fCost || openSet[i].fCost == currentNode.fCost && openSet[i].hCost < currentNode.hCost)
+                    {
+                        currentNode = openSet[i];
+                    }
+                }
+                else 
+                {
+                    // enemy can take into account high dead zones and aviod those 
+                    if (openSet[i].fEnemyCost < currentNode.fEnemyCost || openSet[i].fEnemyCost == currentNode.fEnemyCost && openSet[i].hCost < currentNode.hCost )
+                    {
+                        currentNode = openSet[i];
+                    }
                 }
             }
 
