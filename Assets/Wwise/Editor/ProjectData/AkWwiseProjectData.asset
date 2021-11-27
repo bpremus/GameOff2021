@@ -58,7 +58,7 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: ab7a7d8fa7af904aad885e3b30a5f3e5
     GuidInternal: 
-    m_lastTime: -8585636613591351353
+    m_lastTime: -8585635902431750531
     List:
     - name: Main
       guid: c7ed1213001d794c9f3d34785e89ab38
@@ -77,7 +77,7 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: d2d748c853878f419a502ed6d2b53f2b
     GuidInternal: 
-    m_lastTime: -8585636613863548501
+    m_lastTime: -8585635902826672981
     List:
     - name: Ambient
       guid: fd4e3f4d2b5b3f408bd25e3289266b50
@@ -129,6 +129,20 @@ MonoBehaviour:
         ObjectType: 3
       Path: Default Work Unit\Ambient\Play_Ambient_Night
       maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Play_Big_Bug_Movement
+      guid: c40268d0b3a6b54395ba0626811bb3d6
+      id: 3285809237
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Bugs
+        ObjectType: 4
+      - ElementName: Play_Big_Bug_Movement
+        ObjectType: 3
+      Path: Default Work Unit\Bugs\Play_Big_Bug_Movement
+      maxAttenuation: 9
       maxDuration: -1
       minDuration: -1
     - name: Play_Button_Click
@@ -198,9 +212,9 @@ MonoBehaviour:
       - ElementName: Play_Small_Bug_Death
         ObjectType: 3
       Path: Default Work Unit\Bugs\Play_Small_Bug_Death
-      maxAttenuation: 9
-      maxDuration: 0.326592
-      minDuration: 0.180196
+      maxAttenuation: 10
+      maxDuration: 0.472362
+      minDuration: 0.307646
     - name: Play_Small_Bug_Movement
       guid: 98496e72556df944b31eb86dbb03e35f
       id: 1017378692
@@ -212,7 +226,7 @@ MonoBehaviour:
       - ElementName: Play_Small_Bug_Movement
         ObjectType: 3
       Path: Default Work Unit\Bugs\Play_Small_Bug_Movement
-      maxAttenuation: 9
+      maxAttenuation: 10
       maxDuration: -1
       minDuration: -1
     - name: Rooms
@@ -252,6 +266,20 @@ MonoBehaviour:
       - ElementName: Stop_Ambient_Night
         ObjectType: 3
       Path: Default Work Unit\Ambient\Stop_Ambient_Night
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Stop_Big_Bug_Movement
+      guid: b92ec75ad457484e8b0dbabd3d24125d
+      id: 2326255855
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Bugs
+        ObjectType: 4
+      - ElementName: Stop_Big_Bug_Movement
+        ObjectType: 3
+      Path: Default Work Unit\Bugs\Stop_Big_Bug_Movement
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0

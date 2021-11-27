@@ -19,7 +19,7 @@
 				<GameParameter Id="3866931204" Name="Camera_Y" ObjectPath="\Game Parameters\Default Work Unit\Camera_Y"/>
 			</GameParameters>
 		</SoundBank>
-		<SoundBank Id="3161908922" Language="SFX" Hash="495045264">
+		<SoundBank Id="3161908922" Language="SFX" Hash="4253537220">
 			<ObjectPath>\SoundBanks\Default Work Unit\Main</ObjectPath>
 			<ShortName>Main</ShortName>
 			<Path>Main.bnk</Path>
@@ -37,6 +37,14 @@
 						<File Id="86493557" Language="SFX">
 							<ShortName>Ambient_Night.wav</ShortName>
 							<Path>SFX\Ambient_Night_D79FB2B7.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="3285809237" Name="Play_Big_Bug_Movement" ObjectPath="\Events\Default Work Unit\Bugs\Play_Big_Bug_Movement" MaxAttenuation="9.000000" DurationType="Infinite">
+					<IncludedMemoryFiles>
+						<File Id="523779637" Language="SFX">
+							<ShortName>Movement_Big_Bug.wav</ShortName>
+							<Path>SFX\Movement_Big_Bug_D79FB2B7.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
@@ -72,7 +80,7 @@
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
-				<Event Id="735132331" Name="Play_Small_Bug_Death" ObjectPath="\Events\Default Work Unit\Bugs\Play_Small_Bug_Death" MaxAttenuation="9.000000" DurationType="OneShot" DurationMin="0.180196" DurationMax="0.326592">
+				<Event Id="735132331" Name="Play_Small_Bug_Death" ObjectPath="\Events\Default Work Unit\Bugs\Play_Small_Bug_Death" MaxAttenuation="10.000000" DurationType="OneShot" DurationMin="0.307646" DurationMax="0.472362">
 					<IncludedMemoryFiles>
 						<File Id="81576918" Language="SFX">
 							<ShortName>Death_Small_Bug_1.wav</ShortName>
@@ -96,7 +104,7 @@
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
-				<Event Id="1017378692" Name="Play_Small_Bug_Movement" ObjectPath="\Events\Default Work Unit\Bugs\Play_Small_Bug_Movement" MaxAttenuation="9.000000" DurationType="Infinite">
+				<Event Id="1017378692" Name="Play_Small_Bug_Movement" ObjectPath="\Events\Default Work Unit\Bugs\Play_Small_Bug_Movement" MaxAttenuation="10.000000" DurationType="Infinite">
 					<IncludedMemoryFiles>
 						<File Id="588016348" Language="SFX">
 							<ShortName>Movement_Small_Bug.wav</ShortName>
@@ -106,6 +114,7 @@
 				</Event>
 				<Event Id="1199206671" Name="Stop_Ambient_Day" ObjectPath="\Events\Default Work Unit\Ambient\Stop_Ambient_Day" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 				<Event Id="1512937371" Name="Stop_Ambient_Night" ObjectPath="\Events\Default Work Unit\Ambient\Stop_Ambient_Night" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="2326255855" Name="Stop_Big_Bug_Movement" ObjectPath="\Events\Default Work Unit\Bugs\Stop_Big_Bug_Movement" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 				<Event Id="4052991490" Name="Stop_Small_Bug_Movement" ObjectPath="\Events\Default Work Unit\Bugs\Stop_Small_Bug_Movement" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
 			</IncludedEvents>
 		</SoundBank>

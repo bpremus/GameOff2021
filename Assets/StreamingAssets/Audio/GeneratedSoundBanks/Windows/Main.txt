@@ -7,7 +7,9 @@ Event	ID	Name			Wwise Object Path	Notes
 	1444742574	Play_Room_Destruction			\Default Work Unit\Rooms\Play_Room_Destruction	
 	1512937371	Stop_Ambient_Night			\Default Work Unit\Ambient\Stop_Ambient_Night	
 	1954657867	Play_Room_Placement			\Default Work Unit\Rooms\Play_Room_Placement	
+	2326255855	Stop_Big_Bug_Movement			\Default Work Unit\Bugs\Stop_Big_Bug_Movement	
 	2953607465	Play_Ambient_Day			\Default Work Unit\Ambient\Play_Ambient_Day	
+	3285809237	Play_Big_Bug_Movement			\Default Work Unit\Bugs\Play_Big_Bug_Movement	
 	4021863785	Play_Button_Hover			\Default Work Unit\UI\Play_Button_Hover	
 	4052991490	Stop_Small_Bug_Movement			\Default Work Unit\Bugs\Stop_Small_Bug_Movement	
 
@@ -15,16 +17,17 @@ Effect plug-ins	ID	Name	Type				Notes
 	1008402193	Low_Pass_20KHz	Wwise Parametric EQ			
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	81576918	Death_Small_Bug_1	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Death_Small_Bug_1_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bug_SFX\Death\Death_Small_Bug\Death_Small_Bug_1		18402
+	81576918	Death_Small_Bug_1	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Death_Small_Bug_1_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bug_SFX\Death\Death_Small_Bug\Death_Small_Bug_1		26854
 	86493557	Ambient_Night	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Ambient_Night_D79FB2B7.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ambient\Ambient_Night		20340064
-	170371740	Death_Small_Bug_4	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Death_Small_Bug_4_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bug_SFX\Death\Death_Small_Bug\Death_Small_Bug_4		22200
+	170371740	Death_Small_Bug_4	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Death_Small_Bug_4_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bug_SFX\Death\Death_Small_Bug\Death_Small_Bug_4		31384
 	252928958	SFX_Button_Click	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\SFX_Button_Click_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI_SFX\Button_Click\SFX_Button_Click		6064
-	350433865	Death_Small_Bug_3	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Death_Small_Bug_3_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bug_SFX\Death\Death_Small_Bug\Death_Small_Bug_3		23702
+	350433865	Death_Small_Bug_3	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Death_Small_Bug_3_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bug_SFX\Death\Death_Small_Bug\Death_Small_Bug_3		24206
 	501597484	Room_Placement	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Room_Placement_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Building\Room_Placement\Room_Placement		156064
-	588016348	Movement_Small_Bug	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Movement_Small_Bug_D79FB2B7.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bug_SFX\Movement_Small_Bug		5724064
+	523779637	Movement_Big_Bug	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Movement_Big_Bug_D79FB2B7.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bug_SFX\Movement\Movement_Big_Bug		5736064
+	588016348	Movement_Small_Bug	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Movement_Small_Bug_D79FB2B7.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bug_SFX\Movement\Movement_Small_Bug		5724064
 	650900727	Room_Destruction	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Room_Destruction_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Building\Room_Destruction\Room_Destruction		216064
 	651579877	SFX_Button_Hover	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\SFX_Button_Hover_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI_SFX\Button_Hover\SFX_Button_Hover		36064
-	674038062	Death_Small_Bug_5	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Death_Small_Bug_5_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bug_SFX\Death\Death_Small_Bug\Death_Small_Bug_5		29640
-	947517987	Death_Small_Bug_2	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Death_Small_Bug_2_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bug_SFX\Death\Death_Small_Bug\Death_Small_Bug_2		23542
+	674038062	Death_Small_Bug_5	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Death_Small_Bug_5_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bug_SFX\Death\Death_Small_Bug\Death_Small_Bug_5		30214
+	947517987	Death_Small_Bug_2	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Death_Small_Bug_2_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bug_SFX\Death\Death_Small_Bug\Death_Small_Bug_2		32092
 	1051585042	Ambience_Day	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Ambience_Day_D79FB2B7.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ambient\Ambience_Day		21660064
 
