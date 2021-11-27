@@ -11,6 +11,8 @@ public class WarriorBug : CoreBug
     [SerializeField]
     bool siege_mode = true;
 
+    public float attack_speed = 0.5f;
+
     public override void OnWalkStart()
     {
         // Debug.Log("Bug started walking");
@@ -61,8 +63,6 @@ public class WarriorBug : CoreBug
         }
     }
 
-    public float attack_speed = 0.1f;
-
     public override void MoveToPosition()
     {
         if (siege_mode)
@@ -108,7 +108,7 @@ public class WarriorBug : CoreBug
         }
         
         bugAnimation = BugAnimation.idle;
-        if (_attack_t > 0.1f)
+        if (_attack_t > attack_speed)
         {
             _attack_t = 0;
         }

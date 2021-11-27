@@ -1340,6 +1340,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1163107887}
     - target: {fileID: 2290125106946955865, guid: ff39edff40941804d8bffab139f2b5b5, type: 3}
+      propertyPath: attack_speed
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290125106946955865, guid: ff39edff40941804d8bffab139f2b5b5, type: 3}
       propertyPath: stop_distance
       value: 0.1
       objectReference: {fileID: 0}
@@ -27331,7 +27335,7 @@ MonoBehaviour:
   population: 2
   day_night_duration: 60
   isDay: 0
-  dayDuration: 1
+  dayDuration: 0
   day_count: 20
   room_corridor_cost: 0500000001000000
   room_harvester_cost: 0a00000003000000
