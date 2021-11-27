@@ -19,6 +19,8 @@ public class Room_UI : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI room_name;
     [SerializeField]
+    TextMeshProUGUI room_level;
+    [SerializeField]
     GameObject assignedBugsHolder;
     List<CoreBug> listed_bugs = new List<CoreBug>();
     private void Awake()
@@ -52,8 +54,9 @@ public class Room_UI : MonoBehaviour
 
         hiveCell = hc;
         BuildButtons();
+        SetRoomNameText(hc);
+        SetLevelText(hc);
 
-        room_name.name = hc.GetRoom().name;
 
     }
     public void Hide()
@@ -61,7 +64,25 @@ public class Room_UI : MonoBehaviour
         this.transform.GetChild(0).gameObject.SetActive(false);
         TooltipSystem.Hide();
     }
+    public void SetRoomNameText(HiveCell hc)
+    {
 
+        string text = hc.GetRoom().name;
+        Debug.Log(text);
+        if (text == "HiveCorridor(Clone)") text = "Corridor";
+        else if (text == "SalvageRoom(Clone)") text = "Storage";
+        else if(text == "WarRoom(Clone)") text = "Barracks";
+        else if(text == "HarversterRoom(Clone)") text = "Harvester";
+        else if(text == "QueenRoom(Clone)") text = "Queen room";
+        else if(text == "HiveRoom(Clone)") text = "Main Hive";
+        else text = "Room";
+        room_name.text = text;
+  
+    }
+    public void SetLevelText(HiveCell hc)
+    {
+        room_level.text = "Level " + 1;
+    }
     public void SetTask()
     {
         Debug.Log("start task");

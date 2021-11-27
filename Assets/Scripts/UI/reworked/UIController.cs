@@ -91,6 +91,7 @@ public class UIController : MonoBehaviour
     public void CreatePopup(int id, string header = default, string content = default,GameObject callbackObj = null) => popupsHandler.CreateNewPopup(id,mainCanvas,header,content,callbackObj);
     public void OpenBuildMenu() => overlayHandler.OpenBuildMenu();
     public void CloseBuildMenu() => overlayHandler.CloseBuildMenu();
+    public void CloseSettingsMenu() => overlayHandler.CloseSettingsMenu();
     public void HideRoomUI() => Room_UI.Instance.Hide();
     public void HideBugUI() => DBG_UnitUI.Instance.Hide();
 

@@ -26,6 +26,8 @@ public class DBG_UnitUI : MonoBehaviour
 
     [SerializeField]
     TextMeshProUGUI bug_name;
+    [SerializeField]
+    TextMeshProUGUI bug_level;
 
     CoreBug bug;
     public void Show(CoreBug cb)
@@ -39,18 +41,40 @@ public class DBG_UnitUI : MonoBehaviour
 
         bug = cb;
 
-        bug_name.text = bug.name;
+        
+        SetTextBugName(cb);
+        SetTextBugLevel(cb);
 
     }
     public void Hide()
     {
         this.transform.GetChild(0).gameObject.SetActive(false);
+        CellSelectProto.Instance.HideBugSelector();
         TooltipSystem.Hide();
     }
     public void FollowUnit()
     {
         FindObjectOfType<CameraController>().SetTarget(bug.transform);
         Hide();
+    }
+    public void SetTextBugName(CoreBug cb)
+    {
+
+
+
+
+
+        //Here should be the formatting of names
+
+
+
+
+
+        bug_name.text = cb.name;
+    }
+    public void SetTextBugLevel(CoreBug cb)
+    {
+        bug_level.text = "Level "+cb.level.ToString();
     }
     public void Update()
     {
@@ -86,6 +110,8 @@ public class DBG_UnitUI : MonoBehaviour
         // we have a bug selected 
         // we need to trigger bug path
         CellSelectProto.Instance.SetAssignBugState();
+
+
     }
 
     public void EvolveBug()

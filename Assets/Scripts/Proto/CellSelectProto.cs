@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class CellSelectProto : MonoBehaviour
 {
     public enum SelectState { none, bug_selected, cell_selected, build_cell, bug_assign };
@@ -14,9 +14,24 @@ public class CellSelectProto : MonoBehaviour
     [SerializeField] private Sprite unselectedFrame;
     [SerializeField] private Sprite selectedFrame;
     private Vector3 borderStartSize;
-    [SerializeField] private Vector3 onClickFrameScale = new Vector3(1.1f, 1.1f, 1.1f);
     [SerializeField] private float onClickFrameAnimtime = 0.2f;
     [SerializeField] private LeanTweenType onClickFrameEase;
+
+    [Header("Cell selected GFX")]
+    [SerializeField] private GameObject cellSelected_GFX;
+    private LTDescr cellSelectedAnim;
+
+    [Header("Bug selected GFX")]
+    [SerializeField] private GameObject bugSelected_GFX;
+
+    [Header("Bug hover GFX")]
+    [SerializeField] private GameObject bugHover_GFX;
+
+    [Header("CellSelectCanvas")]
+    [SerializeField] private GameObject cellSelectCanvas;
+    [SerializeField] private GameObject occupiedSpotForRoomText;
+    [SerializeField] private Color greenColor;
+    [SerializeField] private Color redColor;
     // changed to singleton 
     private static CellSelectProto _instance;
     public static CellSelectProto Instance
@@ -49,29 +64,6 @@ public class CellSelectProto : MonoBehaviour
     }
     public void ClearSelectionState() => selection_state = SelectState.none;
     public Transform GetFrameTransform() { return frame_border.transform; }
-    public void OnCellSelect_dep()
-    {
-       // if (hc)
-       // {
-       //     if (hc.cell_Type == CellMesh.Cell_type.dirt)
-       //     {
-       //         if (last_selected_room_id == 0)
-       //             hc.cell_Type = CellMesh.Cell_type.corridor;
-       //         if (last_selected_room_id > 0)
-       //             hc.cell_Type = CellMesh.Cell_type.room;
-       //
-       //         hc.BuildRoom();
-       //     }
-       //     else
-       //     {
-       //         Debug.Log("delete room");
-       //         hc.cell_Type = CellMesh.Cell_type.dirt;
-       //         hc.DestroyRoom();
-       //         hc.BuildRoom();
-       //
-       //     }
-       // }
-    }
 
     // selection
     CoreBug  _hover_bug;
@@ -108,10 +100,14 @@ public class CellSelectProto : MonoBehaviour
 
 
     }
+    public void HideBugSelector()
+    {
+        _hover_bug = null;
+        _bug_selected = null;
+    }
     private void GFX_SelectorBugHover()
     {
-        if(_hover_bug != null)
-             frame_border.transform.position = _hover_bug.transform.position + new Vector3(0, 0, 1);
+
         //enable overlay shader on bug?
 
     }
@@ -119,21 +115,14 @@ public class CellSelectProto : MonoBehaviour
     {
         frame_border.transform.localScale = borderStartSize;
     }
-    private void GFX_SelectorCellSelect()
-    {
-        frame_border.GetComponent<SpriteRenderer>().sprite = selectedFrame;
-        frame_border.gameObject.SetActive(true);
-        SetDefaultFrameSize();
 
-        //play animation
-
-        LeanTween.scale(frame_border.gameObject, onClickFrameScale, onClickFrameAnimtime)
-            .setEase(onClickFrameEase)
-            .setOnComplete(() => LeanTween.scale(frame_border.gameObject, borderStartSize, onClickFrameAnimtime).setEase(LeanTweenType.linear));
-    }
     private void GFX_SelectorBugSelect()
     {
         frame_border.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+
+        //its circle over bug for now
+        bugSelected_GFX.SetActive(true);
+        bugSelected_GFX.GetComponent<CellSelector_Locked>().ScaleUp();
         //enable overlay shader on bug?
     }
     //-----------------------------------------------------------
@@ -145,6 +134,46 @@ public class CellSelectProto : MonoBehaviour
 
         GFX_SelectorCellHover(hc);
         
+        if(selection_state == SelectState.bug_assign)
+        {
+            CheckForSpotToAssignGFX(hc);
+        }
+        else
+        {
+            cellSelectCanvas.SetActive(false);
+        }
+
+
+    }
+    private void CheckForSpotToAssignGFX(HiveCell hc)
+    {
+       if(hc.cell_Type == CellMesh.Cell_type.corridor || hc.cell_Type == CellMesh.Cell_type.room)
+        {
+            int max = hc.GetMaxAvailableSlots();
+            int current = hc.GetLeftAvaiableSlots();
+            string text = current + "/" + max;
+            TextMeshProUGUI txtDisplayer = occupiedSpotForRoomText.GetComponent<TextMeshProUGUI>();
+
+            if (current == max) txtDisplayer.color = redColor;
+            else txtDisplayer.color = greenColor;
+
+            txtDisplayer.text = text;
+            cellSelectCanvas.SetActive(true);
+
+        }
+        else
+        {
+            cellSelectCanvas.SetActive(false);
+        }
+
+    }
+
+    private void GetRoomAndLevelInfo(HiveCell hc)
+    {
+        if (hc.cell_Type == CellMesh.Cell_type.corridor || hc.cell_Type == CellMesh.Cell_type.room)
+        {
+
+        }
     }
     public void OnCellSelect(HiveCell hc)
     {
@@ -153,9 +182,9 @@ public class CellSelectProto : MonoBehaviour
 
         Room_UI.Instance.Show(hc);
         DBG_UnitUI.Instance.Hide();
-      //  SetRoomUIPosition();
-        GFX_SelectorCellSelect();
-       
+        cellSelected_GFX.GetComponent<CellSelector_Locked>().ScaleUp();
+
+        CheckForSpotToAssignGFX(hc);
     }
 
     public void OnBugHover(CoreBug bug)
@@ -176,6 +205,7 @@ public class CellSelectProto : MonoBehaviour
         
         if (selection_state != SelectState.cell_selected) selectionPosition = bug.transform.position;
 
+        bugSelected_GFX.transform.position = new Vector3(bug.transform.position.x, bug.transform.position.y, bugSelected_GFX.transform.position.z);
         GFX_SelectorBugSelect();
       //  SetUnitUIPosition();
     }
@@ -185,7 +215,7 @@ public class CellSelectProto : MonoBehaviour
        // Debug.Log("building placed");
         BuildOnCell(cell);
         selection_state = SelectState.none;
-        UIController.instance.SetDefaultState();
+        CloseUI();
     }
     public void SetBuildRoomState()
     {
@@ -418,17 +448,24 @@ public class CellSelectProto : MonoBehaviour
 
     public void OnMapSelect(WorldMapCell selected_map)
     {
-
         OnDeselect();
     }
-
+    public void CloseUI()
+    {
+        if (UIController.instance.GetUIState() == UIController.State.Building) UIController.instance.SetDefaultState();
+        Debug.Log("Closing All UI elements");
+        selection_state = SelectState.none;
+        UIController.instance.HideRoomUI();
+        UIController.instance.CloseBuildMenu();
+        UIController.instance.CloseSettingsMenu();
+        UIController.instance.HideBugUI();
+        OnDeselect();
+    }
     private void Update()
     {
         if (Input.GetKey(KeyCode.Escape))
         {
-            Debug.Log("ESC");
-            selection_state = SelectState.none;
-            OnDeselect();
+            CloseUI();
         }
 
         if (selection_state == SelectState.bug_assign)
@@ -443,6 +480,24 @@ public class CellSelectProto : MonoBehaviour
         {
             SetDefaultFrameSize();
         }
+
+        if (_cellSelected)
+        {
+            cellSelected_GFX.SetActive(true);
+            cellSelected_GFX.transform.position = _cellSelected.transform.position + new Vector3(0, 0, 1);
+            bugSelected_GFX.SetActive(true);
+        }
+        else
+        {
+            cellSelected_GFX.SetActive(false);
+        }
+
+        if (_bug_selected)
+        {
+            bugSelected_GFX.transform.position = _bug_selected.transform.position + new Vector3(0,0,1);
+            bugSelected_GFX.SetActive(true);
+        }
+        else bugSelected_GFX.SetActive(false);
 
         // send bugs that are in queue
         QueueSendBugs();
@@ -489,105 +544,89 @@ public class CellSelectProto : MonoBehaviour
             HiveCell cell = hit.collider.transform.GetComponent<HiveCell>();
             if (cell)
             {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    // new empty cell 
-                    if (cell.cell_Type == CellMesh.Cell_type.dirt)
-                    {
-                        if (selection_state == SelectState.none)
-                        {
-                            // click on empty cell
-                        }
-                        else if (selection_state == SelectState.cell_selected)
-                        {
-                            // click on empty cell
-                            selection_state = SelectState.none;
-                            OnDeselect();
-                        }
-                        else if (selection_state == SelectState.bug_selected)
-                        {
-                            // click on empty cell
-                            selection_state = SelectState.none;
-                            OnDeselect();
-                        }
-                        else if (selection_state == SelectState.build_cell)
-                        {
-                            OnDeselect();
-                            OnPlaceBuilding(cell);
-                        }
-                        else if (selection_state == SelectState.bug_assign)
-                        {
-                            selection_state = SelectState.none;
-                            OnDeselect();
-                        }
 
-                    }
-                    // we have clicked inside room 
-                    if (cell.cell_Type == CellMesh.Cell_type.corridor || cell.cell_Type == CellMesh.Cell_type.room)
+                    if (Input.GetMouseButtonDown(0))
                     {
-                        if (selection_state == SelectState.none)
-                        {
-                            selection_state = SelectState.cell_selected;
-                            OnCellSelect(cell);
-                        }
-                        else if (selection_state == SelectState.cell_selected)
-                        {
-                            // reselect
-                            selection_state = SelectState.cell_selected;
-                            OnCellSelect(cell);
-                        }
-                        else if (selection_state == SelectState.bug_selected)
-                        {
-                            // reselect
-                            selection_state = SelectState.cell_selected;
-                            OnDeselect();
-                            OnCellSelect(cell);
-                        }
-                        else if (selection_state == SelectState.bug_assign)
-                        {
-                            OnAssignBug(cell);
-                        }
-                    }
-                }
-                else
-                {
-                    //Hovering
-                    if (selection_state == SelectState.build_cell)
-                    {
-                        // we can hover a building we want to make 
+                        // new empty cell 
                         if (cell.cell_Type == CellMesh.Cell_type.dirt)
                         {
-                            GhostRoomDisplayer.instance.Display_CanBuildHere();
+                            if (selection_state == SelectState.none)
+                            {
+                                // click on empty cell
+                            }
+                            else if (selection_state == SelectState.cell_selected)
+                            {
+                                // click on empty cell
+                                selection_state = SelectState.none;
+                                OnDeselect();
+                            }
+                            else if (selection_state == SelectState.bug_selected)
+                            {
+                                // click on empty cell
+                                selection_state = SelectState.none;
+                                OnDeselect();
+                            }
+                            else if (selection_state == SelectState.build_cell)
+                            {
+                                OnDeselect();
+                                OnPlaceBuilding(cell);
+                            }
+                            else if (selection_state == SelectState.bug_assign)
+                            {
+                                selection_state = SelectState.none;
+                                OnDeselect();
+                            }
+
                         }
-                        else
+                        // we have clicked inside room 
+                        if (cell.cell_Type == CellMesh.Cell_type.corridor || cell.cell_Type == CellMesh.Cell_type.room)
                         {
-                            GhostRoomDisplayer.instance.Display_CantBuildHere();
-                        }                      
+                            if (selection_state == SelectState.none)
+                            {
+                                selection_state = SelectState.cell_selected;
+                                OnCellSelect(cell);
+                            }
+                            else if (selection_state == SelectState.cell_selected)
+                            {
+                                // reselect
+                                selection_state = SelectState.cell_selected;
+                                OnCellSelect(cell);
+                            }
+                            else if (selection_state == SelectState.bug_selected)
+                            {
+                                // reselect
+                                selection_state = SelectState.cell_selected;
+                                OnDeselect();
+                                OnCellSelect(cell);
+                            }
+                            else if (selection_state == SelectState.bug_assign)
+                            {
+                                OnAssignBug(cell);
+                            }
+                        }
                     }
-                    OnCellHover(cell);
-                }
+                    else
+                    {
+                        //Hovering
+                        if (selection_state == SelectState.build_cell)
+                        {
+                            // we can hover a building we want to make 
+                            if (cell.cell_Type == CellMesh.Cell_type.dirt)
+                            {
+                                GhostRoomDisplayer.instance.Display_CanBuildHere();
+                            }
+                            else
+                            {
+                                GhostRoomDisplayer.instance.Display_CantBuildHere();
+                            }
+                        }
+                        OnCellHover(cell);
+                    }
+
+                
+
             }
         }
-    }
-    private void SetRoomUIPosition()
-    {
-        Vector2 position = Camera.main.WorldToScreenPoint(selectionPosition);
-        Vector2 corner = new Vector2(((position.x > (Screen.width / 2f)) ? 1f : 0f), ((position.y > (Screen.height / 2f)) ? 1f : 0f));
-        RectTransform rectTransform = Room_UI.Instance.gameObject.transform.GetChild(0).GetComponent<RectTransform>();
-        Room_UI.Instance.gameObject.transform.GetChild(0).position = position;
-        rectTransform.pivot = corner;
-      //  rectTransform.anchorMin = position;
-      //  rectTransform.anchorMax = position;
-    }
-    private void SetUnitUIPosition()
-    {
-        Vector2 position = Camera.main.WorldToScreenPoint(selectionPosition);
-        Vector2 corner = new Vector2(((position.x > (Screen.width / 2f)) ? 1f : 0f), ((position.y > (Screen.height / 2f)) ? 1f : 0f));
-        RectTransform rectTransform = DBG_UnitUI.Instance.gameObject.transform.GetChild(0).GetComponent<RectTransform>();
-        DBG_UnitUI.Instance.gameObject.transform.GetChild(0).position = position;
-        rectTransform.pivot = corner;
-     //  rectTransform.anchorMin = position;
-      //  rectTransform.anchorMax = position;
     }
 
 }

@@ -172,6 +172,7 @@ MonoBehaviour:
   target_cell: {fileID: 0}
   asigned_cell: {fileID: 0}
   underlaying_cell: {fileID: 0}
+  bug_evolution: 0
   health: 10
   damage: 1
   interraction_range: 1
@@ -180,6 +181,7 @@ MonoBehaviour:
   bug_action: 0
   coalition: 0
   hitColliders: []
+  splash_dmg: 1
 --- !u!135 &9011951668891319937
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -191,7 +193,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 4
   m_Center: {x: 0, y: 2, z: -1}
 --- !u!1 &658582526553901383
 GameObject:

@@ -27,7 +27,7 @@ public class CoreBug : BugMovement
     public float damage = 1f;
     public float interraction_range = 1f;
     public int decayOnDeadTimer = 20;
-
+    public int level = 1;
     // offset to camera above cells 
     // may not be needed once tiles are replaced with mesh
     protected Vector3 z_offset = new Vector3(0, 0, -0.1f);
