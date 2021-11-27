@@ -27336,8 +27336,8 @@ MonoBehaviour:
   wood: 50
   population: 2
   day_night_duration: 60
-  isDay: 0
-  dayDuration: 1
+  isDay: 1
+  dayDuration: 0
   day_count: 20
   room_corridor_cost: 0500000001000000
   room_harvester_cost: 0a00000003000000
