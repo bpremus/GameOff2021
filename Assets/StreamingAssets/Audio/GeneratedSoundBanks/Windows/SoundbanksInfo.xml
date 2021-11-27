@@ -19,7 +19,7 @@
 				<GameParameter Id="3866931204" Name="Camera_Y" ObjectPath="\Game Parameters\Default Work Unit\Camera_Y"/>
 			</GameParameters>
 		</SoundBank>
-		<SoundBank Id="3161908922" Language="SFX" Hash="2371216357">
+		<SoundBank Id="3161908922" Language="SFX" Hash="601973999">
 			<ObjectPath>\SoundBanks\Default Work Unit\Main</ObjectPath>
 			<ShortName>Main</ShortName>
 			<Path>Main.bnk</Path>
@@ -64,11 +64,19 @@
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
-				<Event Id="1149159311" Name="Play_Button_Click" ObjectPath="\Events\Default Work Unit\UI\Play_Button_Click" DurationType="OneShot" DurationMin="0.060686" DurationMax="0.064369">
+				<Event Id="1149159311" Name="Play_Button_Click" ObjectPath="\Events\Default Work Unit\UI\Play_Button_Click" DurationType="OneShot" DurationMin="0.054637" DurationMax="0.059651">
 					<IncludedMemoryFiles>
-						<File Id="252928958" Language="SFX">
-							<ShortName>SFX_Button_Click.wav</ShortName>
-							<Path>SFX\SFX_Button_Click_10C4C929.wem</Path>
+						<File Id="651304999" Language="SFX">
+							<ShortName>Button_Replacement_Test.wav</ShortName>
+							<Path>SFX\Button_Replacement_Test_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="757105484" Name="Play_Button_Exit_Click" ObjectPath="\Events\Default Work Unit\UI\Play_Button_Exit_Click" DurationType="OneShot" DurationMin="0.060686" DurationMax="0.065305">
+					<IncludedMemoryFiles>
+						<File Id="621729059" Language="SFX">
+							<ShortName>Button_Exit_Click.wav</ShortName>
+							<Path>SFX\Button_Exit_Click_10C4C929.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
@@ -77,6 +85,14 @@
 						<File Id="651579877" Language="SFX">
 							<ShortName>SFX_Button_Hover.wav</ShortName>
 							<Path>SFX\SFX_Button_Hover_10C4C929.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1662477650" Name="Play_Button_Settings" ObjectPath="\Events\Default Work Unit\UI\Play_Button_Settings" DurationType="OneShot" DurationMin="0.121371" DurationMax="0.128737">
+					<IncludedMemoryFiles>
+						<File Id="363842329" Language="SFX">
+							<ShortName>Button_Settings.wav</ShortName>
+							<Path>SFX\Button_Settings_10C4C929.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
@@ -96,7 +112,7 @@
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
-				<Event Id="735132331" Name="Play_Small_Bug_Death" ObjectPath="\Events\Default Work Unit\Bugs\Play_Small_Bug_Death" MaxAttenuation="10.000000" DurationType="OneShot" DurationMin="0.307646" DurationMax="0.472362">
+				<Event Id="735132331" Name="Play_Small_Bug_Death" ObjectPath="\Events\Default Work Unit\Bugs\Play_Small_Bug_Death" MaxAttenuation="10.000000" DurationType="OneShot" DurationMin="0.318495" DurationMax="0.489020">
 					<IncludedMemoryFiles>
 						<File Id="81576918" Language="SFX">
 							<ShortName>Death_Small_Bug_1.wav</ShortName>

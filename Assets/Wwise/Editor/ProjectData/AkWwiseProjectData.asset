@@ -58,7 +58,7 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: ab7a7d8fa7af904aad885e3b30a5f3e5
     GuidInternal: 
-    m_lastTime: -8585635758406033235
+    m_lastTime: -8585635668437677870
     List:
     - name: Main
       guid: c7ed1213001d794c9f3d34785e89ab38
@@ -77,7 +77,7 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: d2d748c853878f419a502ed6d2b53f2b
     GuidInternal: 
-    m_lastTime: -8585635749761687077
+    m_lastTime: -8585635674595295293
     List:
     - name: Ambient
       guid: fd4e3f4d2b5b3f408bd25e3289266b50
@@ -171,7 +171,21 @@ MonoBehaviour:
         ObjectType: 3
       Path: Default Work Unit\UI\Play_Button_Click
       maxAttenuation: 0
-      maxDuration: 0.064369
+      maxDuration: 0.059651
+      minDuration: 0.054637
+    - name: Play_Button_Exit_Click
+      guid: 47ffeca5f037634b9fd530c42a8c3edb
+      id: 757105484
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: UI
+        ObjectType: 4
+      - ElementName: Play_Button_Exit_Click
+        ObjectType: 3
+      Path: Default Work Unit\UI\Play_Button_Exit_Click
+      maxAttenuation: 0
+      maxDuration: 0.065305
       minDuration: 0.060686
     - name: Play_Button_Hover
       guid: ce0312d62d14414082946d71a19b95b4
@@ -187,6 +201,20 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0.198764
       minDuration: 0.176874
+    - name: Play_Button_Settings
+      guid: 5b82197f4e710c4eb9f9786eec20c89f
+      id: 1662477650
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: UI
+        ObjectType: 4
+      - ElementName: Play_Button_Settings
+        ObjectType: 3
+      Path: Default Work Unit\UI\Play_Button_Settings
+      maxAttenuation: 0
+      maxDuration: 0.128737
+      minDuration: 0.121371
     - name: Play_Room_Destruction
       guid: fb67399008f52e4fb7b06dea7c40f996
       id: 1444742574
@@ -227,8 +255,8 @@ MonoBehaviour:
         ObjectType: 3
       Path: Default Work Unit\Bugs\Play_Small_Bug_Death
       maxAttenuation: 10
-      maxDuration: 0.472362
-      minDuration: 0.307646
+      maxDuration: 0.48902
+      minDuration: 0.318495
     - name: Play_Small_Bug_Movement
       guid: 98496e72556df944b31eb86dbb03e35f
       id: 1017378692

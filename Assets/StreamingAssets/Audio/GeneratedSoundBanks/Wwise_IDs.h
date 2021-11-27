@@ -18,7 +18,9 @@ namespace AK
         static const AkUniqueID PLAY_BIG_BUG_MOVEMENT = 3285809237U;
         static const AkUniqueID PLAY_BIGCLAW_ATTACK = 2207025252U;
         static const AkUniqueID PLAY_BUTTON_CLICK = 1149159311U;
+        static const AkUniqueID PLAY_BUTTON_EXIT_CLICK = 757105484U;
         static const AkUniqueID PLAY_BUTTON_HOVER = 4021863785U;
+        static const AkUniqueID PLAY_BUTTON_SETTINGS = 1662477650U;
         static const AkUniqueID PLAY_ROOM_DESTRUCTION = 1444742574U;
         static const AkUniqueID PLAY_ROOM_PLACEMENT = 1954657867U;
         static const AkUniqueID PLAY_SMALL_BUG_DEATH = 735132331U;
