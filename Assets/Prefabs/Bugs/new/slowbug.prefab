@@ -61,7 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {x: 0, y: 0, z: 0}
   rotation_speed: 10
-  move_speed: 2
+  move_speed: 1
   animators: []
   Debug_movement_mode: 0
   stop_distance: 0.05
@@ -76,6 +76,7 @@ MonoBehaviour:
   damage: 1
   interraction_range: 4
   decayOnDeadTimer: 20
+  bug_base_level: 1
   bugTask: 1
   bug_action: 0
   coalition: 0
@@ -260,7 +261,7 @@ PrefabInstance:
     - target: {fileID: 66594239432594908, guid: a56de3fc2c452534b9cb222c9a4c520c, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: -8543238341381665365, guid: cef813026fbbf8a40a0cb6d5d8689c9d, type: 3}
+      objectReference: {fileID: -8543238341381665365, guid: deedb9cc79614294f988a3f36c6256ad, type: 3}
     - target: {fileID: 66594239432594908, guid: a56de3fc2c452534b9cb222c9a4c520c, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -423,16 +424,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4881968544825393321, guid: 4bff8866dd30ff242bba32a478ff2494, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4881968544825393321, guid: 4bff8866dd30ff242bba32a478ff2494, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4881968544825393321, guid: 4bff8866dd30ff242bba32a478ff2494, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.42
       objectReference: {fileID: 0}
     - target: {fileID: 4881968544825393321, guid: 4bff8866dd30ff242bba32a478ff2494, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1.41
       objectReference: {fileID: 0}
     - target: {fileID: 4881968544825393321, guid: 4bff8866dd30ff242bba32a478ff2494, type: 3}
       propertyPath: m_LocalRotation.w

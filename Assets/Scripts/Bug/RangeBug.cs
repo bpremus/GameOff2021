@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class RangeBug : WarriorBug
 {
+    [SerializeField]
+    ParticleSystem vfx_shoot;
 
     protected override void Start()
     {
@@ -47,6 +49,8 @@ public class RangeBug : WarriorBug
             // flame thrower like animation
             bugAnimation = BugAnimation.attack;
             othrBugs[i].OnInteract(this);
+
+            vfx_shoot.Play();
 
             Vector3 dir = othrBugs[i].transform.position - transform.position;
             Debug.DrawRay(transform.position, dir * interraction_range);
