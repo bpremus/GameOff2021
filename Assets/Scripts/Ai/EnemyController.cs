@@ -117,13 +117,13 @@ public class EnemyController : MonoBehaviour
 
             if (add_mid_bugs > 0)
             {
-                BugRaid pillager = new BugRaid(4, speed_boost, health_boost, 0, target);
+                BugRaid pillager = new BugRaid(6, speed_boost, health_boost, 0, target);
                 bugs_to_spawn.Enqueue(pillager);
             }
 
             if (add_mid_bugs > 0)
             {
-                BugRaid spike = new BugRaid(5, speed_boost, health_boost, 0, target);
+                BugRaid spike = new BugRaid(7, speed_boost, health_boost, 0, target);
                 bugs_to_spawn.Enqueue(spike);
             }
 

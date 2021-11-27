@@ -18171,6 +18171,8 @@ MonoBehaviour:
   - {fileID: 658582526522619735, guid: 434f26ee5c194d54487a6a12baf9f3bf, type: 3}
   - {fileID: 2290125106946955862, guid: ff39edff40941804d8bffab139f2b5b5, type: 3}
   - {fileID: 1175946443047106057, guid: 8ea5be6810593244a98fc692d3759893, type: 3}
+  - {fileID: 1664299985290156309, guid: 10a241a2ba46cf2469690ec88971a584, type: 3}
+  - {fileID: 1664299985290156309, guid: 10a241a2ba46cf2469690ec88971a584, type: 3}
   - {fileID: 8405167607926938731, guid: 088dbabcf83a5f5409ad38b81ab9f289, type: 3}
   - {fileID: 6348623539465587848, guid: 16c9f6643496e9245b2b58a35c5f3e00, type: 3}
   FoodAndWoodPrefabs:
@@ -27335,7 +27337,7 @@ MonoBehaviour:
   population: 2
   day_night_duration: 60
   isDay: 0
-  dayDuration: 0
+  dayDuration: 1
   day_count: 20
   room_corridor_cost: 0500000001000000
   room_harvester_cost: 0a00000003000000
