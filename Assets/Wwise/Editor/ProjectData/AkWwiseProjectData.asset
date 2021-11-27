@@ -58,7 +58,7 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: ab7a7d8fa7af904aad885e3b30a5f3e5
     GuidInternal: 
-    m_lastTime: -8585635902431750531
+    m_lastTime: -8585635758406033235
     List:
     - name: Main
       guid: c7ed1213001d794c9f3d34785e89ab38
@@ -77,7 +77,7 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: d2d748c853878f419a502ed6d2b53f2b
     GuidInternal: 
-    m_lastTime: -8585635902826672981
+    m_lastTime: -8585635749761687077
     List:
     - name: Ambient
       guid: fd4e3f4d2b5b3f408bd25e3289266b50
@@ -145,6 +145,20 @@ MonoBehaviour:
       maxAttenuation: 9
       maxDuration: -1
       minDuration: -1
+    - name: Play_Bigclaw_Attack
+      guid: d59e88ce7336254aae92d403eefd286e
+      id: 2207025252
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Bugs
+        ObjectType: 4
+      - ElementName: Play_Bigclaw_Attack
+        ObjectType: 3
+      Path: Default Work Unit\Bugs\Play_Bigclaw_Attack
+      maxAttenuation: 10
+      maxDuration: 0.470529
+      minDuration: 0.315746
     - name: Play_Button_Click
       guid: 046ae7eaa487d44dad9cf8d18b0f9bd8
       id: 1149159311
@@ -367,6 +381,11 @@ MonoBehaviour:
     GuidInternal: 
     m_lastTime: -8585654763839644713
     List: []
-  ExpandedItems: []
+  ExpandedItems:
+  - /Wwise_GameOff2021
+  - /Wwise_GameOff2021/Events
+  - /Wwise_GameOff2021/Events/Default Work Unit
+  - /Wwise_GameOff2021/Events/Default Work Unit/Ambient
+  - /Wwise_GameOff2021/Events/Default Work Unit/Bugs
   autoPopulateEnabled: 1
   CurrentPluginConfig: 

@@ -11,7 +11,7 @@
 	<StreamedFiles/>
 	<MediaFilesNotInAnyBank/>
 	<SoundBanks>
-		<SoundBank Id="1355168291" Language="SFX" Hash="2391500253">
+		<SoundBank Id="1355168291" Language="SFX" Hash="1047045362">
 			<ObjectPath>Init</ObjectPath>
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
@@ -19,7 +19,7 @@
 				<GameParameter Id="3866931204" Name="Camera_Y" ObjectPath="\Game Parameters\Default Work Unit\Camera_Y"/>
 			</GameParameters>
 		</SoundBank>
-		<SoundBank Id="3161908922" Language="SFX" Hash="4253537220">
+		<SoundBank Id="3161908922" Language="SFX" Hash="2371216357">
 			<ObjectPath>\SoundBanks\Default Work Unit\Main</ObjectPath>
 			<ShortName>Main</ShortName>
 			<Path>Main.bnk</Path>
@@ -45,6 +45,22 @@
 						<File Id="523779637" Language="SFX">
 							<ShortName>Movement_Big_Bug.wav</ShortName>
 							<Path>SFX\Movement_Big_Bug_D79FB2B7.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="2207025252" Name="Play_Bigclaw_Attack" ObjectPath="\Events\Default Work Unit\Bugs\Play_Bigclaw_Attack" MaxAttenuation="10.000000" DurationType="OneShot" DurationMin="0.315746" DurationMax="0.470529">
+					<IncludedMemoryFiles>
+						<File Id="219297782" Language="SFX">
+							<ShortName>Bigclaw_Attack_2.wav</ShortName>
+							<Path>SFX\Bigclaw_Attack_2_10C4C929.wem</Path>
+						</File>
+						<File Id="297837256" Language="SFX">
+							<ShortName>Bigclaw_Attack_3.wav</ShortName>
+							<Path>SFX\Bigclaw_Attack_3_10C4C929.wem</Path>
+						</File>
+						<File Id="711592116" Language="SFX">
+							<ShortName>Bigclaw_Attack_1.wav</ShortName>
+							<Path>SFX\Bigclaw_Attack_1_10C4C929.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
