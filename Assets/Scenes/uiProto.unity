@@ -19427,8 +19427,9 @@ MonoBehaviour:
   - {fileID: 658582526522619735, guid: 434f26ee5c194d54487a6a12baf9f3bf, type: 3}
   - {fileID: 2290125106946955862, guid: ff39edff40941804d8bffab139f2b5b5, type: 3}
   - {fileID: 1175946443047106057, guid: 8ea5be6810593244a98fc692d3759893, type: 3}
+  - {fileID: 1664299985290156309, guid: 10a241a2ba46cf2469690ec88971a584, type: 3}
+  - {fileID: 3270396882474652906, guid: e453a1e328baa5a4eb41f8ef43e1c274, type: 3}
   FoodAndWoodPrefabs:
-  - {fileID: 3861675669014948337, guid: 0acd77074adcbd141b43ff449fc02446, type: 3}
   - {fileID: 6071048527007354161, guid: 95a00b40ca02c7346b0c47bd0292c6ac, type: 3}
   - {fileID: 2431506650734352544, guid: cde5dc2c2b31a1747addf3cd7b6527c6, type: 3}
   - {fileID: 8989178693160460003, guid: 1deb0d72a03238f40ba66a46531caf79, type: 3}
@@ -38608,7 +38609,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2c77ff3dd1ec0cc4e91d7798c19f0a82, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2054ed209c040e54aa106fb4d62eefa3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -47141,7 +47142,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2c77ff3dd1ec0cc4e91d7798c19f0a82, type: 3}
+  m_Sprite: {fileID: 21300000, guid: de057a85c6e1dc741a06e91663967e7c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -65164,7 +65165,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2c77ff3dd1ec0cc4e91d7798c19f0a82, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8eaf5096788cbda4c902ce5208e0b5ee, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
