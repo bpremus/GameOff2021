@@ -231,9 +231,12 @@ public class CellSelectProto : MonoBehaviour
         cellSelected_GFX.GetComponent<CellSelector_Locked>().ScaleUp();
         ShowRoomCapacityDisplay_Selected(hc);
 
-      //  range_distance_ui.transform.position = hc.transform.position + new Vector3(0, 0, 1);
-      //  float d = hc.GetRoom().GetRomRange();
-      //  range_distance_ui.transform.localScale = new Vector3(d, d, d);
+        if (range_distance_ui)
+        { 
+            range_distance_ui.transform.position = hc.transform.position + new Vector3(0, 0, 1);
+            float d = hc.GetRoom().GetRomRange();
+            range_distance_ui.transform.localScale = new Vector3(d * 2, d *2, 0);
+        }
 
     }
 
@@ -257,7 +260,17 @@ public class CellSelectProto : MonoBehaviour
 
         bugSelected_GFX.transform.position = new Vector3(bug.transform.position.x, bug.transform.position.y, bugSelected_GFX.transform.position.z);
         GFX_SelectorBugSelect();
-      //  SetUnitUIPosition();
+        //  SetUnitUIPosition();
+
+        if (range_distance_ui)
+        {
+
+                range_distance_ui.transform.position = bug.transform.position + new Vector3(0, 0, 1);
+                float d = bug.interraction_range;
+                range_distance_ui.transform.localScale = new Vector3(d * 2, d * 2, 0);
+            
+        }
+
     }
 
     public void OnPlaceBuilding(HiveCell cell)
@@ -448,6 +461,14 @@ public class CellSelectProto : MonoBehaviour
        // frame_border.GetComponent<SpriteRenderer>().sprite = unselectedFrame;
         frame_border.transform.localScale = borderStartSize;
         HideRoomCapacityDisplay();
+
+        if (range_distance_ui)
+        {
+            range_distance_ui.transform.position = new Vector3(0, 0, -5);
+            range_distance_ui.transform.localScale = Vector3.zero;
+        }
+                
+
     }
 
     private void OnDrawGizmos()

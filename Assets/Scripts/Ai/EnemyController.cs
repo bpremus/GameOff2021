@@ -238,7 +238,15 @@ public class EnemyController : MonoBehaviour
         {
             // bugs have found a weak spot in our defense
             EnemyController.Instance.AssignGoodPillagePoint(bug.target_cell);
+            Debug.Log("bug has reached destination");
+            OnDestroyBug();
         }
+
+        public void OnDestroyBug()
+        {
+            bug.OnAIEndDestroy();
+        }
+
     }
 
     Queue<HiveCell> GoodPillagePoints = new Queue<HiveCell>();

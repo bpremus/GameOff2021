@@ -165,29 +165,26 @@ public class HiveGenerator : MonoBehaviour
         
         int d = width / 2;
         
-        cells[d    ][height - 3].BuildCooridor();
-        cells[d + 1][height - 4].BuildRoom(HiveCell.RoomContext.war);
-      //  cells[d + 1][height - 4].dCost = 20;
-      //  cells[d + 2][height - 3].BuildCooridor();
-
-        cells[d + 2][height - 4].BuildCooridor();
-        cells[d + 2][height - 5].BuildCooridor();
-        cells[d - 1][height - 4].BuildRoom(HiveCell.RoomContext.hive);
-        cells[d - 1][height - 5].BuildCooridor();
-        cells[d - 2][height - 5].BuildRoom(HiveCell.RoomContext.harvester);
-        cells[d + 3][height - 5].BuildRoom(HiveCell.RoomContext.salvage);
-        cells[d + 2][height - 6].BuildCooridor();
-        cells[d + 1][height - 6].BuildCooridor();
-        cells[d    ][height - 6].BuildCooridor();
-        cells[d - 1][height - 6].BuildCooridor();
-        cells[d + 1][height - 3].BuildCooridor();
-        cells[d + 1][height - 7].BuildRoom(HiveCell.RoomContext.queen);
+       // cells[d    ][height - 3].BuildCooridor();
+       // cells[d + 1][height - 4].BuildRoom(HiveCell.RoomContext.war);
+       // cells[d + 2][height - 4].BuildCooridor();
+       // cells[d + 2][height - 5].BuildCooridor();
+       // cells[d - 1][height - 4].BuildRoom(HiveCell.RoomContext.hive);
+       // cells[d - 1][height - 5].BuildCooridor();
+       // cells[d - 2][height - 5].BuildRoom(HiveCell.RoomContext.harvester);
+       // cells[d + 3][height - 5].BuildRoom(HiveCell.RoomContext.salvage);
+       // cells[d + 2][height - 6].BuildCooridor();
+       // cells[d + 1][height - 6].BuildCooridor();
+       // cells[d    ][height - 6].BuildCooridor();
+       // cells[d - 1][height - 6].BuildCooridor();
+       // cells[d + 1][height - 3].BuildCooridor();
+       // cells[d + 1][height - 7].BuildRoom(HiveCell.RoomContext.queen);
 
 
-        //   cells[d][height - 3].BuildCooridor();
-        //   cells[d][height - 4].BuildCooridor();
-        //   cells[d][height - 5].BuildCooridor();
-        //   cells[d][height - 6].BuildRoom(HiveCell.RoomContext.queen);
+           cells[d][height - 3].BuildCooridor();
+           cells[d][height - 4].BuildCooridor();
+           cells[d][height - 5].BuildCooridor();
+           cells[d][height - 6].BuildRoom(HiveCell.RoomContext.hive);
 
         RefreshAllCells();
         

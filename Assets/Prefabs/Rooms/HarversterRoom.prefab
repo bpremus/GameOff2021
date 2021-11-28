@@ -126,8 +126,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent_cell: {fileID: 0}
-  room_detect_distance: 3
   assigned_bugs: []
-  max_asigned_units: 3
+  max_asigned_units: 5
+  room_detect_distance: 1
+  coalition: 0
+  hitColliders: []
   gather_destination: {fileID: 0}
   gather_duration_time: 1

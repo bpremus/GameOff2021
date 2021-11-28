@@ -101,7 +101,8 @@ MonoBehaviour:
   parent_cell: {fileID: 0}
   assigned_bugs: []
   max_asigned_units: 3
-  room_detect_distance: 10
+  room_detect_distance: 6
+  coalition: 0
   hitColliders: []
 --- !u!1 &1876871982071286008
 GameObject:

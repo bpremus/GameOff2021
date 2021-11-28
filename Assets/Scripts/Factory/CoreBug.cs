@@ -158,6 +158,14 @@ public class CoreBug : BugMovement
         }
     }
 
+    public void OnAIEndDestroy()
+    {
+
+        if (harvest_object)
+            Destroy(harvest_object);
+
+        OnLateDecay();
+    }
 
     public virtual void OnLateDie()
     {
