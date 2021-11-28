@@ -319,6 +319,7 @@ MonoBehaviour:
   baseScale: {x: 1.1, y: 1.1, z: 1.1}
   targetScale: {x: 1.2, y: 1.2, z: 1.2}
   animInTime: 0.2
+  applyLocally: 1
 --- !u!114 &5094382099769913866
 MonoBehaviour:
   m_ObjectHideFlags: 0

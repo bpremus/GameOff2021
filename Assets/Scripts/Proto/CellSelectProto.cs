@@ -27,9 +27,13 @@ public class CellSelectProto : MonoBehaviour
     [Header("Bug hover GFX")]
     [SerializeField] private GameObject bugHover_GFX;
 
-    [Header("CellSelectCanvas")]
-    [SerializeField] private GameObject cellSelectCanvas;
-    [SerializeField] private GameObject occupiedSpotForRoomText;
+    [Header("CellselectorCanvas")]
+    [SerializeField] private GameObject cellHoverCanvas;
+    [SerializeField] private GameObject occupiedSpotForRoomText_hover;
+
+    [SerializeField] private GameObject cellSelectedCanvas;
+    [SerializeField] private GameObject occupiedSpotForRoomText_selected;
+
     [SerializeField] private Color greenColor;
     [SerializeField] private Color redColor;
     // changed to singleton 
@@ -140,10 +144,56 @@ public class CellSelectProto : MonoBehaviour
         }
         else
         {
-            cellSelectCanvas.SetActive(false);
+            cellHoverCanvas.SetActive(false);
         }
 
 
+    }
+
+    private string GetRoomCapacityInfo(HiveCell hc)
+    {
+        string text;
+        if (hc.cell_Type == CellMesh.Cell_type.corridor || hc.cell_Type == CellMesh.Cell_type.room)
+        {
+            int max = hc.GetMaxAvailableSlots();
+            int current = hc.GetLeftAvaiableSlots();
+            text = current + "/" + max;
+        }
+        else text = null;
+
+        return text;
+
+    }
+    private Color GetColorForRoomCapacity(HiveCell hc)
+    {
+        Color color = Color.white;
+        int max = hc.GetMaxAvailableSlots();
+        int current = hc.GetLeftAvaiableSlots();
+        if (current == max) color = redColor;
+        else color = greenColor;
+
+        return color;
+    }
+    private void ShowRoomCapacityDisplay_Hover(HiveCell hc)
+    {
+        TextMeshProUGUI txtDisplayer = occupiedSpotForRoomText_hover.GetComponent<TextMeshProUGUI>();
+        txtDisplayer.text = GetRoomCapacityInfo(hc);
+        txtDisplayer.color = GetColorForRoomCapacity(hc);
+
+        cellHoverCanvas.SetActive(true);
+    }
+    private void ShowRoomCapacityDisplay_Selected(HiveCell hc)
+    {
+        TextMeshProUGUI txtDisplayer = occupiedSpotForRoomText_selected.GetComponent<TextMeshProUGUI>();
+        txtDisplayer.text = GetRoomCapacityInfo(hc);
+        txtDisplayer.color = GetColorForRoomCapacity(hc);
+
+        cellSelectedCanvas.SetActive(true);
+    }
+
+    private void HideRoomCapacityDisplay()
+    {
+        cellHoverCanvas.SetActive(true);
     }
     private void CheckForSpotToAssignGFX(HiveCell hc)
     {
@@ -152,28 +202,20 @@ public class CellSelectProto : MonoBehaviour
             int max = hc.GetMaxAvailableSlots();
             int current = hc.GetLeftAvaiableSlots();
             string text = current + "/" + max;
-            TextMeshProUGUI txtDisplayer = occupiedSpotForRoomText.GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI txtDisplayer = occupiedSpotForRoomText_hover.GetComponent<TextMeshProUGUI>();
 
             if (current == max) txtDisplayer.color = redColor;
             else txtDisplayer.color = greenColor;
 
             txtDisplayer.text = text;
-            cellSelectCanvas.SetActive(true);
+            cellHoverCanvas.SetActive(true);
 
         }
         else
         {
-            cellSelectCanvas.SetActive(false);
+            cellHoverCanvas.SetActive(false);
         }
 
-    }
-
-    private void GetRoomAndLevelInfo(HiveCell hc)
-    {
-        if (hc.cell_Type == CellMesh.Cell_type.corridor || hc.cell_Type == CellMesh.Cell_type.room)
-        {
-
-        }
     }
     public void OnCellSelect(HiveCell hc)
     {
@@ -183,8 +225,7 @@ public class CellSelectProto : MonoBehaviour
         Room_UI.Instance.Show(hc);
         DBG_UnitUI.Instance.Hide();
         cellSelected_GFX.GetComponent<CellSelector_Locked>().ScaleUp();
-
-        CheckForSpotToAssignGFX(hc);
+        ShowRoomCapacityDisplay_Selected(hc);
     }
 
     public void OnBugHover(CoreBug bug)
@@ -322,44 +363,55 @@ public class CellSelectProto : MonoBehaviour
 
     protected void BuildOnCell(HiveCell hc)
     {
+       
         if (hc.cell_Type == CellMesh.Cell_type.dirt)
         {
-          
+            HiveCell.RoomContext context = HiveCell.RoomContext.empty;
             if (last_selected_room_id == 0)
             {
                 hc.BuildCooridor();
+                context = HiveCell.RoomContext.corridor;
                 Debug.Log("Created corridor");
+
             }
             // if its a room 
             else if (last_selected_room_id == 1)
             {
                 hc.BuildRoom(HiveCell.RoomContext.salvage);
+                context = HiveCell.RoomContext.salvage;
                 Debug.Log("Created Storage");
             }
             else if (last_selected_room_id == 2)
             {
                 hc.BuildRoom(HiveCell.RoomContext.war);
+                context = HiveCell.RoomContext.war;
                 Debug.Log("Created barracks");
             }
             else if (last_selected_room_id == 3)
             {
                 hc.BuildRoom(HiveCell.RoomContext.harvester);
+                context = HiveCell.RoomContext.harvester;
                 Debug.Log("Created harvester");
             }
             else if (last_selected_room_id == 4)
             {
                 hc.BuildRoom(HiveCell.RoomContext.queen);
+                context = HiveCell.RoomContext.queen;
                 Debug.Log("Created Queen room");
             }
 
+            GameController.Instance.OnRooomBuild(context);
             hc.BuildRoom();
+            
            
         }
     }
 
-    public void SetDestroyRoom(HiveCell cell)
+    public void DestroyCell(HiveCell hc)
     {
-        cell.DestroyRoom();
+        //
+        hc.DestroyRoom();
+        
         OnDeselect();
     }
 
@@ -386,6 +438,7 @@ public class CellSelectProto : MonoBehaviour
         frame_border.transform.position = new Vector3(0, 0, -5);
        // frame_border.GetComponent<SpriteRenderer>().sprite = unselectedFrame;
         frame_border.transform.localScale = borderStartSize;
+        HideRoomCapacityDisplay();
     }
 
     private void OnDrawGizmos()
@@ -484,6 +537,7 @@ public class CellSelectProto : MonoBehaviour
         if (_cellSelected)
         {
             cellSelected_GFX.SetActive(true);
+            
             cellSelected_GFX.transform.position = _cellSelected.transform.position + new Vector3(0, 0, 1);
             bugSelected_GFX.SetActive(true);
         }

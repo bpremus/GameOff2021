@@ -8,6 +8,7 @@ public class ButtonAnim : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     [SerializeField] private Vector3 baseScale = new Vector3(0.85f,0.85f,0.85f);
     [SerializeField] private Vector3 targetScale = Vector3.one;
     [SerializeField] private float animInTime = 0.2f;
+    [SerializeField] private bool applyLocally = false;
     private LTDescr anim;
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -19,6 +20,14 @@ public class ButtonAnim : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         LeanTween.cancel(anim.uniqueId);
         LeanTween.scale(gameObject, baseScale, animInTime/2);
     }
+    void OnEnable()
+    {
+        if (applyLocally)
+        {
+            transform.localScale = Vector3.zero;
+            LeanTween.scale(gameObject, baseScale, animInTime);
+        }
 
+    }
     void OnDisable() => transform.localScale = baseScale;
 }

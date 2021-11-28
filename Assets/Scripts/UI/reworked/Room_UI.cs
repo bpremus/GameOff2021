@@ -22,6 +22,19 @@ public class Room_UI : MonoBehaviour
     TextMeshProUGUI room_level;
     [SerializeField]
     GameObject assignedBugsHolder;
+
+    // - -  -   -  - - - - - -  -  - - - - -  - - - - 
+    [Header("Header color for different room types")]
+    [SerializeField] private bool disableColorChange;
+    [SerializeField] private GameObject currentRoomHeader;
+
+    [SerializeField] private Color corridorColor;
+    [SerializeField] private Color barracksColor;
+    [SerializeField] private Color storageColor;
+    [SerializeField] private Color harvesterColor;
+    [SerializeField] private Color queenColor;
+    [SerializeField] private Color hiveColor;
+    // - - - - -- - - - - -  - - - -  - --  - -
     List<CoreBug> listed_bugs = new List<CoreBug>();
     private void Awake()
     {
@@ -42,6 +55,7 @@ public class Room_UI : MonoBehaviour
             CellSelectProto.Instance.SetAssignBugState();
         }
 
+        if (!this.transform.GetChild(0).gameObject.activeInHierarchy) assignedBugsHolder.SetActive(false);
     }
     public void Show(HiveCell hc)
     {
@@ -55,6 +69,7 @@ public class Room_UI : MonoBehaviour
         hiveCell = hc;
         BuildButtons();
         SetRoomNameText(hc);
+        SetHeaderColor();
         SetLevelText(hc);
 
 
@@ -82,6 +97,42 @@ public class Room_UI : MonoBehaviour
     public void SetLevelText(HiveCell hc)
     {
         room_level.text = "Level " + 1;
+    }
+
+    public void SetHeaderColor()
+    {
+        Color currentColor;
+        if (disableColorChange) { currentRoomHeader.GetComponent<Image>().color = corridorColor;return; }
+        if (currentRoomHeader == null) return;
+
+       
+        switch (room_name.text)
+        {
+            case "Corridor":
+                currentColor = corridorColor;
+                break;
+            case "Storage":
+                currentColor = storageColor;
+                break;
+            case "Barracks":
+                currentColor = barracksColor;
+                break;
+            case "Harvester":
+                currentColor = harvesterColor;
+                break;
+            case "Queen room":
+                currentColor = queenColor;
+                break;
+            case "Main Hive":
+                currentColor = hiveColor;
+                break;
+
+            default:
+                currentColor = corridorColor;
+                break;
+        }
+
+        currentRoomHeader.GetComponent<Image>().color = currentColor; 
     }
     public void SetTask()
     {
@@ -149,6 +200,7 @@ public class Room_UI : MonoBehaviour
     public void DestroyRoom(bool b)
     {
         if(b)
-         CellSelectProto.Instance.SetDestroyRoom(hiveCell);
+         CellSelectProto.Instance.DestroyCell(hiveCell);
     }
+
 }

@@ -51,16 +51,25 @@ public class BuildManager : MonoBehaviour
       int food = GameController.Instance.GetFood();
       int wood = GameController.Instance.GetWood();
 
-        //need to check for needed resources - maybe separate script which holds "database" of rooms costs / ghost room prefabs / amount of rooms      
-        // maybe switching to scriptable objects would simplify things? - deezaath
+      int[] roomCost = GameController.Instance.GetRoomCost(_roomInd);
 
         // case : not enough resources
 
         //return false
 
         //case : enough, send info back to uicontroller to display ghost room of roomid room
-        CellSelectProto.Instance.SetBuildID(_roomInd);
-        return true;
+
+        if (wood >= roomCost[0] && food >= roomCost[1])
+        {
+            CellSelectProto.Instance.SetBuildID(_roomInd);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+
     } 
     public void CreateNewRoom(int roomInd)
     {
