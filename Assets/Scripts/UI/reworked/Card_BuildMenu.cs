@@ -42,7 +42,11 @@ public class Card_BuildMenu : MonoBehaviour,IPointerEnterHandler,IPointerExitHan
     public void SetCosts()
     {
         int[] cost = GameController.Instance.GetRoomCost(roomId);
-        woodCost.text = cost[0].ToString();
-        foodCost.text = cost[1].ToString();
+        if(woodCost != null && foodCost != null)
+        {
+            woodCost.text = cost[0].ToString();
+            foodCost.text = cost[1].ToString();
+        }
+
     }
 }

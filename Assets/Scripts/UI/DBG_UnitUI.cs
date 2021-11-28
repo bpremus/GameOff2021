@@ -74,7 +74,7 @@ public class DBG_UnitUI : MonoBehaviour
     }
     public void SetTextBugLevel(CoreBug cb)
     {
-        bug_level.text = "Level "+cb.bug_base_level.ToString();
+        bug_level.text = "Level "+ cb.bug_base_level.ToString();
     }
     public void Update()
     {
