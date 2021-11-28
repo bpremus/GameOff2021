@@ -23,6 +23,8 @@ public class Room_UI : MonoBehaviour
     [SerializeField]
     GameObject assignedBugsHolder;
 
+
+    [SerializeField] private GameObject[] customroomButtons;
     // - -  -   -  - - - - - -  -  - - - - -  - - - - 
     [Header("Header color for different room types")]
     [SerializeField] private bool disableColorChange;
@@ -68,6 +70,7 @@ public class Room_UI : MonoBehaviour
 
         hiveCell = hc;
         BuildButtons();
+        InitializeButtons();
         SetRoomNameText(hc);
         SetHeaderColor();
         SetLevelText(hc);
@@ -185,7 +188,53 @@ public class Room_UI : MonoBehaviour
 
 
     }
+    public void InitializeButtons()
+    {
+        CoreRoom room = hiveCell.GetRoom();
+        if (room)
+        {
+            ResetCustomButtons();
+            if (room.GetComponent<HiveCorridor>())
+            {
+                customroomButtons[0].SetActive(true);
+                customroomButtons[1].SetActive(true);
+            }
+            else if (room.GetComponent<HarversterRoom>())
+            {
+                customroomButtons[2].SetActive(true);
+                customroomButtons[3].SetActive(true);
+            }
+            else if (room.GetComponent<SalvageRoom>())
+            {
+                customroomButtons[4].SetActive(true);
+                customroomButtons[5].SetActive(true);
+            }
+            
+            else if (room.GetComponent<WarRoom>())
+            {
+                customroomButtons[6].SetActive(true);
+                customroomButtons[7].SetActive(true);
+            }
 
+            else if (room.GetComponent<QueenRoom>())
+            {
+                customroomButtons[8].SetActive(true);
+                customroomButtons[9].SetActive(true);
+            }
+            else if (room.GetComponent<HiveRoom>())
+            {
+                customroomButtons[10].SetActive(true);
+                customroomButtons[11].SetActive(true);
+            }
+        }
+    }
+    public void ResetCustomButtons()
+    {
+        foreach(GameObject customButton in customroomButtons)
+        {
+            customButton.SetActive(false);
+        }
+    }
     void OnBugSelected(UIBugButton bugbutton)
     {
         CellSelectProto.Instance.SetBugSelection(bugbutton.bug);
