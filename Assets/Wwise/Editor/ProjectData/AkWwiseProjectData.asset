@@ -30,7 +30,7 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: 68b9c5ee75f6ff4c894e5e3569cfca5c
     GuidInternal: 
-    m_lastTime: -8585635586543275962
+    m_lastTime: -8585634710383152205
     List:
     - name: Ambient
       guid: f861f3201f42bb48a0d2325e0c659cb2
@@ -52,6 +52,17 @@ MonoBehaviour:
       - ElementName: Master Audio Bus
         ObjectType: 2
       Path: Default Work Unit\Master Audio Bus
+    - name: Music
+      guid: f13e923409249245a7c702fa1f9e2e75
+      id: 3991942870
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Master Audio Bus
+        ObjectType: 2
+      - ElementName: Music
+        ObjectType: 2
+      Path: Default Work Unit\Master Audio Bus\Music
   BankWwu:
   - PhysicalPath: SoundBanks\Default Work Unit.wwu
     PathAndIcons:
@@ -60,7 +71,7 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: ab7a7d8fa7af904aad885e3b30a5f3e5
     GuidInternal: 
-    m_lastTime: -8585635668437677870
+    m_lastTime: -8585634733168517668
     List:
     - name: Main
       guid: c7ed1213001d794c9f3d34785e89ab38
@@ -79,7 +90,7 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: d2d748c853878f419a502ed6d2b53f2b
     GuidInternal: 
-    m_lastTime: -8585635674595295293
+    m_lastTime: -8585634738771660034
     List:
     - name: Ambient
       guid: fd4e3f4d2b5b3f408bd25e3289266b50
@@ -102,6 +113,18 @@ MonoBehaviour:
       - ElementName: Bugs
         ObjectType: 4
       Path: Default Work Unit\Bugs
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Music
+      guid: b2a58d95777b3145b0aebb7c85f8a3a0
+      id: 3991942870
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Music
+        ObjectType: 4
+      Path: Default Work Unit\Music
       maxAttenuation: 0
       maxDuration: -1
       minDuration: -1
@@ -217,6 +240,34 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0.128737
       minDuration: 0.121371
+    - name: Play_Day_Music
+      guid: 1f84fa6dcfa5f14fb25dfdc25a544360
+      id: 663868728
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Music
+        ObjectType: 4
+      - ElementName: Play_Day_Music
+        ObjectType: 3
+      Path: Default Work Unit\Music\Play_Day_Music
+      maxAttenuation: 0
+      maxDuration: 118
+      minDuration: 118
+    - name: Play_Night_Music
+      guid: 57fae69cdc78624e91c551c062ec9741
+      id: 3279835868
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Music
+        ObjectType: 4
+      - ElementName: Play_Night_Music
+        ObjectType: 3
+      Path: Default Work Unit\Music\Play_Night_Music
+      maxAttenuation: 0
+      maxDuration: 118
+      minDuration: 118
     - name: Play_Room_Destruction
       guid: fb67399008f52e4fb7b06dea7c40f996
       id: 1444742574
@@ -327,6 +378,34 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
+    - name: Stop_Day_Music
+      guid: e5d7432c0b6ec24684fa0af8448542a2
+      id: 1234205806
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Music
+        ObjectType: 4
+      - ElementName: Stop_Day_Music
+        ObjectType: 3
+      Path: Default Work Unit\Music\Stop_Day_Music
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Stop_Night_Music
+      guid: 864357f63c9e824192ea9e091ee3109f
+      id: 1932246634
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Music
+        ObjectType: 4
+      - ElementName: Stop_Night_Music
+        ObjectType: 3
+      Path: Default Work Unit\Music\Stop_Night_Music
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
     - name: Stop_Small_Bug_Movement
       guid: b81f45e2dbae68409f3252d082ab0b68
       id: 4052991490
@@ -361,7 +440,7 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: 53ecf202e82ccd47a2dd471471481431
     GuidInternal: 
-    m_lastTime: -8585635617633335274
+    m_lastTime: -8585634710382947519
     List:
     - name: Bug_Speed
       guid: 33a1acc9ce1cc641aefc145a8ae502f4
@@ -392,6 +471,28 @@ MonoBehaviour:
       - ElementName: Master_Volume
         ObjectType: 13
       Path: Default Work Unit\VolumeSliders\Master_Volume
+    - name: Music_Volume
+      guid: be8ca53fb459ec4e812e89942cc45a33
+      id: 1006694123
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: VolumeSliders
+        ObjectType: 4
+      - ElementName: Music_Volume
+        ObjectType: 13
+      Path: Default Work Unit\VolumeSliders\Music_Volume
+    - name: SFX_Volume
+      guid: 5f1743fd3752964dbc1684bf89fc4366
+      id: 1564184899
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: VolumeSliders
+        ObjectType: 4
+      - ElementName: SFX_Volume
+        ObjectType: 13
+      Path: Default Work Unit\VolumeSliders\SFX_Volume
     - name: VolumeSliders
       guid: 7b03b045f682f14f8bd107eb3ef691b2
       id: 260909787

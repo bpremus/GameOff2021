@@ -1,17 +1,21 @@
 Event	ID	Name			Wwise Object Path	Notes
+	663868728	Play_Day_Music			\Default Work Unit\Music\Play_Day_Music	
 	735132331	Play_Small_Bug_Death			\Default Work Unit\Bugs\Play_Small_Bug_Death	
 	757105484	Play_Button_Exit_Click			\Default Work Unit\UI\Play_Button_Exit_Click	
 	894712109	Play_Ambient_Night			\Default Work Unit\Ambient\Play_Ambient_Night	
 	1017378692	Play_Small_Bug_Movement			\Default Work Unit\Bugs\Play_Small_Bug_Movement	
 	1149159311	Play_Button_Click			\Default Work Unit\UI\Play_Button_Click	
 	1199206671	Stop_Ambient_Day			\Default Work Unit\Ambient\Stop_Ambient_Day	
+	1234205806	Stop_Day_Music			\Default Work Unit\Music\Stop_Day_Music	
 	1444742574	Play_Room_Destruction			\Default Work Unit\Rooms\Play_Room_Destruction	
 	1512937371	Stop_Ambient_Night			\Default Work Unit\Ambient\Stop_Ambient_Night	
 	1662477650	Play_Button_Settings			\Default Work Unit\UI\Play_Button_Settings	
+	1932246634	Stop_Night_Music			\Default Work Unit\Music\Stop_Night_Music	
 	1954657867	Play_Room_Placement			\Default Work Unit\Rooms\Play_Room_Placement	
 	2207025252	Play_Bigclaw_Attack			\Default Work Unit\Bugs\Play_Bigclaw_Attack	
 	2326255855	Stop_Big_Bug_Movement			\Default Work Unit\Bugs\Stop_Big_Bug_Movement	
 	2953607465	Play_Ambient_Day			\Default Work Unit\Ambient\Play_Ambient_Day	
+	3279835868	Play_Night_Music			\Default Work Unit\Music\Play_Night_Music	
 	3285809237	Play_Big_Bug_Movement			\Default Work Unit\Bugs\Play_Big_Bug_Movement	
 	4021863785	Play_Button_Hover			\Default Work Unit\UI\Play_Button_Hover	
 	4052991490	Stop_Small_Bug_Movement			\Default Work Unit\Bugs\Stop_Small_Bug_Movement	
@@ -29,7 +33,9 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	350433865	Death_Small_Bug_3	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Death_Small_Bug_3_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bug_SFX\Death\Death_Small_Bug\Death_Small_Bug_3		24206
 	363842329	Button_Settings	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Button_Settings_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\Button_Settings\Button_Settings		12064
 	501597484	Room_Placement	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Room_Placement_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Building\Room_Placement\Room_Placement		156064
+	506637097	Night_Music	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Night_Music_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\Night\Night_Music\Night_Music		22656064
 	523779637	Movement_Big_Bug	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Movement_Big_Bug_D79FB2B7.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bug_SFX\Movement\Movement_Big_Bug		5736064
+	570071604	Day_Music	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Day_Music_D79FB2B7.wem		\Interactive Music Hierarchy\Default Work Unit\Day\Day_Music\Day_Music		22656064
 	588016348	Movement_Small_Bug	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Movement_Small_Bug_D79FB2B7.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bug_SFX\Movement\Movement_Small_Bug		5724064
 	621729059	Button_Exit_Click	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Button_Exit_Click_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\Button_Exit_Click\Button_Exit_Click		6064
 	650900727	Room_Destruction	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Room_Destruction_10C4C929.wem		\Actor-Mixer Hierarchy\Default Work Unit\Building\Room_Destruction\Room_Destruction		216064

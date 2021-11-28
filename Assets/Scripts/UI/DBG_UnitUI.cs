@@ -28,6 +28,13 @@ public class DBG_UnitUI : MonoBehaviour
     TextMeshProUGUI bug_name;
     [SerializeField]
     TextMeshProUGUI bug_level;
+    [SerializeField]
+    private GameObject levelUpPanel;
+
+    [SerializeField] private GameObject warriorUpgrade;
+    [SerializeField] private GameObject clawUpgrade;
+    [SerializeField] private GameObject rangedUpgrade;
+    [SerializeField] private GameObject ccUpgrade;
 
     CoreBug bug;
     public void Show(CoreBug cb)
@@ -35,6 +42,7 @@ public class DBG_UnitUI : MonoBehaviour
         if (this.transform.GetChild(0).gameObject.activeInHierarchy)
         {
             this.transform.GetChild(0).gameObject.GetComponent<UIFader>().Show();
+            levelUpPanel.SetActive(false);
         }
         else
             this.transform.GetChild(0).gameObject.SetActive(true);
@@ -46,9 +54,17 @@ public class DBG_UnitUI : MonoBehaviour
         SetTextBugLevel(cb);
 
     }
+    public void ShowLevelUpPanel()
+    {
+        if(levelUpPanel.activeInHierarchy)
+            levelUpPanel.SetActive(false);
+        else
+            levelUpPanel.SetActive(true);
+    }
     public void Hide()
     {
         this.transform.GetChild(0).gameObject.SetActive(false);
+        levelUpPanel.SetActive(false);
         CellSelectProto.Instance.HideBugSelector();
         TooltipSystem.Hide();
     }
@@ -79,24 +95,29 @@ public class DBG_UnitUI : MonoBehaviour
     public void Update()
     {
         if (UIController.instance.isBuildMenuActive()) Hide();
-        //   if (Input.GetKey(KeyCode.A))
-        //   {
-        //       CellSelectProto.Instance.SetAssignBugState();
-        //   }
 
-        // Debug test of evolving bugs 
-        if (Input.GetKey(KeyCode.F1))
+
+
+        if(bug != null)
         {
-            EvolveBug(1);
+            if (bug.bug_evolution == CoreBug.BugEvolution.warrior)
+            {
+                warriorUpgrade.GetComponent<Button>().interactable = false;
+                clawUpgrade.GetComponent<Button>().interactable = true;
+                rangedUpgrade.GetComponent<Button>().interactable = true;
+                ccUpgrade.GetComponent<Button>().interactable = true;
+            }
+            else
+            {
+                warriorUpgrade.GetComponent<Button>().interactable = true;
+                clawUpgrade.GetComponent<Button>().interactable = false;
+                rangedUpgrade.GetComponent<Button>().interactable = false;
+                ccUpgrade.GetComponent<Button>().interactable = false;
+            }
+
         }
-        if (Input.GetKey(KeyCode.F2))
-        {
-            EvolveBug(2);
-        }
-        if (Input.GetKey(KeyCode.F3))
-        {
-            EvolveBug(3);
-        }
+
+
     }
 
     public void SelectRoomFromBug()
@@ -123,13 +144,13 @@ public class DBG_UnitUI : MonoBehaviour
     {
 
         if (bug == null) return;
-      //  Debug.Log("evolving a bug " + bug.name);
 
         // drone => warrior
         if (bug.bug_evolution == CoreBug.BugEvolution.drone)
         {
             ArtPrefabsInstance.Instance.EvolveBug(bug, 3); // => drone to warrior bug
             // or drone to super drone 
+           
         }
 
         if (bug.bug_evolution == CoreBug.BugEvolution.super_drone)
@@ -149,6 +170,7 @@ public class DBG_UnitUI : MonoBehaviour
             if (index == 3)
                 ArtPrefabsInstance.Instance.EvolveBug(bug, 4); // => to warrior to cc
 
+           
         }
         // claw, mele splash => can siege
         else
@@ -169,6 +191,8 @@ public class DBG_UnitUI : MonoBehaviour
 
         }
 
+
+        Hide();
     }
 
 }
