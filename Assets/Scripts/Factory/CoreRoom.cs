@@ -19,6 +19,8 @@ public class CoreRoom : MonoBehaviour
 
     public int GetMAxAssignUnits() { return max_asigned_units; }
 
+    public float GetRomRange() { return room_detect_distance; }
+
     public List<CoreBug> GetAssignedBugs()
     {
         List<CoreBug> cbgus = new List<CoreBug>();

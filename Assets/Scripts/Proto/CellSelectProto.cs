@@ -36,6 +36,10 @@ public class CellSelectProto : MonoBehaviour
 
     [SerializeField] private Color greenColor;
     [SerializeField] private Color redColor;
+
+    [Header("Room and Bug detection ranges")]
+    [SerializeField] private GameObject range_distance_ui;
+
     // changed to singleton 
     private static CellSelectProto _instance;
     public static CellSelectProto Instance
@@ -226,6 +230,11 @@ public class CellSelectProto : MonoBehaviour
         DBG_UnitUI.Instance.Hide();
         cellSelected_GFX.GetComponent<CellSelector_Locked>().ScaleUp();
         ShowRoomCapacityDisplay_Selected(hc);
+
+      //  range_distance_ui.transform.position = hc.transform.position + new Vector3(0, 0, 1);
+      //  float d = hc.GetRoom().GetRomRange();
+      //  range_distance_ui.transform.localScale = new Vector3(d, d, d);
+
     }
 
     public void OnBugHover(CoreBug bug)
