@@ -179,6 +179,10 @@ public class GameController : MonoBehaviour
 
         AkSoundEngine.PostEvent("Play_Ambient_Day", gameObject);
 
+        AkSoundEngine.PostEvent("Play_Day_Music", gameObject);
+
+        AkSoundEngine.PostEvent("Stop_Night_Music", gameObject);
+
         day_count++;
     }
     public void OnNightStart()
@@ -186,6 +190,10 @@ public class GameController : MonoBehaviour
         AkSoundEngine.PostEvent("Stop_Ambient_Day", gameObject);
 
         AkSoundEngine.PostEvent("Play_Ambient_Night", gameObject);
+
+        AkSoundEngine.PostEvent("Play_Night_Music", gameObject);
+
+        AkSoundEngine.PostEvent("Stop_Day_Music", gameObject);
     }
     public void OnAttackStart()
     { 
