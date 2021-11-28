@@ -29,7 +29,18 @@ public class CoreBug : BugMovement
     public int   decayOnDeadTimer = 20;
     public int   bug_base_level = 1;
 
-    public void LevelUp() { bug_base_level++; }
+    // bug perfo
+    public int   bug_kill_count = 0;
+    public int   bug_task_count = 0;
+
+    public void LevelUp() { 
+        
+        bug_base_level++;
+        float multipl = bug_base_level * 0.3f;
+        BoostSpeed (multipl);
+        BoostHealth(multipl);
+        BoostDamage(multipl);
+    }
 
     protected void BoostSpeed(float speed_multiply)
     {
@@ -92,9 +103,6 @@ public class CoreBug : BugMovement
     {
         bug_action = action;
     }
-
-
-
     public virtual void NextAction()
     {
         if (bug_action == CoreBug.Bug_action.idle)

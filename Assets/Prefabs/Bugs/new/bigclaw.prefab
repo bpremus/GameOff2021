@@ -342,8 +342,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2290125106946955864}
-  - component: {fileID: 2290125106946955865}
   - component: {fileID: -3888619306148898028}
+  - component: {fileID: 4242044634410950807}
   m_Layer: 7
   m_Name: bigclaw
   m_TagString: Untagged
@@ -368,7 +368,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2290125106946955865
+--- !u!135 &-3888619306148898028
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2290125106946955862}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3
+  m_Center: {x: 0, y: 2, z: 0}
+--- !u!114 &4242044634410950807
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -377,12 +390,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2290125106946955862}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed14602beff7755438b05f21eec537d8, type: 3}
+  m_Script: {fileID: 11500000, guid: 740ad4b80ec24a740b57f0f800df4909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {x: 0, y: 0, z: 0}
   rotation_speed: 10
-  move_speed: 1
+  move_speed: 2
   animators: []
   Debug_movement_mode: 0
   stop_distance: 0.05
@@ -398,26 +411,15 @@ MonoBehaviour:
   interraction_range: 1
   decayOnDeadTimer: 20
   bug_base_level: 1
-  bugTask: 1
+  bug_kill_count: 0
+  bug_task_count: 0
+  bugTask: 0
   bug_action: 0
   coalition: 0
   hitColliders: []
   splash_dmg: 3
-  siege_mode: 0
-  attack_speed: 0.1
---- !u!135 &-3888619306148898028
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2290125106946955862}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 3
-  m_Center: {x: 0, y: 2, z: 0}
+  siege_mode: 1
+  attack_speed: 0.5
 --- !u!1 &2290125106995091674
 GameObject:
   m_ObjectHideFlags: 0

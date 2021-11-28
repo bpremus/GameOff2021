@@ -33,7 +33,6 @@ public class RangeBug : WarriorBug
             GoTo(asigned_cell);
         }
 
-
         bugAnimation = BugAnimation.idle;
         if (_attack_t > 0.1f)
         {
@@ -48,7 +47,12 @@ public class RangeBug : WarriorBug
 
             // flame thrower like animation
             bugAnimation = BugAnimation.attack;
-            othrBugs[i].OnInteract(this);
+            if (othrBugs[i].IsDead() == false)
+            {
+                othrBugs[i].OnInteract(this);
+                // did we killed it?
+                if (othrBugs[i].IsDead()) bug_kill_count++;
+            }
 
             vfx_shoot.Play();
 

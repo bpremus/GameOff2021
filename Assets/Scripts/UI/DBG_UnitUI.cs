@@ -117,7 +117,7 @@ public class DBG_UnitUI : MonoBehaviour
         {
 
             if (index == 1)
-                ArtPrefabsInstance.Instance.EvolveBug(bug, 3); // => to warrior to claw 
+                ArtPrefabsInstance.Instance.EvolveBug(bug, 2); // => to warrior to claw 
             if (index == 2)
                 ArtPrefabsInstance.Instance.EvolveBug(bug, 5); // => to warrior to ranged
             if (index == 3)

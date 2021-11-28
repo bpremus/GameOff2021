@@ -21,12 +21,22 @@ public class WarriorBug : CoreBug
 
     protected override void Start()
     {
-        bug_evolution = BugEvolution.warrior;
+        SetEvolution();
+
+        if (asigned_cell == null)
+        {
+            asigned_cell = GetUndelayingCell();
+        }
 
         base.Start();
         current_cell = asigned_cell;
         target = asigned_cell.transform.position + z_offset;
         AssignToAroom(asigned_cell);
+    }
+
+    public virtual void SetEvolution()
+    {
+        bug_evolution = BugEvolution.warrior;
     }
 
     public override void SetAnimation()
@@ -120,7 +130,12 @@ public class WarriorBug : CoreBug
         for (int i = 0; i < othrBugs.Count; i++)
         {
             bugAnimation = BugAnimation.attack;
-            othrBugs[i].OnInteract(this);
+            if (othrBugs[i].IsDead() == false)
+            {
+                othrBugs[i].OnInteract(this);
+                // did we killed it?
+                if (othrBugs[i].IsDead()) bug_kill_count++;
+            }
         }
     }
 
@@ -151,7 +166,7 @@ public class WarriorBug : CoreBug
         float rot_speed = rotation_speed;
         if (bug_action == Bug_action.fighting)
         {
-            rot_speed = 0.1f;
+            rot_speed = 0.5f;
         }
 
         look_direction = Quaternion.LookRotation(direction, normal_direction); // replace me with a normal
