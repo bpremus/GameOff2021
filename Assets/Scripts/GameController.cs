@@ -33,6 +33,7 @@ public class GameController : MonoBehaviour
     [SerializeField] int[] room_harvester_cost = { 10, 3 };
     [SerializeField] int[] room_salvage_cost = { 10, 5 };
     [SerializeField] int[] room_war_cost = { 10, 5 };
+    [SerializeField] int[] room_queen_cost = { 20, 10 };
 
     [SerializeField] int[] bug_return_resources = { 5, 10 };
 
@@ -65,13 +66,43 @@ public class GameController : MonoBehaviour
         wood -= cost[1];
         return true;
     }
+    bool RetrieveResources(int[] cost)
+    {
+        food += cost[0];
+        wood += cost[1];
+        return true;
+    }
     bool SellBuilding(int[] cost)
     {
         food += (int)(((float)(cost[0])) *0.3f);
         wood += (int)(((float)(cost[1])) *0.3f);
         return true;
     }
-    
+    public int[] GetRoomCost(int roomIndex)
+    {
+        switch (roomIndex)
+        {
+            case 0:
+                return room_corridor_cost;
+                break;
+            case 1:
+                return room_salvage_cost;
+                break;
+            case 2:
+                return room_war_cost;
+                break;
+            case 3:
+                return room_harvester_cost;
+                break;
+            case 4:
+                return room_queen_cost;
+                break;
+            default:
+                return room_corridor_cost;
+        }
+         
+
+    }
     public void OnRooomBuild(HiveCell.RoomContext context)
     {
         // define cost of each buildning 
@@ -91,6 +122,10 @@ public class GameController : MonoBehaviour
         {
             SpendResources(room_war_cost);
         }
+        if(context == HiveCell.RoomContext.queen)
+        {
+            SpendResources(room_queen_cost);
+        }
     }
     // bring back some resources
     public void OnRoomDestroyed(HiveCell.RoomContext context)
@@ -98,19 +133,19 @@ public class GameController : MonoBehaviour
         // define cost of each buildning 
         if (context == HiveCell.RoomContext.corridor)
         {
-            SpendResources(room_corridor_cost);
+            RetrieveResources(room_corridor_cost);
         }
         if (context == HiveCell.RoomContext.harvester)
         {
-            SpendResources(room_harvester_cost);
+            RetrieveResources(room_harvester_cost);
         }
         if (context == HiveCell.RoomContext.salvage)
         {
-            SpendResources(room_salvage_cost);
+            RetrieveResources(room_salvage_cost);
         }
         if (context == HiveCell.RoomContext.war)
         {
-            SpendResources(room_war_cost);
+            RetrieveResources(room_war_cost);
         }
     }
     public bool CanBuild(HiveCell.RoomContext context)

@@ -99,7 +99,7 @@ public class DBG_RoomUI : MonoBehaviour
 
     public void OnRoomDestroy()
     {
-        CellSelectProto.Instance.SetDestroyRoom(hiveCell);
+        CellSelectProto.Instance.DestroyCell(hiveCell);
     }
 
     public void Show(HiveCell hc)

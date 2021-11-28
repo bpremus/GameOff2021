@@ -41,7 +41,7 @@ Material:
     - _VertexOffsetY: 0
     m_Colors:
     - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
-    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _FaceColor: {r: 2.6082377, g: 2.6082377, b: 2.6082377, a: 1}
   m_BuildTextureStacks: []
 --- !u!28 &-520048130520306289
 Texture2D:
@@ -102,9 +102,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: Futura Heavy font
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: 105752145
   material: {fileID: -8678950325765569185}
-  materialHashCode: 0
+  materialHashCode: 856401361
   m_Version: 1.1.0
   m_SourceFontFileGUID: 837f61fc0a532fd42b1f64c6cbaed07a
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 837f61fc0a532fd42b1f64c6cbaed07a, type: 3}

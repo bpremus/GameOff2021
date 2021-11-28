@@ -148,7 +148,10 @@ public class CameraController : MonoBehaviour
         Debug.Log("target assigned");
     }
 
-
+    public bool IsDragging()
+    {
+        return isDragging;
+    }
     public void ResetTarget()
     {
         targetFollow = null;

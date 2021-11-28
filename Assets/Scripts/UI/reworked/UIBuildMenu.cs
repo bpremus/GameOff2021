@@ -27,7 +27,6 @@ public class UIBuildMenu : MonoBehaviour
     {
         uiController.Build_BuildRequest(roomID);
     }
-
     public void CloseMenu()
     {
         uiController.overlayHandler.CloseBuildMenu();

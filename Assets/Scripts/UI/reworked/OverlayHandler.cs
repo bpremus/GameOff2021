@@ -81,7 +81,6 @@ public class OverlayHandler : MonoBehaviour
         }
         else
         {
-            //Failed to build (no resources) - Animation ?
             ButtonInteractable(buildButton, true);
             HideIndicator();
             return;
