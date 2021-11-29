@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[ExecuteInEditMode]
+// [ExecuteInEditMode] <- turn on for running this in editor
 public class GameController : MonoBehaviour
 {
     // Singleton class
@@ -317,6 +317,9 @@ public class GameController : MonoBehaviour
              OnDayStart();
          else
              OnNightStart();
+
+        day_count = 0; // set day to one
+
     }
 
 }
