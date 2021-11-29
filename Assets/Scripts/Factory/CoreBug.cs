@@ -25,6 +25,7 @@ public class CoreBug : BugMovement
     [Header("Bug stats")]
     public float health = 10f;
     public float damage = 1f;
+    public float extra_damage = 0;
     public float interraction_range = 1f;
     public int   decayOnDeadTimer = 20;
     public int   bug_base_level = 1;
@@ -36,36 +37,43 @@ public class CoreBug : BugMovement
     public void LevelUp() { 
         
         bug_base_level++;
-        float multipl = bug_base_level * 0.3f;
-        BoostSpeed (multipl);
-        BoostHealth(multipl);
-        BoostDamage(multipl);
+        float m1 = bug_base_level * 0.03f;
+        float m2 = bug_base_level * 0.01f;
+        float m3 = bug_base_level * 0.003f;
+        BoostSpeed (m3);
+        BoostHealth(m1);
+        BoostDamage(m2);
+
+        OnLevelUp();
+    }
+
+    public void OnLevelUp()
+    {
+        Debug.Log("LEVEL UP");
     }
 
     protected void BoostSpeed(float speed_multiply)
     {
-        if (speed_multiply == 0) return;
-        this.move_speed *= speed_multiply;
+        this.move_speed += speed_multiply;
+        if (this.move_speed > 4) this.move_speed = 4;
     }
     protected void BoostHealth(float health_multiply)
     {
-        if (health_multiply == 0) return;
-        this.health *= health_multiply;
+        this.health += health_multiply;
+        if (this.health > 50) this.health = 50;
     }
     protected void BoostDamage(float dmg_multiply)
     {
-        if (dmg_multiply == 0) return;
-        this.damage *= dmg_multiply;
+        this.damage += dmg_multiply;
     }
     protected void BoostRange(float range_multiply)
     {
-        if (range_multiply == 0) return;
-        this.interraction_range *= range_multiply;
+        this.interraction_range += range_multiply;
     }
 
     public void AIBoost(float speed, float health)
     {
-        BoostRange(speed);
+        BoostSpeed(speed);
         BoostHealth(health);
     }
 
@@ -83,6 +91,8 @@ public class CoreBug : BugMovement
     public Bug_action GetAction { get => bug_action; }
 
     public int coalition = 0;
+
+    public virtual void SiegeBug(bool siege) { }
 
     //  moving to dead bug
     protected CoreBug salvagedBug;

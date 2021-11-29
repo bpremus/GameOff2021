@@ -49,31 +49,23 @@ public class DBG_UnitUI : MonoBehaviour
 
         bug = cb;
 
-        
         SetTextBugName(cb);
         SetTextBugLevel(cb);
 
     }
     public void ShowLevelUpPanel()
-    {
+    {      
         if (bug)
         {
-            // what kind of bug do we have?
-            // can we evolve it or can we level it up
+            if (GameController.Instance.IsLevelUpOnly(bug))
+            {
+                levelUpPanel.SetActive(false);
 
-            Debug.LogError("TODO");
-            /*
-            bug evolution 
-            bug siege 
-            room bonus on asign 
-
-
-            destroy restriction
-            eng game 
-            */
+                LevelUpBug();
+                return;
+            }
         }
-
-
+        
         if(levelUpPanel.activeInHierarchy)
             levelUpPanel.SetActive(false);
         else
@@ -153,20 +145,34 @@ public class DBG_UnitUI : MonoBehaviour
 
     }
 
+    /*
     public void EvolveBug()
     {
         ArtPrefabsInstance.Instance.EvolveBug(bug,0);
         Hide();
     }
+    */
+
+    public void LevelUpBug()
+    {
+        if (bug == null) return;
+        if (GameController.Instance.EvolveBug(bug.bug_evolution))
+        {
+            bug.LevelUp();
+        }
+    }
+
     public void EvolveBug(int index)
     {
+        Debug.Log("evolve " + index);
 
         if (bug == null) return;
 
         // drone => warrior
         if (bug.bug_evolution == CoreBug.BugEvolution.drone)
         {
-            ArtPrefabsInstance.Instance.EvolveBug(bug, 3); // => drone to warrior bug
+            if (GameController.Instance.EvolveBug(CoreBug.BugEvolution.warrior))
+                ArtPrefabsInstance.Instance.EvolveBug(bug, 3); // => drone to warrior bug
             // or drone to super drone 
            
         }
@@ -182,13 +188,23 @@ public class DBG_UnitUI : MonoBehaviour
         {
 
             if (index == 1)
-                ArtPrefabsInstance.Instance.EvolveBug(bug, 2); // => to warrior to claw 
-            if (index == 2)
-                ArtPrefabsInstance.Instance.EvolveBug(bug, 5); // => to warrior to ranged
-            if (index == 3)
-                ArtPrefabsInstance.Instance.EvolveBug(bug, 4); // => to warrior to cc
+            {
+                if (GameController.Instance.EvolveBug(CoreBug.BugEvolution.claw))
+                    ArtPrefabsInstance.Instance.EvolveBug(bug, 2); // => to warrior to claw 
+            }
 
-           
+            if (index == 2)
+            {
+                if (GameController.Instance.EvolveBug(CoreBug.BugEvolution.range))
+                    ArtPrefabsInstance.Instance.EvolveBug(bug, 5); // => to warrior to ranged
+            }
+                
+            if (index == 3)
+            {
+                if (GameController.Instance.EvolveBug(CoreBug.BugEvolution.cc_bug))
+                    ArtPrefabsInstance.Instance.EvolveBug(bug, 4); // => to warrior to cc
+            }
+
         }
         // claw, mele splash => can siege
         else

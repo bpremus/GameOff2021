@@ -18,7 +18,6 @@ public class WarriorBug : CoreBug
         // Debug.Log("Bug started walking");
     }
 
-
     protected override void Start()
     {
         SetEvolution();
@@ -32,6 +31,25 @@ public class WarriorBug : CoreBug
         current_cell = asigned_cell;
         target = asigned_cell.transform.position + z_offset;
         AssignToAroom(asigned_cell);
+    }
+
+    protected override void OnDamageBoost()
+    {
+        if (siege_mode)
+        {
+            extra_damage = damage * 1.5f;
+            return;
+        }
+        if (asigned_cell.GetRoom().GetComponent<CommandCenter>())
+        {
+            extra_damage = damage * 1.1f;
+            return;
+        }
+        if (asigned_cell.GetRoom().GetComponent<WarRoom>())
+        {
+            extra_damage = damage * 1.1f;
+            return;
+        }
     }
 
     public virtual void SetEvolution()
@@ -166,12 +184,17 @@ public class WarriorBug : CoreBug
         float rot_speed = rotation_speed;
         if (bug_action == Bug_action.fighting)
         {
-            rot_speed = 0.5f;
+            rot_speed = 1.5f;
         }
 
         look_direction = Quaternion.LookRotation(direction, normal_direction); // replace me with a normal
         transform.rotation = Quaternion.Slerp(transform.rotation, look_direction, Time.deltaTime * rot_speed);
 
+    }
+
+    public override void SiegeBug(bool siege) 
+    {
+        siege_mode = siege;
     }
 
 }

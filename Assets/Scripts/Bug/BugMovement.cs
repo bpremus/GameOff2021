@@ -125,6 +125,11 @@ public class BugMovement : MonoBehaviour
 
     }
 
+    protected virtual void OnDamageBoost()
+    { 
+    
+    }
+
     protected virtual void OnCanRangeShoot()
     { 
     

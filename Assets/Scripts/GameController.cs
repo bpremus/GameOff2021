@@ -37,6 +37,13 @@ public class GameController : MonoBehaviour
 
     [SerializeField] int[] bug_return_resources = { 5, 10 };
 
+    [SerializeField] int[] evolve_drone         = { 5, 0 };
+    [SerializeField] int[] evolve_super_drone   = { 25, 10 };
+    [SerializeField] int[] evolve_warrior       = { 25, 10 };
+    [SerializeField] int[] evolve_claw          = { 100, 20 };
+    [SerializeField] int[] evolve_spike         = { 200, 20 };
+    [SerializeField] int[] evolve_slow          = { 150, 20 };
+
     // consume resources
 
     bool DoWeHaveEnoughResources(int[] cost)
@@ -220,6 +227,67 @@ public class GameController : MonoBehaviour
     {
         population -= 1;
     }
+
+    public bool EvolveBug(CoreBug.BugEvolution bugEvolution) 
+    {
+        if (bugEvolution == CoreBug.BugEvolution.warrior)
+        {
+            if (food >= evolve_super_drone[0] && wood >= evolve_super_drone[1])
+            {
+                food -= evolve_super_drone[0];
+                wood -= evolve_super_drone[1];
+                return true;
+            }   
+        }
+        else if (bugEvolution == CoreBug.BugEvolution.claw)
+        {
+            if (food >= evolve_claw[0] && wood >=  evolve_claw[1])
+            {
+                food -= evolve_claw[0];
+                wood -= evolve_claw[1];
+                return true;
+            }
+        }
+        else if (bugEvolution == CoreBug.BugEvolution.range)
+        {
+            if (food >= evolve_spike[0] && wood >= evolve_spike[1])
+            {
+                food -= evolve_spike[0];
+                wood -= evolve_spike[1];
+                return true;
+            }
+        }
+        else if (bugEvolution == CoreBug.BugEvolution.cc_bug)
+        {
+            if (food >= evolve_slow[0] && wood >= evolve_slow[1])
+            {
+                food -= evolve_slow[0];
+                wood -= evolve_slow[1];
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public bool IsLevelUpOnly(CoreBug bug)
+    {
+        if (bug.bug_evolution == CoreBug.BugEvolution.claw)
+        {
+            return true;
+        }
+        if (bug.bug_evolution == CoreBug.BugEvolution.range)
+        {
+            return true;
+        }
+        if (bug.bug_evolution == CoreBug.BugEvolution.cc_bug)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
 
     // methods 
     // ------------------------------

@@ -46,8 +46,8 @@ public class EnemyController : MonoBehaviour
         int elapsed_day = game_controller.GetDayS();
 
         // every day send 1 more scut and increase stats slightly, there is a stats cap also
-        float speed_boost = elapsed_day * 0.1f;
-        float health_boost = elapsed_day * 0.05f;
+        float speed_boost  = elapsed_day * 0.001f;
+        float health_boost = elapsed_day * 0.005f;
 
         int h_room = harvester_cells.Count;
         int s_room = salvage_cells.Count;
@@ -97,7 +97,7 @@ public class EnemyController : MonoBehaviour
 
         HiveCell target = hive_cell;
         int total_attack_count = night_attack_number + elapsed_day;
-        if (total_attack_count > 30) total_attack_count = 30;
+        if (total_attack_count > 50) total_attack_count = game_controller.GetPopulation();
 
         int add_mid_bugs = 0;
         int add_big_bugs = 0;

@@ -166,6 +166,11 @@ public class Room_UI : MonoBehaviour
                 Debug.Log("send pillage");
                 ccroom.SendToCollect();
             }
+            HiveCorridor hcorridor = room.GetComponent<HiveCorridor>();
+            if (hcorridor)
+            {
+                hcorridor.UnsiegeBug();
+            }
 
         }
     }
@@ -208,6 +213,12 @@ public class Room_UI : MonoBehaviour
             if (srom)
             {
                 srom.RecallBugs();
+            }
+
+            HiveCorridor hcorridor = room.GetComponent<HiveCorridor>();
+            if (hcorridor)
+            {
+                hcorridor.SiegeBug();
             }
 
         }
