@@ -54,4 +54,14 @@ public class HiveRoom : CoreRoom
         }
     }
 
+    public virtual void RecallBugs()
+    {
+        for (int i = 0; i < assigned_bugs.Count; i++)
+        {
+            CoreBug cb = assigned_bugs[i].GetComponent<CoreBug>();
+            cb.GoTo(this.cell);
+            cb.SetAction(CoreBug.Bug_action.idle);
+        }
+    }
+
 }

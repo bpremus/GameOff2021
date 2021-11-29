@@ -27,36 +27,31 @@ public class UIBugButton : MonoBehaviour
 
     public void Update()
     {
+
         if (bug)
         {
-            string bug_name = bug.name;
+            ArtPrefabsInstance.Instance.SetBugName(bug);
             if (bug.bug_evolution == CoreBug.BugEvolution.drone)
             {
                 button_image.sprite = icon_images[0];
-                bug_name = "Drone";
             }
             else if (bug.bug_evolution == CoreBug.BugEvolution.warrior)
             {
                 button_image.sprite = icon_images[1];
-                bug_name = "Warrior";
             }
             else if (bug.bug_evolution == CoreBug.BugEvolution.claw)
             {
                 button_image.sprite = icon_images[2];
-                bug_name = "Claw";
             }
             else if (bug.bug_evolution == CoreBug.BugEvolution.range)
             {
                 button_image.sprite = icon_images[3];
-                bug_name = "Spit";
             }
             else if (bug.bug_evolution == CoreBug.BugEvolution.cc_bug)
             {
                 button_image.sprite = icon_images[4];
-                bug_name = "Slow";
             }
-
-            text.text = bug_name;
+            text.text = bug.name;
         }
            
     }

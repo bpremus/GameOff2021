@@ -36,12 +36,11 @@ public class WarRoom : HiveRoom
     public void OnBugReachHomeCell(CoreBug bug)
     {
         Debug.Log("bugs returned home");
-
         GameController.Instance.OnBrigResources();
     }
 
     float _spread_timer = 0;
-    public void SendGathering()
+    public virtual void SendGathering()
     {
         _spread_timer += Time.deltaTime;
         for (int i = 0; i < assigned_bugs.Count; i++)

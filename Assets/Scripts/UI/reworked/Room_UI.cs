@@ -86,7 +86,7 @@ public class Room_UI : MonoBehaviour
     {
 
         string text = hc.GetRoom().name;
-        Debug.Log(text);
+       // Debug.Log(text);
         if (text == "HiveCorridor(Clone)") text = "Corridor";
         else if (text == "SalvageRoom(Clone)") text = "Storage";
         else if(text == "WarRoom(Clone)") text = "Barracks";
@@ -150,6 +150,66 @@ public class Room_UI : MonoBehaviour
                 hrom.SendToCollect();
               //  OnSendGathering();
             }
+
+            QueenRoom qroom = room.GetComponent<QueenRoom>();
+            if (qroom)
+            {
+                // we can gather from here also 
+                Debug.Log("send gathering");
+                qroom.SendToCollect();
+            }
+
+            CommandCenter ccroom = room.GetComponent<CommandCenter>();
+            if (ccroom)
+            {
+                // we can gather from here also 
+                Debug.Log("send pillage");
+                ccroom.SendToCollect();
+            }
+
+        }
+    }
+
+    public void UnsetTask()
+    {
+        Debug.Log("cancel task");
+        CoreRoom room = hiveCell.GetRoom();
+        if (room)
+        {
+            HarversterRoom hrom = room.GetComponent<HarversterRoom>();
+            if (hrom)
+            {
+                hrom.RecallBugs();
+                return;
+            }
+
+            QueenRoom qroom = room.GetComponent<QueenRoom>();
+            if (qroom)
+            {
+                qroom.RecallBugs();
+                return;
+            }
+
+            CommandCenter ccroom = room.GetComponent<CommandCenter>();
+            if (ccroom)
+            {
+                ccroom.RecallBugs();
+                return;
+            }
+
+            WarRoom wroom = room.GetComponent<WarRoom>();
+            if (wroom)
+            {
+                wroom.RecallBugs();
+                return;
+            }
+
+            SalvageRoom srom = room.GetComponent<SalvageRoom>();
+            if (srom)
+            {
+                srom.RecallBugs();
+            }
+
         }
     }
 

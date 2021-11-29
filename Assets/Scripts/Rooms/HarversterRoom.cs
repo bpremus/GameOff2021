@@ -59,7 +59,13 @@ public class HarversterRoom : HiveRoom
         GameController.Instance.OnBrigResources();
     }
 
-   
+    public override void RecallBugs()
+    {
+        base.RecallBugs();
+        gather_destination = null;
+    }
+
+
     public void OnBugDepart(CoreBug bug)
     {
 

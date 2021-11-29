@@ -51,8 +51,11 @@ MonoBehaviour:
   assigned_bugs: []
   max_asigned_units: 3
   room_detect_distance: 3
+  coalition: 0
   hitColliders: []
-  spawn_bug_interval: 1
+  gather_destination: {fileID: 0}
+  gather_duration_time: 1
+  spawn_bug_interval: 5
 --- !u!1001 &93858843591132520
 PrefabInstance:
   m_ObjectHideFlags: 0

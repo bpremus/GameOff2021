@@ -98,7 +98,7 @@ public class WarriorBug : CoreBug
 
     public override void InteractWithEnemies(List<CoreBug> othrBugs)
     {
-        Debug.Log("attacking");
+       // Debug.Log("attacking");
 
         //target = underlaying_cell.transform.position + z_offset;
         if (othrBugs.Count == 0) return;

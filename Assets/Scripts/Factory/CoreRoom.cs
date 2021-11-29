@@ -21,6 +21,16 @@ public class CoreRoom : MonoBehaviour
 
     public float GetRomRange() { return room_detect_distance; }
 
+    public virtual float GetRoomBonusDmg() 
+    {
+        return 0;
+    }
+
+    public virtual float GetRoomBonusHealth()
+    {
+        return 0;
+    }
+
     public List<CoreBug> GetAssignedBugs()
     {
         List<CoreBug> cbgus = new List<CoreBug>();

@@ -47,9 +47,40 @@ public class ArtPrefabsInstance : MonoBehaviour
             evolved_bug.GoTo(cell);
 
             //cell.AssignDrone(bug); <-- something is wrong 
+            SetBugName(evolved_bug);
 
             Destroy(bug.gameObject);
 
         }
     }
+
+    public void SetBugName(CoreBug bug)
+    {
+
+        string bug_name = bug.name;
+        if (bug.bug_evolution == CoreBug.BugEvolution.drone)
+        {
+            bug_name = "Drone";
+        }
+        else if (bug.bug_evolution == CoreBug.BugEvolution.warrior)
+        {
+            bug_name = "Warrior";
+        }
+        else if (bug.bug_evolution == CoreBug.BugEvolution.claw)
+        {
+            bug_name = "Claw";
+        }
+        else if (bug.bug_evolution == CoreBug.BugEvolution.range)
+        {
+            bug_name = "Spit";
+        }
+        else if (bug.bug_evolution == CoreBug.BugEvolution.cc_bug)
+        {
+            bug_name = "Slow";
+        }
+
+        bug.name = bug_name;
+
+    }
+
 }
