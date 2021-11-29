@@ -11,17 +11,18 @@
 	<StreamedFiles/>
 	<MediaFilesNotInAnyBank/>
 	<SoundBanks>
-		<SoundBank Id="1355168291" Language="SFX" Hash="369061274">
+		<SoundBank Id="1355168291" Language="SFX" Hash="4256455378">
 			<ObjectPath>Init</ObjectPath>
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
 			<GameParameters>
 				<GameParameter Id="1006694123" Name="Music_Volume" ObjectPath="\Game Parameters\Default Work Unit\VolumeSliders\Music_Volume"/>
+				<GameParameter Id="1564184899" Name="SFX_Volume" ObjectPath="\Game Parameters\Default Work Unit\VolumeSliders\SFX_Volume"/>
 				<GameParameter Id="3866931204" Name="Camera_Y" ObjectPath="\Game Parameters\Default Work Unit\Camera_Y"/>
 				<GameParameter Id="4179668880" Name="Master_Volume" ObjectPath="\Game Parameters\Default Work Unit\VolumeSliders\Master_Volume"/>
 			</GameParameters>
 		</SoundBank>
-		<SoundBank Id="3161908922" Language="SFX" Hash="2478025520">
+		<SoundBank Id="3161908922" Language="SFX" Hash="390327918">
 			<ObjectPath>\SoundBanks\Default Work Unit\Main</ObjectPath>
 			<ShortName>Main</ShortName>
 			<Path>Main.bnk</Path>
@@ -42,7 +43,7 @@
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
-				<Event Id="3285809237" Name="Play_Big_Bug_Movement" ObjectPath="\Events\Default Work Unit\Bugs\Play_Big_Bug_Movement" MaxAttenuation="9.000000" DurationType="Infinite">
+				<Event Id="3285809237" Name="Play_Big_Bug_Movement" ObjectPath="\Events\Default Work Unit\Bugs\Play_Big_Bug_Movement" MaxAttenuation="10.000000" DurationType="Infinite">
 					<IncludedMemoryFiles>
 						<File Id="523779637" Language="SFX">
 							<ShortName>Movement_Big_Bug.wav</ShortName>
@@ -159,6 +160,14 @@
 						<File Id="588016348" Language="SFX">
 							<ShortName>Movement_Small_Bug.wav</ShortName>
 							<Path>SFX\Movement_Small_Bug_D79FB2B7.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="533979565" Name="Play_WarRoom" ObjectPath="\Events\Default Work Unit\Rooms\Play_WarRoom" DurationType="OneShot" DurationMin="0.530929" DurationMax="0.595948">
+					<IncludedMemoryFiles>
+						<File Id="829699643" Language="SFX">
+							<ShortName>Barracks.wav</ShortName>
+							<Path>SFX\Barracks_10C4C929.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>

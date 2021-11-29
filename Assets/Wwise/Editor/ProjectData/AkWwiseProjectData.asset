@@ -30,7 +30,7 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: 68b9c5ee75f6ff4c894e5e3569cfca5c
     GuidInternal: 
-    m_lastTime: -8585634710383152205
+    m_lastTime: -8585634143601982449
     List:
     - name: Ambient
       guid: f861f3201f42bb48a0d2325e0c659cb2
@@ -40,9 +40,11 @@ MonoBehaviour:
         ObjectType: 12
       - ElementName: Master Audio Bus
         ObjectType: 2
+      - ElementName: SFX
+        ObjectType: 2
       - ElementName: Ambient
         ObjectType: 2
-      Path: Default Work Unit\Master Audio Bus\Ambient
+      Path: Default Work Unit\Master Audio Bus\SFX\Ambient
     - name: Master Audio Bus
       guid: d8a41415a61d2a41a17e75ca0c2149f3
       id: 3803692087
@@ -63,6 +65,17 @@ MonoBehaviour:
       - ElementName: Music
         ObjectType: 2
       Path: Default Work Unit\Master Audio Bus\Music
+    - name: SFX
+      guid: ecd437380ebe3e42ab138207e8061a00
+      id: 393239870
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Master Audio Bus
+        ObjectType: 2
+      - ElementName: SFX
+        ObjectType: 2
+      Path: Default Work Unit\Master Audio Bus\SFX
   BankWwu:
   - PhysicalPath: SoundBanks\Default Work Unit.wwu
     PathAndIcons:
@@ -71,7 +84,7 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: ab7a7d8fa7af904aad885e3b30a5f3e5
     GuidInternal: 
-    m_lastTime: -8585634733168517668
+    m_lastTime: -8585633923478313063
     List:
     - name: Main
       guid: c7ed1213001d794c9f3d34785e89ab38
@@ -90,7 +103,7 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: d2d748c853878f419a502ed6d2b53f2b
     GuidInternal: 
-    m_lastTime: -8585634738771660034
+    m_lastTime: -8585633923478382872
     List:
     - name: Ambient
       guid: fd4e3f4d2b5b3f408bd25e3289266b50
@@ -167,7 +180,7 @@ MonoBehaviour:
       - ElementName: Play_Big_Bug_Movement
         ObjectType: 3
       Path: Default Work Unit\Bugs\Play_Big_Bug_Movement
-      maxAttenuation: 9
+      maxAttenuation: 10
       maxDuration: -1
       minDuration: -1
     - name: Play_Bigclaw_Attack
@@ -324,6 +337,20 @@ MonoBehaviour:
       maxAttenuation: 10
       maxDuration: -1
       minDuration: -1
+    - name: Play_WarRoom
+      guid: 4923ebe9071b17449799f7022dcc28ba
+      id: 533979565
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Rooms
+        ObjectType: 4
+      - ElementName: Play_WarRoom
+        ObjectType: 3
+      Path: Default Work Unit\Rooms\Play_WarRoom
+      maxAttenuation: 0
+      maxDuration: 0.595948
+      minDuration: 0.530929
     - name: Rooms
       guid: 9239e5d16ba9284697bd4e5870ce485a
       id: 1359360203
@@ -440,7 +467,7 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: 53ecf202e82ccd47a2dd471471481431
     GuidInternal: 
-    m_lastTime: -8585634710382947519
+    m_lastTime: -8585634145047874350
     List:
     - name: Bug_Speed
       guid: 33a1acc9ce1cc641aefc145a8ae502f4

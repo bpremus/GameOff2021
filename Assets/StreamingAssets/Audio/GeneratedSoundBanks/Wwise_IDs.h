@@ -27,6 +27,7 @@ namespace AK
         static const AkUniqueID PLAY_ROOM_PLACEMENT = 1954657867U;
         static const AkUniqueID PLAY_SMALL_BUG_DEATH = 735132331U;
         static const AkUniqueID PLAY_SMALL_BUG_MOVEMENT = 1017378692U;
+        static const AkUniqueID PLAY_WARROOM = 533979565U;
         static const AkUniqueID STOP_AMBIENT_DAY = 1199206671U;
         static const AkUniqueID STOP_AMBIENT_NIGHT = 1512937371U;
         static const AkUniqueID STOP_BIG_BUG_MOVEMENT = 2326255855U;
@@ -55,6 +56,7 @@ namespace AK
         static const AkUniqueID AMBIENT = 77978275U;
         static const AkUniqueID MASTER_AUDIO_BUS = 3803692087U;
         static const AkUniqueID MUSIC = 3991942870U;
+        static const AkUniqueID SFX = 393239870U;
     } // namespace BUSSES
 
     namespace AUDIO_DEVICES
