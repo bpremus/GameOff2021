@@ -28,7 +28,6 @@ public class ArtPrefabsInstance : MonoBehaviour
     
     public void EvolveBug(CoreBug bug, int prefab_index)
     {
-   
         // detach bug from rooms 
         HiveCell cell = bug.asigned_cell;
         cell.DetachDrone(bug);
@@ -50,7 +49,6 @@ public class ArtPrefabsInstance : MonoBehaviour
             SetBugName(evolved_bug);
 
             Destroy(bug.gameObject);
-
         }
     }
 

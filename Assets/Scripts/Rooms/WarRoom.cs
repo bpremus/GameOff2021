@@ -24,6 +24,12 @@ public class WarRoom : HiveRoom
         base.Update();
         SendGathering();
     }
+
+    public override void OnRoomSelect()
+    {
+        Debug.Log(this.name + " selected");
+    }
+
     public void OnBugDepart(CoreBug bug)
     {
 

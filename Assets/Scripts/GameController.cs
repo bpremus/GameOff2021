@@ -207,8 +207,6 @@ public class GameController : MonoBehaviour
     {
         food += bug_return_resources[0];
         wood += bug_return_resources[1];
-        
-
     }
     public void OnStolenFood()
     {

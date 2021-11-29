@@ -17,6 +17,8 @@ public class CoreRoom : MonoBehaviour
 
     public int coalition = 0;
 
+  
+
     public int GetMAxAssignUnits() { return max_asigned_units; }
 
     public float GetRomRange() { return room_detect_distance; }
@@ -80,5 +82,9 @@ public class CoreRoom : MonoBehaviour
         DetectEnemy();
     }
 
+    public virtual void OnRoomSelect()
+    {
+        Debug.Log("core room selected");
+    }
 
 }

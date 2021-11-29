@@ -56,6 +56,24 @@ public class DBG_UnitUI : MonoBehaviour
     }
     public void ShowLevelUpPanel()
     {
+        if (bug)
+        {
+            // what kind of bug do we have?
+            // can we evolve it or can we level it up
+
+            Debug.LogError("TODO");
+            /*
+            bug evolution 
+            bug siege 
+            room bonus on asign 
+
+
+            destroy restriction
+            eng game 
+            */
+        }
+
+
         if(levelUpPanel.activeInHierarchy)
             levelUpPanel.SetActive(false);
         else

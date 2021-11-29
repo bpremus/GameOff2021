@@ -150,8 +150,6 @@ public class CellSelectProto : MonoBehaviour
         {
             cellHoverCanvas.SetActive(false);
         }
-
-
     }
 
     private string GetRoomCapacityInfo(HiveCell hc)
@@ -238,6 +236,11 @@ public class CellSelectProto : MonoBehaviour
             range_distance_ui.transform.localScale = new Vector3(d * 2, d *2, 0);
         }
 
+        CoreRoom hroom = hc.GetRoom();
+        if (hroom)
+        {
+            hroom.OnRoomSelect();
+        }
     }
 
     public void OnBugHover(CoreBug bug)
