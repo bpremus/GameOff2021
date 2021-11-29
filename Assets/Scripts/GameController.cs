@@ -274,6 +274,11 @@ public class GameController : MonoBehaviour
             return;
         }
 
+        if (population < 10)
+        {
+            food -= 1;
+            return;
+        }
         food -= population;
     }
     private float _t_day_duration = 0;
