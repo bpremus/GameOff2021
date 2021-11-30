@@ -102,9 +102,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: Futura Heavy Italic font
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: -83247253
   material: {fileID: -3712146409459349577}
-  materialHashCode: 0
+  materialHashCode: 1177535467
   m_Version: 1.1.0
   m_SourceFontFileGUID: 2b479cac6bf47d0449adb93b84614e94
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 2b479cac6bf47d0449adb93b84614e94, type: 3}

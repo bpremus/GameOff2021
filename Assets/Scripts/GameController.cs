@@ -227,7 +227,26 @@ public class GameController : MonoBehaviour
     {
         population -= 1;
     }
-
+    public int[] GetEvolutionCost(int index)
+    {
+        switch (index)
+        {
+            case 0:
+                return evolve_warrior;
+                break;
+            case 1:
+                return evolve_claw;
+                break;
+            case 2:
+                return evolve_slow;
+                break;
+            case 3:
+                return evolve_spike;
+                break;
+            default:
+                return evolve_warrior;
+        }
+    }
     public bool EvolveBug(CoreBug.BugEvolution bugEvolution) 
     {
         if (bugEvolution == CoreBug.BugEvolution.warrior)
