@@ -25,7 +25,51 @@ public class ArtPrefabsInstance : MonoBehaviour
     public GameObject[] BugsPrefabs;
     public GameObject[] FoodAndWoodPrefabs;
 
-    
+
+    // ment for loading 
+    public CoreBug SpawnBug(CoreBug.BugEvolution bug_type, HiveCell cell)
+    {
+        int prefab_index = 0;
+        if (bug_type == CoreBug.BugEvolution.drone)
+        {
+            prefab_index = 0;
+        }
+        if (bug_type == CoreBug.BugEvolution.warrior)
+        {
+            prefab_index = 3;
+        }
+        if (bug_type == CoreBug.BugEvolution.claw)
+        {
+            prefab_index = 2;
+        }
+        if (bug_type == CoreBug.BugEvolution.range)
+        {
+            prefab_index = 4;
+        }
+        if (bug_type == CoreBug.BugEvolution.cc_bug)
+        {
+            prefab_index = 5;
+        }
+
+        Vector3 new_pos = cell.transform.position + cell.transform.up * 1f;
+        GameObject g = Instantiate(BugsPrefabs[prefab_index], new_pos, Quaternion.identity); 
+        if (g)
+        {
+            CoreBug evolved_bug = g.GetComponent<CoreBug>();
+            evolved_bug.asigned_cell = cell;
+            evolved_bug.current_cell = cell;
+            evolved_bug.SiegeBug(false);
+            CoreRoom room = cell.GetRoom();
+            room.AssignBug(evolved_bug);
+            evolved_bug.GoTo(cell);
+            SetBugName(evolved_bug);
+
+            return evolved_bug;
+        }
+
+        return null;
+    }
+
     public void EvolveBug(CoreBug bug, int prefab_index)
     {
         // detach bug from rooms 
