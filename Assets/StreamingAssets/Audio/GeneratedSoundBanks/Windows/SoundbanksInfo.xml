@@ -11,7 +11,7 @@
 	<StreamedFiles/>
 	<MediaFilesNotInAnyBank/>
 	<SoundBanks>
-		<SoundBank Id="1355168291" Language="SFX" Hash="4256455378">
+		<SoundBank Id="1355168291" Language="SFX" Hash="3340521499">
 			<ObjectPath>Init</ObjectPath>
 			<ShortName>Init</ShortName>
 			<Path>Init.bnk</Path>
@@ -22,7 +22,7 @@
 				<GameParameter Id="4179668880" Name="Master_Volume" ObjectPath="\Game Parameters\Default Work Unit\VolumeSliders\Master_Volume"/>
 			</GameParameters>
 		</SoundBank>
-		<SoundBank Id="3161908922" Language="SFX" Hash="390327918">
+		<SoundBank Id="3161908922" Language="SFX" Hash="1263201180">
 			<ObjectPath>\SoundBanks\Default Work Unit\Main</ObjectPath>
 			<ShortName>Main</ShortName>
 			<Path>Main.bnk</Path>
@@ -31,7 +31,7 @@
 					<IncludedMemoryFiles>
 						<File Id="1051585042" Language="SFX">
 							<ShortName>Ambience_Day.wav</ShortName>
-							<Path>SFX\Ambience_Day_D79FB2B7.wem</Path>
+							<Path>SFX\Ambience_Day_A03254A3.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
@@ -39,7 +39,7 @@
 					<IncludedMemoryFiles>
 						<File Id="86493557" Language="SFX">
 							<ShortName>Ambient_Night.wav</ShortName>
-							<Path>SFX\Ambient_Night_D79FB2B7.wem</Path>
+							<Path>SFX\Ambient_Night_A03254A3.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
@@ -47,7 +47,7 @@
 					<IncludedMemoryFiles>
 						<File Id="523779637" Language="SFX">
 							<ShortName>Movement_Big_Bug.wav</ShortName>
-							<Path>SFX\Movement_Big_Bug_D79FB2B7.wem</Path>
+							<Path>SFX\Movement_Big_Bug_A03254A3.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
@@ -55,31 +55,31 @@
 					<IncludedMemoryFiles>
 						<File Id="219297782" Language="SFX">
 							<ShortName>Bigclaw_Attack_2.wav</ShortName>
-							<Path>SFX\Bigclaw_Attack_2_10C4C929.wem</Path>
+							<Path>SFX\Bigclaw_Attack_2_21D7A5C5.wem</Path>
 						</File>
 						<File Id="297837256" Language="SFX">
 							<ShortName>Bigclaw_Attack_3.wav</ShortName>
-							<Path>SFX\Bigclaw_Attack_3_10C4C929.wem</Path>
+							<Path>SFX\Bigclaw_Attack_3_21D7A5C5.wem</Path>
 						</File>
 						<File Id="711592116" Language="SFX">
 							<ShortName>Bigclaw_Attack_1.wav</ShortName>
-							<Path>SFX\Bigclaw_Attack_1_10C4C929.wem</Path>
+							<Path>SFX\Bigclaw_Attack_1_21D7A5C5.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
-				<Event Id="1149159311" Name="Play_Button_Click" ObjectPath="\Events\Default Work Unit\UI\Play_Button_Click" DurationType="OneShot" DurationMin="0.054637" DurationMax="0.059651">
+				<Event Id="1149159311" Name="Play_Button_Click" ObjectPath="\Events\Default Work Unit\UI\Play_Button_Click" DurationType="OneShot" DurationMin="0.056175" DurationMax="0.061330">
 					<IncludedMemoryFiles>
-						<File Id="651304999" Language="SFX">
-							<ShortName>Button_Replacement_Test.wav</ShortName>
-							<Path>SFX\Button_Replacement_Test_10C4C929.wem</Path>
+						<File Id="374411796" Language="SFX">
+							<ShortName>Main_Button .wav</ShortName>
+							<Path>SFX\Main_Button _21D7A5C5.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
 				<Event Id="757105484" Name="Play_Button_Exit_Click" ObjectPath="\Events\Default Work Unit\UI\Play_Button_Exit_Click" DurationType="OneShot" DurationMin="0.060686" DurationMax="0.065305">
 					<IncludedMemoryFiles>
-						<File Id="621729059" Language="SFX">
-							<ShortName>Button_Exit_Click.wav</ShortName>
-							<Path>SFX\Button_Exit_Click_10C4C929.wem</Path>
+						<File Id="387343566" Language="SFX">
+							<ShortName>Exit_Button .wav</ShortName>
+							<Path>SFX\Exit_Button _21D7A5C5.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
@@ -87,15 +87,23 @@
 					<IncludedMemoryFiles>
 						<File Id="651579877" Language="SFX">
 							<ShortName>SFX_Button_Hover.wav</ShortName>
-							<Path>SFX\SFX_Button_Hover_10C4C929.wem</Path>
+							<Path>SFX\SFX_Button_Hover_21D7A5C5.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
-				<Event Id="1662477650" Name="Play_Button_Settings" ObjectPath="\Events\Default Work Unit\UI\Play_Button_Settings" DurationType="OneShot" DurationMin="0.121371" DurationMax="0.128737">
+				<Event Id="1662477650" Name="Play_Button_Settings" ObjectPath="\Events\Default Work Unit\UI\Play_Button_Settings" DurationType="OneShot" DurationMin="0.157014" DurationMax="0.166543">
 					<IncludedMemoryFiles>
-						<File Id="363842329" Language="SFX">
-							<ShortName>Button_Settings.wav</ShortName>
-							<Path>SFX\Button_Settings_10C4C929.wem</Path>
+						<File Id="666734104" Language="SFX">
+							<ShortName>Settings_Button .wav</ShortName>
+							<Path>SFX\Settings_Button _21D7A5C5.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1530724216" Name="Play_Corridor" ObjectPath="\Events\Default Work Unit\Rooms\Play_Corridor" DurationType="OneShot" DurationMin="0.530929" DurationMax="0.595948">
+					<IncludedMemoryFiles>
+						<File Id="997140107" Language="SFX">
+							<ShortName>Corridor.wav</ShortName>
+							<Path>SFX\Corridor_21D7A5C5.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
@@ -103,7 +111,23 @@
 					<IncludedMemoryFiles>
 						<File Id="570071604" Language="SFX">
 							<ShortName>Day_Music.wav</ShortName>
-							<Path>SFX\Day_Music_D79FB2B7.wem</Path>
+							<Path>SFX\Day_Music_A03254A3.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="3939321212" Name="Play_Harvester" ObjectPath="\Events\Default Work Unit\Rooms\Play_Harvester" DurationType="OneShot" DurationMin="0.766898" DurationMax="0.860814">
+					<IncludedMemoryFiles>
+						<File Id="725670555" Language="SFX">
+							<ShortName>Harvester.wav</ShortName>
+							<Path>SFX\Harvester_21D7A5C5.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1290610762" Name="Play_Hatchery" ObjectPath="\Events\Default Work Unit\Rooms\Play_Hatchery" DurationType="OneShot" DurationMin="0.803178" DurationMax="0.901537">
+					<IncludedMemoryFiles>
+						<File Id="122163495" Language="SFX">
+							<ShortName>Hatchery.wav</ShortName>
+							<Path>SFX\Hatchery_21D7A5C5.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
@@ -111,7 +135,7 @@
 					<IncludedMemoryFiles>
 						<File Id="506637097" Language="SFX">
 							<ShortName>Night_Music.wav</ShortName>
-							<Path>SFX\Night_Music_D79FB2B7.wem</Path>
+							<Path>SFX\Night_Music_A03254A3.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
@@ -119,7 +143,7 @@
 					<IncludedMemoryFiles>
 						<File Id="650900727" Language="SFX">
 							<ShortName>Room_Destruction.wav</ShortName>
-							<Path>SFX\Room_Destruction_10C4C929.wem</Path>
+							<Path>SFX\Room_Destruction_21D7A5C5.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
@@ -127,7 +151,15 @@
 					<IncludedMemoryFiles>
 						<File Id="501597484" Language="SFX">
 							<ShortName>Room_Placement.wav</ShortName>
-							<Path>SFX\Room_Placement_10C4C929.wem</Path>
+							<Path>SFX\Room_Placement_21D7A5C5.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1433195752" Name="Play_SalvageRoom" ObjectPath="\Events\Default Work Unit\Rooms\Play_SalvageRoom" DurationType="OneShot" DurationMin="0.666395" DurationMax="0.748003">
+					<IncludedMemoryFiles>
+						<File Id="498056746" Language="SFX">
+							<ShortName>SalvageRoom.wav</ShortName>
+							<Path>SFX\SalvageRoom_21D7A5C5.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
@@ -135,23 +167,23 @@
 					<IncludedMemoryFiles>
 						<File Id="81576918" Language="SFX">
 							<ShortName>Death_Small_Bug_1.wav</ShortName>
-							<Path>SFX\Death_Small_Bug_1_10C4C929.wem</Path>
+							<Path>SFX\Death_Small_Bug_1_21D7A5C5.wem</Path>
 						</File>
 						<File Id="170371740" Language="SFX">
 							<ShortName>Death_Small_Bug_4.wav</ShortName>
-							<Path>SFX\Death_Small_Bug_4_10C4C929.wem</Path>
+							<Path>SFX\Death_Small_Bug_4_21D7A5C5.wem</Path>
 						</File>
 						<File Id="350433865" Language="SFX">
 							<ShortName>Death_Small_Bug_3.wav</ShortName>
-							<Path>SFX\Death_Small_Bug_3_10C4C929.wem</Path>
+							<Path>SFX\Death_Small_Bug_3_21D7A5C5.wem</Path>
 						</File>
 						<File Id="674038062" Language="SFX">
 							<ShortName>Death_Small_Bug_5.wav</ShortName>
-							<Path>SFX\Death_Small_Bug_5_10C4C929.wem</Path>
+							<Path>SFX\Death_Small_Bug_5_21D7A5C5.wem</Path>
 						</File>
 						<File Id="947517987" Language="SFX">
 							<ShortName>Death_Small_Bug_2.wav</ShortName>
-							<Path>SFX\Death_Small_Bug_2_10C4C929.wem</Path>
+							<Path>SFX\Death_Small_Bug_2_21D7A5C5.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
@@ -159,7 +191,7 @@
 					<IncludedMemoryFiles>
 						<File Id="588016348" Language="SFX">
 							<ShortName>Movement_Small_Bug.wav</ShortName>
-							<Path>SFX\Movement_Small_Bug_D79FB2B7.wem</Path>
+							<Path>SFX\Movement_Small_Bug_A03254A3.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
@@ -167,7 +199,7 @@
 					<IncludedMemoryFiles>
 						<File Id="829699643" Language="SFX">
 							<ShortName>Barracks.wav</ShortName>
-							<Path>SFX\Barracks_10C4C929.wem</Path>
+							<Path>SFX\Barracks_21D7A5C5.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>

@@ -112,6 +112,8 @@ public class CommandCenter : WarRoom
     public override void OnRoomSelect()
     {
         Debug.Log(this.name + " selected");
+
+        AkSoundEngine.PostEvent("Play_Hatchery", gameObject);
     }
 
 

@@ -198,4 +198,11 @@ public class SalvageRoom : HiveRoom
             }
         }
     }
+
+    public override void OnRoomSelect()
+    {
+        Debug.Log(this.name + " selected");
+
+        AkSoundEngine.PostEvent("Play_SalvageRoom", gameObject);
+    }
 }

@@ -21,10 +21,14 @@ namespace AK
         static const AkUniqueID PLAY_BUTTON_EXIT_CLICK = 757105484U;
         static const AkUniqueID PLAY_BUTTON_HOVER = 4021863785U;
         static const AkUniqueID PLAY_BUTTON_SETTINGS = 1662477650U;
+        static const AkUniqueID PLAY_CORRIDOR = 1530724216U;
         static const AkUniqueID PLAY_DAY_MUSIC = 663868728U;
+        static const AkUniqueID PLAY_HARVESTER = 3939321212U;
+        static const AkUniqueID PLAY_HATCHERY = 1290610762U;
         static const AkUniqueID PLAY_NIGHT_MUSIC = 3279835868U;
         static const AkUniqueID PLAY_ROOM_DESTRUCTION = 1444742574U;
         static const AkUniqueID PLAY_ROOM_PLACEMENT = 1954657867U;
+        static const AkUniqueID PLAY_SALVAGEROOM = 1433195752U;
         static const AkUniqueID PLAY_SMALL_BUG_DEATH = 735132331U;
         static const AkUniqueID PLAY_SMALL_BUG_MOVEMENT = 1017378692U;
         static const AkUniqueID PLAY_WARROOM = 533979565U;
