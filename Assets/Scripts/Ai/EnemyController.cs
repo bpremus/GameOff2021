@@ -35,7 +35,6 @@ public class EnemyController : MonoBehaviour
     GameController game_controller;
 
 
-
     // day logic 
     public void OnDayAttacks()
     {

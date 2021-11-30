@@ -197,4 +197,6 @@ public class WarriorBug : CoreBug
         siege_mode = siege;
     }
 
+    public override bool GetSiegeState() { return siege_mode; }
+
 }

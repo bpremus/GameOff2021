@@ -316,6 +316,15 @@ public class GameController : MonoBehaviour
         return day_count;
     }
 
+    public void OnLoadOverride(int food, int wood, int population, int day_count)
+    {
+        this.food = food;
+        this.wood = wood;
+        this.population = population;
+        this.day_count = day_count;
+        isDay = true;
+    }
+
     protected void Update()
     {
         TimeCycle();

@@ -93,6 +93,20 @@ public class CoreBug : BugMovement
     public int coalition = 0;
 
     public virtual void SiegeBug(bool siege) { }
+    public virtual bool GetSiegeState() { return false; }
+
+    public float GetMoveSpeed() { return move_speed; }
+
+    public void OnBugLoad(string name, float health, float damage, float speed, int kill_count, int task_count, int base_level, bool sieged)
+    {
+        this.name       = name;
+        this.health     = health;
+        this.damage     = damage;
+        this.move_speed     = speed;
+        this.bug_kill_count = kill_count;
+        this.bug_task_count = task_count;
+        this.SiegeBug(sieged);
+    }
 
     //  moving to dead bug
     protected CoreBug salvagedBug;
