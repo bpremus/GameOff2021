@@ -69,17 +69,6 @@ public class UIFader : MonoBehaviour
            scaling = LeanTween.scale(gameObject, scaleTo, fadeInTime).setEase(ease);
         }
     }
-    public void ReplayAnimation()
-    {
-        OnReplayHide();
-    }
-    private void OnReplayHide()
-    {
-        canvasGroup.alpha = 0;
-
-        Show();
-
-    }
     public void Hide()
     {
      fading = LeanTween.alphaCanvas(canvasGroup, 0, fadeOutTime).setOnComplete(() =>ResetScale());

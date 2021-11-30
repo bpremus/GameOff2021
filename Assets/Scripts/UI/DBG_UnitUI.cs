@@ -77,7 +77,6 @@ public class DBG_UnitUI : MonoBehaviour
         levelUpPanel.SetActive(false);
         CellSelectProto.Instance.HideBugSelector();
         TooltipSystem.Hide();
-        CostTooltip.Hide();
     }
     public void FollowUnit()
     {
@@ -103,17 +102,13 @@ public class DBG_UnitUI : MonoBehaviour
     {
         bug_level.text = "Level "+ cb.bug_base_level.ToString();
     }
-    public int[] GetUpgradesCosts(int id)
-    {
-       return GameController.Instance.GetEvolutionCost(id);
-    }
     public void Update()
     {
         if (UIController.instance.isBuildMenuActive()) Hide();
-        if (!this.transform.GetChild(0).gameObject.activeInHierarchy) CostTooltip.Hide();
 
 
-        if (bug != null)
+
+        if(bug != null)
         {
             if (bug.bug_evolution == CoreBug.BugEvolution.warrior)
             {
