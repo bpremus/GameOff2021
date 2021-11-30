@@ -7,9 +7,14 @@ public class CCSlowBug : WarriorBug
 
     protected override void Start()
     {
-        bug_evolution = BugEvolution.cc_bug;
         base.Start();
     }
+
+    public override void SetEvolution()
+    {
+        bug_evolution = BugEvolution.cc_bug;
+    }
+
 
     public override void InteractWithEnemies(List<CoreBug> othrBugs)
     {
@@ -42,7 +47,7 @@ public class CCSlowBug : WarriorBug
         for (int i = 0; i < othrBugs.Count; i++)
         {
             bugAnimation = BugAnimation.attack;
-
+            Debug.Log("Slowing");
             // flame thrower like animation
             othrBugs[i].OnBugSlowdown(GetDefinedSpeed * 0.5f);
             Debug.DrawLine(transform.position, othrBugs[i].transform.position, Color.red);

@@ -9,10 +9,13 @@ public class RangeBug : WarriorBug
 
     protected override void Start()
     {
-        bug_evolution = BugEvolution.range;
         base.Start();
     }
 
+    public override void SetEvolution()
+    {
+        bug_evolution = BugEvolution.range;
+    }
 
     public override void InteractWithEnemies(List<CoreBug> othrBugs)
     {

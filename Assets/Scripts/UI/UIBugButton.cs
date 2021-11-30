@@ -38,11 +38,7 @@ public class UIBugButton : MonoBehaviour
             if (bug.bug_evolution == CoreBug.BugEvolution.drone)
             {
                 button_image.sprite = icon_images[0];
-            }
-            else if (bug.bug_evolution == CoreBug.BugEvolution.warrior)
-            {
-                button_image.sprite = icon_images[1];
-            }
+            }           
             else if (bug.bug_evolution == CoreBug.BugEvolution.claw)
             {
                 button_image.sprite = icon_images[2];
@@ -54,6 +50,10 @@ public class UIBugButton : MonoBehaviour
             else if (bug.bug_evolution == CoreBug.BugEvolution.cc_bug)
             {
                 button_image.sprite = icon_images[4];
+            }
+            else if (bug.bug_evolution == CoreBug.BugEvolution.warrior)
+            {
+                button_image.sprite = icon_images[1];
             }
             text.text = bug.name;
         }

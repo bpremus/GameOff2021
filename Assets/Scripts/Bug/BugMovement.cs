@@ -201,6 +201,7 @@ public class BugMovement : MonoBehaviour
             Vector3 new_position = transform.position + direction;
 
             float final_speed = move_speed - slow_penalty_speed;
+            if (final_speed <= 0) final_speed = 0.1f;
             slow_penalty_speed = 0;
 
             transform.position = Vector3.Lerp(transform.position, new_position, Time.deltaTime * final_speed);
@@ -219,7 +220,7 @@ public class BugMovement : MonoBehaviour
         }
     }
 
-    public void OnBugSlowdown(float speed = 0.5f)
+    public void OnBugSlowdown(float speed)
     {
         slow_penalty_speed = speed;
     }

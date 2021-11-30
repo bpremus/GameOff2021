@@ -61,7 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {x: 0, y: 0, z: 0}
   rotation_speed: 10
-  move_speed: 1
+  move_speed: 1.5
   animators: []
   Debug_movement_mode: 0
   stop_distance: 0.05
@@ -74,9 +74,12 @@ MonoBehaviour:
   bug_evolution: 0
   health: 10
   damage: 1
-  interraction_range: 4
+  extra_damage: 0
+  interraction_range: 2
   decayOnDeadTimer: 20
   bug_base_level: 1
+  bug_kill_count: 0
+  bug_task_count: 0
   bugTask: 1
   bug_action: 0
   coalition: 0

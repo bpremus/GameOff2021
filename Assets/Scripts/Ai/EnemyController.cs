@@ -42,7 +42,7 @@ public class EnemyController : MonoBehaviour
     // day logic 
     public void OnDayAttacks()
     {
-        Debug.Log("Day scout started");
+      
 
         // day is just a scout;
         SetAttack();
@@ -83,6 +83,12 @@ public class EnemyController : MonoBehaviour
             bugs_to_spawn.Enqueue(raider);
 
         }
+    }
+
+    public void ExtraAttackOnIdle()
+    {
+        Debug.Log("Extra attack on idle");
+        OnDayAttacks();
     }
 
     public void OnNightAttacks()
@@ -291,10 +297,26 @@ public class EnemyController : MonoBehaviour
 
     }
 
+    
     int d_idx = 0;
     public void SpawnBug()
     {
-        if (bugs_to_spawn.Count == 0) return;
+        if (bugs_to_spawn.Count == 0)
+        { float perc = game_controller.GetTimePercent();
+            if (perc > 25 && perc < 30)
+            {
+                ExtraAttackOnIdle();
+            }
+            else if (perc > 50 && perc < 65)
+            {
+                ExtraAttackOnIdle();
+            }
+            else if (perc > 80 && perc < 90)
+            {
+                ExtraAttackOnIdle();
+            }
+            return;    
+        }
 
         spawn_timer += Time.deltaTime;
         if (spawn_timer > bug_separation)
