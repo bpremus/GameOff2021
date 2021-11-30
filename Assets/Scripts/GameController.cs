@@ -28,6 +28,19 @@ public class GameController : MonoBehaviour
     [SerializeField]
     int day_count = 0;
 
+
+    public void ResetGame()
+    {
+        food = 20;
+        wood = 20;
+        population = 2;
+        day_count = 0;
+
+        // we need to rest AI 
+
+    }
+
+
     // costs                 wood, food 
     [SerializeField] int[] room_corridor_cost = { 5, 1 };
     [SerializeField] int[] room_harvester_cost = { 10, 3 };
@@ -110,6 +123,17 @@ public class GameController : MonoBehaviour
          
 
     }
+
+    public void OnGameEnd()
+    { 
+    
+    }
+
+    public void OnGameRestart()
+    { 
+      
+    }
+
     public void OnRooomBuild(HiveCell.RoomContext context)
     {
         // define cost of each buildning 

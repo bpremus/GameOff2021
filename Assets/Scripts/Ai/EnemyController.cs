@@ -34,6 +34,10 @@ public class EnemyController : MonoBehaviour
     public int bug_separation = 1;
     GameController game_controller;
 
+    public void ResetGame()
+    { 
+        
+    }
 
     // day logic 
     public void OnDayAttacks()

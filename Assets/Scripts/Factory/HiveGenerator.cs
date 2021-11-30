@@ -178,20 +178,38 @@ public class HiveGenerator : MonoBehaviour
             }
         }
 
-        SetFixedCells();
+        SetFixedCells(-1);
     }
 
-
-
-
-
+    public void ResetGame()
+    {
+        for (int i = 0; i < cells.Count; i++)
+        {
+            for (int j = 0; j < cells[i].Count; j++)
+            {
+                HiveCell gs = cells[i][j];
+                CoreRoom room = gs.GetRoom();
+                if (room)
+                {
+                    List<CoreBug> bugs = room.GetAssignedBugs();
+                    for (int b = 0; b < bugs.Count; b++)
+                    {
+                        Destroy(bugs[b].gameObject);
+                    }
+                    gs.DestroyRoom();
+                }
+            }
+        }
+        SetFixedCells();
+        GameController.Instance.ResetGame();
+    }
 
     public void DebugGrid()
     {
 
         CollecteCells();
         
-        int d = width / 2;
+      //  int d = width / 2;
 
         SetLevelVariant();
 
@@ -413,8 +431,22 @@ public class HiveGenerator : MonoBehaviour
             hive_entrance[0] = cells[d][height - 2];
 
         }
+        if (level == -1)
+        {
+            cells[d - 3][height - 2].mesh_index = 1;
+            cells[d - 3][height - 2].cell_Type = CellMesh.Cell_type.entrance;
+            cells[d - 3][height - 2].is_static_cell = true;
+            cells[d - 3][height - 3].BuildCooridor();
+            cells[d - 3][height - 3].is_static_cell = true;
 
 
+            cells[d + 3][height - 2].mesh_index = 1;
+            cells[d + 3][height - 2].cell_Type = CellMesh.Cell_type.entrance;
+            cells[d + 3][height - 2].is_static_cell = true;
+            cells[d + 3][height - 3].BuildCooridor();
+            cells[d + 3][height - 3].is_static_cell = true;
+
+        }
     }
 
 
@@ -427,6 +459,9 @@ public class HiveGenerator : MonoBehaviour
             cells[i][height -1].BuildOutside();
         }
 
+        SetLevelVariant(variant);
+
+        /*
         // earh border row with opening 
         for (int i = 0; i < width; i++)
         {
@@ -453,7 +488,7 @@ public class HiveGenerator : MonoBehaviour
             cells[d][height - 3].is_static_cell = true;
 
         }
-    
+        */
 
         // solver 
         PlaceCooridors(cells);

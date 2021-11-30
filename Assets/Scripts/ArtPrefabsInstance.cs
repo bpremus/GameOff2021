@@ -51,8 +51,11 @@ public class ArtPrefabsInstance : MonoBehaviour
             prefab_index = 5;
         }
 
-        Vector3 new_pos = cell.transform.position + cell.transform.up * 1f;
-        GameObject g = Instantiate(BugsPrefabs[prefab_index], new_pos, Quaternion.identity); 
+        Vector3 new_pos = cell.transform.position;
+
+        Quaternion look_dir = Quaternion.Euler(0, -90, -90);
+
+        GameObject g = Instantiate(BugsPrefabs[prefab_index], new_pos, look_dir); 
         if (g)
         {
             CoreBug evolved_bug = g.GetComponent<CoreBug>();

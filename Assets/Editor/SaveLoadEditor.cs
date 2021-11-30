@@ -8,6 +8,12 @@ public class SaveLoadEditor : Editor
     {
         base.OnInspectorGUI();
 
+        if (GUILayout.Button("Restart game"))
+        {
+            SaveController save_controll = (SaveController)this.target;
+            save_controll.ResetGame();
+        }
+
         if (GUILayout.Button("Save game"))
         {
             SaveController save_controll = (SaveController) this.target;

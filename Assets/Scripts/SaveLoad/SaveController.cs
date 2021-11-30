@@ -21,6 +21,7 @@ public class SaveController : MonoBehaviour
         public int bug_task_count;
         public int bug_base_level;
         public bool sieged;
+        public int bug_task = 0;
 
         public Drone_data(CoreBug bug)
         {
@@ -33,6 +34,7 @@ public class SaveController : MonoBehaviour
             this.bug_task_count = bug.bug_kill_count;
             this.bug_base_level = bug.bug_base_level;
             this.sieged = bug.GetSiegeState();
+            this.bug_task = (int) bug.bugTask;
         }
     }
 
@@ -126,6 +128,12 @@ public class SaveController : MonoBehaviour
 
     Hive_data hive_data;
 
+    public void ResetGame()
+    {
+        Debug.Log("This doesnt work");
+    }
+
+
     public void ClarHive()
     {
         FlushHive();
@@ -164,6 +172,8 @@ public class SaveController : MonoBehaviour
                     // build these drones and assign to this room;
                     CoreBug bug = ArtPrefabsInstance.Instance.SpawnBug((CoreBug.BugEvolution) drone.bug_type, hc);
                     bug.OnBugLoad(drone.name, drone.health, drone.damage, drone.speed, drone.bug_kill_count, drone.bug_task_count, drone.bug_base_level, drone.sieged);
+
+                    bug.bugTask = (CoreBug.BugTask) drone.bug_task;
 
                 }
             }
