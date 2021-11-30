@@ -170,6 +170,8 @@ public class HarversterRoom : HiveRoom
     public override void OnRoomSelect()
     {
         Debug.Log(this.name + " selected");
+
+        AkSoundEngine.PostEvent("Play_Harvester", gameObject);
     }
 
 

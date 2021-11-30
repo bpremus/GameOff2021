@@ -30,7 +30,7 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: 68b9c5ee75f6ff4c894e5e3569cfca5c
     GuidInternal: 
-    m_lastTime: -8585634143601982449
+    m_lastTime: -8585633052809000907
     List:
     - name: Ambient
       guid: f861f3201f42bb48a0d2325e0c659cb2
@@ -84,7 +84,7 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: ab7a7d8fa7af904aad885e3b30a5f3e5
     GuidInternal: 
-    m_lastTime: -8585633923478313063
+    m_lastTime: -8585633050849323794
     List:
     - name: Main
       guid: c7ed1213001d794c9f3d34785e89ab38
@@ -103,7 +103,7 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: d2d748c853878f419a502ed6d2b53f2b
     GuidInternal: 
-    m_lastTime: -8585633923478382872
+    m_lastTime: -8585633072641507871
     List:
     - name: Ambient
       guid: fd4e3f4d2b5b3f408bd25e3289266b50
@@ -209,8 +209,8 @@ MonoBehaviour:
         ObjectType: 3
       Path: Default Work Unit\UI\Play_Button_Click
       maxAttenuation: 0
-      maxDuration: 0.059651
-      minDuration: 0.054637
+      maxDuration: 0.06133
+      minDuration: 0.056175
     - name: Play_Button_Exit_Click
       guid: 47ffeca5f037634b9fd530c42a8c3edb
       id: 757105484
@@ -251,8 +251,22 @@ MonoBehaviour:
         ObjectType: 3
       Path: Default Work Unit\UI\Play_Button_Settings
       maxAttenuation: 0
-      maxDuration: 0.128737
-      minDuration: 0.121371
+      maxDuration: 0.166543
+      minDuration: 0.157014
+    - name: Play_Corridor
+      guid: 6ea0175ddad0e14ab713ff51ab382a45
+      id: 1530724216
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Rooms
+        ObjectType: 4
+      - ElementName: Play_Corridor
+        ObjectType: 3
+      Path: Default Work Unit\Rooms\Play_Corridor
+      maxAttenuation: 0
+      maxDuration: 0.595948
+      minDuration: 0.530929
     - name: Play_Day_Music
       guid: 1f84fa6dcfa5f14fb25dfdc25a544360
       id: 663868728
@@ -267,6 +281,34 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 118
       minDuration: 118
+    - name: Play_Harvester
+      guid: f64aeb43f569524eb9526db6028e6283
+      id: 3939321212
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Rooms
+        ObjectType: 4
+      - ElementName: Play_Harvester
+        ObjectType: 3
+      Path: Default Work Unit\Rooms\Play_Harvester
+      maxAttenuation: 0
+      maxDuration: 0.860814
+      minDuration: 0.766898
+    - name: Play_Hatchery
+      guid: b1da09477de1054ea28b22da1a9a67de
+      id: 1290610762
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Rooms
+        ObjectType: 4
+      - ElementName: Play_Hatchery
+        ObjectType: 3
+      Path: Default Work Unit\Rooms\Play_Hatchery
+      maxAttenuation: 0
+      maxDuration: 0.901537
+      minDuration: 0.803178
     - name: Play_Night_Music
       guid: 57fae69cdc78624e91c551c062ec9741
       id: 3279835868
@@ -309,6 +351,20 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0.861311
       minDuration: 0.766455
+    - name: Play_SalvageRoom
+      guid: 49e5cc732826a14db1acd4c5a5812acf
+      id: 1433195752
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Rooms
+        ObjectType: 4
+      - ElementName: Play_SalvageRoom
+        ObjectType: 3
+      Path: Default Work Unit\Rooms\Play_SalvageRoom
+      maxAttenuation: 0
+      maxDuration: 0.748003
+      minDuration: 0.666395
     - name: Play_Small_Bug_Death
       guid: 45ee6578ccd23743ab404ebd21a7fa88
       id: 735132331
