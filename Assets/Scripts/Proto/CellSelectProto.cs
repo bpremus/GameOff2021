@@ -103,6 +103,7 @@ public class CellSelectProto : MonoBehaviour
             }
 
             frame_border.transform.position = _hover_cell.transform.position + new Vector3(0, 0, 1);
+
             SetDefaultFrameSize();
         }
 
@@ -229,18 +230,37 @@ public class CellSelectProto : MonoBehaviour
         cellSelected_GFX.GetComponent<CellSelector_Locked>().ScaleUp();
         ShowRoomCapacityDisplay_Selected(hc);
 
-        if (range_distance_ui)
-        { 
-            range_distance_ui.transform.position = hc.transform.position + new Vector3(0, 0, 1);
-            float d = hc.GetRoom().GetRomRange();
-            range_distance_ui.transform.localScale = new Vector3(d * 2, d *2, 0);
-        }
 
         CoreRoom hroom = hc.GetRoom();
         if (hroom)
         {
             hroom.OnRoomSelect();
         }
+
+
+
+
+            if (_cellSelected.cell_Type == CellMesh.Cell_type.room)
+            {
+            
+            
+                
+                range_distance_ui.transform.position = _cellSelected.transform.position + new Vector3(0, 0, 1);
+                float d = _cellSelected.GetRoom().GetRomRange();
+                Vector3 rangeDisplaySize = new Vector3(d * 2, d * 2, 0);
+                range_distance_ui.transform.localScale = rangeDisplaySize;
+            //messy code here but we got not time, basically checks if range is too small then dont display it at all
+                if(d > 1)
+                 range_distance_ui.SetActive(true);
+             }
+            else
+            {
+                
+                  range_distance_ui.SetActive(false);
+            }
+        
+
+
     }
 
     public void OnBugHover(CoreBug bug)
@@ -267,7 +287,7 @@ public class CellSelectProto : MonoBehaviour
 
         if (range_distance_ui)
         {
-
+            
                 range_distance_ui.transform.position = bug.transform.position + new Vector3(0, 0, 1);
                 float d = bug.interraction_range;
                 range_distance_ui.transform.localScale = new Vector3(d * 2, d * 2, 0);
@@ -428,7 +448,7 @@ public class CellSelectProto : MonoBehaviour
             GameController.Instance.OnRooomBuild(context);
             hc.BuildRoom();
             
-           
+
         }
     }
 
@@ -545,6 +565,7 @@ public class CellSelectProto : MonoBehaviour
         UIController.instance.CloseBuildMenu();
         UIController.instance.CloseSettingsMenu();
         UIController.instance.HideBugUI();
+        range_distance_ui.SetActive(false);
         OnDeselect();
     }
     private void Update()

@@ -52,17 +52,22 @@ public class PlayerPref : MonoBehaviour
     {
         if (!masterVolumeSlider || !musicVolumeSlider || !sfxVolumeSlider) { Debug.LogError("ASSIGN VOLUME SLIDERS IN PLAYERPREFS!"); return; }
 
+        CheckIfDefaultVolumeSettings();
+        ApplySavedVolumesToSlider();
+    }
 
-        if (!PlayerPrefs.HasKey("mainVolume")) SaveMainVolume(defaultMasterSoundLevel);
-        if (!PlayerPrefs.HasKey("musicVolume")) SaveMusicVolume(defaultMusicSoundLeel);
-        if (!PlayerPrefs.HasKey("sfxVolume")) SaveSFXVolume(defaultSFXSoundLevel);
-
+    private void ApplySavedVolumesToSlider()
+    {
         masterVolumeSlider.SetSavedLevel();
         musicVolumeSlider.SetSavedLevel();
         sfxVolumeSlider.SetSavedLevel();
-        Debug.Log("Sound levels are set to default value now");
     }
-
+    private void CheckIfDefaultVolumeSettings()
+    {
+        if (!PlayerPrefs.HasKey("mainVolume")) SaveMainVolume(defaultMasterSoundLevel);
+        if (!PlayerPrefs.HasKey("musicVolume")) SaveMusicVolume(defaultMusicSoundLeel);
+        if (!PlayerPrefs.HasKey("sfxVolume")) SaveSFXVolume(defaultSFXSoundLevel);
+    }
     #region Volume settings - Setters and Getters
 
     public void SaveMainVolume(float value) 

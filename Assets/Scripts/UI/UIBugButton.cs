@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
+
 public class UIBugButton : MonoBehaviour
 {
     public CoreBug bug;
@@ -13,9 +15,11 @@ public class UIBugButton : MonoBehaviour
 
     Image button_image;
 
-
+    private bool startTimer;
+    private float elapsedTime;
     public void Start()
     {
+        
         button_image = GetComponent<Image>();
 
         TextMeshProUGUI t = GetComponentInChildren<TextMeshProUGUI>();
@@ -27,7 +31,7 @@ public class UIBugButton : MonoBehaviour
 
     public void Update()
     {
-
+        if (startTimer) CountTime();
         if (bug)
         {
             ArtPrefabsInstance.Instance.SetBugName(bug);
@@ -55,5 +59,22 @@ public class UIBugButton : MonoBehaviour
         }
            
     }
-
+    private void OnEnable()
+    {
+        startTimer = true;
+        elapsedTime = 0;
+    }
+    private void OnDisable()
+    {
+        startTimer = false;
+    }
+    private void CountTime()
+    {
+        if (elapsedTime > 0.22f)
+        {
+            if(!GetComponent<ButtonAnim>().displayedCorrectly)
+                    GetComponent<ButtonAnim>().ForceDisplay();
+        }
+      elapsedTime += Time.deltaTime;
+    }
 }

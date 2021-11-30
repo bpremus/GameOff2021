@@ -127,4 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotation_elem: {fileID: 6864076096941232243}
-  rot_speed: 20
+  baseColor: {r: 1, g: 1, b: 1, a: 0.09411765}
+  fadeToColor: {r: 1, g: 1, b: 1, a: 0.03529412}
+  animTime: 1.2
+  rot_speed: 12

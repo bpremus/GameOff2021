@@ -72,7 +72,6 @@ public class Room_UI : MonoBehaviour
         BuildButtons();
         InitializeButtons();
         SetRoomNameText(hc);
-        SetHeaderColor();
         SetLevelText(hc);
 
 
@@ -91,11 +90,11 @@ public class Room_UI : MonoBehaviour
         else if (text == "SalvageRoom(Clone)") text = "Storage";
         else if(text == "WarRoom(Clone)") text = "Barracks";
         else if(text == "HarversterRoom(Clone)") text = "Harvester";
-        else if(text == "QueenRoom(Clone)") text = "Queen room";
-        else if(text == "HiveRoom(Clone)") text = "Main Hive";
+        else if(text == "QueenRoom(Clone)") text = "Hatchery";
+        else if(text == "HiveRoom(Clone)") text = "Queen";
         else text = "Room";
         room_name.text = text;
-  
+        SetHeaderColor();
     }
     public void SetLevelText(HiveCell hc)
     {
@@ -123,10 +122,10 @@ public class Room_UI : MonoBehaviour
             case "Harvester":
                 currentColor = harvesterColor;
                 break;
-            case "Queen room":
+            case "Hatchery":
                 currentColor = queenColor;
                 break;
-            case "Main Hive":
+            case "Queen":
                 currentColor = hiveColor;
                 break;
 
