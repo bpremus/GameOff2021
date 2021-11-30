@@ -94,7 +94,6 @@ public class CoreBug : BugMovement
 
     public virtual void SiegeBug(bool siege) { }
 
-
     //  moving to dead bug
     protected CoreBug salvagedBug;
     public CoreBug salvage_object
