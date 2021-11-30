@@ -383,6 +383,7 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+
          // fire first day or night 
          if (isDay)
              OnDayStart();
@@ -391,6 +392,11 @@ public class GameController : MonoBehaviour
 
         day_count = 0; // set day to one
 
+
+
+
+        //playerprefs inits
+        PlayerPref.Instance.UpdatePlayerSoundSettings();
     }
 
 }
