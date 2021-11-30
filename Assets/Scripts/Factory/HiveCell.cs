@@ -11,7 +11,6 @@ public class HiveCell : MonoBehaviour
     [SerializeField]
     public CellMesh cell_mesh;
 
-    public bool is_static_cell = false;
     public void SetNode(int x, int y)
     {
         // cell placement and pathfinding 

@@ -158,29 +158,6 @@ public class HiveGenerator : MonoBehaviour
         }
     }
 
-    public void CleanGrid()
-    {
-        for (int i = 0; i < cells.Count; i++)
-        {
-            for (int j = 0; j < cells[i].Count; j++)
-            {
-                HiveCell gs = cells[i][j];
-                CoreRoom room = gs.GetRoom();
-                if (room)
-                {
-                    List<CoreBug> bugs = room.GetAssignedBugs();
-                    for (int b = 0; b < bugs.Count; b++)
-                    {
-                        Destroy(bugs[b].gameObject);
-                    }
-                    gs.DestroyRoom();
-                }         
-            }
-        }
-
-        SetFixedCells();
-    }
-
     public void DebugGrid()
     {
 
@@ -215,24 +192,6 @@ public class HiveGenerator : MonoBehaviour
 
         RefreshAllCells();
         
-    }
-
-    public HiveCell BuildOnCell(int x, int y, HiveCell.RoomContext context)
-    {
-
-        HiveCell cell = cells[x][y];
-        if (context == HiveCell.RoomContext.corridor)
-        {
-            cell.BuildCooridor();
-        }
-        else
-        {
-            cell.BuildRoom(context);
-        }
-
-        RefreshAllCells();
-
-        return cell;
     }
 
     public void RefreshAllCells()
@@ -345,22 +304,18 @@ public class HiveGenerator : MonoBehaviour
         {
             cells[i][height - 2].mesh_index = 32;
             cells[i][height - 2].cell_Type = CellMesh.Cell_type.top;
-            cells[i][height - 2].is_static_cell = true;
         }
 
         int d = width / 2;
 
         cells[d][height - 2].mesh_index = 1;
         cells[d][height - 2].cell_Type = CellMesh.Cell_type.entrance;
-        cells[d][height - 2].is_static_cell = true;
-
         hive_entrance[0] = cells[d][height - 2];
+
 
         // we need to solve non dirt first, or the one with lowest choices 
         // we have simple solution as each tile can connect any other with corridor 
         cells[d][height - 3].BuildCooridor();
-        cells[d][height - 3].is_static_cell = true;
-
 
         // solver 
         PlaceCooridors(cells);
