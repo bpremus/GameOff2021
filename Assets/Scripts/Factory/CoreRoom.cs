@@ -20,16 +20,8 @@ public class CoreRoom : MonoBehaviour
   
 
     public int GetMAxAssignUnits() { return max_asigned_units; }
-    public void SetMaxUnits(int max_units)
-    {
-        max_asigned_units = max_units;
-    }
-    public float GetRomRange() { return room_detect_distance; }
 
-    public void SetRoomRange(float max_range)
-    {
-        room_detect_distance = max_range;
-    }
+    public float GetRomRange() { return room_detect_distance; }
 
     public virtual float GetRoomBonusDmg() 
     {
