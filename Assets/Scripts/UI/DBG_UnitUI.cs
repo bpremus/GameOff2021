@@ -196,13 +196,13 @@ public class DBG_UnitUI : MonoBehaviour
             if (index == 2)
             {
                 if (GameController.Instance.EvolveBug(CoreBug.BugEvolution.range))
-                    ArtPrefabsInstance.Instance.EvolveBug(bug, 5); // => to warrior to ranged
+                    ArtPrefabsInstance.Instance.EvolveBug(bug, 4); // => to warrior to ranged
             }
                 
             if (index == 3)
             {
                 if (GameController.Instance.EvolveBug(CoreBug.BugEvolution.cc_bug))
-                    ArtPrefabsInstance.Instance.EvolveBug(bug, 4); // => to warrior to cc
+                    ArtPrefabsInstance.Instance.EvolveBug(bug, 5); // => to warrior to cc
             }
 
         }

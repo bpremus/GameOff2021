@@ -94,6 +94,9 @@ public class CommandCenter : WarRoom
                             bug.SetAction(CoreBug.Bug_action.idle);
 
                             // were we in gathering hunt?
+                            OnBugReachHomeCell(bug);
+                            OnBugReachHomeCell(bug); // on purpose quick fix
+
                         }
                     }
 
@@ -110,5 +113,6 @@ public class CommandCenter : WarRoom
     {
         Debug.Log(this.name + " selected");
     }
+
 
 }
