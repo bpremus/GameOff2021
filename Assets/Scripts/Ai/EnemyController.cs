@@ -34,6 +34,15 @@ public class EnemyController : MonoBehaviour
     public int bug_separation = 1;
     GameController game_controller;
 
+    float base_modifier_level = 1;
+
+
+    public void Start()
+    {
+        game_controller = GameController.Instance;
+        base_modifier_level = 0f;
+    }
+
     public void ResetGame()
     { 
         
@@ -101,8 +110,11 @@ public class EnemyController : MonoBehaviour
         // we gout our asses kicked 
 
         // stats boost 
-        float speed_boost = elapsed_day * 0.1f;
+        float speed_boost  = elapsed_day * 0.1f;
         float health_boost = elapsed_day * 0.05f;
+
+        health_boost += base_modifier_level;
+        if (health_boost < 0) health_boost = 0;
 
         HiveCell target = hive_cell;
         int total_attack_count = night_attack_number + elapsed_day;
@@ -150,10 +162,6 @@ public class EnemyController : MonoBehaviour
     }
 
 
-    public void Start()
-    {
-        game_controller = GameController.Instance;
-    }
 
     public void Update()
     {
@@ -254,8 +262,15 @@ public class EnemyController : MonoBehaviour
         public void OnDestroyBug()
         {
             bug.OnAIEndDestroy();
+            EnemyController.Instance.BugsDieingALot();
         }
+    }
 
+    
+    public void BugsDieingALot()
+    {
+        // base_modifier_level
+        base_modifier_level += 0.001f;
     }
 
     Queue<HiveCell> GoodPillagePoints = new Queue<HiveCell>();
@@ -263,6 +278,8 @@ public class EnemyController : MonoBehaviour
     {
         if (GoodPillagePoints.Contains(destination) == false)
             GoodPillagePoints.Enqueue(destination);
+
+        base_modifier_level -= 0.01f;
     }
 
     struct BugRaid

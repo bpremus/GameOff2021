@@ -238,12 +238,14 @@ public class HiveCell : MonoBehaviour
 
     public bool CanDestroyRoom()
     {
-
-        QueenRoom qr = childRoom.GetComponent<QueenRoom>();
-        if (qr)
+        if (childRoom)
         {
-            // cant delete queen room
-            return false;
+            QueenRoom qr = childRoom.GetComponent<QueenRoom>();
+            if (qr)
+            {
+                // cant delete queen room
+                return false;
+            }
         }
 
         walkable = 0;
