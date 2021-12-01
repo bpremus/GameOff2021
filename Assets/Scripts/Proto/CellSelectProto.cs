@@ -17,6 +17,9 @@ public class CellSelectProto : MonoBehaviour
     [SerializeField] private float onClickFrameAnimtime = 0.2f;
     [SerializeField] private LeanTweenType onClickFrameEase;
 
+    [Header("Assign gfx")]
+    private Color defaultFrameColor;
+    [SerializeField] private Color frameColorOnAssign;
     [Header("Cell selected GFX")]
     [SerializeField] private GameObject cellSelected_GFX;
     private LTDescr cellSelectedAnim;
@@ -60,6 +63,7 @@ public class CellSelectProto : MonoBehaviour
         _instance = this;
 
         borderStartSize = frame_border.transform.localScale;
+        defaultFrameColor = frame_border.GetComponent<SpriteRenderer>().color;
     }
 
     int last_selected_room_id = 0;
@@ -150,6 +154,7 @@ public class CellSelectProto : MonoBehaviour
         else
         {
             cellHoverCanvas.SetActive(false);
+            frame_border.GetComponent<SpriteRenderer>().color = defaultFrameColor;
         }
     }
 
@@ -210,6 +215,7 @@ public class CellSelectProto : MonoBehaviour
             if (current == max) txtDisplayer.color = redColor;
             else txtDisplayer.color = greenColor;
 
+            frame_border.GetComponent<SpriteRenderer>().color = frameColorOnAssign;
             txtDisplayer.text = text;
             cellHoverCanvas.SetActive(true);
 
@@ -278,7 +284,9 @@ public class CellSelectProto : MonoBehaviour
 
         DBG_UnitUI.Instance.Show(bug);
         Room_UI.Instance.Hide();
-        
+
+
+
         if (selection_state != SelectState.cell_selected) selectionPosition = bug.transform.position;
 
         bugSelected_GFX.transform.position = new Vector3(bug.transform.position.x, bug.transform.position.y, bugSelected_GFX.transform.position.z);

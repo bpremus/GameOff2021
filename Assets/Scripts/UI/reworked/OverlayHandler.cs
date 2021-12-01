@@ -61,11 +61,14 @@ public class OverlayHandler : MonoBehaviour
     }
     public void OpenSettingsMenu()
     {
+        uiController.HideAllUI();
         settingsMenu.SetActive(true);
+        uiController.gameObject.GetComponent<BlurController>().EnableBlur();
     }
     public void CloseSettingsMenu()
     {
         settingsMenu.SetActive(false);
+        uiController.gameObject.GetComponent<BlurController>().DisableBlur();
     }
     public bool IsSettingsMenuActive()
     {
