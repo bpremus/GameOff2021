@@ -12,18 +12,25 @@ Event	ID	Name			Wwise Object Path	Notes
 	1433195752	Play_SalvageRoom			\Default Work Unit\Rooms\Play_SalvageRoom	
 	1444742574	Play_Room_Destruction			\Default Work Unit\Rooms\Play_Room_Destruction	
 	1512937371	Stop_Ambient_Night			\Default Work Unit\Ambient\Stop_Ambient_Night	
+	1520388910	Play_Ranged_Attack			\Default Work Unit\Bugs\Attack\Play_Ranged_Attack	
 	1530724216	Play_Corridor			\Default Work Unit\Rooms\Play_Corridor	
 	1662477650	Play_Button_Settings			\Default Work Unit\UI\Play_Button_Settings	
 	1932246634	Stop_Night_Music			\Default Work Unit\Music\Stop_Night_Music	
 	1954657867	Play_Room_Placement			\Default Work Unit\Rooms\Play_Room_Placement	
-	2207025252	Play_Bigclaw_Attack			\Default Work Unit\Bugs\Play_Bigclaw_Attack	
+	2207025252	Play_Bigclaw_Attack			\Default Work Unit\Bugs\Attack\Play_Bigclaw_Attack	
 	2326255855	Stop_Big_Bug_Movement			\Default Work Unit\Bugs\Stop_Big_Bug_Movement	
 	2953607465	Play_Ambient_Day			\Default Work Unit\Ambient\Play_Ambient_Day	
+	3140365032	Play_Ranged_Selection			\Default Work Unit\Bugs\Selection\Play_Ranged_Selection	
 	3279835868	Play_Night_Music			\Default Work Unit\Music\Play_Night_Music	
 	3285809237	Play_Big_Bug_Movement			\Default Work Unit\Bugs\Play_Big_Bug_Movement	
+	3789169039	Play_Drone_Selection			\Default Work Unit\Bugs\Selection\Play_Drone_Selection	
+	3886607231	Play_Warrior_Selection			\Default Work Unit\Bugs\Selection\Play_Warrior_Selection	
 	3939321212	Play_Harvester			\Default Work Unit\Rooms\Play_Harvester	
+	3988919171	Play_CC_Selection			\Default Work Unit\Bugs\Selection\Play_CC_Selection	
 	4021863785	Play_Button_Hover			\Default Work Unit\UI\Play_Button_Hover	
 	4052991490	Stop_Small_Bug_Movement			\Default Work Unit\Bugs\Stop_Small_Bug_Movement	
+	4104832234	Play_BigClaw_Selection			\Default Work Unit\Bugs\Selection\Play_BigClaw_Selection	
+	4109336823	Play_Warrior_Attack			\Default Work Unit\Bugs\Attack\Play_Warrior_Attack	
 
 Effect plug-ins	ID	Name	Type				Notes
 	862824400	Wwise_Guitar_Distortion_(Custom)	Wwise Guitar Distortion			
@@ -34,11 +41,15 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	86493557	Ambient_Night	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Ambient_Night_A03254A3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Ambient\Ambient_Night		6693158
 	122163495	Hatchery	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Hatchery_21D7A5C5.wem		\Actor-Mixer Hierarchy\Default Work Unit\Rooms\Hatchery\Hatchery		65129
 	170371740	Death_Small_Bug_4	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Death_Small_Bug_4_21D7A5C5.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bug_SFX\Death\Death_Small_Bug\Death_Small_Bug_4		13048
+	206458061	Selection_Ranged	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Selection_Ranged_21D7A5C5.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bug_SFX\Selection\Warrior_Selection\Selection_Ranged		33846
 	219297782	Bigclaw_Attack_2	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Bigclaw_Attack_2_21D7A5C5.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bug_SFX\Attack\Bigclaw_Attack\Bigclaw_Attack_2		13787
+	255693773	Selection_BigClaw	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Selection_BigClaw_21D7A5C5.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bug_SFX\Selection\Bigclaw_Selection\Selection_BigClaw		45459
 	297837256	Bigclaw_Attack_3	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Bigclaw_Attack_3_21D7A5C5.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bug_SFX\Attack\Bigclaw_Attack\Bigclaw_Attack_3		16876
+	318861196	Selection_Warrior	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Selection_Warrior_21D7A5C5.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bug_SFX\Selection\Ranged_Selection\Selection_Warrior		46941
 	350433865	Death_Small_Bug_3	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Death_Small_Bug_3_21D7A5C5.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bug_SFX\Death\Death_Small_Bug\Death_Small_Bug_3		9896
 	374411796	Main_Button	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Main_Button _21D7A5C5.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\Button_Click\Main_Button		3063
 	387343566	Exit_Button	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Exit_Button _21D7A5C5.wem		\Actor-Mixer Hierarchy\Default Work Unit\UI\Button_Exit_Click\Exit_Button		2950
+	478416624	Selection_CC	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Selection_CC_21D7A5C5.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bug_SFX\Selection\CC_Selection\Selection_CC		43942
 	498056746	SalvageRoom	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\SalvageRoom_21D7A5C5.wem		\Actor-Mixer Hierarchy\Default Work Unit\Rooms\SalvageRoom\SalvageRoom		51692
 	501597484	Room_Placement	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Room_Placement_21D7A5C5.wem		\Actor-Mixer Hierarchy\Default Work Unit\Rooms\Room_Placement\Room_Placement		64154
 	506637097	Night_Music	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Night_Music_A03254A3.wem		\Interactive Music Hierarchy\Default Work Unit\Night\Night_Music\Night_Music		6330563
@@ -51,6 +62,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	674038062	Death_Small_Bug_5	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Death_Small_Bug_5_21D7A5C5.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bug_SFX\Death\Death_Small_Bug\Death_Small_Bug_5		13445
 	711592116	Bigclaw_Attack_1	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Bigclaw_Attack_1_21D7A5C5.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bug_SFX\Attack\Bigclaw_Attack\Bigclaw_Attack_1		14429
 	725670555	Harvester	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Harvester_21D7A5C5.wem		\Actor-Mixer Hierarchy\Default Work Unit\Rooms\Harvester\Harvester		63366
+	735371606	Selection_Drone	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Selection_Drone_21D7A5C5.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bug_SFX\Selection\Drone_Selection\Selection_Drone		16517
 	829699643	Barracks	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Barracks_21D7A5C5.wem		\Actor-Mixer Hierarchy\Default Work Unit\Rooms\WarRoom\Barracks		22579
 	947517987	Death_Small_Bug_2	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Death_Small_Bug_2_21D7A5C5.wem		\Actor-Mixer Hierarchy\Default Work Unit\Bug_SFX\Death\Death_Small_Bug\Death_Small_Bug_2		12917
 	997140107	Corridor	D:\Game Projects\Game Off 2021\Wwise_GameOff2021\.cache\Windows\SFX\Corridor_21D7A5C5.wem		\Actor-Mixer Hierarchy\Default Work Unit\Rooms\Corridor\Corridor		28678
