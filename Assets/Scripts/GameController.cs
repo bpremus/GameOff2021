@@ -254,6 +254,8 @@ public class GameController : MonoBehaviour
 
     public bool EvolveBug(CoreBug.BugEvolution bugEvolution) 
     {
+        AkSoundEngine.PostEvent("Play_Upgrade", gameObject);
+
         if (bugEvolution == CoreBug.BugEvolution.warrior)
         {
             if (food >= evolve_super_drone[0] && wood >= evolve_super_drone[1])
@@ -291,7 +293,7 @@ public class GameController : MonoBehaviour
             }
         }
 
-        // if you put here.... we dont have enough 
+        AkSoundEngine.PostEvent("Play_Error", gameObject);
 
         return false;
     }
