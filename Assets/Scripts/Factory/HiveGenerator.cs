@@ -26,6 +26,28 @@ public class HiveGenerator : MonoBehaviour
         return new int[] { width, height };
     }
 
+    public List<HiveCell> GetAllRooms()
+    {
+        List<HiveCell> rooms = new List<HiveCell>();
+
+        for (int i = 0; i < cells.Count; i++)
+        {
+            for (int j = 0; j < cells[i].Count; j++)
+            {
+                HiveCell gs = cells[i][j];
+                CoreRoom room = gs.GetRoom();
+                if (room)
+                {
+                    if (room.GetComponent<HiveCorridor>()) continue;
+                    
+                        if (rooms.Contains(gs) == false)
+                            rooms.Add(gs);
+                    
+                }
+            }
+        }
+        return rooms;
+    }
 
     public void Start()
     {
@@ -366,6 +388,9 @@ public class HiveGenerator : MonoBehaviour
         }
 
         int d = width / 2;
+
+        hive_entrance.Clear();
+
         if (level == 0)
         {
           
@@ -373,7 +398,7 @@ public class HiveGenerator : MonoBehaviour
             cells[d][height - 2].cell_Type = CellMesh.Cell_type.entrance;
             cells[d][height - 2].is_static_cell = true;
 
-            hive_entrance[0] = cells[d][height - 2];
+            hive_entrance.Add(cells[d][height - 2]);
 
             // we need to solve non dirt first, or the one with lowest choices 
             // we have simple solution as each tile can connect any other with corridor 
@@ -398,6 +423,8 @@ public class HiveGenerator : MonoBehaviour
             cells[d - 3][height - 2].is_static_cell = true;     
             cells[d - 3][height - 3].BuildCooridor();
             cells[d - 3][height - 3].is_static_cell = true;
+            hive_entrance.Add(cells[d - 3][height - 2]);
+
 
 
             cells[d + 3][height - 2].mesh_index = 1;
@@ -405,6 +432,7 @@ public class HiveGenerator : MonoBehaviour
             cells[d + 3][height - 2].is_static_cell = true;
             cells[d + 3][height - 3].BuildCooridor();
             cells[d + 3][height - 3].is_static_cell = true;
+            hive_entrance.Add(cells[d - 3][height - 2]);
 
 
 

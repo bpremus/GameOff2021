@@ -235,9 +235,55 @@ public class HiveCell : MonoBehaviour
         }
     }
 
+
+    public bool CanDestroyRoom()
+    {
+
+        QueenRoom qr = childRoom.GetComponent<QueenRoom>();
+        if (qr)
+        {
+            // cant delete queen room
+            return false;
+        }
+
+        walkable = 0;
+        HiveCell entrace = hiveGenerator.hive_entrance[0];
+        Debug.Log("checking path from" + entrace.name);
+
+        bool can_destroy = true;
+        List<HiveCell> get_all_rooms = hiveGenerator.GetAllRooms();
+        for (int i = 0; i < get_all_rooms.Count; i++)
+        {
+            Debug.Log("is " + get_all_rooms[i].GetRoom().name + " connected to exit");
+            if (get_all_rooms[i] == this) continue;
+
+            List <HiveCell> cells = AiController.GetPath(entrace, get_all_rooms[i]);
+            int path_size = cells.Count;
+            if (path_size == 0)
+            {
+                
+                can_destroy = false;
+
+               // dbg
+               // get_all_rooms[i].GetRoom().gameObject.SetActive(false);
+
+                break;
+            }
+        }
+        walkable = 1;
+        return can_destroy;
+    }
+
+
     public void DestroyRoom()
     {
         Debug.Log("Destroy room");
+
+        if (CanDestroyRoom() == false)
+        {
+            Debug.Log("Room cannot be destroyed");
+            return;
+        }
 
         if (childRoom)
         {

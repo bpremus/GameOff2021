@@ -527,6 +527,7 @@ public class CellSelectProto : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        
         if (_hover_bug)
         {
             Gizmos.DrawWireSphere(_hover_bug.transform.position, 1);
