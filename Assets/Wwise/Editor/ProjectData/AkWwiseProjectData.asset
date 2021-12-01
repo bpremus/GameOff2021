@@ -84,7 +84,7 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: ab7a7d8fa7af904aad885e3b30a5f3e5
     GuidInternal: 
-    m_lastTime: -8585632286827822224
+    m_lastTime: -8585632161234730396
     List:
     - name: Main
       guid: c7ed1213001d794c9f3d34785e89ab38
@@ -103,7 +103,7 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: d2d748c853878f419a502ed6d2b53f2b
     GuidInternal: 
-    m_lastTime: -8585632301529619943
+    m_lastTime: -8585632161722613714
     List:
     - name: Ambient
       guid: fd4e3f4d2b5b3f408bd25e3289266b50
@@ -194,7 +194,7 @@ MonoBehaviour:
       - ElementName: Play_Big_Bug_Movement
         ObjectType: 3
       Path: Default Work Unit\Bugs\Play_Big_Bug_Movement
-      maxAttenuation: 12
+      maxAttenuation: 13
       maxDuration: -1
       minDuration: -1
     - name: Play_Bigclaw_Attack
@@ -210,7 +210,7 @@ MonoBehaviour:
       - ElementName: Play_Bigclaw_Attack
         ObjectType: 3
       Path: Default Work Unit\Bugs\Attack\Play_Bigclaw_Attack
-      maxAttenuation: 12
+      maxAttenuation: 13
       maxDuration: 0.470529
       minDuration: 0.315746
     - name: Play_BigClaw_Selection
@@ -345,6 +345,20 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0.738975
       minDuration: 0.648914
+    - name: Play_Error
+      guid: 6c0b28168683474aabe3a6007672eadf
+      id: 2713813216
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: UI
+        ObjectType: 4
+      - ElementName: Play_Error
+        ObjectType: 3
+      Path: Default Work Unit\UI\Play_Error
+      maxAttenuation: 0
+      maxDuration: 0.5
+      minDuration: 0.5
     - name: Play_Harvester
       guid: f64aeb43f569524eb9526db6028e6283
       id: 3939321212
@@ -400,9 +414,9 @@ MonoBehaviour:
       - ElementName: Play_Ranged_Attack
         ObjectType: 3
       Path: Default Work Unit\Bugs\Attack\Play_Ranged_Attack
-      maxAttenuation: 0
-      maxDuration: 0
-      minDuration: 0
+      maxAttenuation: 13
+      maxDuration: 0.463427
+      minDuration: 0.353953
     - name: Play_Ranged_Selection
       guid: b427b020e335c047a322d312fc591b81
       id: 3140365032
@@ -486,9 +500,23 @@ MonoBehaviour:
       - ElementName: Play_Small_Bug_Movement
         ObjectType: 3
       Path: Default Work Unit\Bugs\Play_Small_Bug_Movement
-      maxAttenuation: 12
+      maxAttenuation: 13
       maxDuration: -1
       minDuration: -1
+    - name: Play_Upgrade
+      guid: 867185eb7b70394eae585b2389541cd3
+      id: 2062295234
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: UI
+        ObjectType: 4
+      - ElementName: Play_Upgrade
+        ObjectType: 3
+      Path: Default Work Unit\UI\Play_Upgrade
+      maxAttenuation: 0
+      maxDuration: 0.5625
+      minDuration: 0.5625
     - name: Play_Warrior_Attack
       guid: 3620994b04b3b441a3bd62bf08d7e504
       id: 4109336823
@@ -757,12 +785,6 @@ MonoBehaviour:
     GuidInternal: 
     m_lastTime: -8585654763839644713
     List: []
-  ExpandedItems:
-  - /Wwise_GameOff2021
-  - /Wwise_GameOff2021/Events
-  - /Wwise_GameOff2021/Events/Default Work Unit
-  - /Wwise_GameOff2021/Events/Default Work Unit/Ambient
-  - /Wwise_GameOff2021/Events/Default Work Unit/Bugs
-  - /Wwise_GameOff2021/Events/Default Work Unit/Bugs/Attack
+  ExpandedItems: []
   autoPopulateEnabled: 1
   CurrentPluginConfig: 

@@ -26,6 +26,7 @@ namespace AK
         static const AkUniqueID PLAY_CORRIDOR = 1530724216U;
         static const AkUniqueID PLAY_DAY_MUSIC = 663868728U;
         static const AkUniqueID PLAY_DRONE_SELECTION = 3789169039U;
+        static const AkUniqueID PLAY_ERROR = 2713813216U;
         static const AkUniqueID PLAY_HARVESTER = 3939321212U;
         static const AkUniqueID PLAY_HATCHERY = 1290610762U;
         static const AkUniqueID PLAY_NIGHT_MUSIC = 3279835868U;
@@ -36,6 +37,7 @@ namespace AK
         static const AkUniqueID PLAY_SALVAGEROOM = 1433195752U;
         static const AkUniqueID PLAY_SMALL_BUG_DEATH = 735132331U;
         static const AkUniqueID PLAY_SMALL_BUG_MOVEMENT = 1017378692U;
+        static const AkUniqueID PLAY_UPGRADE = 2062295234U;
         static const AkUniqueID PLAY_WARRIOR_ATTACK = 4109336823U;
         static const AkUniqueID PLAY_WARRIOR_SELECTION = 3886607231U;
         static const AkUniqueID PLAY_WARROOM = 533979565U;
