@@ -12,7 +12,7 @@ public class PlayerPref : MonoBehaviour
     [Range(0, 100)]
     [SerializeField] private float defaultSFXSoundLevel = 80f;
 
-
+    [SerializeField] private int gamesPlayed = 0;
     [SerializeField]  private MasterVolumeSlider masterVolumeSlider;
     [SerializeField] private MusicVolumeSlider musicVolumeSlider;
     [SerializeField] private SfxVolumeSlider sfxVolumeSlider;
@@ -34,7 +34,7 @@ public class PlayerPref : MonoBehaviour
 
         _instance = this;
 
-
+        gamesPlayed = GetGamesPlayed();
         UpdatePlayerSoundSettings();
     }
 
@@ -47,7 +47,15 @@ public class PlayerPref : MonoBehaviour
         Debug.Log("Deleted player Sound Settings");
         UpdatePlayerSoundSettings();
     }
-
+    public void IncreaseGamesPlayed()
+    {
+        gamesPlayed++;
+        PlayerPrefs.SetInt("gamesPlayed", gamesPlayed);
+    }
+    public int GetGamesPlayed()
+    {
+        return PlayerPrefs.GetInt("gamesPlayed");
+    }
     public void UpdatePlayerSoundSettings()
     {
         if (!masterVolumeSlider || !musicVolumeSlider || !sfxVolumeSlider) { Debug.LogError("ASSIGN VOLUME SLIDERS IN PLAYERPREFS!"); return; }

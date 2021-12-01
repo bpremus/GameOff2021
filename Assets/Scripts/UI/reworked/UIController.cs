@@ -45,7 +45,10 @@ public class UIController : MonoBehaviour
         if (mainCanvas == null) Debug.LogError("MAIN CANVAS IS NOT ASSIGNED IN UICONTROLER");
 
     }
-
+    private void Start()
+    {
+      
+    }
     public State GetUIState() { return uiState; }
     public bool isBuildMenuActive()
     {

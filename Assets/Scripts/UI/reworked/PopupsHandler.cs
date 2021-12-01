@@ -75,7 +75,17 @@ public class PopupsHandler : MonoBehaviour
             }
         }
     }
-
+    public void DisplayGuide()
+    {
+        Debug.Log("aaa");
+        if (callbackObj)
+        {
+            if(callbackObj.GetComponent<TutorialUI>() != null)
+            {
+                callbackObj.GetComponent<TutorialUI>().EnableFirst();
+            }
+        }
+    }
         
     
     public void SetCurrentPopupHeader(string text)

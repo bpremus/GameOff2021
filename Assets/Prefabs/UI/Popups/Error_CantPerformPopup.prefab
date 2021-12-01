@@ -904,7 +904,7 @@ MonoBehaviour:
   popupWindow: {fileID: 2971510037780813792}
   headerText: {fileID: 3456418398698519370}
   contentText: {fileID: 7537080166065877135}
-  enableAnimations: 0
+  enableAnimations: 1
   scaleTime: 0.35
   fadeTime: 0.1
   ease: 32
