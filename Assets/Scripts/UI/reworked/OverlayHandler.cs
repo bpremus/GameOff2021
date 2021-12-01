@@ -12,6 +12,9 @@ public class OverlayHandler : MonoBehaviour
     private GameObject optionsListButton;
 
     [SerializeField]
+    private GameObject tutorialButton;
+
+    [SerializeField]
     private GameObject buildMenu;
 
     [SerializeField]
@@ -19,6 +22,7 @@ public class OverlayHandler : MonoBehaviour
 
     [SerializeField]
     private GameObject topIndicator;
+
     [SerializeField]
     private TextMeshProUGUI topIndicatorText;
     [SerializeField]

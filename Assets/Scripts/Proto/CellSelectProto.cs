@@ -596,6 +596,7 @@ public class CellSelectProto : MonoBehaviour
         UIController.instance.CloseBuildMenu();
         UIController.instance.CloseSettingsMenu();
         UIController.instance.HideBugUI();
+        TutorialUI.instance.HideAll();
         range_distance_ui.SetActive(false);
         OnDeselect();
     }

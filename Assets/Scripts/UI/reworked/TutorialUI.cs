@@ -5,6 +5,7 @@ using UnityEngine;
 public class TutorialUI : MonoBehaviour
 {
     [SerializeField] private GameObject[] tutorialPanels;
+    [SerializeField] private GameObject raycastBlocker;
     public static TutorialUI instance;
     private GameObject currentPanel;
     private int currentIndex;
@@ -30,6 +31,7 @@ public class TutorialUI : MonoBehaviour
     }
     public void EnableFirst()
     {
+
         Activate(currentIndex);
     }
     public void SwitchRight()
@@ -62,6 +64,7 @@ public class TutorialUI : MonoBehaviour
     public void Activate(int index)
     {
         tutorialPanels[index].SetActive(true);
+        raycastBlocker.SetActive(true);
     }
     public void HideAll()
     {
@@ -69,6 +72,7 @@ public class TutorialUI : MonoBehaviour
         {
             panel.SetActive(false);
         }
+        raycastBlocker.SetActive(false);
     }
     public void SwitchToActive()
     {
