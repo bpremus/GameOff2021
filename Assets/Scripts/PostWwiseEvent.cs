@@ -6,7 +6,7 @@ public class PostWwiseEvent : MonoBehaviour
 {
     public AK.Wwise.Event MyEvent;
    
-    public void PlayBigclawAttack()
+    public void PlayAttack()
     {
         MyEvent.Post(gameObject);
     }

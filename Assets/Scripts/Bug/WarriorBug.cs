@@ -16,6 +16,24 @@ public class WarriorBug : CoreBug
     public override void OnWalkStart()
     {
         // Debug.Log("Bug started walking");
+
+        AkSoundEngine.PostEvent("Play_Small_Bug_Movement", gameObject);
+    }
+
+    public override void OnIdleStart()
+    {
+
+        // Debug.Log("Bug is idle");
+
+        AkSoundEngine.PostEvent("Stop_Small_Bug_Movement", gameObject);
+    }
+
+    public override void OnBugIsDead()
+    {
+
+        AkSoundEngine.PostEvent("Stop_Small_Bug_Movement", gameObject);
+
+        AkSoundEngine.PostEvent("Play_Small_Bug_Death", gameObject);
     }
 
     protected override void Start()
