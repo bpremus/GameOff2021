@@ -37,7 +37,12 @@ public class PlayerPref : MonoBehaviour
         gamesPlayed = GetGamesPlayed();
         UpdatePlayerSoundSettings();
     }
-
+    [ContextMenu("Reset games played")]
+    public void ResetGamesPlayed()
+    {
+        PlayerPrefs.DeleteKey("gamesPlayed");
+        gamesPlayed = GetGamesPlayed();
+    }
     [ContextMenu("Reset Sound Settings")]
     public void ResetPlayerSettings()
     {
