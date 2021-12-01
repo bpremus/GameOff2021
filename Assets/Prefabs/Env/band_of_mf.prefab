@@ -3064,6 +3064,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2531477239128422771}
   - component: {fileID: 2531477239128422770}
+  - component: {fileID: 8684841979147891882}
   m_Layer: 0
   m_Name: band_of_mf
   m_TagString: Untagged
@@ -3110,6 +3111,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8684841979147891882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2531477239128422768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5a63d55d83ad8b4eb4c19e14d996bb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2922861292115354264
 GameObject:
   m_ObjectHideFlags: 0
