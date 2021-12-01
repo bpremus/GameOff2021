@@ -17,6 +17,41 @@ public class RangeBug : WarriorBug
         bug_evolution = BugEvolution.range;
     }
 
+    public override void SetAnimation()
+    {
+        // if its dead just stop all
+        if (_isDead)
+        {
+            for (int i = 0; i < animators.Length; i++)
+            {
+                animators[0].speed = 0;
+            }
+            return;
+        }
+
+        if (bugAnimation == BugAnimation.idle)
+        {
+            animators[0].speed = 0;
+            animators[0].SetInteger("State", 0);
+            animators[1].SetInteger("State", 0);
+        }
+
+        if (bugAnimation == BugAnimation.walk)
+        {
+            animators[0].speed = move_speed * 4;
+            animators[0].SetInteger("State", 0);
+            animators[1].SetInteger("State", 0);
+        }
+
+        if (bugAnimation == BugAnimation.attack)
+        {
+            animators[0].speed = 1;
+            animators[0].SetInteger("State", 2);
+            animators[1].SetInteger("State", 2);
+        }
+    }
+
+
     public override void InteractWithEnemies(List<CoreBug> othrBugs)
     {
         //target = underlaying_cell.transform.position + z_offset;

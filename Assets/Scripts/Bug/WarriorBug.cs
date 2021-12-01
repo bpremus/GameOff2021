@@ -213,7 +213,9 @@ public class WarriorBug : CoreBug
     public override void SiegeBug(bool siege) 
     {
         siege_mode = siege;
+        Debug.Log("Siege mode" + siege_mode);
     }
+
 
     public override bool GetSiegeState() { return siege_mode; }
 

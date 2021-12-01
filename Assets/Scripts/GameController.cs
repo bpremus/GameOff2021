@@ -291,6 +291,8 @@ public class GameController : MonoBehaviour
             }
         }
 
+        // if you put here.... we dont have enough 
+
         return false;
     }
 
