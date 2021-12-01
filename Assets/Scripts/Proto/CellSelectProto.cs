@@ -299,7 +299,7 @@ public class CellSelectProto : MonoBehaviour
                 break;
             case CoreBug.BugEvolution.range:
                 //your sound or anything
-                AkSoundEngine.PostEvent("Play_Drone_Ranged", gameObject);
+                AkSoundEngine.PostEvent("Play_Ranged_Ranged", gameObject);
                 break;
             case CoreBug.BugEvolution.cc_bug:
                 //your sound or anything
