@@ -84,7 +84,7 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: ab7a7d8fa7af904aad885e3b30a5f3e5
     GuidInternal: 
-    m_lastTime: -8585633050849323794
+    m_lastTime: -8585632286827822224
     List:
     - name: Main
       guid: c7ed1213001d794c9f3d34785e89ab38
@@ -103,7 +103,7 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: d2d748c853878f419a502ed6d2b53f2b
     GuidInternal: 
-    m_lastTime: -8585633072641507871
+    m_lastTime: -8585632301529619943
     List:
     - name: Ambient
       guid: fd4e3f4d2b5b3f408bd25e3289266b50
@@ -114,6 +114,20 @@ MonoBehaviour:
       - ElementName: Ambient
         ObjectType: 4
       Path: Default Work Unit\Ambient
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Attack
+      guid: 1c67989f9f84474ca4d14db1363dc417
+      id: 180661997
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Bugs
+        ObjectType: 4
+      - ElementName: Attack
+        ObjectType: 4
+      Path: Default Work Unit\Bugs\Attack
       maxAttenuation: 0
       maxDuration: -1
       minDuration: -1
@@ -191,12 +205,30 @@ MonoBehaviour:
         ObjectType: 12
       - ElementName: Bugs
         ObjectType: 4
+      - ElementName: Attack
+        ObjectType: 4
       - ElementName: Play_Bigclaw_Attack
         ObjectType: 3
-      Path: Default Work Unit\Bugs\Play_Bigclaw_Attack
+      Path: Default Work Unit\Bugs\Attack\Play_Bigclaw_Attack
       maxAttenuation: 10
       maxDuration: 0.470529
       minDuration: 0.315746
+    - name: Play_BigClaw_Selection
+      guid: 02e5e33b40048e44b76d5e12d728138e
+      id: 4104832234
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Bugs
+        ObjectType: 4
+      - ElementName: Selection
+        ObjectType: 4
+      - ElementName: Play_BigClaw_Selection
+        ObjectType: 3
+      Path: Default Work Unit\Bugs\Selection\Play_BigClaw_Selection
+      maxAttenuation: 0
+      maxDuration: 0.738975
+      minDuration: 0.648914
     - name: Play_Button_Click
       guid: 046ae7eaa487d44dad9cf8d18b0f9bd8
       id: 1149159311
@@ -253,6 +285,22 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0.166543
       minDuration: 0.157014
+    - name: Play_CC_Selection
+      guid: 64d350a098702b4aad7965d27964b942
+      id: 3988919171
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Bugs
+        ObjectType: 4
+      - ElementName: Selection
+        ObjectType: 4
+      - ElementName: Play_CC_Selection
+        ObjectType: 3
+      Path: Default Work Unit\Bugs\Selection\Play_CC_Selection
+      maxAttenuation: 0
+      maxDuration: 0.675849
+      minDuration: 0.593481
     - name: Play_Corridor
       guid: 6ea0175ddad0e14ab713ff51ab382a45
       id: 1530724216
@@ -281,6 +329,22 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 118
       minDuration: 118
+    - name: Play_Drone_Selection
+      guid: bd0b73d9b59c464883026b5cbcf55c99
+      id: 3789169039
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Bugs
+        ObjectType: 4
+      - ElementName: Selection
+        ObjectType: 4
+      - ElementName: Play_Drone_Selection
+        ObjectType: 3
+      Path: Default Work Unit\Bugs\Selection\Play_Drone_Selection
+      maxAttenuation: 0
+      maxDuration: 0.738975
+      minDuration: 0.648914
     - name: Play_Harvester
       guid: f64aeb43f569524eb9526db6028e6283
       id: 3939321212
@@ -323,6 +387,38 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 118
       minDuration: 118
+    - name: Play_Ranged_Attack
+      guid: d28b09fa65e711429ea1669aa179f455
+      id: 1520388910
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Bugs
+        ObjectType: 4
+      - ElementName: Attack
+        ObjectType: 4
+      - ElementName: Play_Ranged_Attack
+        ObjectType: 3
+      Path: Default Work Unit\Bugs\Attack\Play_Ranged_Attack
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Play_Ranged_Selection
+      guid: b427b020e335c047a322d312fc591b81
+      id: 3140365032
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Bugs
+        ObjectType: 4
+      - ElementName: Selection
+        ObjectType: 4
+      - ElementName: Play_Ranged_Selection
+        ObjectType: 3
+      Path: Default Work Unit\Bugs\Selection\Play_Ranged_Selection
+      maxAttenuation: 0
+      maxDuration: 0.671796
+      minDuration: 0.589921
     - name: Play_Room_Destruction
       guid: fb67399008f52e4fb7b06dea7c40f996
       id: 1444742574
@@ -393,6 +489,38 @@ MonoBehaviour:
       maxAttenuation: 10
       maxDuration: -1
       minDuration: -1
+    - name: Play_Warrior_Attack
+      guid: 3620994b04b3b441a3bd62bf08d7e504
+      id: 4109336823
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Bugs
+        ObjectType: 4
+      - ElementName: Attack
+        ObjectType: 4
+      - ElementName: Play_Warrior_Attack
+        ObjectType: 3
+      Path: Default Work Unit\Bugs\Attack\Play_Warrior_Attack
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - name: Play_Warrior_Selection
+      guid: 2b113ac3c8c3384984039305d38d622a
+      id: 3886607231
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Bugs
+        ObjectType: 4
+      - ElementName: Selection
+        ObjectType: 4
+      - ElementName: Play_Warrior_Selection
+        ObjectType: 3
+      Path: Default Work Unit\Bugs\Selection\Play_Warrior_Selection
+      maxAttenuation: 0
+      maxDuration: 0.617918
+      minDuration: 0.54261
     - name: Play_WarRoom
       guid: 4923ebe9071b17449799f7022dcc28ba
       id: 533979565
@@ -416,6 +544,20 @@ MonoBehaviour:
       - ElementName: Rooms
         ObjectType: 4
       Path: Default Work Unit\Rooms
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Selection
+      guid: 117f11b7f12b0f4b8d347cb7126a4008
+      id: 1973847113
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Bugs
+        ObjectType: 4
+      - ElementName: Selection
+        ObjectType: 4
+      Path: Default Work Unit\Bugs\Selection
       maxAttenuation: 0
       maxDuration: -1
       minDuration: -1

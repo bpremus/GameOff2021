@@ -22,7 +22,7 @@
 				<GameParameter Id="4179668880" Name="Master_Volume" ObjectPath="\Game Parameters\Default Work Unit\VolumeSliders\Master_Volume"/>
 			</GameParameters>
 		</SoundBank>
-		<SoundBank Id="3161908922" Language="SFX" Hash="1263201180">
+		<SoundBank Id="3161908922" Language="SFX" Hash="3461944110">
 			<ObjectPath>\SoundBanks\Default Work Unit\Main</ObjectPath>
 			<ShortName>Main</ShortName>
 			<Path>Main.bnk</Path>
@@ -51,7 +51,7 @@
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
-				<Event Id="2207025252" Name="Play_Bigclaw_Attack" ObjectPath="\Events\Default Work Unit\Bugs\Play_Bigclaw_Attack" MaxAttenuation="10.000000" DurationType="OneShot" DurationMin="0.315746" DurationMax="0.470529">
+				<Event Id="2207025252" Name="Play_Bigclaw_Attack" ObjectPath="\Events\Default Work Unit\Bugs\Attack\Play_Bigclaw_Attack" MaxAttenuation="10.000000" DurationType="OneShot" DurationMin="0.315746" DurationMax="0.470529">
 					<IncludedMemoryFiles>
 						<File Id="219297782" Language="SFX">
 							<ShortName>Bigclaw_Attack_2.wav</ShortName>
@@ -64,6 +64,14 @@
 						<File Id="711592116" Language="SFX">
 							<ShortName>Bigclaw_Attack_1.wav</ShortName>
 							<Path>SFX\Bigclaw_Attack_1_21D7A5C5.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="4104832234" Name="Play_BigClaw_Selection" ObjectPath="\Events\Default Work Unit\Bugs\Selection\Play_BigClaw_Selection" DurationType="OneShot" DurationMin="0.648914" DurationMax="0.738975">
+					<IncludedMemoryFiles>
+						<File Id="255693773" Language="SFX">
+							<ShortName>Selection_BigClaw.wav</ShortName>
+							<Path>SFX\Selection_BigClaw_21D7A5C5.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
@@ -99,6 +107,14 @@
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
+				<Event Id="3988919171" Name="Play_CC_Selection" ObjectPath="\Events\Default Work Unit\Bugs\Selection\Play_CC_Selection" DurationType="OneShot" DurationMin="0.593481" DurationMax="0.675849">
+					<IncludedMemoryFiles>
+						<File Id="478416624" Language="SFX">
+							<ShortName>Selection_CC.wav</ShortName>
+							<Path>SFX\Selection_CC_21D7A5C5.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
 				<Event Id="1530724216" Name="Play_Corridor" ObjectPath="\Events\Default Work Unit\Rooms\Play_Corridor" DurationType="OneShot" DurationMin="0.530929" DurationMax="0.595948">
 					<IncludedMemoryFiles>
 						<File Id="997140107" Language="SFX">
@@ -112,6 +128,14 @@
 						<File Id="570071604" Language="SFX">
 							<ShortName>Day_Music.wav</ShortName>
 							<Path>SFX\Day_Music_A03254A3.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="3789169039" Name="Play_Drone_Selection" ObjectPath="\Events\Default Work Unit\Bugs\Selection\Play_Drone_Selection" DurationType="OneShot" DurationMin="0.648914" DurationMax="0.738975">
+					<IncludedMemoryFiles>
+						<File Id="735371606" Language="SFX">
+							<ShortName>Selection_Drone.wav</ShortName>
+							<Path>SFX\Selection_Drone_21D7A5C5.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
@@ -136,6 +160,15 @@
 						<File Id="506637097" Language="SFX">
 							<ShortName>Night_Music.wav</ShortName>
 							<Path>SFX\Night_Music_A03254A3.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="1520388910" Name="Play_Ranged_Attack" ObjectPath="\Events\Default Work Unit\Bugs\Attack\Play_Ranged_Attack" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="3140365032" Name="Play_Ranged_Selection" ObjectPath="\Events\Default Work Unit\Bugs\Selection\Play_Ranged_Selection" DurationType="OneShot" DurationMin="0.589921" DurationMax="0.671796">
+					<IncludedMemoryFiles>
+						<File Id="318861196" Language="SFX">
+							<ShortName>Selection_Warrior.wav</ShortName>
+							<Path>SFX\Selection_Warrior_21D7A5C5.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
@@ -192,6 +225,15 @@
 						<File Id="588016348" Language="SFX">
 							<ShortName>Movement_Small_Bug.wav</ShortName>
 							<Path>SFX\Movement_Small_Bug_A03254A3.wem</Path>
+						</File>
+					</IncludedMemoryFiles>
+				</Event>
+				<Event Id="4109336823" Name="Play_Warrior_Attack" ObjectPath="\Events\Default Work Unit\Bugs\Attack\Play_Warrior_Attack" MaxAttenuation="0.000000" DurationType="OneShot" DurationMin="0.000000" DurationMax="0.000000"/>
+				<Event Id="3886607231" Name="Play_Warrior_Selection" ObjectPath="\Events\Default Work Unit\Bugs\Selection\Play_Warrior_Selection" DurationType="OneShot" DurationMin="0.542610" DurationMax="0.617918">
+					<IncludedMemoryFiles>
+						<File Id="206458061" Language="SFX">
+							<ShortName>Selection_Ranged.wav</ShortName>
+							<Path>SFX\Selection_Ranged_21D7A5C5.wem</Path>
 						</File>
 					</IncludedMemoryFiles>
 				</Event>
