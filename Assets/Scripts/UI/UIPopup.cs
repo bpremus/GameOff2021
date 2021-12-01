@@ -142,7 +142,9 @@ public class UIPopup : MonoBehaviour
     }
     public void ReturnTrue()
     {
-        popupsHandler.RoomDestroyChoice(true);
+        if (gameObject.name == "GuidePrompt(Clone)") popupsHandler.DisplayGuide();
+        else
+             popupsHandler.RoomDestroyChoice(true);
         HideWindow();
     }
 

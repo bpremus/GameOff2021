@@ -429,6 +429,7 @@ public class GameController : MonoBehaviour
 
 
         //playerprefs inits
+        PlayerPref.Instance.IncreaseGamesPlayed();
         PlayerPref.Instance.UpdatePlayerSoundSettings();
     }
 

@@ -30,7 +30,7 @@ MonoBehaviour:
     ParentPath: Default Work Unit
     guid: 68b9c5ee75f6ff4c894e5e3569cfca5c
     GuidInternal: 
-    m_lastTime: -8585633052809000907
+    m_lastTime: -8585632258135240442
     List:
     - name: Ambient
       guid: f861f3201f42bb48a0d2325e0c659cb2
@@ -194,7 +194,7 @@ MonoBehaviour:
       - ElementName: Play_Big_Bug_Movement
         ObjectType: 3
       Path: Default Work Unit\Bugs\Play_Big_Bug_Movement
-      maxAttenuation: 10
+      maxAttenuation: 12
       maxDuration: -1
       minDuration: -1
     - name: Play_Bigclaw_Attack
@@ -210,7 +210,7 @@ MonoBehaviour:
       - ElementName: Play_Bigclaw_Attack
         ObjectType: 3
       Path: Default Work Unit\Bugs\Attack\Play_Bigclaw_Attack
-      maxAttenuation: 10
+      maxAttenuation: 12
       maxDuration: 0.470529
       minDuration: 0.315746
     - name: Play_BigClaw_Selection
@@ -472,7 +472,7 @@ MonoBehaviour:
       - ElementName: Play_Small_Bug_Death
         ObjectType: 3
       Path: Default Work Unit\Bugs\Play_Small_Bug_Death
-      maxAttenuation: 10
+      maxAttenuation: 12
       maxDuration: 0.48902
       minDuration: 0.318495
     - name: Play_Small_Bug_Movement
@@ -486,7 +486,7 @@ MonoBehaviour:
       - ElementName: Play_Small_Bug_Movement
         ObjectType: 3
       Path: Default Work Unit\Bugs\Play_Small_Bug_Movement
-      maxAttenuation: 10
+      maxAttenuation: 12
       maxDuration: -1
       minDuration: -1
     - name: Play_Warrior_Attack
@@ -763,5 +763,6 @@ MonoBehaviour:
   - /Wwise_GameOff2021/Events/Default Work Unit
   - /Wwise_GameOff2021/Events/Default Work Unit/Ambient
   - /Wwise_GameOff2021/Events/Default Work Unit/Bugs
+  - /Wwise_GameOff2021/Events/Default Work Unit/Bugs/Attack
   autoPopulateEnabled: 1
   CurrentPluginConfig: 
