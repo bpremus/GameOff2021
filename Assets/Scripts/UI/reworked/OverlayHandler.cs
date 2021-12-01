@@ -12,6 +12,9 @@ public class OverlayHandler : MonoBehaviour
     private GameObject optionsListButton;
 
     [SerializeField]
+    private GameObject tutorialButton;
+
+    [SerializeField]
     private GameObject buildMenu;
 
     [SerializeField]
@@ -19,6 +22,7 @@ public class OverlayHandler : MonoBehaviour
 
     [SerializeField]
     private GameObject topIndicator;
+
     [SerializeField]
     private TextMeshProUGUI topIndicatorText;
     [SerializeField]
@@ -61,11 +65,14 @@ public class OverlayHandler : MonoBehaviour
     }
     public void OpenSettingsMenu()
     {
+        uiController.HideAllUI();
         settingsMenu.SetActive(true);
+        uiController.gameObject.GetComponent<BlurController>().EnableBlur();
     }
     public void CloseSettingsMenu()
     {
         settingsMenu.SetActive(false);
+        uiController.gameObject.GetComponent<BlurController>().DisableBlur();
     }
     public bool IsSettingsMenuActive()
     {

@@ -72,7 +72,7 @@ public class Room_UI : MonoBehaviour
         BuildButtons();
         InitializeButtons();
         SetRoomNameText(hc);
-        SetLevelText(hc);
+        SetOccupyText(hc);
 
 
     }
@@ -96,9 +96,9 @@ public class Room_UI : MonoBehaviour
         room_name.text = text;
         SetHeaderColor();
     }
-    public void SetLevelText(HiveCell hc)
+    public void SetOccupyText(HiveCell hc)
     {
-        room_level.text = "Level " + 1;
+        room_level.text = hc.GetLeftAvaiableSlots() + "/" + hc.GetMaxAvailableSlots();
     }
 
     public void SetHeaderColor()

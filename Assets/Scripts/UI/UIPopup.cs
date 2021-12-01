@@ -17,6 +17,7 @@ public class UIPopup : MonoBehaviour
 
     private PopupsHandler popupsHandler;
     private CanvasGroup canvasGroup;
+    private float timeActive;
     public enum AnimType
     {
         Fade,
@@ -28,6 +29,7 @@ public class UIPopup : MonoBehaviour
 
     private void Awake()
     {
+        timeActive = 0;
         canvasGroup = GetComponent<CanvasGroup>();
         popupsHandler = FindObjectOfType<PopupsHandler>();
     }
@@ -38,6 +40,8 @@ public class UIPopup : MonoBehaviour
         {
             ReturnFalse();
         }
+        timeActive += Time.deltaTime;
+       // if (timeActive > scaleTime * 2 && transform.localScale.x < Vector3.one.x) transform.localScale = Vector3.one;
     }
     [ContextMenu("Show window")]
     public void ShowWindow()
@@ -133,12 +137,13 @@ public class UIPopup : MonoBehaviour
     }
     public void ReturnFalse()
     {
-        popupsHandler.GetChoice(false);
+        popupsHandler.RoomDestroyChoice(false);
         HideWindow();
     }
     public void ReturnTrue()
     {
-        popupsHandler.GetChoice(true);
+        popupsHandler.RoomDestroyChoice(true);
         HideWindow();
     }
+
 }
