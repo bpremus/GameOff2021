@@ -11,8 +11,12 @@ public class RestartButton : MonoBehaviour
         SceneFader.instance.EnableFade(gameObject);
         
     }
+    public void GoToMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
     public void RestartGame()
     {
-            SceneManager.LoadScene(0); // default game scene
+            SceneManager.LoadScene(1); // default game scene
     }
 }
