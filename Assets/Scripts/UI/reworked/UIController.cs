@@ -94,7 +94,7 @@ public class UIController : MonoBehaviour
     public void CloseSettingsMenu() => overlayHandler.CloseSettingsMenu();
     public void HideRoomUI() => Room_UI.Instance.Hide();
     public void HideBugUI() => DBG_UnitUI.Instance.Hide();
-
+    public void HideAllUI() => CellSelectProto.Instance.CloseUI();
     public void ExitBuildingMode() => SetDefaultState();
     public void SetDefaultState()
     {

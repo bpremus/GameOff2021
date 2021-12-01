@@ -65,7 +65,7 @@ public class PopupsHandler : MonoBehaviour
         }
 
     }
-    public void GetChoice(bool b)
+    public void RoomDestroyChoice(bool b)
     {
         if (callbackObj)
         {
@@ -74,9 +74,10 @@ public class PopupsHandler : MonoBehaviour
                 callbackObj.GetComponent<Room_UI>().DestroyRoom(b);
             }
         }
+    }
 
         
-    }
+    
     public void SetCurrentPopupHeader(string text)
     {
         if (activePopup != null)
