@@ -27,6 +27,11 @@ public class TutorialUI : MonoBehaviour
         }
 
 
+
+        if(PlayerPref.Instance.GetGamesPlayed() <= 1)
+             UIController.instance.CreatePopup(4,null,null,gameObject);
+
+
         //  EnableFirst();
     }
     public void EnableFirst()
