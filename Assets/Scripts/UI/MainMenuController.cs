@@ -7,8 +7,15 @@ using System;
 
 public class MainMenuController : MonoBehaviour
 {
-    [SerializeField] private GameObject mainPanel;
-    [SerializeField] private GameObject creditsPanel;
+    [Header("Panels")]
+    [SerializeField] private GameObject leftPanel;
+    [SerializeField] private GameObject rightPanel;
+    [Space(10)]
+    [SerializeField] private GameObject rp_Creators;
+    [SerializeField] private GameObject rp_Settings;
+    [SerializeField] private GameObject rp_Saved;
+    [Space(10)]
+    [SerializeField] private GameObject loadingScreen;
 
     [Header("Menu camera mover")]
     [SerializeField] private float scrollSpeed;
@@ -22,6 +29,8 @@ public class MainMenuController : MonoBehaviour
 
         cam = Camera.main.transform;
         defaultPosition = cam.position;
+        leftPanel.SetActive(true);
+        rightPanel.SetActive(false);
     }
 
     private void SetRandomPoint()
@@ -31,33 +40,65 @@ public class MainMenuController : MonoBehaviour
     }
     private void Update()
     {
+
+        if (rightPanel.activeInHierarchy)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                rightPanel.SetActive(false);
+            }
+        }
+
+
+
+
         Vector3 target = new Vector3(randomPoint.x, randomPoint.y, defaultPosition.z);
         Debug.Log(target);
         cam.transform.position = Vector3.MoveTowards(cam.transform.position, target, scrollSpeed * Time.deltaTime);
         float dist = Vector3.Distance(cam.position, target);
-        if(dist <= 5f)
+        if(dist <= 1f)
         {
             SetRandomPoint();
         }
     }
     public void NewGame()
     {
-        SceneManager.LoadScene(1);
+        rightPanel.SetActive(false);
+        loadingScreen.SetActive(true);
+        StartCoroutine(StartCooldown());
+
+
+    }
+    private IEnumerator StartCooldown()
+    {
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
     }
     public void LoadGame()
     {
-        //???
+        rightPanel.SetActive(true);
+        rp_Settings.SetActive(false);
+        rp_Creators.SetActive(true);
+        rp_Saved.SetActive(true);
     }
     public void Credits()
     {
         //hide this panel and display credits panel
-        mainPanel.SetActive(false);
-        creditsPanel.SetActive(true);
+        rightPanel.SetActive(true);
+        rp_Settings.SetActive(false);
+        rp_Saved.SetActive(false);
+        rp_Creators.SetActive(true);
+    }
+    public void Settings()
+    {
+        rightPanel.SetActive(true);
+        rp_Creators.SetActive(false);
+        rp_Saved.SetActive(false);
+        rp_Settings.SetActive(true);
     }
     public void ToMenu()
     {
-        mainPanel.SetActive(true);
-        creditsPanel.SetActive(false);
+
     }
     public void ExitGame()
     {
