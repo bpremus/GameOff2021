@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class ButtonAnim : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
 
-    [SerializeField] private Vector3 baseScale = new Vector3(0.85f,0.85f,0.85f);
+    [SerializeField] private Vector3 baseScale = new Vector3(1,1,1);
     [SerializeField] private Vector3 targetScale = Vector3.one;
     [SerializeField] private float animInTime = 0.2f;
-    [SerializeField] private bool applyLocally = false;
+    [SerializeField] private bool playOnEnable = false;
     private LTDescr anim;
     [SerializeField] private bool ignoreButtonDependency = false;
    [HideInInspector] public bool displayedCorrectly = false;
@@ -65,7 +65,7 @@ public class ButtonAnim : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     }
     void OnEnable()
     {
-        if (applyLocally)
+        if (playOnEnable)
         {
             transform.localScale = Vector3.zero;
             LeanTween.scale(gameObject, baseScale, animInTime).setOnComplete(() => displayedCorrectly = true); ;

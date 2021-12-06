@@ -8,103 +8,171 @@ using System;
 public class MainMenuController : MonoBehaviour
 {
     [Header("Panels")]
-    [SerializeField] private GameObject leftPanel;
-    [SerializeField] private GameObject rightPanel;
-    [Space(10)]
-    [SerializeField] private GameObject rp_Creators;
-    [SerializeField] private GameObject rp_Settings;
-    [SerializeField] private GameObject rp_Saved;
-    [Space(10)]
-    [SerializeField] private GameObject loadingScreen;
-
+    [SerializeField] private GameObject mainPanel;
+    [SerializeField] private GameObject loadingPanel;
     [Header("Menu camera mover")]
     [SerializeField] private float scrollSpeed;
     [SerializeField] private Vector2 maxBoundaries;
     private Vector2 randomPoint;
-    private Vector3 defaultPosition;
+    private Vector3 startingCamPos;
     Transform cam;
-    private void Awake()
+
+    [Header("Tabs")]
+    [SerializeField] private GameObject contentButtons;
+     private List<GameObject> mainbuttons;
+    [SerializeField] private GameObject contentGamesSaved;
+    private List<GameObject> gamesSavedChilds;
+
+    [SerializeField] private GameObject contentSettings;
+    private List<GameObject> settingsChilds;
+
+    private void Awake() 
     {
-        ToMenu();
-
         cam = Camera.main.transform;
-        defaultPosition = cam.position;
-        leftPanel.SetActive(true);
-        rightPanel.SetActive(false);
+        mainbuttons = new List<GameObject>();
+        gamesSavedChilds = new List<GameObject>();
+        settingsChilds = new List<GameObject>();
+        InitiateMenu();
     }
+    private void InitiateMenu()
+    {
+        SetupChilds();
 
-    private void SetRandomPoint()
+        startingCamPos = cam.position;
+        loadingPanel.SetActive(false);
+        SetRandomTargetPointForCamera();
+        SwitchGamesSavedChilds(false);
+        SwitchMainMenuButtons(true);
+    }
+    private void SetupChilds()
+    {
+        for (int i = 0; i < contentButtons.transform.childCount; i++)
+        {
+            GameObject child = contentButtons.transform.GetChild(i).gameObject;
+            mainbuttons.Add(child);
+            Debug.Log("Added:" + mainbuttons[i].name + " to list of main buttons");
+        }
+        for (int i = 0; i < contentGamesSaved.transform.childCount; i++)
+        {
+            GameObject child = contentGamesSaved.transform.GetChild(i).gameObject;
+            gamesSavedChilds.Add(child);
+            Debug.Log("Added:" + gamesSavedChilds[i].name + " to list of child (loadGamePanel)");
+        }
+        for (int i = 0; i < contentSettings.transform.childCount; i++)
+        {
+            GameObject child = contentSettings.transform.GetChild(i).gameObject;
+            settingsChilds.Add(child);
+            Debug.Log("Added:" + settingsChilds[i].name + " to list of child (settingsPanel)");
+        }
+    }
+    private void Update()
+    {
+        MoveCamera();
+
+        if (loadingPanel.activeInHierarchy)
+            loadingPanel.GetComponent<CanvasGroup>().alpha += 0.03f;
+    }
+    #region Background camera movement
+    private void MoveCamera()
+    {
+        Vector3 target = new Vector3(randomPoint.x, randomPoint.y, startingCamPos.z);
+        cam.transform.position = Vector3.MoveTowards(cam.transform.position, target, scrollSpeed * Time.deltaTime);
+        float dist = Vector3.Distance(cam.position, target);
+        if (dist <= 1f)
+        {
+            SetRandomTargetPointForCamera();
+        }
+    }
+    private void SetRandomTargetPointForCamera()
     {
         Vector2 randomPoint = new Vector3(UnityEngine.Random.Range(-maxBoundaries.x, maxBoundaries.x), (UnityEngine.Random.Range(-maxBoundaries.y, maxBoundaries.y)));
         this.randomPoint = randomPoint;
     }
-    private void Update()
-    {
 
-        if (rightPanel.activeInHierarchy)
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                HideAll();
-            }
-        }
+    #endregion
 
-
-
-
-        Vector3 target = new Vector3(randomPoint.x, randomPoint.y, defaultPosition.z);
-        Debug.Log(target);
-        cam.transform.position = Vector3.MoveTowards(cam.transform.position, target, scrollSpeed * Time.deltaTime);
-        float dist = Vector3.Distance(cam.position, target);
-        if(dist <= 1f)
-        {
-            SetRandomPoint();
-        }
-    }
+    #region Buttons
     public void NewGame()
     {
-        rightPanel.SetActive(false);
-        loadingScreen.SetActive(true);
-        StartCoroutine(StartCooldown());
-
-
+        loadingPanel.SetActive(true);
+        StartCoroutine(WaitToLoad());
     }
-    private IEnumerator StartCooldown()
+    public void OpenSavedGames()
     {
-        yield return new WaitForSeconds(0.8f);
-        SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
+        DisplaySavedGames();
     }
-    public void LoadGame()
-    {
-        HideAll();
-        rightPanel.SetActive(true);
-        rp_Saved.SetActive(true);
-    }
+
     public void Credits()
     {
-        HideAll();
-        rightPanel.SetActive(true);
-        rp_Creators.SetActive(true);
+
     }
     public void Settings()
     {
-        HideAll();
-        rightPanel.SetActive(true);
-        rp_Settings.SetActive(true);
-    }
-    public void ToMenu()
-    {
-
-    }
-    private void HideAll()
-    {
-        rightPanel.SetActive(false);
-        rp_Creators.SetActive(false);
-        rp_Saved.SetActive(false);
-        rp_Settings.SetActive(false);
+        DisplaySettingsMenu();
     }
     public void ExitGame()
     {
         Application.Quit();
     }
+    public void BackToMenu()
+    {
+        ResetAllPanels();
+        SwitchMainMenuButtons(true);
+
+    }
+    #endregion
+
+    #region Panel switching
+
+    private void DisplaySavedGames()
+    {
+        ResetAllPanels();
+        SwitchGamesSavedChilds(true);
+    }
+    private void DisplaySettingsMenu()
+    {
+        ResetAllPanels();
+        SwitchSettingsChilds(true);
+    }
+    private void ResetAllPanels()
+    {
+        SwitchGamesSavedChilds(false);
+        SwitchSettingsChilds(false);
+        SwitchMainMenuButtons(false);
+    }
+    #endregion
+    #region Others
+    private IEnumerator WaitToLoad()
+    {
+        yield return new WaitForSeconds(0.9f);
+        SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
+    }
+
+    private void SwitchMainMenuButtons(bool state)
+    {
+        foreach(GameObject button in mainbuttons)
+        {
+            button.SetActive(state);
+        }
+    }
+    private void SwitchGamesSavedChilds(bool state)
+    {
+        foreach (GameObject child in gamesSavedChilds)
+        {
+            child.SetActive(state);
+        }
+    }
+    private void SwitchSettingsChilds(bool state)
+    {
+        foreach (GameObject child in settingsChilds)
+        {
+            child.SetActive(state);
+        }
+    }
+    private void HideAll()
+    {
+
+    }
+    #endregion
+
 }

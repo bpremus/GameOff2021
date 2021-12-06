@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class loadingSpinner : MonoBehaviour
 {
-    [SerializeField] private GameObject textobj;
     [SerializeField] private float rotatateSpeed;
     private void Update()
     {
         transform.Rotate(-Vector3.forward * Time.deltaTime * rotatateSpeed);
     }
+
 }

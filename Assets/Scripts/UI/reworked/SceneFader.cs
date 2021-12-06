@@ -5,6 +5,7 @@ using UnityEngine;
 public class SceneFader : MonoBehaviour
 {
     public static SceneFader instance;
+    public bool playOnEnable = false;
     [SerializeField] private float fadeTime = 0.3f;
     private CanvasGroup canvasGroup;
     private bool isFadeFinished;
@@ -25,7 +26,8 @@ public class SceneFader : MonoBehaviour
     }
     private void OnEnable()
     {
-       // EnableFade();
+        if(playOnEnable)
+             EnableFade();
     }
     private void OnDisable()
     {
