@@ -45,7 +45,7 @@ public class MainMenuController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                rightPanel.SetActive(false);
+                HideAll();
             }
         }
 
@@ -71,34 +71,37 @@ public class MainMenuController : MonoBehaviour
     }
     private IEnumerator StartCooldown()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.8f);
         SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
     }
     public void LoadGame()
     {
+        HideAll();
         rightPanel.SetActive(true);
-        rp_Settings.SetActive(false);
-        rp_Creators.SetActive(true);
         rp_Saved.SetActive(true);
     }
     public void Credits()
     {
-        //hide this panel and display credits panel
+        HideAll();
         rightPanel.SetActive(true);
-        rp_Settings.SetActive(false);
-        rp_Saved.SetActive(false);
         rp_Creators.SetActive(true);
     }
     public void Settings()
     {
+        HideAll();
         rightPanel.SetActive(true);
-        rp_Creators.SetActive(false);
-        rp_Saved.SetActive(false);
         rp_Settings.SetActive(true);
     }
     public void ToMenu()
     {
 
+    }
+    private void HideAll()
+    {
+        rightPanel.SetActive(false);
+        rp_Creators.SetActive(false);
+        rp_Saved.SetActive(false);
+        rp_Settings.SetActive(false);
     }
     public void ExitGame()
     {
