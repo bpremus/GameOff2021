@@ -3,36 +3,197 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
+
 public class MainMenuController : MonoBehaviour
 {
+    [Header("Panels")]
     [SerializeField] private GameObject mainPanel;
-    [SerializeField] private GameObject creditsPanel;
+    [SerializeField] private GameObject loadingPanel;
+    [Header("Menu camera mover")]
+    [SerializeField] private float scrollSpeed;
+    [SerializeField] private Vector2 maxBoundaries;
+    private Vector2 randomPoint;
+    private Vector3 startingCamPos;
+    Transform cam;
 
-    private void Awake()
+    [Header("Tabs")]
+    [SerializeField] private GameObject contentButtons;
+     private List<GameObject> mainbuttons;
+    [SerializeField] private GameObject contentGamesSaved;
+    private List<GameObject> gamesSavedChilds;
+
+    [SerializeField] private GameObject contentSettings;
+    private List<GameObject> settingsChilds;
+
+    [SerializeField] private GameObject contentCredits;
+    private List<GameObject> creditsChilds;
+
+    private void Awake() 
     {
-        ToMenu();
+        cam = Camera.main.transform;
+
+        InitiateMenu();
     }
+    private void InitiateMenu()
+    {
+        InitializePanels();
+
+        startingCamPos = cam.position;
+        loadingPanel.SetActive(false);
+        SetRandomTargetPointForCamera();
+        ResetAllPanels();
+        SwitchMainMenuButtons(true);
+    }
+    private void InitializePanels()
+    {
+        mainbuttons = new List<GameObject>();
+        gamesSavedChilds = new List<GameObject>();
+        settingsChilds = new List<GameObject>();
+        creditsChilds = new List<GameObject>();
+        for (int i = 0; i < contentButtons.transform.childCount; i++)
+        {
+            GameObject child = contentButtons.transform.GetChild(i).gameObject;
+            mainbuttons.Add(child);
+            Debug.Log("Added:" + mainbuttons[i].name + " to list of main buttons");
+        }
+        for (int i = 0; i < contentGamesSaved.transform.childCount; i++)
+        {
+            GameObject child = contentGamesSaved.transform.GetChild(i).gameObject;
+            gamesSavedChilds.Add(child);
+            Debug.Log("Added:" + gamesSavedChilds[i].name + " to list of child (loadGamePanel)");
+        }
+        for (int i = 0; i < contentSettings.transform.childCount; i++)
+        {
+            GameObject child = contentSettings.transform.GetChild(i).gameObject;
+            settingsChilds.Add(child);
+            Debug.Log("Added:" + settingsChilds[i].name + " to list of child (settingsPanel)");
+        }
+        for (int i = 0; i < contentCredits.transform.childCount; i++)
+        {
+            GameObject child = contentCredits.transform.GetChild(i).gameObject;
+            creditsChilds.Add(child);
+            Debug.Log("Added:" + settingsChilds[i].name + " to list of child (creditsPanel)");
+        }
+        Debug.Log("All childs of panels initialized!");
+    }
+    private void Update()
+    {
+        MoveCamera();
+
+        if (loadingPanel.activeInHierarchy)
+            loadingPanel.GetComponent<CanvasGroup>().alpha += 0.03f;
+    }
+    #region Background camera movement
+    private void MoveCamera()
+    {
+        Vector3 target = new Vector3(randomPoint.x, randomPoint.y, startingCamPos.z);
+        cam.transform.position = Vector3.MoveTowards(cam.transform.position, target, scrollSpeed * Time.deltaTime);
+        float dist = Vector3.Distance(cam.position, target);
+        if (dist <= 1f)
+        {
+            SetRandomTargetPointForCamera();
+        }
+    }
+    private void SetRandomTargetPointForCamera()
+    {
+        Vector2 randomPoint = new Vector3(UnityEngine.Random.Range(-maxBoundaries.x, maxBoundaries.x), (UnityEngine.Random.Range(-maxBoundaries.y, maxBoundaries.y)));
+        this.randomPoint = randomPoint;
+    }
+
+    #endregion
+
+    #region Buttons
     public void NewGame()
     {
-        SceneManager.LoadScene(1);
+        loadingPanel.SetActive(true);
+        StartCoroutine(WaitToLoad());
     }
-    public void LoadGame()
+    public void OpenSavedGames()
     {
-        //???
+        DisplaySavedGames();
     }
+
     public void Credits()
     {
-        //hide this panel and display credits panel
-        mainPanel.SetActive(false);
-        creditsPanel.SetActive(true);
+        DisplayCredits();
     }
-    public void ToMenu()
+    public void Settings()
     {
-        mainPanel.SetActive(true);
-        creditsPanel.SetActive(false);
+        DisplaySettingsMenu();
     }
     public void ExitGame()
     {
         Application.Quit();
     }
+    public void BackToMenu()
+    {
+        ResetAllPanels();
+        SwitchMainMenuButtons(true);
+
+    }
+    #endregion
+
+    #region Panel switching
+
+    private void DisplaySavedGames()
+    {
+        ResetAllPanels();
+        SwitchGamesSavedChilds(true);
+    }
+    private void DisplaySettingsMenu()
+    {
+        ResetAllPanels();
+        SwitchSettingsChilds(true);
+    }
+    private void DisplayCredits()
+    {
+        ResetAllPanels();
+        SwitchCreditsChilds(true);
+    }
+    private void ResetAllPanels()
+    {
+        SwitchGamesSavedChilds(false);
+        SwitchCreditsChilds(false);
+        SwitchSettingsChilds(false);
+        SwitchMainMenuButtons(false);
+    }
+    #endregion
+    #region Others
+    private IEnumerator WaitToLoad()
+    {
+        yield return new WaitForSeconds(0.9f);
+        SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
+    }
+
+    private void SwitchMainMenuButtons(bool state)
+    {
+        foreach(GameObject button in mainbuttons)
+        {
+            button.SetActive(state);
+        }
+    }
+    private void SwitchGamesSavedChilds(bool state)
+    {
+        foreach (GameObject child in gamesSavedChilds)
+        {
+            child.SetActive(state);
+        }
+    }
+    private void SwitchSettingsChilds(bool state)
+    {
+        foreach (GameObject child in settingsChilds)
+        {
+            child.SetActive(state);
+        }
+    }
+    private void SwitchCreditsChilds(bool state)
+    {
+        foreach (GameObject child in creditsChilds)
+        {
+            child.SetActive(state);
+        }
+    }
+    #endregion
+
 }
