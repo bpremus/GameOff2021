@@ -12,7 +12,9 @@ public class CellSelectProto : MonoBehaviour
     GameObject path_sphere;
     [Header("GFX")]
     [SerializeField] private Sprite unselectedFrame;
-    [SerializeField] private Sprite selectedFrame;
+    [SerializeField] private Color frame_normalColor;
+    [SerializeField] private Color frame_CanAssignColor;
+    [SerializeField] private Color frame_CantAssignColor;
     private Vector3 borderStartSize;
     [SerializeField] private float onClickFrameAnimtime = 0.2f;
     [SerializeField] private LeanTweenType onClickFrameEase;
@@ -150,6 +152,7 @@ public class CellSelectProto : MonoBehaviour
         else
         {
             cellHoverCanvas.SetActive(false);
+            frame_border.gameObject.GetComponent<SpriteRenderer>().color = frame_normalColor;
         }
     }
 
@@ -207,16 +210,26 @@ public class CellSelectProto : MonoBehaviour
             string text = current + "/" + max;
             TextMeshProUGUI txtDisplayer = occupiedSpotForRoomText_hover.GetComponent<TextMeshProUGUI>();
 
-            if (current == max) txtDisplayer.color = redColor;
-            else txtDisplayer.color = greenColor;
+            if (current == max)
+            {
+                frame_border.gameObject.GetComponent<SpriteRenderer>().color = frame_CantAssignColor;
+                txtDisplayer.color = redColor;
+            }
+
+            else
+            {
+                frame_border.gameObject.GetComponent<SpriteRenderer>().color = frame_CanAssignColor;
+                txtDisplayer.color = greenColor;
+            }
 
             txtDisplayer.text = text;
             cellHoverCanvas.SetActive(true);
-
+           
         }
         else
         {
             cellHoverCanvas.SetActive(false);
+            frame_border.gameObject.GetComponent<SpriteRenderer>().color = frame_normalColor;
         }
 
     }

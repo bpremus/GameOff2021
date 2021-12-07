@@ -27,7 +27,7 @@ public class DBG_UnitUI : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI bug_name;
     [SerializeField]
-    TextMeshProUGUI bug_level;
+    TextMeshProUGUI bugTask_Txt;
     [SerializeField]
     private GameObject levelUpPanel;
 
@@ -50,7 +50,7 @@ public class DBG_UnitUI : MonoBehaviour
         bug = cb;
 
         SetTextBugName(cb);
-        SetTextBugLevel(cb);
+        SetTextCurrentState(cb);
 
     }
     public void ShowLevelUpPanel()
@@ -85,46 +85,61 @@ public class DBG_UnitUI : MonoBehaviour
     }
     public void SetTextBugName(CoreBug cb)
     {
-
-
-
-
-
-        //Here should be the formatting of names
-
-
-
-
-
-        bug_name.text = cb.name;
+        string bugName = "Bug";
+        if (cb.bug_evolution == CoreBug.BugEvolution.drone) bugName = "Worker";
+        else if (cb.bug_evolution == CoreBug.BugEvolution.warrior) bugName = "Warrior";
+        else if (cb.bug_evolution == CoreBug.BugEvolution.claw) bugName = "Claw";
+        else if (cb.bug_evolution == CoreBug.BugEvolution.range) bugName = "Range";
+        else if (cb.bug_evolution == CoreBug.BugEvolution.cc_bug) bugName = "Spike bug";
+        else
+             bugName = cb.bug_evolution.ToString();
+        bug_name.text = bugName;
     }
-    public void SetTextBugLevel(CoreBug cb)
+    public void SetTextCurrentState(CoreBug cb)
     {
-        bug_level.text = "Level "+ cb.bug_base_level.ToString();
+        string task;
+        if (cb.bugTask == CoreBug.BugTask.none) task = "Idle";
+        else if (cb.bugTask == CoreBug.BugTask.fight) task = "Defending";
+        else if (cb.bugTask == CoreBug.BugTask.harvesting) task = "Harvesting";
+        else if (cb.bugTask == CoreBug.BugTask.salvage) task = "Salvaging";
+        else
+            task = cb.bugTask.ToString();
+        bugTask_Txt.text = task;
     }
     public void Update()
     {
         if (UIController.instance.isBuildMenuActive()) Hide();
 
 
-
         if(bug != null)
         {
-            if (bug.bug_evolution == CoreBug.BugEvolution.warrior)
+            if (bug.bug_evolution == CoreBug.BugEvolution.drone)
             {
-                warriorUpgrade.GetComponent<Button>().interactable = false;
-                clawUpgrade.GetComponent<Button>().interactable = true;
-                rangedUpgrade.GetComponent<Button>().interactable = true;
-                ccUpgrade.GetComponent<Button>().interactable = true;
+                warriorUpgrade.SetActive(true);
+
+                clawUpgrade.SetActive(false);
+                rangedUpgrade.SetActive(false);
+                ccUpgrade.SetActive(false);
+
+            }
+            else if (bug.bug_evolution == CoreBug.BugEvolution.warrior)
+            {
+                
+                clawUpgrade.SetActive(true);
+                rangedUpgrade.SetActive(true);
+                ccUpgrade.SetActive(true);
+
+                warriorUpgrade.SetActive(false);
+               
             }
             else
             {
-                warriorUpgrade.GetComponent<Button>().interactable = true;
-                clawUpgrade.GetComponent<Button>().interactable = false;
-                rangedUpgrade.GetComponent<Button>().interactable = false;
-                ccUpgrade.GetComponent<Button>().interactable = false;
+                warriorUpgrade.SetActive(false);
+                clawUpgrade.SetActive(false);
+                rangedUpgrade.SetActive(false);
+                ccUpgrade.SetActive(false);
             }
-
+            OnAffordButtonActive();
         }
 
 
@@ -145,13 +160,7 @@ public class DBG_UnitUI : MonoBehaviour
 
     }
 
-    /*
-    public void EvolveBug()
-    {
-        ArtPrefabsInstance.Instance.EvolveBug(bug,0);
-        Hide();
-    }
-    */
+
 
     public void LevelUpBug()
     {
@@ -161,7 +170,13 @@ public class DBG_UnitUI : MonoBehaviour
             bug.LevelUp();
         }
     }
-
+    public void OnAffordButtonActive()
+    {
+        warriorUpgrade.GetComponent<Button>().interactable = GameController.Instance.CanAffordUpgrade(CoreBug.BugEvolution.warrior);
+        clawUpgrade.GetComponent<Button>().interactable = GameController.Instance.CanAffordUpgrade(CoreBug.BugEvolution.claw);
+        rangedUpgrade.GetComponent<Button>().interactable = GameController.Instance.CanAffordUpgrade(CoreBug.BugEvolution.range);
+        ccUpgrade.GetComponent<Button>().interactable = GameController.Instance.CanAffordUpgrade(CoreBug.BugEvolution.cc_bug);
+    }
     public void EvolveBug(int index)
     {
         Debug.Log("evolve " + index);

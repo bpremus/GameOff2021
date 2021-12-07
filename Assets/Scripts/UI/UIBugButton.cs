@@ -55,9 +55,17 @@ public class UIBugButton : MonoBehaviour
             {
                 button_image.sprite = icon_images[1];
             }
-            text.text = bug.name;
+            SetName();
         }
            
+    }
+    private void SetName()
+    {
+        string bugName = "Bug";
+        if (bug.bug_evolution == CoreBug.BugEvolution.drone) bugName = "Worker";
+        else
+            bugName = bug.bug_evolution.ToString();
+        text.text = bugName;
     }
     private void OnEnable()
     {

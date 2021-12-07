@@ -59,7 +59,7 @@ public class GameController : MonoBehaviour
 
     // consume resources
 
-    bool DoWeHaveEnoughResources(int[] cost)
+    public bool DoWeHaveEnoughResources(int[] cost)
     {
 
         // food 
@@ -123,7 +123,40 @@ public class GameController : MonoBehaviour
          
 
     }
+    private int[] GetUpgradeCost(CoreBug.BugEvolution bugEvolution)
+    {
+        switch (bugEvolution)
+        {
+            case CoreBug.BugEvolution.drone:
+                return evolve_drone;
+                break;
+            case CoreBug.BugEvolution.super_drone:
+                return evolve_super_drone;
+                break;
+            case CoreBug.BugEvolution.warrior:
+                return evolve_warrior;
+                break;
+            case CoreBug.BugEvolution.claw:
+                return evolve_claw;
+                break;
+            case CoreBug.BugEvolution.range:
+                return evolve_slow;
+                break;
+            case CoreBug.BugEvolution.cc_bug:
+                return evolve_spike;
+                break;
+            default:
+                return evolve_drone;
+                break;
+        }
 
+    } 
+    public bool CanAffordUpgrade(CoreBug.BugEvolution bugEvolution)
+    {
+        int[] cost = GetUpgradeCost(bugEvolution);
+        if (food >= cost[0] && wood >= cost[1]) return true;
+        return false;
+    }
     public void OnGameEnd()
     { 
     
