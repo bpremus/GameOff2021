@@ -7,6 +7,6 @@ public class ButtonExitSFX : MonoBehaviour
 
     public void onClick()
     {
-  
+        FMODUnity.RuntimeManager.PlayOneShotAttached("event:/UI/Button_Press_Exit", gameObject);
     }
 }
