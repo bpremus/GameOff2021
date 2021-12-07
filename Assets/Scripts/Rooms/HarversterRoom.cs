@@ -171,7 +171,7 @@ public class HarversterRoom : HiveRoom
     {
         Debug.Log(this.name + " selected");
 
-        AkSoundEngine.PostEvent("Play_Harvester", gameObject);
+
     }
 
 

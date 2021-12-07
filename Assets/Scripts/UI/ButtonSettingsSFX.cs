@@ -6,6 +6,6 @@ public class ButtonSettingsSFX : MonoBehaviour
 {
     public void onCLick()
     {
-        AkSoundEngine.PostEvent("Play_Button_Settings", gameObject);
+
     }
 }

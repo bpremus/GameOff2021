@@ -29,7 +29,7 @@ public class WarRoom : HiveRoom
     {
         Debug.Log(this.name + " selected");
 
-        AkSoundEngine.PostEvent("Play_WarRoom", gameObject);
+
     }
 
     public void OnBugDepart(CoreBug bug)

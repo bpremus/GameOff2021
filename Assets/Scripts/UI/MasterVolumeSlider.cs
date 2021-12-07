@@ -16,7 +16,7 @@ public class MasterVolumeSlider : MonoBehaviour
     }
     public void MasterVolume (float volume)
     {
-        AkSoundEngine.SetRTPCValue("Master_Volume", volume);
+  
         PlayerPref.Instance.SaveMainVolume(volume);
     }
     public void SetSavedLevel()

@@ -113,7 +113,7 @@ public class CommandCenter : WarRoom
     {
         Debug.Log(this.name + " selected");
 
-        AkSoundEngine.PostEvent("Play_Hatchery", gameObject);
+
     }
 
 

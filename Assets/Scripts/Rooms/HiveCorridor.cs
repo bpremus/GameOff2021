@@ -68,6 +68,6 @@ public class HiveCorridor : HiveRoom
     {
         Debug.Log(this.name + " selected");
 
-        AkSoundEngine.PostEvent("Play_Corridor", gameObject);
+
     }
 }

@@ -17,7 +17,7 @@ public class MusicVolumeSlider : MonoBehaviour
     }
     public void MusicVolume (float volume)
     {
-        AkSoundEngine.SetRTPCValue("Music_Volume", volume);
+
         PlayerPref.Instance.SaveMusicVolume(volume);
     }
 

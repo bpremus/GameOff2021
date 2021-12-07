@@ -239,25 +239,13 @@ public class GameController : MonoBehaviour
 
     public void OnDayStart() 
     {
-        AkSoundEngine.PostEvent("Stop_Ambient_Night", gameObject);
 
-        AkSoundEngine.PostEvent("Play_Ambient_Day", gameObject);
-
-        AkSoundEngine.PostEvent("Play_Day_Music", gameObject);
-
-        AkSoundEngine.PostEvent("Stop_Night_Music", gameObject);
 
         day_count++;
     }
     public void OnNightStart()
     {
-        AkSoundEngine.PostEvent("Stop_Ambient_Day", gameObject);
 
-        AkSoundEngine.PostEvent("Play_Ambient_Night", gameObject);
-
-        AkSoundEngine.PostEvent("Play_Night_Music", gameObject);
-
-        AkSoundEngine.PostEvent("Stop_Day_Music", gameObject);
     }
     public void OnAttackStart()
     { 
@@ -293,7 +281,7 @@ public class GameController : MonoBehaviour
 
     public bool EvolveBug(CoreBug.BugEvolution bugEvolution) 
     {
-        AkSoundEngine.PostEvent("Play_Upgrade", gameObject);
+     
 
         if (bugEvolution == CoreBug.BugEvolution.warrior)
         {
@@ -332,7 +320,7 @@ public class GameController : MonoBehaviour
             }
         }
 
-        AkSoundEngine.PostEvent("Play_Error", gameObject);
+      
 
         return false;
     }

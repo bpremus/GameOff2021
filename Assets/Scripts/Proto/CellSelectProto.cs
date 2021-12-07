@@ -296,27 +296,27 @@ public class CellSelectProto : MonoBehaviour
         {
             case CoreBug.BugEvolution.drone:
                 //your sound or anything
-                AkSoundEngine.PostEvent("Play_Drone_Selection", gameObject);
+              
                 break;
             case CoreBug.BugEvolution.super_drone:
                 //your sound or anything
-                AkSoundEngine.PostEvent("Play_Drone_Selection", gameObject);
+             
                 break;
             case CoreBug.BugEvolution.warrior:
                 //your sound or anything
-                AkSoundEngine.PostEvent("Play_Warrior_Selection", gameObject);
+              
                 break;
             case CoreBug.BugEvolution.claw:
                 //your sound or anything
-                AkSoundEngine.PostEvent("Play_BigClaw_Selection", gameObject);
+               
                 break;
             case CoreBug.BugEvolution.range:
                 //your sound or anything
-                AkSoundEngine.PostEvent("Play_Ranged_Selection", gameObject);
+               
                 break;
             case CoreBug.BugEvolution.cc_bug:
                 //your sound or anything
-                AkSoundEngine.PostEvent("Play_CC_Selection", gameObject);
+             
                 break;
             default:
                 //if somethings happens set default sound here (drone?)

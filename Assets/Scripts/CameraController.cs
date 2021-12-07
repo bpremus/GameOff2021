@@ -136,7 +136,7 @@ public class CameraController : MonoBehaviour
       CameraUpdate();
         float y = transform.position.y;
 
-        AkSoundEngine.SetRTPCValue("Camera_Y", y);
+
     }
 
     #endregion

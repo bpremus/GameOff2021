@@ -69,7 +69,7 @@ public class CCSlowBug : WarriorBug
     {
         // Debug.Log("Bug started walking");
 
-        AkSoundEngine.PostEvent("Play_Big_Bug_Movement", gameObject);
+ 
     }
 
     public override void OnIdleStart()
@@ -77,14 +77,12 @@ public class CCSlowBug : WarriorBug
 
         // Debug.Log("Bug is idle");
 
-        AkSoundEngine.PostEvent("Stop_Big_Bug_Movement", gameObject);
+  
     }
 
     public override void OnBugIsDead()
     {
 
-        AkSoundEngine.PostEvent("Stop_Big_Bug_Movement", gameObject);
 
-        AkSoundEngine.PostEvent("Play_Small_Bug_Death", gameObject);
     }
 }

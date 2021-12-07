@@ -203,6 +203,6 @@ public class SalvageRoom : HiveRoom
     {
         Debug.Log(this.name + " selected");
 
-        AkSoundEngine.PostEvent("Play_SalvageRoom", gameObject);
+
     }
 }

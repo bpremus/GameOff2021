@@ -17,7 +17,7 @@ public class SfxVolumeSlider : MonoBehaviour
     }
     public void SFXVolume(float volume)
     {
-        AkSoundEngine.SetRTPCValue("SFX_Volume", volume);
+  
         PlayerPref.Instance.SaveSFXVolume(volume);
     }
     public void ResetAll()
