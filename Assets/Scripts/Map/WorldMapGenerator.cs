@@ -1,73 +1,150 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WorldMapGenerator : MonoBehaviour
 {
+    public int width  = 10;
+    public int height = 10;
 
-    public GameObject Hexagon;
-    public uint Radius;
-    public float HexSideMultiplier = 1;
-    private const float sq3 = 1.7320508075688772935274463415059F;
+    [SerializeField] GameObject map_prefab;
+    [SerializeField] float x_offset = 50;
+    [SerializeField] float y_offset = 50;
+    [SerializeField] Transform parrent;
+    [SerializeField] protected GameObject grid_ui_node;
 
-    List<Vector3> tiles = new List<Vector3>();
-    List<int> distance = new List<int>();
-    void Start()
+    List<List<WorldMapCell>> cells = new List<List<WorldMapCell>>();
+    List<WorldMapCell> visited_cells = new List<WorldMapCell>();
+
+    protected void Start()
     {
-        Vector3 currentPoint = transform.parent.position;
-       if (Hexagon.transform.localScale.x != Hexagon.transform.localScale.z) return;
- 
-        Vector3[] mv = {
-            new Vector3(1.5f,0, -sq3*0.5f),       
-            new Vector3(0,0, -sq3),               
-            new Vector3(-1.5f,0, -sq3*0.5f),      
-            new Vector3(-1.5f,0, sq3*0.5f),       
-            new Vector3(0,0, sq3),                
-            new Vector3(1.5f,0, sq3*0.5f)         
-        };
+        GenerateGrid();
+       // grid_ui_node = transform.GetChild(0).gameObject;
+    }
 
-        int lmv = mv.Length;
-        float HexSide = Hexagon.transform.localScale.x * HexSideMultiplier;
-        int range = 0;
-        for (int mult = 0; mult <= Radius; mult++)
+    QueenRoom selected_room;
+    public void OpenMap(QueenRoom qr)
+    {
+        if (qr.GetAssignedBugs().Count > 0)
         {
-            int hn = 0;
-            for (int j = 0; j < lmv; j++)
+
+            selected_room = qr;
+            EnableMap();
+        }
+        else
+        {
+            GameLog.Instance.SendMessage("You dont have enough assigned bugs in this room");
+        }
+    }
+
+    public void SetRoomAsDesitnation(WorldMapCell cell)
+    {
+        if (selected_room != null)
+        {
+            visited_cells.Add(cell);
+            selected_room.SendToCollect();
+            CloseMap();
+        }
+        // on sucessfull scout or gather
+        cell.ExpandCell();
+    }
+
+    // ----------------------------------------
+
+    public void EnableMap()
+    {
+        grid_ui_node.SetActive(true);
+    }
+
+    public void CancelMap()
+    {
+        grid_ui_node.SetActive(false);
+    }
+
+    public WorldMapCell CloseMap()
+    {
+        grid_ui_node.SetActive(false);
+        return null;
+    }
+
+    protected void GenerateGrid()
+    {
+        // Generate map 
+        
+        for (int i = 0; i < width; i++)
+        {
+            List<WorldMapCell> col = new List<WorldMapCell>();
+            for (int j = 0; j < height; j++)
             {
-                for (int i = 0; i < mult; i++, hn++)
-                {
-                    distance.Add(range);
-                    tiles.Add(currentPoint);
-                    currentPoint += (mv[j] * HexSide);
-                }
-                if (j == 4)
-                {
-                    distance.Add(range);
-                    tiles.Add(currentPoint);
-                    currentPoint += (mv[j] * HexSide);
-                    hn++;
+                col.Add(SpawnButton(i, j));
+            }
+            cells.Add(col);
+        }
 
-                    range++;
+        // Generate neighbours 
 
-                    if (mult == Radius)
-                        break;   
-                }
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                WorldMapCell cell = cells[i][j];
+                cell.SetNeighbours(cells);
             }
         }
 
 
-        // close enoug distance
-        for (int i = 0; i < tiles.Count; i++)
-        {
-            Vector3 pos = tiles[i];
-            Vector3 rot_pos = new Vector3(pos.x, pos.z, 0) + new Vector3(0, Screen.height / 2 , 0); 
-            GameObject wc = Instantiate(Hexagon, rot_pos, Quaternion.identity, transform);      
-           // wc.cell_distance = Mathf.FloorToInt(distance[i]);
-           // wc.name = "m_" + wc.cell_distance;
-           // wc.BuildTile(0);
-        }
+        // Generate visited cells (on load)
 
-        
+        // Place hive
+        WorldMapCell hive = cells[width / 2][height / 2];
+        hive.cell_Type = WorldMapCell.Cell_type.player_hive;
+        hive.ExpandCell();
+
+        // ready to play
+        CancelMap();
     }
+
+    protected WorldMapCell SpawnButton(int x, int y)
+    {
+        Vector3 pos = new Vector3((x * x_offset) - (x_offset * width) / 2, (y * y_offset) - (y_offset * height) / 2, 1);
+        if (x % 2 == 0)
+        {
+            pos.y += y_offset / 2;
+        }
+        pos = parrent.position + pos;
+        WorldMapCell g = Instantiate(map_prefab, pos, Quaternion.identity, parrent).GetComponent<WorldMapCell>();
+        g.SetPos(x, y, this);
+        g.cell_Type = WorldMapCell.Cell_type.hidden;
+
+        float perl = Mathf.PerlinNoise((float) x / width -1,(float)y / height -1);
+        float dist = Vector3.Distance(transform.position, pos);
+        g.peral = perl;
+        g.dist = dist;
+
+
+        // Text t = g.GetComponentInChildren<Text>();
+
+
+
+        // t.text = ""; // + x + ":" + y;
+        return g;           
+    }
+
+    private static WorldMapGenerator _instance;
+    public static WorldMapGenerator Instance
+    {
+        get { return _instance; }
+    }
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        _instance = this;
+    }
+
 
 }

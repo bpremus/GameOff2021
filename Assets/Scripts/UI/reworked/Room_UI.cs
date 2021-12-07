@@ -155,7 +155,9 @@ public class Room_UI : MonoBehaviour
             {
                 // we can gather from here also 
                 Debug.Log("send gathering");
-                qroom.SendToCollect();
+                //qroom.SendToCollect();
+                WorldMapGenerator.Instance.OpenMap(qroom);
+
             }
 
             CommandCenter ccroom = room.GetComponent<CommandCenter>();
@@ -320,6 +322,27 @@ public class Room_UI : MonoBehaviour
     {
         if(b)
          CellSelectProto.Instance.DestroyCell(hiveCell);
+    }
+
+    public void SpawnDrone()
+    {
+        CoreRoom room = hiveCell.GetRoom();
+        QueenRoom qroom = room.GetComponent<QueenRoom>();
+        if (qroom)
+        {
+            // we can gather from here also 
+            qroom.SpawnBug();
+        }
+    }
+
+    public void EnableButtons()
+    { 
+    
+    }
+    public void DisableButtons()
+    {
+      //  Button[] list_buttons = GetComponentsInChildren<Button>();
+
     }
 
 }

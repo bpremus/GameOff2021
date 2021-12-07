@@ -72,7 +72,8 @@ public class HiveGenerator : MonoBehaviour
         // grid does not change
         BuildGrid();
         Setneighbours();
-        SetFixedCells();
+        // SetFixedCells();
+        BuildRooms();
     }
 
     public void CollecteCells()
@@ -233,7 +234,7 @@ public class HiveGenerator : MonoBehaviour
         
       //  int d = width / 2;
 
-        SetLevelVariant();
+     //   SetLevelVariant();
 
       // cells[d    ][height - 3].BuildCooridor();
       // cells[d + 1][height - 4].BuildRoom(HiveCell.RoomContext.war);
@@ -260,7 +261,7 @@ public class HiveGenerator : MonoBehaviour
         //  cells[d+1][height - 5].BuildRoom(HiveCell.RoomContext.queen);
         //  cells[d-1][height - 5].BuildRoom(HiveCell.RoomContext.harvester);
 
-        RefreshAllCells();
+     //   RefreshAllCells();
         
     }
 
@@ -357,8 +358,7 @@ public class HiveGenerator : MonoBehaviour
                     if (Application.isEditor)
                         DestroyImmediate(gs.cell_mesh.gameObject);
                     else
-                        Destroy(gs.cell_mesh.gameObject);
-         
+                        Destroy(gs.cell_mesh.gameObject);       
                 }
 
                 if (idx < 0) continue;
@@ -366,12 +366,16 @@ public class HiveGenerator : MonoBehaviour
                 Vector3 pos = new Vector3(gs.GetX * offset - width, (gs.GetY * offset) - height * offset, 0);
                 pos += transform.position;
                 CellMesh cm = Instantiate(cell_mesh_prefabs[idx], pos, Quaternion.identity);
-                cm.name = gs.name;
-                cm.transform.SetParent(this.transform);
+                cm.name = "mesh_" + gs.x + "_" + gs.y;
+                gs.name = "cell_" + gs.x + "_" + gs.y;
+                cm.transform.SetParent(gs.transform);
                 gs.cell_mesh = cm;
+
             }
         }
     }
+
+  
 
     public void SetLevelVariant(int level = 1)
     {
@@ -477,15 +481,67 @@ public class HiveGenerator : MonoBehaviour
         }
     }
 
+    public void BuildTopLevel()
+    {
+        // outside top row
+        for (int i = 0; i < width; i++)
+        {
+            cells[i][height - 1].BuildOutside();
+        }
+    }
+
+    public void BuildDirtBorder()
+    {
+        // earh border row with opening 
+        for (int i = 0; i < width; i++)
+        {
+            cells[i][height - 2].mesh_index = 32;
+            cells[i][height - 2].cell_Type = CellMesh.Cell_type.top;
+            cells[i][height - 2].is_static_cell = true;
+
+            cells[i][height - 3].mesh_index = 0;
+            cells[i][height - 3].cell_Type = CellMesh.Cell_type.dirt;
+            cells[i][height - 3].is_static_cell = true;
+        }
+    }
+
+    public void BuildQueenRoom()
+    {
+        int d = width / 2;
+
+        cells[d][height - 2].mesh_index = 1;
+        cells[d][height - 2].cell_Type = CellMesh.Cell_type.entrance;    
+        cells[d][height - 3].BuildCooridor();
+        cells[d][height - 3].BuildCooridor();
+        cells[d][height - 4].BuildCooridor();
+        cells[d][height - 5].BuildRoom(HiveCell.RoomContext.hive);
+
+        hive_entrance.Add(cells[d][height - 2]);
+    }
+
+
+    public void BuildRooms()
+    {
+        // outside 
+        BuildTopLevel();
+        // border with top and dirt 
+        BuildDirtBorder();
+
+        BuildQueenRoom();
+
+        // solver 
+        PlaceCooridors(cells);
+
+        // redraw grid
+        RedrawGrid();
+
+    } 
+
 
     public void SetFixedCells(int variant = 1)
     {
 
-        // outside top row
-        for (int i = 0; i < width; i++)
-        {
-            cells[i][height -1].BuildOutside();
-        }
+       
 
         SetLevelVariant(variant);
 

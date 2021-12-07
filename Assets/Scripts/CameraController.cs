@@ -148,6 +148,14 @@ public class CameraController : MonoBehaviour
         Debug.Log("target assigned");
     }
 
+    public void SetFocus(HiveCell hc)
+    {
+        Debug.Log("focus on " + hc.name);
+        zoomPos = 0.5f;
+        m_Transform.position = hc.transform.position;
+
+    }
+
     public bool IsDragging()
     {
         return isDragging;
@@ -171,14 +179,12 @@ public class CameraController : MonoBehaviour
             if (Input.GetKeyDown(stopFollowingKey)) UIController.instance.SetDefaultState();
             else
               FollowTarget();
-        }
-          
+        }      
         else
             Move();
 
         HeightCalculation();
         LimitPosition();
-
     }
 
     private void Move()
@@ -222,8 +228,6 @@ public class CameraController : MonoBehaviour
         }
         if (useDragInput)
         {
-
-
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             LayerMask selection_mask = 0;
@@ -248,10 +252,6 @@ public class CameraController : MonoBehaviour
                 }
             }
 
-
-
-  
-
             if (isDragging)
             {
                 Vector3 desiredMove = new Vector3(-Input.GetAxis("Mouse X"), -Input.GetAxis("Mouse Y"), 0f);
@@ -260,9 +260,6 @@ public class CameraController : MonoBehaviour
                 m_Transform.Translate(desiredMove, Space.Self);
             }
         }
-
-
-
     }
 
     private void HeightCalculation()

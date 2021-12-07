@@ -10,6 +10,7 @@ public class UIBuildMenu : MonoBehaviour
     private UIController uiController;
     private float awakeTime;
     //  0 - corridor    1 - storage    2 - barracks    3 - resource room    4 - queen room
+
     private void Awake()
     {
         uiController = FindObjectOfType<UIController>();
@@ -17,6 +18,7 @@ public class UIBuildMenu : MonoBehaviour
         canvasGroup.alpha = 0;
         awakeTime = 0;
     }
+
     private void Update()
     {
 
@@ -25,6 +27,7 @@ public class UIBuildMenu : MonoBehaviour
     }
     public void CheckForSelectedRoom(int roomID)
     {
+        Debug.Log("card on click " + roomID);
         uiController.Build_BuildRequest(roomID);
     }
     public void CloseMenu()

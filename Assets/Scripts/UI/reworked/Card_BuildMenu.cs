@@ -11,14 +11,14 @@ public class Card_BuildMenu : MonoBehaviour,IPointerEnterHandler,IPointerExitHan
     [SerializeField] private TextMeshProUGUI woodCost;
     [SerializeField] private TextMeshProUGUI foodCost;
 
-
-
-  [SerializeField]  private Vector3 scaleVector = new Vector3(1.1f,1.1f,1.1f);
+    [SerializeField]  private Vector3 scaleVector = new Vector3(1.1f,1.1f,1.1f);
     private float pointerEnterTime  = 0.2f;
     private float pointerExitTime = 0.15f;
     private LeanTweenType ease = LeanTweenType.easeSpring;
 
     private LTDescr scaleup;
+
+  
     public void OnPointerEnter(PointerEventData eventData)
     {
      scaleup = LeanTween.scale(gameObject, scaleVector, pointerEnterTime).setEase(ease);

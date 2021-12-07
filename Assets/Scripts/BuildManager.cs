@@ -47,7 +47,7 @@ public class BuildManager : MonoBehaviour
 
     public bool CanBuildRoom(int _roomInd)
     {
-        if (_roomInd > roomsIds.Length){ Debug.LogError("room with index"+ _roomInd +" does not exists");return false; }
+      if (_roomInd > roomsIds.Length){ Debug.LogError("room with index"+ _roomInd +" does not exists");return false; }
       int food = GameController.Instance.GetFood();
       int wood = GameController.Instance.GetWood();
 

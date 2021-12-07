@@ -120,9 +120,8 @@ public class GameController : MonoBehaviour
             default:
                 return room_corridor_cost;
         }
-         
-
     }
+
 
     public void OnGameEnd()
     { 
@@ -230,9 +229,15 @@ public class GameController : MonoBehaviour
     { 
     
     }
-    public void OnConsumeFood()
+    public void SetResrouces(int food, int wood)
     {
-        food -= 1;
+        this.food = food;
+        this.wood = wood;
+    }
+
+    public void OnConsumeFood(int food = 1)
+    {
+        this.food -= food;
     }
     public void OnBrigResources()
     {
@@ -365,6 +370,16 @@ public class GameController : MonoBehaviour
 
     float _food_t = 0;
     float food_conusme_thick = 5;
+    public void StopFoodTick()
+    {
+
+        
+    }
+    public void SetFoodTick(int food_tick)
+    {
+        food_conusme_thick = food_tick;
+    }
+
     public void ConsumeFoodThick()
     {
         _food_t += Time.deltaTime;
@@ -377,12 +392,7 @@ public class GameController : MonoBehaviour
             return;
         }
 
-        if (population < 10)
-        {
-            food -= 1;
-            return;
-        }
-        food -= population;
+        OnConsumeFood(population);
     }
     private float _t_day_duration = 0;
     protected void TimeCycle()

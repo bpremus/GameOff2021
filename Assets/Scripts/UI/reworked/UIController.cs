@@ -15,6 +15,41 @@ public class UIController : MonoBehaviour
     private UIBuildMenu uiBuildMenu;
     public static UIController instance;
 
+    public enum UIElements { none, build_corridor, build_harvester, build_salvage, build_war_room,
+    assign_bug, send_gathering, recall_bug, evolve_drone};
+
+    [SerializeField]
+    private Card_BuildMenu[] menu_cards;
+
+    public void EnableUIElement(UIElements ui_elements)
+    {
+        if (menu_cards.Length == 0)
+            menu_cards = buildMenu.GetComponentsInChildren<Card_BuildMenu>();
+
+        if (ui_elements == UIElements.build_corridor)
+            menu_cards[0].gameObject.SetActive(true);
+        if (ui_elements == UIElements.build_harvester)
+            menu_cards[1].gameObject.SetActive(true);
+
+    }
+
+    public void DisableUIElements(UIElements ui_elements)
+    {
+        if (menu_cards.Length == 0)
+            menu_cards = buildMenu.GetComponentsInChildren<Card_BuildMenu>();
+    }
+
+    public void DisableBuildCards()
+    { 
+        if (menu_cards.Length == 0)
+            menu_cards = buildMenu.GetComponentsInChildren<Card_BuildMenu>();
+        foreach (Card_BuildMenu card in menu_cards)
+        {
+            card.gameObject.SetActive(false);
+        }
+    }
+
+
     public enum State 
     {
         Default,
@@ -45,10 +80,13 @@ public class UIController : MonoBehaviour
         if (mainCanvas == null) Debug.LogError("MAIN CANVAS IS NOT ASSIGNED IN UICONTROLER");
 
     }
+
     private void Start()
     {
-      
+
     }
+
+
     public State GetUIState() { return uiState; }
     public bool isBuildMenuActive()
     {

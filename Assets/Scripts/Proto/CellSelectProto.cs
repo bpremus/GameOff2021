@@ -579,11 +579,7 @@ public class CellSelectProto : MonoBehaviour
     
     }
 
-    public void OnMapHover(WorldMapCell map)
-    {
-        map.OnHover();
-    }
-
+   
     public void OnMapSelect(WorldMapCell selected_map)
     {
         OnDeselect();
@@ -658,13 +654,7 @@ public class CellSelectProto : MonoBehaviour
         {
             if (UIController.instance.GetUIState() == UIController.State.Default)
             {
-                WorldMapCell map = hit.collider.transform.GetComponent<WorldMapCell>();
-                if (map)
-                {
-                    OnMapHover(map);
-                    return;
-                }
-
+                
                 CoreBug bug = hit.collider.transform.GetComponent<CoreBug>();
                 if (bug)
                 {

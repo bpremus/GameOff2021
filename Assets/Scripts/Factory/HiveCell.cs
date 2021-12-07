@@ -6,10 +6,44 @@ using UnityEngine;
 public class HiveCell : MonoBehaviour
 {
     public bool isCellEmpty;
-    [SerializeField]
-    protected CoreRoom childRoom;
-    [SerializeField]
-    public CellMesh cell_mesh;
+    [SerializeField] protected CoreRoom childRoom;
+    [SerializeField] public CellMesh cell_mesh;
+
+
+    public enum Cell_state { none, disabled, enabled };
+    public Cell_state cell_state = Cell_state.none;
+
+    public void SetMeshColor(float r, float g, float b)
+    {
+        if (cell_mesh == null) return;
+     
+        MaterialPropertyBlock  block = new MaterialPropertyBlock();
+        Renderer renderer = cell_mesh.GetComponentInChildren<Renderer>();
+        if (renderer)
+        {
+            // Debug.Log("setting color");
+            Color cell_color = new Color(r, g, b);
+            block.SetColor("_baseColor", cell_color);
+            renderer.SetPropertyBlock(block);
+
+        }
+    }
+
+    public void ResetMeshColor()
+    {
+        if (cell_mesh == null) return;
+
+        MaterialPropertyBlock block = new MaterialPropertyBlock();
+        Renderer renderer = cell_mesh.GetComponentInChildren<Renderer>();
+        if (renderer)
+        {
+            block.Clear();
+            renderer.SetPropertyBlock(block);
+        }
+    }
+
+    // -----------------------------------------------------------------------
+
 
     public bool is_static_cell = false;
     public void SetNode(int x, int y)
@@ -238,6 +272,8 @@ public class HiveCell : MonoBehaviour
 
     public bool CanDestroyRoom()
     {
+        return true;
+
         if (childRoom)
         {
             QueenRoom qr = childRoom.GetComponent<QueenRoom>();
@@ -386,6 +422,7 @@ public class HiveCell : MonoBehaviour
 
         return list;
     }
+
 
     #endregion
 }
