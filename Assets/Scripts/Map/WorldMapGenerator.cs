@@ -16,11 +16,12 @@ public class WorldMapGenerator : MonoBehaviour
 
     List<List<WorldMapCell>> cells = new List<List<WorldMapCell>>();
     List<WorldMapCell> visited_cells = new List<WorldMapCell>();
+    bool map_generated = false;
 
     protected void Start()
     {
-        GenerateGrid();
-       // grid_ui_node = transform.GetChild(0).gameObject;
+        // GenerateGrid();
+        // grid_ui_node = transform.GetChild(0).gameObject;
     }
 
     QueenRoom selected_room;
@@ -28,13 +29,12 @@ public class WorldMapGenerator : MonoBehaviour
     {
         if (qr.GetAssignedBugs().Count > 0)
         {
-
             selected_room = qr;
             EnableMap();
         }
         else
         {
-            GameLog.Instance.SendMessage("You dont have enough assigned bugs in this room");
+            GameLog.Instance.WriteLine("You dont have enough assigned bugs in this room");
         }
     }
 
@@ -54,7 +54,14 @@ public class WorldMapGenerator : MonoBehaviour
 
     public void EnableMap()
     {
-        grid_ui_node.SetActive(true);
+        grid_ui_node.SetActive(true); // and build the first time 
+        
+        if (map_generated == false)
+        {         
+            GenerateGrid();
+            map_generated = true;
+        }
+        
     }
 
     public void CancelMap()
@@ -101,8 +108,6 @@ public class WorldMapGenerator : MonoBehaviour
         hive.cell_Type = WorldMapCell.Cell_type.player_hive;
         hive.ExpandCell();
 
-        // ready to play
-        CancelMap();
     }
 
     protected WorldMapCell SpawnButton(int x, int y)

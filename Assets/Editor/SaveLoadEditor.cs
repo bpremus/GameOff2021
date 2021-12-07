@@ -25,12 +25,5 @@ public class SaveLoadEditor : Editor
             SaveController save_controll = (SaveController)this.target;
             save_controll.ClarHive();
         }
-
-        if (GUILayout.Button("Load game"))
-        {
-            SaveController save_controll = (SaveController)this.target;
-            save_controll.Load();
-        }
-
     }
 }

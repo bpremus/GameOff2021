@@ -404,7 +404,17 @@ public class GameController : MonoBehaviour
 
     float _food_t = 0;
     float food_conusme_thick = 5;
+
+    public void StopFoodTick()
     {
+
+    }
+
+    public void SetFoodTick(int food_tick)
+    {
+        food_conusme_thick = food_tick;
+    }
+
     public void ConsumeFoodThick()
     {
         _food_t += Time.deltaTime;

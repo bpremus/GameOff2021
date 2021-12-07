@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -26,15 +27,15 @@ public class SaveController : MonoBehaviour
         public Drone_data(CoreBug bug)
         {
             this.name = bug.name;
-            this.bug_type = (int) bug.bug_evolution;
+            this.bug_type = (int)bug.bug_evolution;
             this.health = bug.health;
             this.damage = bug.damage;
-            this.speed  = bug.GetMoveSpeed();
+            this.speed = bug.GetMoveSpeed();
             this.bug_kill_count = bug.bug_kill_count;
             this.bug_task_count = bug.bug_kill_count;
             this.bug_base_level = bug.bug_base_level;
             this.sieged = bug.GetSiegeState();
-            this.bug_task = (int) bug.bugTask;
+            this.bug_task = (int)bug.bugTask;
         }
     }
 
@@ -99,7 +100,7 @@ public class SaveController : MonoBehaviour
 
     [SerializeField]
     List<HiveCell> cells_to_save = new List<HiveCell>();
-    public void Save()
+    public void Save(string filename = "")
     {
         Debug.Log("Saving game");
         cells_to_save.Clear();
@@ -123,7 +124,7 @@ public class SaveController : MonoBehaviour
         }
 
         // save to actuall file 
-        SaveToFile();
+        SaveToFile(filename);
     }
 
     Hive_data hive_data;
@@ -133,17 +134,16 @@ public class SaveController : MonoBehaviour
         Debug.Log("This doesnt work");
     }
 
-
     public void ClarHive()
     {
         FlushHive();
     }
 
-    public void Load()
+    public void Load(string filename)
     {
         Debug.Log("Load game");
 
-        LoadFromFile();
+        LoadFromFile(filename);
 
         if (hive_data.Equals(default(Hive_data)) == false)
         {
@@ -170,17 +170,16 @@ public class SaveController : MonoBehaviour
                 {
                     Drone_data drone = drones[d];
                     // build these drones and assign to this room;
-                    CoreBug bug = ArtPrefabsInstance.Instance.SpawnBug((CoreBug.BugEvolution) drone.bug_type, hc);
+                    CoreBug bug = ArtPrefabsInstance.Instance.SpawnBug((CoreBug.BugEvolution)drone.bug_type, hc);
                     bug.OnBugLoad(drone.name, drone.health, drone.damage, drone.speed, drone.bug_kill_count, drone.bug_task_count, drone.bug_base_level, drone.sieged);
 
-                    bug.bugTask = (CoreBug.BugTask) drone.bug_task;
+                    bug.bugTask = (CoreBug.BugTask)drone.bug_task;
 
                 }
             }
         }
     }
 
- 
     public void OnSave(List<HiveCell> cells_to_save)
     {
 
@@ -266,11 +265,21 @@ public class SaveController : MonoBehaviour
     }
 
     // save nn to file 
-    public void SaveToFile()
+    public void SaveToFile(string new_filename)
     {
+        DateTime utcDate = DateTime.UtcNow;
+        string filename = "Archive-";
+        filename += utcDate.ToString("dd-MM-yyyy-hh-mm-tt"); // 07:00 AM // 12 hour clock // hour is always 2 digits
+        filename += ".gd";
+
+        // in case we want to override
+        if (new_filename != "") filename = new_filename;
+        
+
+        Debug.Log("Saving to filename : " + filename);
         if (hive_data.Equals(default(Hive_data)) == false)
         {
-            string _path = Application.persistentDataPath + "/GT2_bugs_save.gd";
+            string _path = Application.persistentDataPath + "/" + filename;
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Create(_path);
             bf.Serialize(file, hive_data);
@@ -278,10 +287,52 @@ public class SaveController : MonoBehaviour
         }
     }
 
-    // load from file 
-    public void LoadFromFile()
+    public static List<string> GetSavedFiles()
     {
-        string _path = Application.persistentDataPath + "/GT2_bugs_save.gd";
+        List<string> saves = new List<string>();
+
+        string _path = Application.persistentDataPath;
+        DirectoryInfo d = new DirectoryInfo(_path);
+
+        foreach (var file in d.GetFiles("Archive-*.gd"))
+        {
+            string filename = file.Name;
+            Debug.Log("Filename found : " + filename);
+            saves.Add(filename);
+        }
+
+        return saves;
+    }
+
+    public static bool DeleteSavedGame(string filename)
+    {
+        if (filename.Length == 0) return true;
+
+        bool file_deleted = false;
+        try
+        {
+            string _path = Application.persistentDataPath + "/";
+            // Check if file exists with its full path    
+            if (File.Exists(_path))
+            {
+                // If file found, delete it    
+                File.Delete(_path);
+                Debug.Log("save game deleted");
+                file_deleted = true;
+            }
+        }
+        catch (IOException ioExp)
+        {
+            Debug.LogError("cannot delete file");
+        }
+
+        return file_deleted;
+    }
+
+    // load from file 
+    public void LoadFromFile(string filename)
+    {
+        string _path = Application.persistentDataPath + "/" + filename;
         if (File.Exists(_path))
         {
             BinaryFormatter bf = new BinaryFormatter();
@@ -289,6 +340,13 @@ public class SaveController : MonoBehaviour
             hive_data = (Hive_data)bf.Deserialize(file);
             file.Close();
         }
+    }
+
+    public void Start()
+    {
+
+        Debug.Log("currently load is disabled until unit fixes are added");
+        
     }
 
 }
