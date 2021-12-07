@@ -148,7 +148,7 @@ public class HiveCell : MonoBehaviour
         set => hiveGenerator = value;
     }
 
-
+    #region Building 
     public virtual void OnRoomPlaced()
     {
         Debug.Log("Room has been built");
@@ -348,7 +348,7 @@ public class HiveCell : MonoBehaviour
 
         hiveGenerator.RefreshAllCells();
     }
-
+    #endregion
     // drawing the room mesh 
     #region room_mesh
 
