@@ -26,26 +26,31 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private GameObject contentSettings;
     private List<GameObject> settingsChilds;
 
+    [SerializeField] private GameObject contentCredits;
+    private List<GameObject> creditsChilds;
+
     private void Awake() 
     {
         cam = Camera.main.transform;
-        mainbuttons = new List<GameObject>();
-        gamesSavedChilds = new List<GameObject>();
-        settingsChilds = new List<GameObject>();
+
         InitiateMenu();
     }
     private void InitiateMenu()
     {
-        SetupChilds();
+        InitializePanels();
 
         startingCamPos = cam.position;
         loadingPanel.SetActive(false);
         SetRandomTargetPointForCamera();
-        SwitchGamesSavedChilds(false);
+        ResetAllPanels();
         SwitchMainMenuButtons(true);
     }
-    private void SetupChilds()
+    private void InitializePanels()
     {
+        mainbuttons = new List<GameObject>();
+        gamesSavedChilds = new List<GameObject>();
+        settingsChilds = new List<GameObject>();
+        creditsChilds = new List<GameObject>();
         for (int i = 0; i < contentButtons.transform.childCount; i++)
         {
             GameObject child = contentButtons.transform.GetChild(i).gameObject;
@@ -64,6 +69,13 @@ public class MainMenuController : MonoBehaviour
             settingsChilds.Add(child);
             Debug.Log("Added:" + settingsChilds[i].name + " to list of child (settingsPanel)");
         }
+        for (int i = 0; i < contentCredits.transform.childCount; i++)
+        {
+            GameObject child = contentCredits.transform.GetChild(i).gameObject;
+            creditsChilds.Add(child);
+            Debug.Log("Added:" + settingsChilds[i].name + " to list of child (creditsPanel)");
+        }
+        Debug.Log("All childs of panels initialized!");
     }
     private void Update()
     {
@@ -104,7 +116,7 @@ public class MainMenuController : MonoBehaviour
 
     public void Credits()
     {
-
+        DisplayCredits();
     }
     public void Settings()
     {
@@ -134,9 +146,15 @@ public class MainMenuController : MonoBehaviour
         ResetAllPanels();
         SwitchSettingsChilds(true);
     }
+    private void DisplayCredits()
+    {
+        ResetAllPanels();
+        SwitchCreditsChilds(true);
+    }
     private void ResetAllPanels()
     {
         SwitchGamesSavedChilds(false);
+        SwitchCreditsChilds(false);
         SwitchSettingsChilds(false);
         SwitchMainMenuButtons(false);
     }
@@ -169,9 +187,12 @@ public class MainMenuController : MonoBehaviour
             child.SetActive(state);
         }
     }
-    private void HideAll()
+    private void SwitchCreditsChilds(bool state)
     {
-
+        foreach (GameObject child in creditsChilds)
+        {
+            child.SetActive(state);
+        }
     }
     #endregion
 
