@@ -23,5 +23,8 @@ public class ProgressBar : MonoBehaviour
         progress_bar.gameObject.SetActive(false);
     }
 
-
+    public void Update()
+    {
+        transform.rotation = transform.parent.rotation;
+    }
 }

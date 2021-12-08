@@ -19,7 +19,7 @@ public class TutorialLevel : CoreLevel
         Debug.Log("tutorial started");
 
         // starting resources 
-        GameController.Instance.SetResrouces(20, 0);
+        //GameController.Instance.SetResrouces(20, 0);
 
         // stop spending resources 
         GameController.Instance.SetFoodTick(300); // every 20 sec 1 tick

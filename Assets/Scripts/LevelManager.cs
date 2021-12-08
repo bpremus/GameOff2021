@@ -41,10 +41,6 @@ public class LevelManager : MonoBehaviour
     {
         RunLevel();
     }
-
-        if (_debugCheats) DebugCheats();
-
-    }
     private void DebugCheats()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
