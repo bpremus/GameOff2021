@@ -12,7 +12,7 @@ public class UIController : MonoBehaviour
     private BlurController blurController;
     private PopupsHandler popupsHandler;
     [HideInInspector] public OverlayHandler overlayHandler;
-    private UIBuildMenu uiBuildMenu;
+    [SerializeField] private UIBuildMenu uiBuildMenu;
     public static UIController instance;
 
     public enum UIElements { none, build_corridor, build_harvester, build_salvage, build_war_room,
@@ -21,8 +21,15 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private Card_BuildMenu[] menu_cards;
 
+
+    public void RestrictBuilds(List<int> restrictedBuilds)
+    {
+        uiBuildMenu.RestrictBuilds(restrictedBuilds); //here just pass it over
+    }
+
     public void EnableUIElement(UIElements ui_elements)
     {
+
         if (menu_cards.Length == 0)
             menu_cards = buildMenu.GetComponentsInChildren<Card_BuildMenu>();
 
@@ -76,7 +83,6 @@ public class UIController : MonoBehaviour
         blurController = GetComponent<BlurController>();
         popupsHandler = GetComponent<PopupsHandler>();
         overlayHandler = GetComponent<OverlayHandler>();
-        uiBuildMenu = GetComponent<UIBuildMenu>();
         if (mainCanvas == null) Debug.LogError("MAIN CANVAS IS NOT ASSIGNED IN UICONTROLER");
 
     }
@@ -149,7 +155,7 @@ public class UIController : MonoBehaviour
         //ask game/build manager if player can build currently selected room (id of room)
 
         //then call Build_CanBuildRoom from build manager with either true or false
-        if (BuildManager.Instance.CanBuildRoom(roomID))
+        if (BuildManager.Instance.TryBuild(roomID))
         {
             UI_SetBuildMode(true);
             GhostRoomDisplayer.instance.DisplayGhostRoom(roomID);

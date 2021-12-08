@@ -61,7 +61,7 @@ public class BuildManager : MonoBehaviour
 
         if (wood >= roomCost[0] && food >= roomCost[1])
         {
-            CellSelectProto.Instance.SetBuildID(_roomInd);
+            
             return true;
         }
         else
@@ -70,7 +70,12 @@ public class BuildManager : MonoBehaviour
         }
 
 
-    } 
+    }
+    public bool TryBuild(int _roomInd)
+    {
+        if(CanBuildRoom(_roomInd)) CellSelectProto.Instance.SetBuildID(_roomInd);
+        return CanBuildRoom(_roomInd);
+    }
     public void CreateNewRoom(int roomInd)
     {
         if (roomInd > room_prefabs.Length || roomInd < 0) { Debug.LogError("Room id with" + roomInd + " does not exists"); return; }

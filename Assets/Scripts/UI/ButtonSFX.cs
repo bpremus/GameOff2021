@@ -8,7 +8,7 @@ public class ButtonSFX : MonoBehaviour
     public void onClick()
     {
 
-   
+        FMODUnity.RuntimeManager.PlayOneShotAttached("event:/UI/Button_Press_Default", gameObject);
 
     }
 

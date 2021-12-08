@@ -91,7 +91,7 @@ public class Room_UI : MonoBehaviour
         else if(text == "WarRoom(Clone)") text = "Barracks";
         else if(text == "HarversterRoom(Clone)") text = "Harvester";
         else if(text == "QueenRoom(Clone)") text = "Hatchery";
-        else if(text == "HiveRoom(Clone)") text = "Queen";
+        else if(text == "Queen HiveRoom(Clone)") text = "Queen";
         else text = "Room";
         room_name.text = text;
         SetHeaderColor();

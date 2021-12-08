@@ -4,9 +4,17 @@ using UnityEngine;
 
 public class TutorialLevel : CoreLevel
 {
+
+
     [SerializeField] int food_objective = 100;
     [SerializeField] int wood_objective = 10;
+    [SerializeField] private List<int> restrictedBuilds;
 
+
+    private void Awake()
+    {
+       
+    }
     public override void SetGrid() {
         Debug.Log("tutorial started");
 
@@ -37,23 +45,64 @@ public class TutorialLevel : CoreLevel
     public override void SetAvialableUnits() { }
 
     // limit ui elements user can click
+
+    /// <summary>
+    /// 
+    /// Deezaath: 
+    ///      restrictedRoomList contains all restricted rooms that player cant build
+    ///      you can use  UnlockRestrictedRoom and RestrictRoomBuild to  unlock/lock room building
+    ///      or switch states using SwitchRoomBuildRestriction
+    ///      
+    /// </summary>
     public override void SetAvialableRooms() 
     {
-        // disable build elements 
         levelManager.uiController.DisableBuildCards();
         levelManager.uiController.EnableUIElement(UIController.UIElements.build_corridor);
         levelManager.uiController.EnableUIElement(UIController.UIElements.build_harvester);
-
-        // disable all room buttons 
-        // enable queen create drone 
-        // enable queen send on task 
-
-        // disable all drone ui 
-        // enable assign bug 
-        // enable fallow 
-
     }
+    public override void UnlockRestrictedRoom(int roomid)
+    {
 
+        if (!IsRoomBuildLocked(roomid))
+        {
+            restrictedBuilds.Remove(roomid);
+            Debug.Log(roomid + "'s room is now unlocked");
+        }
+        else
+        {
+            Debug.LogWarning("Room "+ roomid+" is already unlocked");
+        }
+
+        SetAvialableRooms();
+      
+    }
+    public override void RestrictRoomBuild(int roomid)
+    {
+        if (IsRoomBuildLocked(roomid)) return;
+
+        restrictedBuilds.Add(roomid);
+        SetAvialableRooms();
+        Debug.Log(roomid + "'s room is now locked");
+    }
+    public override void SwitchRoomBuildRestriction(int roomid)
+    {
+        if (IsRoomBuildLocked(roomid))
+        {
+            restrictedBuilds.Remove(roomid);
+            Debug.Log(roomid + "'s room is now unlocked");
+        }
+        else
+        {
+            restrictedBuilds.Add(roomid);
+            Debug.Log(roomid + "'s room is now locked");
+        }
+        SetAvialableRooms();
+    }
+    private bool IsRoomBuildLocked(int roomid)
+    {
+        if (restrictedBuilds.Contains(roomid)) return true;
+        return false;
+    }
     // if goal is completed (x food, y wood) go to next level
     public override bool IsTaskCompleted() {
 

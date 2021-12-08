@@ -155,7 +155,6 @@ public class CameraController : MonoBehaviour
         m_Transform.position = hc.transform.position;
 
     }
-
     public bool IsDragging()
     {
         return isDragging;
