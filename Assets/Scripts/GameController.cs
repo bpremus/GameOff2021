@@ -237,15 +237,25 @@ public class GameController : MonoBehaviour
     // Events 
     // ------------------------------
 
+    private FMOD.Studio.EventInstance DayAmbience;
+
+    private FMOD.Studio.EventInstance NightAmbience;
+
     public void OnDayStart() 
     {
-
+        DayAmbience = FMODUnity.RuntimeManager.CreateInstance("event:/Ambience/Ambience_Day");
+        DayAmbience.start();
+        NightAmbience.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        NightAmbience.release();
 
         day_count++;
     }
     public void OnNightStart()
     {
-
+        NightAmbience = FMODUnity.RuntimeManager.CreateInstance("event:/Ambience/Ambience_Night");
+        NightAmbience.start();
+        DayAmbience.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        DayAmbience.release();
     }
     public void OnAttackStart()
     { 

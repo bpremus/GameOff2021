@@ -18,6 +18,7 @@ public class CameraController : MonoBehaviour
     public bool useKeyboardZooming = true;
     public bool useScrollwheelZooming = true;
     public bool useRightMouseButtonToDrag = false;
+    
 
     #region Movement
     [Header("Movement")]
@@ -136,7 +137,7 @@ public class CameraController : MonoBehaviour
       CameraUpdate();
         float y = transform.position.y;
 
-
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Camera_Y", y);
     }
 
     #endregion
