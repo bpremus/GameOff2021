@@ -371,6 +371,7 @@ public class HiveGenerator : MonoBehaviour
                 cm.transform.SetParent(gs.transform);
                 gs.cell_mesh = cm;
 
+                gs.UpdateColors();
             }
         }
     }

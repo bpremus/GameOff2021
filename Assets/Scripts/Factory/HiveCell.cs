@@ -9,7 +9,6 @@ public class HiveCell : MonoBehaviour
     [SerializeField] protected CoreRoom childRoom;
     [SerializeField] public CellMesh cell_mesh;
 
-
     public enum Cell_state { none, disabled, enabled };
     public Cell_state cell_state = Cell_state.none;
 
@@ -25,7 +24,6 @@ public class HiveCell : MonoBehaviour
             Color cell_color = new Color(r, g, b);
             block.SetColor("_baseColor", cell_color);
             renderer.SetPropertyBlock(block);
-
         }
     }
 
@@ -43,9 +41,8 @@ public class HiveCell : MonoBehaviour
     }
 
     // -----------------------------------------------------------------------
-
-
     public bool is_static_cell = false;
+
     public void SetNode(int x, int y)
     {
         // cell placement and pathfinding 
@@ -63,7 +60,9 @@ public class HiveCell : MonoBehaviour
         // set name 
         SetTileName();
     }
+
     Queue<CoreBug> bugs_to_assign = new Queue<CoreBug>();
+
     public bool AssignDrone(CoreBug bug)
     {
         // Debug.Log("assinging a bug to a new room");
@@ -75,11 +74,13 @@ public class HiveCell : MonoBehaviour
     {
         return GetMaxAvailableSlots() - GetLeftAvaiableSlots();
     }
+
     public int GetMaxAvailableSlots()
     {
        
         return childRoom.GetMAxAssignUnits();
     }
+
     public int GetLeftAvaiableSlots()
     {
         return childRoom.GetAssignedBugs().Count;
@@ -143,6 +144,7 @@ public class HiveCell : MonoBehaviour
 
     // cell still has a room that inside have a room mesh 
     public HiveGenerator hiveGenerator = null;
+
     public HiveGenerator SetGenerator
     {
         set => hiveGenerator = value;
@@ -358,12 +360,21 @@ public class HiveCell : MonoBehaviour
     public int mesh_index = -1;
     int[] connections = new int[4] { -1, -1, -1, -1 };
 
+    public bool IsBuildRestricted = false;
+
+    public void UpdateColors()
+    {
+        if (IsBuildRestricted == true)
+            SetMeshColor(0.6f, 0.6f, 0.6f);
+        else
+            ResetMeshColor();
+    }
+
     public void SetConnection(int[] connections)
     {
         this.connections = connections;
     }
 
- 
     public int GetConnectionInDirection(int index)
     {
         if (neighbour_cells[index] != null)
@@ -378,7 +389,6 @@ public class HiveCell : MonoBehaviour
     }
 
     #endregion
-
     // Everything regarding pathfinding 
     #region path_finding 
 
@@ -422,7 +432,6 @@ public class HiveCell : MonoBehaviour
 
         return list;
     }
-
 
     #endregion
 }

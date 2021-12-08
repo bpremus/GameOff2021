@@ -73,7 +73,18 @@ public class ArtPrefabsInstance : MonoBehaviour
         return null;
     }
 
-    public void EvolveBug(CoreBug bug, int prefab_index)
+
+    public void EvolveToLarvaFirst(CoreBug bug, int prefab_index)
+    {
+        LarvaEvolve larva = EvolveBug(bug, 8).GetComponent<LarvaEvolve>();
+        if (larva)
+        {
+            larva.prefab_index = prefab_index;
+            larva.transform.rotation = Quaternion.Euler(-90, 90, 90);
+        }
+    }
+
+    public CoreBug EvolveBug(CoreBug bug, int prefab_index)
     {
         // detach bug from rooms 
         HiveCell cell = bug.asigned_cell;
@@ -96,7 +107,10 @@ public class ArtPrefabsInstance : MonoBehaviour
             SetBugName(evolved_bug);
 
             Destroy(bug.gameObject);
+
+            return evolved_bug;
         }
+        return null;
     }
 
     public void SetBugName(CoreBug bug)

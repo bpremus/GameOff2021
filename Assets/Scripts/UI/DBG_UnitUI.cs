@@ -187,7 +187,7 @@ public class DBG_UnitUI : MonoBehaviour
         if (bug.bug_evolution == CoreBug.BugEvolution.drone)
         {
             if (GameController.Instance.EvolveBug(CoreBug.BugEvolution.warrior))
-                ArtPrefabsInstance.Instance.EvolveBug(bug, 3); // => drone to warrior bug
+                ArtPrefabsInstance.Instance.EvolveToLarvaFirst(bug, 3); // => drone to warrior bug
             // or drone to super drone 
            
         }

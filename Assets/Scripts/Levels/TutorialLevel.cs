@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class TutorialLevel : CoreLevel
 {
-
-
     [SerializeField] int food_objective = 100;
     [SerializeField] int wood_objective = 10;
 
@@ -41,9 +39,19 @@ public class TutorialLevel : CoreLevel
     // limit ui elements user can click
     public override void SetAvialableRooms() 
     {
+        // disable build elements 
         levelManager.uiController.DisableBuildCards();
         levelManager.uiController.EnableUIElement(UIController.UIElements.build_corridor);
         levelManager.uiController.EnableUIElement(UIController.UIElements.build_harvester);
+
+        // disable all room buttons 
+        // enable queen create drone 
+        // enable queen send on task 
+
+        // disable all drone ui 
+        // enable assign bug 
+        // enable fallow 
+
     }
 
     // if goal is completed (x food, y wood) go to next level

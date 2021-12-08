@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-
     [SerializeField]
     HiveGenerator hive_generator;
 
@@ -31,6 +30,7 @@ public class LevelManager : MonoBehaviour
             if (curent_level.IsTaskCompleted() == true)
             {
                 level_index++;
+
                 curent_level = game_levels[level_index];
                 curent_level.StartLevel(this);
             }

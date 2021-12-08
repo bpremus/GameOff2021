@@ -54,13 +54,16 @@ public class CoreLevel : MonoBehaviour
                     int jj = hc.x;
                     if (Mathf.Abs(i - jj) < offset)
                     {
-                        cell.ResetMeshColor();
+                        cell.IsBuildRestricted = false;
                         continue;
                     }
-                    cell.SetMeshColor(0.6f, 0.6f, 0.6f);
+                    cell.IsBuildRestricted = true;
                 }
             }
         }
+
+       levelManager.hiveGenerator.RedrawGrid();
+
     }
 
 

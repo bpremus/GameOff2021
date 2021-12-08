@@ -362,15 +362,10 @@ public class QueenRoom : HiveRoom
         }
     }
 
-   
-
     public override void OnRoomSelect()
     {
         Debug.Log(this.name + " selected");
 
 
     }
-
-
-
 }
