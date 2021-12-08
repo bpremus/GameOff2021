@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-
+    [SerializeField] private bool _debugCheats;
     [SerializeField]
     HiveGenerator hive_generator;
 
@@ -40,8 +40,38 @@ public class LevelManager : MonoBehaviour
     private void Update()
     {
         RunLevel();
-    }
 
+        if (_debugCheats) DebugCheats();
+
+    }
+    private void DebugCheats()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            curent_level.SwitchRoomBuildRestriction(0);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            curent_level.SwitchRoomBuildRestriction(1);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            curent_level.SwitchRoomBuildRestriction(2);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            curent_level.SwitchRoomBuildRestriction(3);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            curent_level.SwitchRoomBuildRestriction(4);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            GameController.Instance.SetResources(GameController.Instance.GetFood() + 10, GameController.Instance.GetWood() + 10);
+            Debug.Log("Added 10 food and 10 wood");
+        }
+    }
     public HiveGenerator hiveGenerator { get => hive_generator; }
     public UIController uiController { get => ui_controller; }
 
