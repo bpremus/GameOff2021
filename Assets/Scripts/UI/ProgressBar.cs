@@ -7,9 +7,11 @@ public class ProgressBar : MonoBehaviour
 {
     [SerializeField] Scrollbar progress_bar;
 
+    Vector3 eulter_angles = Vector3.zero;
     public void Start()
     {
         HideProgressBar();
+        eulter_angles = transform.eulerAngles;
     }
 
     public void SetProgress(float percent)
@@ -22,9 +24,15 @@ public class ProgressBar : MonoBehaviour
     {
         progress_bar.gameObject.SetActive(false);
     }
+    
+  
 
-    public void Update()
+    public void LateUpdate()
     {
-        transform.rotation = transform.parent.rotation;
+        eulter_angles.y = transform.eulerAngles.y;
+        transform.eulerAngles = eulter_angles;
+        Vector3 pos = transform.position;
+        pos.x = transform.parent.position.x;
+        transform.position = pos;
     }
 }
