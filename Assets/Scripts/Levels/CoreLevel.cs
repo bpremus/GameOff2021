@@ -19,12 +19,16 @@ public class CoreLevel : MonoBehaviour
 
     public virtual void SetAvialableRooms() { }
 
+    public virtual void UnlockRestrictedRoom(int roomID) { }
+
+    public virtual void RestrictRoomBuild(int roomID) { }
+    public virtual void SwitchRoomBuildRestriction(int roomID) { }
 
     // control move to next level
     public virtual bool IsTaskCompleted() { return false; }
 
     // control threats on each level
-    public virtual void SpawnTreat() { }
+    public virtual void SpawnThread() { }
 
     public void StartLevel(LevelManager manager)
     {
@@ -35,7 +39,7 @@ public class CoreLevel : MonoBehaviour
     }
     public void RunLevel()
     {
-        SpawnTreat();
+        SpawnThread();
     }
 
     protected void DrawMask(int offset)

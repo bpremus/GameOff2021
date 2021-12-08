@@ -251,7 +251,7 @@ public class GameController : MonoBehaviour
     { 
     
     }
-    public void SetResrouces(int food, int wood)
+    public void SetResources(int food, int wood)
     {
         this.food = food;
         this.wood = wood;
@@ -385,6 +385,7 @@ public class GameController : MonoBehaviour
         TimeCycle();
         dayDuration = GetTimePercent();
         ConsumeFoodThick();
+
     }
 
     // Protected
