@@ -28,7 +28,9 @@ public class GameController : MonoBehaviour
     [SerializeField]
     int day_count = 0;
 
-
+    private int lastFoodValue;
+    private int lastWoodValue;
+    private int lastPopulationValue;
     public void ResetGame()
     {
         food = 20;
@@ -97,6 +99,45 @@ public class GameController : MonoBehaviour
         food += (int)(((float)(cost[0])) *0.3f);
         wood += (int)(((float)(cost[1])) *0.3f);
         return true;
+    }
+    public bool OnFoodValueChanged()
+    {
+        if(lastFoodValue != food)
+        {
+            int difference = food - lastFoodValue;
+            lastFoodValue = food;
+            //here we can play animation of food added (+difference)
+            Debug.Log(" [ "+difference + " ] FOOD");
+            ValueChangedDisplay.Instance.OnNewValue(difference, 0);
+            return true;
+        }
+        return false;
+    }
+    public bool OnWoodValueChanged()
+    {
+        if (lastWoodValue != wood)
+        {
+            int difference = wood - lastWoodValue;
+            lastWoodValue = wood;
+            //here we can play animation of wood added (+difference)
+            Debug.Log(" [ " + difference + " ] WOOD");
+            ValueChangedDisplay.Instance.OnNewValue(difference, 1);
+
+            return true;
+        }
+        return false;
+    }
+    public bool OnPopulationValueChanged()
+    {
+        if(lastPopulationValue != population)
+        {
+            int difference = population - lastPopulationValue;
+            lastPopulationValue = population;
+            Debug.Log(" [ " + difference + " ] POPULATION");
+            ValueChangedDisplay.Instance.OnNewValue(difference, 2);
+            return true;
+        }
+        return false;
     }
     public int[] GetRoomCost(int roomIndex)
     {
@@ -263,8 +304,6 @@ public class GameController : MonoBehaviour
     {
         food += bug_return_resources[0];
         wood += bug_return_resources[1];
-
-       // UIController.instance. 
     }
     public void OnStolenFood()
     {
@@ -385,7 +424,9 @@ public class GameController : MonoBehaviour
         TimeCycle();
         dayDuration = GetTimePercent();
         ConsumeFoodThick();
-
+        OnFoodValueChanged();
+        OnWoodValueChanged();
+        OnPopulationValueChanged();
     }
 
     // Protected

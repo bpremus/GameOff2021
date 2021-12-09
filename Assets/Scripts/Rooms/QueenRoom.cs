@@ -150,12 +150,12 @@ public class QueenRoom : HiveRoom
 
     public void OnDroneSpawn()
     {
-        ActionLogger.Instance.AddLog("A new worker has been born", 1);
+        ActionLogger.Instance.AddLog("A new worker has been born, yay!", 1);
     }
 
     public void OnMaxDronesInRoom()
     {
-        ActionLogger.Instance.AddLog("You have reached maximum units in Queen room", 2);
+        ActionLogger.Instance.AddLog("You have reached maximum units in Queen room!", 2);
     }
 
     public void OnNotEnoughResrouces()
@@ -167,9 +167,7 @@ public class QueenRoom : HiveRoom
     {
         if (bug.harvest_object == null) return;
 
-        Debug.Log("bug has reached destination");
-        GameLog.Instance.WriteLine(bug.name + " has return");
-        ActionLogger.Instance.AddLog(bug.name + " has return",0);
+        ActionLogger.Instance.AddLog(bug.name + " has return to harvester",0);
 
         Destroy(bug.harvest_object);
         bug.harvest_object = null;
@@ -225,8 +223,7 @@ public class QueenRoom : HiveRoom
             }
 
             bugs_to_spawn.Enqueue(0); // drone 
-            GameLog.Instance.WriteLine("Queen consumed 1 food to produce Drone " + bugs_to_spawn.Count + " of " + max_asigned_units);
-            ActionLogger.Instance.AddLog("Queen consumed 1 food to produce Drone " + bugs_to_spawn.Count + " of " + max_asigned_units, 0);
+            ActionLogger.Instance.AddLog("Producing a worker:  " + bugs_to_spawn.Count + " of " + max_asigned_units, 0);
             return true;
         }
 

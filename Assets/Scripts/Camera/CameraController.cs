@@ -79,6 +79,7 @@ public class CameraController : MonoBehaviour
     public string zoomingAxis = "Mouse ScrollWheel";
 
     private bool isDragging = false;
+    public void SetDraggingState(bool state) { isDragging = state; }
     private Vector2 KeyboardInput
     {
         // get { return useKeyboardInput ? new Vector2(Input.GetAxis(horizontalAxis), Input.GetAxis(verticalAxis)) : Vector2.zero; }

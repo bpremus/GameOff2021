@@ -50,27 +50,34 @@ public class LevelManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             curent_level.SwitchRoomBuildRestriction(0);
+            ActionLogger.Instance.AddLog("[CHEAT] Switched restriction of roomID 0",2);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             curent_level.SwitchRoomBuildRestriction(1);
+            ActionLogger.Instance.AddLog("[CHEAT] Switched restriction of roomID 1",2);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             curent_level.SwitchRoomBuildRestriction(2);
+            ActionLogger.Instance.AddLog("[CHEAT] Switched restriction of roomID 2",2);
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             curent_level.SwitchRoomBuildRestriction(3);
+            ActionLogger.Instance.AddLog("[CHEAT] Switched restriction of roomID 3",2);
         }
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
             curent_level.SwitchRoomBuildRestriction(4);
+            ActionLogger.Instance.AddLog("[CHEAT] Switched restriction of roomID 4",2);
         }
         if (Input.GetKeyDown(KeyCode.Alpha6))
         {
-            GameController.Instance.SetResources(GameController.Instance.GetFood() + 10, GameController.Instance.GetWood() + 10);
-            Debug.Log("Added 10 food and 10 wood");
+            int foodtoAdd = 10;
+            int woodtoAdd = 5;
+            GameController.Instance.SetResources(GameController.Instance.GetFood() + foodtoAdd, GameController.Instance.GetWood() + woodtoAdd);
+            ActionLogger.Instance.AddLog("[CHEAT] Added " + foodtoAdd + " food and " + woodtoAdd + " wood",2);
         }
     }
     public HiveGenerator hiveGenerator { get => hive_generator; }

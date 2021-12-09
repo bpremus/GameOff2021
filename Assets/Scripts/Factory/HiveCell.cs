@@ -274,7 +274,7 @@ public class HiveCell : MonoBehaviour
 
     public bool CanDestroyRoom()
     {
-        return true;
+
 
         if (childRoom)
         {
@@ -285,6 +285,10 @@ public class HiveCell : MonoBehaviour
                 return false;
             }
         }
+
+
+        return true;  // not working (?)
+
 
         walkable = 0;
         HiveCell entrace = hiveGenerator.hive_entrance[0];

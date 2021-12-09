@@ -23,7 +23,7 @@ public class Card_BuildMenu : MonoBehaviour,IPointerEnterHandler,IPointerExitHan
     private LeanTweenType ease = LeanTweenType.easeSpring;
 
     private LTDescr scaleup;
-
+    public bool isRestricted() { return restricted; }
     public int getID() { return roomId; }
     public void OnPointerEnter(PointerEventData eventData)
     {

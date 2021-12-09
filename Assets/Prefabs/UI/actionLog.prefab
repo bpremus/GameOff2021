@@ -60,12 +60,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 699f29b611e724242804fe330f531424, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enableMovingUp: 0
   easeType: 32
   scaleVector: {x: 1, y: 1, z: 1}
   timeToDestroy: 5
   scaleTime: 1
   appearTime: 0.6
   disapearTime: 0.5
+  offsetscaleTime: 0.15
+  timeTostartFade: 1
+  moveTo_f: 0
+  moveTo_Time: 0
 --- !u!114 &3419871213698554261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,7 +118,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
+  m_fontSize: 30
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -149,7 +154,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 2.1314392, y: 0, z: -1.4755859, w: 0}
+  m_margin: {x: 2.1314392, y: 0, z: -204.23059, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

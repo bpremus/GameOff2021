@@ -47,29 +47,7 @@ public class BuildManager : MonoBehaviour
 
     public bool CanBuildRoom(int _roomInd)
     {
-      if (_roomInd > roomsIds.Length){ Debug.LogError("room with index"+ _roomInd +" does not exists");return false; }
-      int food = GameController.Instance.GetFood();
-      int wood = GameController.Instance.GetWood();
-
-      int[] roomCost = GameController.Instance.GetRoomCost(_roomInd);
-
-        // case : not enough resources
-
-        //return false
-
-        //case : enough, send info back to uicontroller to display ghost room of roomid room
-
-        if (wood >= roomCost[0] && food >= roomCost[1])
-        {
-            
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-
-
+        return  GameController.Instance.DoWeHaveEnoughResources(GameController.Instance.GetRoomCost(_roomInd));
     }
     public bool TryBuild(int _roomInd)
     {

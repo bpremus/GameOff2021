@@ -119,7 +119,7 @@ public class ArtPrefabsInstance : MonoBehaviour
         string bug_name = bug.name;
         if (bug.bug_evolution == CoreBug.BugEvolution.drone)
         {
-            bug_name = "Drone";
+            bug_name = "Worker";
         }
         else if (bug.bug_evolution == CoreBug.BugEvolution.warrior)
         {

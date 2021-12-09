@@ -22,11 +22,14 @@ public class UIBuildMenu : MonoBehaviour
 
         CheckIfCanAfford();
     }
-    private void CheckIfCanAfford()
+    public void CheckIfCanAfford()
     {
+        Debug.Log("Updating if player can afford to buy ");
         foreach (GameObject room in roomsPanels)
         {
+
             Card_BuildMenu buildCard = room.GetComponent<Card_BuildMenu>();
+            if (buildCard.isRestricted()) break;
             buildCard.SetAvailable(BuildManager.Instance.CanBuildRoom(buildCard.getID()));
         }
     }
@@ -50,7 +53,6 @@ public class UIBuildMenu : MonoBehaviour
 
     private void Update()
     {
-        CheckIfCanAfford();
         if (awakeTime > 2f && canvasGroup.alpha != 1) canvasGroup.alpha = 1;
         awakeTime += Time.deltaTime;
     }
@@ -68,6 +70,7 @@ public class UIBuildMenu : MonoBehaviour
     {
         // LeanTween.alphaCanvas(canvasGroup, 1, fadeTime).setEase(ease);
         canvasGroup.alpha = 1;
+        CheckIfCanAfford();
     }
     public void HideWindow()
     {
