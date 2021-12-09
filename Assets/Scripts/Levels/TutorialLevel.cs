@@ -10,7 +10,10 @@ public class TutorialLevel : CoreLevel
     [SerializeField] int wood_objective = 10;
     [SerializeField] private List<int> restrictedBuilds;
 
-
+    public List<int> GetRestrictedList()
+    {
+        return restrictedBuilds;
+    }
     private void Awake()
     {
        
@@ -41,24 +44,18 @@ public class TutorialLevel : CoreLevel
         cam_controller.SetFocus(hc);
     }
 
+
+
     // limit unit evolution 
     public override void SetAvialableUnits() { }
 
-    // limit ui elements user can click
-
-    /// <summary>
-    /// 
-    /// Deezaath: 
-    ///      restrictedRoomList contains all restricted rooms that player cant build
-    ///      you can use  UnlockRestrictedRoom and RestrictRoomBuild to  unlock/lock room building
-    ///      or switch states using SwitchRoomBuildRestriction
-    ///      
-    /// </summary>
+    #region RoomRestrictions
     public override void SetAvialableRooms() 
     {
-        levelManager.uiController.DisableBuildCards();
-        levelManager.uiController.EnableUIElement(UIController.UIElements.build_corridor);
-        levelManager.uiController.EnableUIElement(UIController.UIElements.build_harvester);
+        levelManager.uiController.RestrictBuilds(restrictedBuilds); // <- this solution restricts rooms instead of hiding them
+     //   levelManager.uiController.DisableBuildCards();
+     //   levelManager.uiController.EnableUIElement(UIController.UIElements.build_corridor);
+     //   levelManager.uiController.EnableUIElement(UIController.UIElements.build_harvester);
     }
     public override void UnlockRestrictedRoom(int roomid)
     {
@@ -103,6 +100,7 @@ public class TutorialLevel : CoreLevel
         if (restrictedBuilds.Contains(roomid)) return true;
         return false;
     }
+    #endregion
     // if goal is completed (x food, y wood) go to next level
     public override bool IsTaskCompleted() {
 

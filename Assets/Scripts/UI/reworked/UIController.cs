@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,6 @@ public class UIController : MonoBehaviour
     private BlurController blurController;
     private PopupsHandler popupsHandler;
     [HideInInspector] public OverlayHandler overlayHandler;
-    [SerializeField] private UIBuildMenu uiBuildMenu;
     public static UIController instance;
 
     public enum UIElements { none, build_corridor, build_harvester, build_salvage, build_war_room,
@@ -24,7 +24,7 @@ public class UIController : MonoBehaviour
 
     public void RestrictBuilds(List<int> restrictedBuilds)
     {
-        uiBuildMenu.RestrictBuilds(restrictedBuilds); //here just pass it over
+        buildMenu.GetComponent<UIBuildMenu>().RestrictBuilds(restrictedBuilds); //here just pass it over
     }
 
     public void EnableUIElement(UIElements ui_elements)
@@ -106,14 +106,28 @@ public class UIController : MonoBehaviour
     public bool isIndicatorActive() { return overlayHandler.isIndicatorActive(); }
     private void Update()
     {
-        if (Camera.main.gameObject.GetComponent<CameraController>().FollowingTarget) uiState = State.Following;
 
-        if(currentState != uiState)
+        //   if (GameController.Instance.OnFoodValueChanged()) { buildMenu.GetComponent<UIBuildMenu>().CheckIfCanAfford(); }   //for some reason function gets called but its not executed(?) 
+        //using this instead now
+        if (isBuildMenuActive()) { buildMenu.GetComponent<UIBuildMenu>().CheckIfCanAfford(); } //very inefficient way of doing this
+
+
+        if (Camera.main.gameObject.GetComponent<CameraController>().FollowingTarget) uiState = State.Following;
+        if (isBuildMenuActive() || isSettingsMenuActive()) Camera.main.GetComponent<CameraController>().SetDraggingState(false);
+
+
+        ControlUIStates();
+
+    }
+
+    private void ControlUIStates()
+    {
+        if (currentState != uiState)
         {
             switch (uiState)
             {
                 case State.Default:
-                   overlayHandler.HideIndicator();
+                    overlayHandler.HideIndicator();
                     CellSelectProto.Instance.ClearSelectionState();
                     GhostRoomDisplayer.instance.HideGhostRoom();
                     overlayHandler.BuildingMode(false);
@@ -135,6 +149,7 @@ public class UIController : MonoBehaviour
 
         currentState = uiState;
     }
+
     public void CreatePopup(int id, string header = default, string content = default,GameObject callbackObj = null) => popupsHandler.CreateNewPopup(id,mainCanvas,header,content,callbackObj);
     public void OpenBuildMenu() => overlayHandler.OpenBuildMenu();
     public void CloseBuildMenu() => overlayHandler.CloseBuildMenu();

@@ -31,7 +31,7 @@ public class GameLog : MonoBehaviour
     float _t = 0;
     protected void Update()
     {
-        _t += Time.deltaTime;
+      //  _t += Time.deltaTime;
         Writer();
 
         if (_t > 3)

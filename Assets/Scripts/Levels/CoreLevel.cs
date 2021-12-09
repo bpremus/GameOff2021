@@ -29,7 +29,6 @@ public class CoreLevel : MonoBehaviour
 
     // control threats on each level
     public virtual void SpawnThread() { }
-
     public void StartLevel(LevelManager manager)
     {
         levelManager = manager;
