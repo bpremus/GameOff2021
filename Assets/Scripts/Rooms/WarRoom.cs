@@ -44,7 +44,7 @@ public class WarRoom : HiveRoom
     public void OnBugReachHomeCell(CoreBug bug)
     {
         Debug.Log("bugs returned home");
-        GameController.Instance.OnBrigResources();
+        GameController.Instance.OnBringResources();
     }
 
     float _spread_timer = 0;

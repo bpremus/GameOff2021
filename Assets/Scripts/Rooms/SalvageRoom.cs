@@ -50,7 +50,7 @@ public class SalvageRoom : HiveRoom
     {
         Debug.Log("bugs returned home");
 
-        GameController.Instance.OnBrigResources();
+        GameController.Instance.OnBringResources();
     }
 
 

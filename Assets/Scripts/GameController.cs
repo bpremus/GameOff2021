@@ -104,19 +104,14 @@ public class GameController : MonoBehaviour
         {
             case 0:
                 return room_corridor_cost;
-                break;
             case 1:
                 return room_salvage_cost;
-                break;
             case 2:
                 return room_war_cost;
-                break;
             case 3:
                 return room_harvester_cost;
-                break;
             case 4:
                 return room_queen_cost;
-                break;
             default:
                 return room_corridor_cost;
         }
@@ -129,25 +124,18 @@ public class GameController : MonoBehaviour
         {
             case CoreBug.BugEvolution.drone:
                 return evolve_drone;
-                break;
             case CoreBug.BugEvolution.super_drone:
                 return evolve_super_drone;
-                break;
             case CoreBug.BugEvolution.warrior:
                 return evolve_warrior;
-                break;
             case CoreBug.BugEvolution.claw:
                 return evolve_claw;
-                break;
             case CoreBug.BugEvolution.range:
                 return evolve_slow;
-                break;
             case CoreBug.BugEvolution.cc_bug:
                 return evolve_spike;
-                break;
             default:
                 return evolve_drone;
-                break;
         }
 
     } 
@@ -271,10 +259,12 @@ public class GameController : MonoBehaviour
     {
         this.food -= food;
     }
-    public void OnBrigResources()
+    public void OnBringResources()
     {
         food += bug_return_resources[0];
         wood += bug_return_resources[1];
+
+       // UIController.instance. 
     }
     public void OnStolenFood()
     {

@@ -16,7 +16,10 @@ public class LevelManager : MonoBehaviour
 
     CoreLevel curent_level = null;
     private int level_index = 0;
-
+    private void Start()
+    {
+        if (_debugCheats) { Debug.LogWarning("CHEATS ARE ENABLED!"); }
+    }
     private void RunLevel()
     {
         if (curent_level == null)
@@ -40,6 +43,7 @@ public class LevelManager : MonoBehaviour
     private void Update()
     {
         RunLevel();
+        if (_debugCheats) DebugCheats();
     }
     private void DebugCheats()
     {

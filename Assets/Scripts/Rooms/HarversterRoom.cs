@@ -56,7 +56,7 @@ public class HarversterRoom : HiveRoom
     {
         Debug.Log("bugs returned home");
 
-        GameController.Instance.OnBrigResources();
+        GameController.Instance.OnBringResources();
     }
 
     public override void RecallBugs()

@@ -12,7 +12,6 @@ public class UIController : MonoBehaviour
     private BlurController blurController;
     private PopupsHandler popupsHandler;
     [HideInInspector] public OverlayHandler overlayHandler;
-    [SerializeField] private UIBuildMenu uiBuildMenu;
     public static UIController instance;
 
     public enum UIElements { none, build_corridor, build_harvester, build_salvage, build_war_room,
@@ -24,7 +23,7 @@ public class UIController : MonoBehaviour
 
     public void RestrictBuilds(List<int> restrictedBuilds)
     {
-        uiBuildMenu.RestrictBuilds(restrictedBuilds); //here just pass it over
+        buildMenu.GetComponent<UIBuildMenu>().RestrictBuilds(restrictedBuilds); //here just pass it over
     }
 
     public void EnableUIElement(UIElements ui_elements)

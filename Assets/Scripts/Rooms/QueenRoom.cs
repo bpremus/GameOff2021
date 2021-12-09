@@ -130,7 +130,7 @@ public class QueenRoom : HiveRoom
             cb.target = transform.position + move_to * 0.7f;
             cb.asigned_cell = this.parent_cell;
 
-            cb.name = "Drone"; // "b_" + name_index;
+            cb.name = "Worker"; // "b_" + name_index;
             name_index++;
 
             GameController.Instance.OnNewBug();
@@ -150,12 +150,12 @@ public class QueenRoom : HiveRoom
 
     public void OnDroneSpawn()
     {
-        GameLog.Instance.WriteLine("A new Drone has been born");
+        ActionLogger.Instance.AddLog("A new worker has been born", 1);
     }
 
     public void OnMaxDronesInRoom()
     {
-        GameLog.Instance.WriteLine("You have reached maximum units in Queen room");
+        ActionLogger.Instance.AddLog("You have reached maximum units in Queen room", 2);
     }
 
     public void OnNotEnoughResrouces()
@@ -169,6 +169,7 @@ public class QueenRoom : HiveRoom
 
         Debug.Log("bug has reached destination");
         GameLog.Instance.WriteLine(bug.name + " has return");
+        ActionLogger.Instance.AddLog(bug.name + " has return",0);
 
         Destroy(bug.harvest_object);
         bug.harvest_object = null;
@@ -196,13 +197,12 @@ public class QueenRoom : HiveRoom
 
     public void OnBugReachHomeCell(CoreBug bug)
     {
-        Debug.Log("bugs returned home");
-        GameController.Instance.OnBrigResources();
+        GameController.Instance.OnBringResources();
     }
 
     public void OnBugDepart(CoreBug bug)
     {
-        GameLog.Instance.WriteLine(bug.name + " is send to collect resurces");
+        ActionLogger.Instance.AddLog(bug.name + " is send to collect resources", 0);
     }
 
 
@@ -226,6 +226,7 @@ public class QueenRoom : HiveRoom
 
             bugs_to_spawn.Enqueue(0); // drone 
             GameLog.Instance.WriteLine("Queen consumed 1 food to produce Drone " + bugs_to_spawn.Count + " of " + max_asigned_units);
+            ActionLogger.Instance.AddLog("Queen consumed 1 food to produce Drone " + bugs_to_spawn.Count + " of " + max_asigned_units, 0);
             return true;
         }
 

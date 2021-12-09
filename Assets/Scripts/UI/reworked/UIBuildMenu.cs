@@ -32,7 +32,7 @@ public class UIBuildMenu : MonoBehaviour
     }
     public void RestrictBuilds(List<int> restrictedBuilds)
     {
-        
+        if (roomsPanels.Length < 1) Debug.LogError("No roomPanels assigned in inspector!!");
         foreach (GameObject room in roomsPanels)
         {
             Card_BuildMenu buildCard = room.GetComponent<Card_BuildMenu>();
