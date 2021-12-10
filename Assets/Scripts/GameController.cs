@@ -6,7 +6,42 @@ using UnityEngine;
 // [ExecuteInEditMode] <- turn on for running this in editor
 public class GameController : MonoBehaviour
 {
-    // Singleton class
+    // Save and Load 
+    // ----------------------------
+    [System.Serializable]
+    public class SaveGameController
+    {
+        public int  food;
+        public int  wood;
+        public int  population;
+        public bool isDay;
+        public int  day_count;
+    }
+
+    public SaveGameController GetSaveData()
+    {
+        SaveGameController data = new SaveGameController();
+        data.food = this.food;
+        data.wood = this.wood;
+        data.population = this.population;
+        data.isDay = this.isDay;
+        data.day_count = this.day_count;
+        return data;
+    }
+
+    public void SetSaveData(SaveGameController data)
+    {
+        this.food        = data.food;
+        this.wood        = data.wood;
+        this.population  = data.population;
+        this.isDay       = data.isDay;
+        this.day_count   = data.day_count;
+
+        // reset counters 
+        _t_day_duration = 0;
+        _food_t = 0;
+    }
+
 
     // Stats 
     // -----------------------------
@@ -17,7 +52,7 @@ public class GameController : MonoBehaviour
     [SerializeField]
     int population = 2;
 
-    // day and night cylces 
+    // day and night cycles 
     [SerializeField]
     float day_night_duration = 1;
     [SerializeField]
@@ -507,7 +542,7 @@ public class GameController : MonoBehaviour
 
 
 
-        //playerprefs inits
+        //player's inits
         PlayerPref.Instance.IncreaseGamesPlayed();
         PlayerPref.Instance.UpdatePlayerSoundSettings();
     }

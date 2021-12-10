@@ -490,7 +490,7 @@ public class CellSelectProto : MonoBehaviour
             }
 
             GameController.Instance.OnRooomBuild(context);
-            hc.BuildRoom();
+            //hc.BuildRoom();
             
 
         }

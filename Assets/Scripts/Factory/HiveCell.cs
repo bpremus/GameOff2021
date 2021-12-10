@@ -154,25 +154,22 @@ public class HiveCell : MonoBehaviour
     public virtual void OnRoomPlaced()
     {
         Debug.Log("Room has been built");
-
-  
     }
 
     public virtual void OnRoomDestroyed()
     {
         Debug.Log("Room has been destroyed");
-
-
     }
 
-    public void BuildRoom()
+ 
+    public void BuildEntrance()
     {
-       // Debug.Log("building room");
-        // room is just a rooridor or room layout mesh 
-        // we have some kind of room context 
-        // Queen room 
-        // harwaster room 
-        SetTileName();
+        cell_Type = CellMesh.Cell_type.entrance;
+        ArtPrefabsInstance art = ArtPrefabsInstance.Instance;
+        BuildRoom(ArtPrefabsInstance.Instance.RoomPrefabs[6]);
+        walkable = 1;
+        isCellEmpty = false;
+
         hiveGenerator.RefreshAllCells();
     }
 
@@ -318,12 +315,11 @@ public class HiveCell : MonoBehaviour
         return can_destroy;
     }
 
-
-    public void DestroyRoom()
+    public void DestroyRoom(bool force = false)
     {
         Debug.Log("Destroy room");
 
-        if (CanDestroyRoom() == false)
+        if (CanDestroyRoom() == false && force == false)
         {
             Debug.Log("Room cannot be destroyed");
             return;

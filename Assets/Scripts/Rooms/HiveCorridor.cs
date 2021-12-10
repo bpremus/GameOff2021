@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class HiveCorridor : HiveRoom
 {
-  
     public void GetBugsFromWarRoom()
     {
 
@@ -42,7 +41,6 @@ public class HiveCorridor : HiveRoom
         }
     }
 
-
     public void GuardRoom()
     {
         // keep in the room
@@ -67,7 +65,5 @@ public class HiveCorridor : HiveRoom
     public override void OnRoomSelect()
     {
         Debug.Log(this.name + " selected");
-
-
     }
 }

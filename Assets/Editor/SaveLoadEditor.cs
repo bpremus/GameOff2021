@@ -8,22 +8,22 @@ public class SaveLoadEditor : Editor
     {
         base.OnInspectorGUI();
 
-        if (GUILayout.Button("Restart game"))
-        {
-            SaveController save_controll = (SaveController)this.target;
-            save_controll.ResetGame();
-        }
-
         if (GUILayout.Button("Save game"))
         {
-            SaveController save_controll = (SaveController) this.target;
+            SaveController save_controll = (SaveController)this.target;
             save_controll.Save();
         }
 
         if (GUILayout.Button("Clear hive"))
         {
-            SaveController save_controll = (SaveController)this.target;
+            SaveController save_controll = (SaveController) this.target;
             save_controll.ClarHive();
+        }
+
+        if (GUILayout.Button("Continue game"))
+        {
+            SaveController save_controll = (SaveController)this.target;
+            save_controll.Continue();
         }
     }
 }

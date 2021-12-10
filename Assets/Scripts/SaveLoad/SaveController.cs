@@ -7,99 +7,69 @@ using UnityEngine;
 
 public class SaveController : MonoBehaviour
 {
-    [SerializeField]
-    HiveGenerator hiveGenerator;
+    [SerializeField] protected HiveGenerator hiveGenerator;
+    [SerializeField] protected GameController gameController;
+    [SerializeField] protected LevelManager levelManager;
 
-    [System.Serializable]
-    public class Drone_data
+    [SerializeField] protected string current_filename = "";
+
+    public void Save(string filename = "")
     {
-        public string name;
-        public int bug_type;
-        public float health;
-        public float damage;
-        public float speed;
-        public int bug_kill_count;
-        public int bug_task_count;
-        public int bug_base_level;
-        public bool sieged;
-        public int bug_task = 0;
-
-        public Drone_data(CoreBug bug)
-        {
-            this.name = bug.name;
-            this.bug_type = (int)bug.bug_evolution;
-            this.health = bug.health;
-            this.damage = bug.damage;
-            this.speed = bug.GetMoveSpeed();
-            this.bug_kill_count = bug.bug_kill_count;
-            this.bug_task_count = bug.bug_kill_count;
-            this.bug_base_level = bug.bug_base_level;
-            this.sieged = bug.GetSiegeState();
-            this.bug_task = (int)bug.bugTask;
-        }
+        Debug.Log("Saving game");
     }
 
-    [System.Serializable]
-    public class Cell_data
+    public void Load(string filename = "")
     {
-        public int room_type;
-        public int room_position_x;
-        public int room_position_y;
-        public int max_asisgn;
-        public int threat_cost;
-        public float room_max_range;
-        public Drone_data[] assigned_bugs;
-
-        public Cell_data(HiveCell cell)
-        {
-            CoreRoom room = cell.GetRoom();
-
-            room_type = GetRoomType(room);
-
-            room_position_x = cell.x;
-            room_position_y = cell.y;
-            max_asisgn = room.GetMAxAssignUnits();
-            room_max_range = room.GetRomRange();
-            threat_cost = cell.dCost;
-
-            List<CoreBug> bugs = room.GetAssignedBugs();
-            assigned_bugs = new Drone_data[bugs.Count];
-            for (int i = 0; i < bugs.Count; i++)
-            {
-                CoreBug b = bugs[i];
-                if (b)
-                {
-                    Drone_data drone = new Drone_data(b);
-                    assigned_bugs[i] = drone;
-                }
-            }
-        }
+        Debug.Log("Saving game");
     }
-    [System.Serializable]
-    public class Hive_data
+
+    public void Continue()
     {
-        // player state
-
-        public int day;
-        public int food;
-        public int wood;
-        public int population;
-        public Cell_data[] hive_cell;
-
-        // enemy AI state 
-
-        public Hive_data(int cell_size)
-        {
-            this.day = 0;
-            this.food = 0;
-            this.wood = 0;
-            this.population = 0;
-            hive_cell = new Cell_data[cell_size];
-        }
+        Debug.Log("Continue on last save game");
     }
+
+    // what do we save and load
+    // GameController
+    // LevelManager
+    // AIController
+    // HiveGenerator
+    //   L HiveCell
+    //      L HiveRoom
+    //         L CoreBug
+
+    public class SaveArchiveData
+    {
+        public GameController.SaveGameController gameController;
+
+    }
+
+    public void OnSave()
+    {
+        // prepare save inputs 
+        SaveArchiveData save_data = new SaveArchiveData();
+        save_data.gameController = gameController.GetSaveData();
+
+        // prepare cells to save 
+
+
+    }
+    
+    public void ClarHive()
+    {
+        hiveGenerator.CleanGrid();
+    }
+
+
+
+    // -------------------------------------
+
+
+
+    /*
 
     [SerializeField]
-    List<HiveCell> cells_to_save = new List<HiveCell>();
+    protected List<HiveCell> cells_to_save = new List<HiveCell>();
+
     public void Save(string filename = "")
     {
         Debug.Log("Saving game");
@@ -123,7 +93,7 @@ public class SaveController : MonoBehaviour
             OnSave(cells_to_save);
         }
 
-        // save to actuall file 
+        // save to actual file 
         SaveToFile(filename);
     }
 
@@ -348,5 +318,46 @@ public class SaveController : MonoBehaviour
         Debug.Log("currently load is disabled until unit fixes are added");
         
     }
+    */
+    public static List<string> GetSavedFiles()
+    {
+        List<string> saves = new List<string>();
 
+        string _path = Application.persistentDataPath;
+        DirectoryInfo d = new DirectoryInfo(_path);
+
+        foreach (var file in d.GetFiles("Archive-*.gd"))
+        {
+            string filename = file.Name;
+            Debug.Log("Filename found : " + filename);
+            saves.Add(filename);
+        }
+
+        return saves;
+    }
+
+    public static bool DeleteSavedGame(string filename)
+    {
+        if (filename.Length == 0) return true;
+
+        bool file_deleted = false;
+        try
+        {
+            string _path = Application.persistentDataPath + "/";
+            // Check if file exists with its full path    
+            if (File.Exists(_path))
+            {
+                // If file found, delete it    
+                File.Delete(_path);
+                Debug.Log("save game deleted");
+                file_deleted = true;
+            }
+        }
+        catch (IOException ioExp)
+        {
+            Debug.LogError("cannot delete file");
+        }
+
+        return file_deleted;
+    }
 }
