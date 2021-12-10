@@ -5,6 +5,63 @@ using UnityEngine;
 
 public class HiveGenerator : MonoBehaviour
 {
+    // Save and Load 
+    // ----------------------------
+    [System.Serializable]
+    public class SaveHiveGenerator
+    {
+        public int width;
+        public int height;
+        public bool isGameStarted;
+        public HiveCell.SaveHiveCell[] saved_cells;
+    }
+
+    public SaveHiveGenerator GetSaveData()
+    {
+        SaveHiveGenerator data = new SaveHiveGenerator();
+
+        // Save each cell
+        //     cell saves room
+        //          room saves bugs
+        data.width = this.width;
+        data.height = this.height;
+        data.isGameStarted = this.isGameStarted;
+
+        List<HiveCell> all_modified_cells = GetAllBuiltRooms();
+        data.saved_cells = new HiveCell.SaveHiveCell[all_modified_cells.Count];
+        for (int i = 0; i < all_modified_cells.Count; i++)
+        {
+            data.saved_cells[i] = all_modified_cells[i].GetSaveData();
+        }
+        
+        return data;
+    }
+
+    public void SetSaveData(SaveHiveGenerator data)
+    {
+        this.width = data.width;
+        this.height = data.height;
+        this.isGameStarted = data.isGameStarted;
+        for (int i = 0; i < data.saved_cells.Length; i++)
+        {
+            HiveCell.SaveHiveCell cell_data = data.saved_cells[i];
+            HiveCell hive_cell = cells[cell_data.x][cell_data.y];
+
+            if (cell_data.room_context == HiveCell.RoomContext.corridor)
+            {
+                hive_cell.BuildCooridor();
+            }
+            else if (cell_data.room_context == HiveCell.RoomContext.entrance)
+            {
+                hive_cell.BuildEntrance();
+            }
+            else
+            {
+                hive_cell.BuildRoom(cell_data.room_context);
+            }
+        }
+    }
+
     // Prefabs needed to generate grid 
     // could be moved to art-instance
     [SerializeField] GameObject cell_prefab;
@@ -26,6 +83,25 @@ public class HiveGenerator : MonoBehaviour
     public int [] GetSize()
     {
         return new int[] { width, height };
+    }
+
+    public List<HiveCell> GetAllBuiltRooms()
+    {
+        List<HiveCell> rooms = new List<HiveCell>();
+        for (int i = 0; i < cells.Count; i++)
+        {
+            for (int j = 0; j < cells[i].Count; j++)
+            {
+                HiveCell gs = cells[i][j];
+                CoreRoom room = gs.GetRoom();
+                if (room)
+                {
+                    if (rooms.Contains(gs) == false)
+                        rooms.Add(gs);
+                }
+            }
+        }
+        return rooms;
     }
 
     public List<HiveCell> GetAllRooms()

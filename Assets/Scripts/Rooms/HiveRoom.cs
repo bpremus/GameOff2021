@@ -7,13 +7,7 @@ public class HiveRoom : CoreRoom
    
     public override void Start()
     {
-        for (int i = 0; i < max_asigned_units; i++)
-        {
-            //  CoreBug b = assigned_bugs[i].GetComponent<CoreBug>();
-            //  b.CurrentPositon(this.parent_cell);
-            //  // b.GoTo(Dbg_destination.GetComponent<HiveCell>());
-           // assigned_bugs.Add(null);
-        }
+
     }
 
     public override void DetachBug(CoreBug bug)

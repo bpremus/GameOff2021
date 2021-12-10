@@ -4,6 +4,29 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+    // Save and Load 
+    // ----------------------------
+    [System.Serializable]
+    public class SaveLevelManager
+    {
+        public int level_index;
+
+    }
+
+    public SaveLevelManager GetSaveData()
+    {
+        SaveLevelManager data = new SaveLevelManager();
+        data.level_index = this.level_index;
+        return data;
+    }
+
+    public void SetSaveData(SaveLevelManager data)
+    {
+        this.level_index = data.level_index;
+        curent_level = null;
+    }
+
+
     [SerializeField] private bool _debugCheats;
     [SerializeField]
     HiveGenerator hive_generator;

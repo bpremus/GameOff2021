@@ -7,15 +7,16 @@ using UnityEngine;
 
 public class SaveController : MonoBehaviour
 {
-    [SerializeField] protected HiveGenerator hiveGenerator;
+    [SerializeField] protected HiveGenerator  hiveGenerator;
     [SerializeField] protected GameController gameController;
-    [SerializeField] protected LevelManager levelManager;
+    [SerializeField] protected LevelManager   levelManager;
 
     [SerializeField] protected string current_filename = "";
 
     public void Save(string filename = "")
     {
         Debug.Log("Saving game");
+        OnNewSave();
     }
 
     public void Load(string filename = "")
@@ -26,6 +27,12 @@ public class SaveController : MonoBehaviour
     public void Continue()
     {
         Debug.Log("Continue on last save game");
+        OnLoad();
+    }
+
+    public void ClarHive()
+    {
+        hiveGenerator.CleanGrid();
     }
 
     // what do we save and load
@@ -37,33 +44,78 @@ public class SaveController : MonoBehaviour
     //      L HiveRoom
     //         L CoreBug
 
+    [System.Serializable]
     public class SaveArchiveData
     {
+        public string filename;
         public GameController.SaveGameController gameController;
-
+        public HiveGenerator.SaveHiveGenerator   hiveGenerator;
+        public LevelManager.SaveLevelManager     levelManager;
     }
 
-    public void OnSave()
+    public void OnLoad()
+    {    
+        SaveArchiveData save_data = new SaveArchiveData();
+        List<string> saved_files = GetSavedFiles();
+        if (saved_files.Count > 0)
+        {
+            ClarHive();
+            save_data = LoadFromFile(saved_files[saved_files.Count -1]);
+            gameController.SetSaveData(save_data.gameController);
+            hiveGenerator.SetSaveData(save_data.hiveGenerator);
+            levelManager.SetSaveData(save_data.levelManager);
+        }
+    }
+
+    public void OnNewSave()
     {
         // prepare save inputs 
         SaveArchiveData save_data = new SaveArchiveData();
-        save_data.gameController = gameController.GetSaveData();
+        save_data.gameController  = gameController.GetSaveData();
+        save_data.hiveGenerator   = hiveGenerator.GetSaveData();
+        save_data.levelManager    = levelManager.GetSaveData();
 
-        // prepare cells to save 
+        // ready to pass to save
+        DateTime utcDate = DateTime.UtcNow;
+        string filename  = "Archive-";
+        filename += utcDate.ToString("dd-MM-yyyy-hh-mm-tt-ss"); 
+        filename += ".gd";
+        save_data.filename = filename;
 
-
+        // save to file
+        SaveToFile(save_data);
     }
-    
-    public void ClarHive()
+  
+    public void SaveToFile(SaveArchiveData save_data)
+    {     
+        if (save_data.Equals(default(SaveArchiveData)) == false)
+        {
+            string _path = Application.persistentDataPath + "/" + save_data.filename;
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Create(_path);
+            bf.Serialize(file, save_data);
+            file.Close();
+            Debug.Log("Saved to filename : " + save_data.filename);
+        }
+    }
+    public SaveArchiveData LoadFromFile(string filename)
     {
-        hiveGenerator.CleanGrid();
+        SaveArchiveData save_data = new SaveArchiveData();
+        string _path = Application.persistentDataPath + "/" + filename;
+        //Debug.Log(_path);
+        
+        if (File.Exists(_path))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(_path, FileMode.Open);
+            save_data = (SaveArchiveData)bf.Deserialize(file);
+            file.Close();
+        }
+        return save_data;
     }
-
 
 
     // -------------------------------------
-
-
 
     /*
 

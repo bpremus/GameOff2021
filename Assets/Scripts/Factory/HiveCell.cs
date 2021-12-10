@@ -5,12 +5,70 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class HiveCell : MonoBehaviour
 {
+    // Save and Load 
+    // ----------------------------
+    [System.Serializable]
+    public class SaveHiveCell
+    {
+        public bool is_static_cell;
+
+        public int x;
+        public int y;
+        public int gCost;
+        public int hCost;
+        public int walkable;
+        public int dCost;
+
+        public Cell_state cell_state;
+        public RoomContext room_context;
+        public CoreRoom.SaveCoreRoom child_room;
+
+    }
+
+    public SaveHiveCell GetSaveData()
+    {
+        SaveHiveCell data = new SaveHiveCell();
+
+        data.is_static_cell = this.is_static_cell;
+        data.x              = this.x;
+        data.y              = this.y;
+        data.gCost          = this.gCost;
+        data.hCost          = this.hCost;
+        data.walkable       = this.walkable;
+        data.dCost          = this.dCost;
+
+        data.cell_state     = this.cell_state;
+        data.room_context   = this.room_context;
+        data.child_room     = this.childRoom.GetSaveData();
+
+        return data;
+    }
+
+    // cell still has a room that inside have a room mesh 
+    public HiveGenerator hiveGenerator = null;
+
+    // path-finding 
+    // -------------------------
+    public int x;
+    public int y;
+    public int gCost;
+    public int hCost;
+    public int walkable = 0;
+
+    // death cost for enemy bugs 
+    public int dCost = 0;
+
     public bool isCellEmpty;
     [SerializeField] protected CoreRoom childRoom;
     [SerializeField] public CellMesh cell_mesh;
 
     public enum Cell_state { none, disabled, enabled };
     public Cell_state cell_state = Cell_state.none;
+
+    // this will determine what kind of cell mesh (walls) are going to be drawn
+    public CellMesh.Cell_type cell_Type = CellMesh.Cell_type.dirt;
+    public enum RoomContext { empty, hive, queen, harvester, war, salvage, corridor, entrance };
+    public RoomContext room_context = RoomContext.empty;
 
     public void SetMeshColor(float r, float g, float b)
     {
@@ -137,14 +195,6 @@ public class HiveCell : MonoBehaviour
         this.name = "hive_cell_" + cell_Type.ToString() + "_" + x + "_" + y;
     }
 
-    // this will determine what kind of cell mesh (walls) are going to be drawn
-    public CellMesh.Cell_type cell_Type = CellMesh.Cell_type.dirt;
-
-    public enum RoomContext { empty, hive, queen, harvester, war, salvage, corridor};
-
-    // cell still has a room that inside have a room mesh 
-    public HiveGenerator hiveGenerator = null;
-
     public HiveGenerator SetGenerator
     {
         set => hiveGenerator = value;
@@ -161,7 +211,6 @@ public class HiveCell : MonoBehaviour
         Debug.Log("Room has been destroyed");
     }
 
- 
     public void BuildEntrance()
     {
         cell_Type = CellMesh.Cell_type.entrance;
@@ -169,6 +218,7 @@ public class HiveCell : MonoBehaviour
         BuildRoom(ArtPrefabsInstance.Instance.RoomPrefabs[6]);
         walkable = 1;
         isCellEmpty = false;
+        room_context = RoomContext.entrance;
 
         hiveGenerator.RefreshAllCells();
     }
@@ -180,6 +230,7 @@ public class HiveCell : MonoBehaviour
         BuildRoom(ArtPrefabsInstance.Instance.RoomPrefabs[2]);
         walkable = 1;
         isCellEmpty = false;
+        room_context = RoomContext.corridor;
 
         if (hiveGenerator.isGameStarted)
             OnRoomPlaced();
@@ -208,12 +259,14 @@ public class HiveCell : MonoBehaviour
         {
             BuildRoom(ArtPrefabsInstance.Instance.RoomPrefabs[0]);
             hiveGenerator.hive_cell = this;
+            room_context = RoomContext.hive;
             return;
         }
 
         if (context == RoomContext.queen)
         {
             BuildRoom(ArtPrefabsInstance.Instance.RoomPrefabs[5]);
+            room_context = RoomContext.queen;
             // return;
         }
 
@@ -221,28 +274,27 @@ public class HiveCell : MonoBehaviour
         if (context == RoomContext.harvester)
         {
             BuildRoom(ArtPrefabsInstance.Instance.RoomPrefabs[1]);
+            room_context = RoomContext.harvester;
         }
 
         if (context == RoomContext.war)
         {
             BuildRoom(ArtPrefabsInstance.Instance.RoomPrefabs[3]);
+            room_context = RoomContext.war;
         }
 
         if (context == RoomContext.salvage)
         {
             BuildRoom(ArtPrefabsInstance.Instance.RoomPrefabs[4]);
+            room_context = RoomContext.salvage;
         }
 
-       // if (hiveGenerator.rooms.Contains(this) == false)
-       // {
-       //     hiveGenerator.rooms.Add(this);
-       // }
-
+   
         if (hiveGenerator.isGameStarted)
             OnRoomPlaced();
 
 
-
+        hiveGenerator.RefreshAllCells();
     }
 
     public void BuildRoom(GameObject room)
@@ -268,11 +320,8 @@ public class HiveCell : MonoBehaviour
         }
     }
 
-
     public bool CanDestroyRoom()
     {
-
-
         if (childRoom)
         {
             QueenRoom qr = childRoom.GetComponent<QueenRoom>();
@@ -282,10 +331,7 @@ public class HiveCell : MonoBehaviour
                 return false;
             }
         }
-
-
         return true;  // not working (?)
-
 
         walkable = 0;
         HiveCell entrace = hiveGenerator.hive_entrance[0];
@@ -297,17 +343,11 @@ public class HiveCell : MonoBehaviour
         {
             Debug.Log("is " + get_all_rooms[i].GetRoom().name + " connected to exit");
             if (get_all_rooms[i] == this) continue;
-
             List <HiveCell> cells = AiController.GetPath(entrace, get_all_rooms[i]);
             int path_size = cells.Count;
             if (path_size == 0)
-            {
-                
+            {          
                 can_destroy = false;
-
-               // dbg
-               // get_all_rooms[i].GetRoom().gameObject.SetActive(false);
-
                 break;
             }
         }
@@ -318,13 +358,11 @@ public class HiveCell : MonoBehaviour
     public void DestroyRoom(bool force = false)
     {
         Debug.Log("Destroy room");
-
         if (CanDestroyRoom() == false && force == false)
         {
             Debug.Log("Room cannot be destroyed");
             return;
         }
-
         if (childRoom)
         {
             List<CoreBug> bugs = childRoom.GetAssignedBugs();
@@ -334,19 +372,15 @@ public class HiveCell : MonoBehaviour
             {
                 bugs[i].GoTo(hiveGenerator.hive_entrance[0]);
             }     
-        }
-            
+        }     
         hiveGenerator.rooms.Remove(this);
-
         // replace with dirt
         cell_Type = CellMesh.Cell_type.dirt;
         mesh_index = 0;
         isCellEmpty = true;
         walkable = 0;
-
         if (hiveGenerator.isGameStarted)
             OnRoomDestroyed();
-
 
         hiveGenerator.RefreshAllCells();
     }
@@ -389,17 +423,8 @@ public class HiveCell : MonoBehaviour
     }
 
     #endregion
-    // Everything regarding pathfinding 
+    // Everything regarding path-finding 
     #region path_finding 
-
-    // pathfinding 
-    // -------------------------
-    public int x;
-    public int y;
-    public int gCost;
-    public int hCost;
-    public int walkable = 0;
-    public int dbg_select = 0;
 
     public int fCost
     {
@@ -410,8 +435,6 @@ public class HiveCell : MonoBehaviour
     {
         get => gCost + hCost + dCost;
     }
-    // death cost for enemy bugs 
-    public int dCost = 0;
 
     [SerializeField]
     protected HiveCell[] neighbour_cells = new HiveCell[4];
