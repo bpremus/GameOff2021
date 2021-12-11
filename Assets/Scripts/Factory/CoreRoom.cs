@@ -15,6 +15,10 @@ public class CoreRoom : MonoBehaviour
 
         // assigned bugs
         public CoreBug.SaveCoreBug[] assigned_bugs;
+
+        // special rooms 
+        public QueenRoom.SaveQueenRoom save_queen_data;
+        public HarversterRoom.SaveHarversterData save_harvester_data;
     }
 
     public SaveCoreRoom GetSaveData()
@@ -28,6 +32,18 @@ public class CoreRoom : MonoBehaviour
         for (int i = 0; i < assigned_bugs.Count; i++)
         {
             data.assigned_bugs[i] = assigned_bugs[i].GetSaveData();
+        }
+
+        QueenRoom qr = GetComponent<QueenRoom>();
+        if (qr)
+        {
+            data.save_queen_data = qr.GetSaveQueenData();
+        }
+
+        HarversterRoom hr = GetComponent<HarversterRoom>();
+        if (hr)
+        {
+            data.save_harvester_data = hr.GetSaveHarversterData();
         }
 
         return data;
@@ -47,9 +63,18 @@ public class CoreRoom : MonoBehaviour
              bug.SetSaveData(bug_data);
         }
 
-        // spread bugs in the room
-        SpreadBugs();
+        // special rooms 
+        QueenRoom qr = GetComponent<QueenRoom>();
+        if (qr)
+        {
+            qr.SetSaveQueenData(save.save_queen_data);
+        }
 
+        HarversterRoom hr = GetComponent<HarversterRoom>();
+        if (hr)
+        {
+            hr.SetSaveHarversterData(save.save_harvester_data);
+        }
     }
 
     [SerializeField] protected HiveCell parent_cell;
@@ -62,7 +87,6 @@ public class CoreRoom : MonoBehaviour
         set { this.parent_cell = value; }
     }
     public int coalition = 0;
-
     public int GetMAxAssignUnits() { return max_asigned_units; }
     public void SetMaxUnits(int max_units)
     {
@@ -105,7 +129,10 @@ public class CoreRoom : MonoBehaviour
     {
         Debug.LogError("Why are you calling the base class?");
     }
-
+    public virtual void RecallBugs()
+    {
+        Debug.LogError("Why are you calling the base class?");
+    }
     public virtual bool AssignBug(CoreBug bug)
     {
         if (assigned_bugs.Count > max_asigned_units) return false;
@@ -128,5 +155,4 @@ public class CoreRoom : MonoBehaviour
     {
         DetectEnemy();
     }
-
 }

@@ -4,6 +4,36 @@ using UnityEngine;
 
 public class HarversterRoom : HiveRoom
 {
+
+    // Save and Load 
+    // ----------------------------
+    [System.Serializable]
+    public class SaveHarversterData
+    {
+        public int[] gather_destination;
+        public int   gather_duration_time;
+        public float _gather_t;
+    }
+
+    public SaveHarversterData GetSaveHarversterData()
+    {
+        SaveHarversterData data   = new SaveHarversterData();
+        data.gather_destination   = new int[2] { cell.x, cell.y };
+        data.gather_duration_time = this.gather_duration_time;
+        data._gather_t            = this._gather_t;
+        return data;
+    }
+
+    public void SetSaveHarversterData(SaveHarversterData data)
+    {
+        if (this.gather_destination != null)
+        {
+            gather_destination = cell.hiveGenerator.GetCell(data.gather_destination[0], data.gather_destination[1]);
+        }
+        this.gather_duration_time = data.gather_duration_time;
+        this._gather_t = data._gather_t;
+    }
+
     [SerializeField]
     public HiveCell gather_destination;
     public int gather_duration_time = 1;
@@ -13,13 +43,11 @@ public class HarversterRoom : HiveRoom
     // we will go with version 2 for now 
     // later in polish phase we can adjust
     float _gather_t = 0;
-
     public override void Update()
     {
         base.Update();
         SendGathering();
     }
-
     public void GetBugsFromHive()
     {
         QueenRoom qr = FindObjectOfType<QueenRoom>();
@@ -43,8 +71,6 @@ public class HarversterRoom : HiveRoom
             Destroy(bug.harvest_object);
             bug.harvest_object = null;
         }
-
-
         int idx = Random.Range(0, ArtPrefabsInstance.Instance.FoodAndWoodPrefabs.Length);
         GameObject food_wood = ArtPrefabsInstance.Instance.FoodAndWoodPrefabs[idx];
         Vector3 food_pos = new Vector3(0, 0, -5);
@@ -55,7 +81,6 @@ public class HarversterRoom : HiveRoom
     public void OnBugReachHomeCell(CoreBug bug)
     {
         Debug.Log("bugs returned home");
-
         GameController.Instance.OnBringResources();
     }
 
@@ -64,7 +89,6 @@ public class HarversterRoom : HiveRoom
         base.RecallBugs();
         gather_destination = null;
     }
-
 
     public void OnBugDepart(CoreBug bug)
     {
@@ -170,9 +194,6 @@ public class HarversterRoom : HiveRoom
     public override void OnRoomSelect()
     {
         Debug.Log(this.name + " selected");
-
-
     }
-
 
 }

@@ -62,8 +62,8 @@ public class SaveController : MonoBehaviour
         {
             ClarHive();
             save_data = LoadFromFile(saved_files[0]);
-            gameController.SetSaveData(save_data.gameController);
             hiveGenerator.SetSaveData(save_data.hiveGenerator);
+            gameController.SetSaveData(save_data.gameController);
             levelManager.SetSaveData(save_data.levelManager);
         }
     }

@@ -79,7 +79,7 @@ public class CoreBug : BugMovement
         this.move_speed = data.move_speed;
         this.slow_penalty_speed = data.slow_penalty_speed;
         this._isDead = data._isDead;
-        this.transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
+        // this.transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
         this.orientation = data.orientation;
 
         // from bug 
@@ -101,6 +101,9 @@ public class CoreBug : BugMovement
         // is it a special bug
         if (this.bug_evolution == BugEvolution.larva_evolve)
             GetComponent<LarvaEvolve>().SetEvolvedSaveData(data.larva_variant);
+
+        // Move bug to home cell
+            GoTo(asigned_cell);
 
     }
 

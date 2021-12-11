@@ -25,8 +25,6 @@ public class ProgressBar : MonoBehaviour
         progress_bar.gameObject.SetActive(false);
     }
     
-  
-
     public void LateUpdate()
     {
         eulter_angles.y = transform.eulerAngles.y;

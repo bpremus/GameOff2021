@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class HiveRoom : CoreRoom
 {
-
     public override void Start()
     {
 
     }
-
     public override void DetachBug(CoreBug bug)
     {
         if (assigned_bugs.Contains(bug))
@@ -21,14 +19,8 @@ public class HiveRoom : CoreRoom
         assigned_bugs.Add(bug);
         return true;
     }
-
-    [SerializeField]
-    protected Collider[] hitColliders;
-    public override void DetectEnemy()
-    {
-
-    }
-
+    [SerializeField] protected Collider[] hitColliders;
+    public override void DetectEnemy() { }
     public override void SpreadBugs()
     {
         for (int i = 0; i < assigned_bugs.Count; i++)
@@ -48,8 +40,7 @@ public class HiveRoom : CoreRoom
             }
         }
     }
-
-    public virtual void RecallBugs()
+    public override void RecallBugs()
     {
         for (int i = 0; i < assigned_bugs.Count; i++)
         {
@@ -58,5 +49,4 @@ public class HiveRoom : CoreRoom
             cb.SetAction(CoreBug.Bug_action.idle);
         }
     }
-
 }

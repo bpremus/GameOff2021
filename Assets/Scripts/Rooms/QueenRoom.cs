@@ -8,10 +8,32 @@ public class QueenRoom : HiveRoom
 
     // Save and Load 
     // ----------------------------
- 
+    [System.Serializable]
+    public class SaveQueenRoom
+    {
+        public int gather_duration_time;
+        public int spawn_bug_interval;
+        public float _spawn_t;
+    }
 
+    public SaveQueenRoom GetSaveQueenData()
+    {
+        SaveQueenRoom data = new SaveQueenRoom();
+        data.gather_duration_time = this.gather_duration_time;
+        data.spawn_bug_interval = this.spawn_bug_interval;
+        data._spawn_t = this._spawn_t;
+        return data;
+    }
 
+    public void SetSaveQueenData(SaveQueenRoom data)
+    {
+        this.gather_duration_time = data.gather_duration_time;
+        this.spawn_bug_interval = data.spawn_bug_interval;
+        this._spawn_t = data._spawn_t;
 
+        SpreadBugs();
+    }
+    
     [SerializeField]
     public HiveCell gather_destination;
     public int gather_duration_time = 1;
@@ -213,8 +235,6 @@ public class QueenRoom : HiveRoom
         return false;
     }
 
-
-    float _gather_t = 0;
     float _spread_timer = 0;
     protected virtual void SendGathering()
     {
