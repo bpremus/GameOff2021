@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HiveRoom : CoreRoom
 {
-   
+
     public override void Start()
     {
 
@@ -12,13 +12,13 @@ public class HiveRoom : CoreRoom
 
     public override void DetachBug(CoreBug bug)
     {
-        if (assigned_bugs.Contains(bug.gameObject))
-            assigned_bugs.Remove(bug.gameObject);
+        if (assigned_bugs.Contains(bug))
+            assigned_bugs.Remove(bug);
     }
     public override bool AssignBug(CoreBug bug)
     {
         if (assigned_bugs.Count > max_asigned_units) return false;
-        assigned_bugs.Add(bug.gameObject);
+        assigned_bugs.Add(bug);
         return true;
     }
 
@@ -26,9 +26,10 @@ public class HiveRoom : CoreRoom
     protected Collider[] hitColliders;
     public override void DetectEnemy()
     {
+
     }
 
-    public virtual void SpreadBugs()
+    public override void SpreadBugs()
     {
         for (int i = 0; i < assigned_bugs.Count; i++)
         {

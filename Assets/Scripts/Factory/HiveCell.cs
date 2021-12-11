@@ -22,7 +22,6 @@ public class HiveCell : MonoBehaviour
         public Cell_state cell_state;
         public RoomContext room_context;
         public CoreRoom.SaveCoreRoom child_room;
-
     }
 
     public SaveHiveCell GetSaveData()
@@ -219,7 +218,7 @@ public class HiveCell : MonoBehaviour
         walkable = 1;
         isCellEmpty = false;
         room_context = RoomContext.entrance;
-
+        hiveGenerator.SetHiveRoom(this);
         hiveGenerator.RefreshAllCells();
     }
 
@@ -252,44 +251,35 @@ public class HiveCell : MonoBehaviour
         cell_Type = CellMesh.Cell_type.room;
 
         // register rooms
-        hiveGenerator.rooms.Add(this);
+        hiveGenerator.SetHiveRoom(this);
 
         // place interior room 
         if (context == RoomContext.hive)
         {
             BuildRoom(ArtPrefabsInstance.Instance.RoomPrefabs[0]);
-            hiveGenerator.hive_cell = this;
             room_context = RoomContext.hive;
-            return;
-        }
-
+        } else 
         if (context == RoomContext.queen)
         {
             BuildRoom(ArtPrefabsInstance.Instance.RoomPrefabs[5]);
             room_context = RoomContext.queen;
-            // return;
-        }
-
-        // any other room
+        } else 
         if (context == RoomContext.harvester)
         {
             BuildRoom(ArtPrefabsInstance.Instance.RoomPrefabs[1]);
             room_context = RoomContext.harvester;
-        }
-
+        } else
         if (context == RoomContext.war)
         {
             BuildRoom(ArtPrefabsInstance.Instance.RoomPrefabs[3]);
             room_context = RoomContext.war;
-        }
-
+        } else 
         if (context == RoomContext.salvage)
         {
             BuildRoom(ArtPrefabsInstance.Instance.RoomPrefabs[4]);
             room_context = RoomContext.salvage;
         }
-
-   
+ 
         if (hiveGenerator.isGameStarted)
             OnRoomPlaced();
 
@@ -334,7 +324,7 @@ public class HiveCell : MonoBehaviour
         return true;  // not working (?)
 
         walkable = 0;
-        HiveCell entrace = hiveGenerator.hive_entrance[0];
+        HiveCell entrace = hiveGenerator.GetAllEntrances()[0];
         Debug.Log("checking path from" + entrace.name);
 
         bool can_destroy = true;
@@ -370,11 +360,16 @@ public class HiveCell : MonoBehaviour
 
             for (int i = 0; i < bugs.Count; i++)
             {
-                bugs[i].GoTo(hiveGenerator.hive_entrance[0]);
+                //bugs[i].GoTo(hiveGenerator.hive_entrance[0]);
+                Debug.LogError("FIX ME");
             }     
-        }     
-        hiveGenerator.rooms.Remove(this);
+        }
+
+        // remove actual room rep
+        //hiveGenerator.RemoveRoom(this);
+
         // replace with dirt
+        room_context = RoomContext.empty;
         cell_Type = CellMesh.Cell_type.dirt;
         mesh_index = 0;
         isCellEmpty = true;

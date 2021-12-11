@@ -26,35 +26,13 @@ public class ArtPrefabsInstance : MonoBehaviour
     public GameObject[] FoodAndWoodPrefabs;
 
 
-    // ment for loading 
+    // meant for loading 
     public CoreBug SpawnBug(CoreBug.BugEvolution bug_type, HiveCell cell)
     {
-        int prefab_index = 0;
-        if (bug_type == CoreBug.BugEvolution.drone)
-        {
-            prefab_index = 0;
-        }
-        if (bug_type == CoreBug.BugEvolution.warrior)
-        {
-            prefab_index = 3;
-        }
-        if (bug_type == CoreBug.BugEvolution.claw)
-        {
-            prefab_index = 2;
-        }
-        if (bug_type == CoreBug.BugEvolution.range)
-        {
-            prefab_index = 4;
-        }
-        if (bug_type == CoreBug.BugEvolution.cc_bug)
-        {
-            prefab_index = 5;
-        }
+        int prefab_index = GetBugPrefabIndex(bug_type);
 
         Vector3 new_pos = cell.transform.position;
-
         Quaternion look_dir = Quaternion.Euler(0, -90, -90);
-
         GameObject g = Instantiate(BugsPrefabs[prefab_index], new_pos, look_dir); 
         if (g)
         {
@@ -66,7 +44,6 @@ public class ArtPrefabsInstance : MonoBehaviour
             room.AssignBug(evolved_bug);
             evolved_bug.GoTo(cell);
             SetBugName(evolved_bug);
-
             return evolved_bug;
         }
 
@@ -74,16 +51,22 @@ public class ArtPrefabsInstance : MonoBehaviour
     }
 
 
-    public void EvolveToLarvaFirst(CoreBug bug, int prefab_index)
+    public void EvolveToLarvaFirst(CoreBug bug, CoreBug.BugEvolution evolve_to)
     {
         LarvaEvolve larva = EvolveBug(bug, 8).GetComponent<LarvaEvolve>();
         if (larva)
         {
-            larva.prefab_index = prefab_index;
+            larva.evolve_to = evolve_to;
             larva.transform.rotation = Quaternion.Euler(-90, 90, 90);
+            larva.bug_evolution = CoreBug.BugEvolution.larva_evolve;
         }
     }
 
+    public CoreBug EvolveBug(CoreBug bug, CoreBug.BugEvolution bug_type)
+    {
+        int prefab_index = GetBugPrefabIndex(bug_type);
+        return EvolveBug(bug, prefab_index);
+    }
     public CoreBug EvolveBug(CoreBug bug, int prefab_index)
     {
         // detach bug from rooms 
@@ -111,6 +94,37 @@ public class ArtPrefabsInstance : MonoBehaviour
             return evolved_bug;
         }
         return null;
+    }
+
+    public int GetBugPrefabIndex(CoreBug.BugEvolution bug_type)
+    {
+        int prefab_index = 0;
+        if (bug_type == CoreBug.BugEvolution.drone)
+        {
+            prefab_index = 0;
+        }
+        if (bug_type == CoreBug.BugEvolution.warrior)
+        {
+            prefab_index = 3;
+        }
+        if (bug_type == CoreBug.BugEvolution.claw)
+        {
+            prefab_index = 2;
+        }
+        if (bug_type == CoreBug.BugEvolution.range)
+        {
+            prefab_index = 4;
+        }
+        if (bug_type == CoreBug.BugEvolution.cc_bug)
+        {
+            prefab_index = 5;
+        }
+        if (bug_type == CoreBug.BugEvolution.larva_evolve)
+        {
+            prefab_index = 8;
+        }
+
+        return prefab_index;
     }
 
     public void SetBugName(CoreBug bug)

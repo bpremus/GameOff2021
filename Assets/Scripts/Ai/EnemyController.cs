@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    /*
     // Start cell is location where bugs will spawn
     [SerializeField]
     HiveCell start_cell;
@@ -196,7 +197,7 @@ public class EnemyController : MonoBehaviour
         // day scout 
         // ------------------------------
 
-        */
+        
     }
 
 
@@ -376,6 +377,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    */
 
     private static EnemyController _instance;
     public static EnemyController Instance
@@ -393,7 +395,5 @@ public class EnemyController : MonoBehaviour
     }
 
    
-
-
 }
 

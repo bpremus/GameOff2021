@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
@@ -56,11 +57,11 @@ public class SaveController : MonoBehaviour
     public void OnLoad()
     {    
         SaveArchiveData save_data = new SaveArchiveData();
-        List<string> saved_files = GetSavedFiles();
+        List<string> saved_files = GetSavedFiles(); // first one in the list is last one
         if (saved_files.Count > 0)
         {
             ClarHive();
-            save_data = LoadFromFile(saved_files[saved_files.Count -1]);
+            save_data = LoadFromFile(saved_files[0]);
             gameController.SetSaveData(save_data.gameController);
             hiveGenerator.SetSaveData(save_data.hiveGenerator);
             levelManager.SetSaveData(save_data.levelManager);
@@ -78,7 +79,7 @@ public class SaveController : MonoBehaviour
         // ready to pass to save
         DateTime utcDate = DateTime.UtcNow;
         string filename  = "Archive-";
-        filename += utcDate.ToString("dd-MM-yyyy-hh-mm-tt-ss"); 
+        filename += utcDate.ToString("yyyy-mm-dd-hh-tt-ss"); 
         filename += ".gd";
         save_data.filename = filename;
 
@@ -102,8 +103,8 @@ public class SaveController : MonoBehaviour
     {
         SaveArchiveData save_data = new SaveArchiveData();
         string _path = Application.persistentDataPath + "/" + filename;
-        //Debug.Log(_path);
-        
+        Debug.Log("Loading from filename : " + _path);
+
         if (File.Exists(_path))
         {
             BinaryFormatter bf = new BinaryFormatter();
@@ -376,14 +377,23 @@ public class SaveController : MonoBehaviour
         List<string> saves = new List<string>();
 
         string _path = Application.persistentDataPath;
-        DirectoryInfo d = new DirectoryInfo(_path);
-
-        foreach (var file in d.GetFiles("Archive-*.gd"))
+        var dir_list = new DirectoryInfo(_path).GetFiles("Archive-*.gd").OrderBy(f => f.LastWriteTime).ToList();
+        foreach (var file in dir_list)
         {
             string filename = file.Name;
-            Debug.Log("Filename found : " + filename);
             saves.Add(filename);
         }
+
+        saves.Reverse();
+
+        string dbg_output = "Saved games:\n";
+        dbg_output += "---------------------\n";
+        foreach (string file in saves)
+        {
+            dbg_output += file + "\n";
+        }
+        dbg_output += "---------------------\n";
+        Debug.Log(dbg_output);
 
         return saves;
     }

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class TutorialLevel : CoreLevel
 {
-
-
     [SerializeField] int food_objective = 100;
     [SerializeField] int wood_objective = 10;
     [SerializeField] private List<int> restrictedBuilds;
@@ -39,12 +37,10 @@ public class TutorialLevel : CoreLevel
     // focus camera when game start on hive
     public override void SetCamera() {
 
-        HiveCell hc = levelManager.hiveGenerator.hive_cell;
+        HiveCell hc = levelManager.hiveGenerator.GetHiveQueenRoom();
         CameraController cam_controller = Camera.main.GetComponent<CameraController>();
         cam_controller.SetFocus(hc);
     }
-
-
 
     // limit unit evolution 
     public override void SetAvialableUnits() { }
@@ -110,17 +106,14 @@ public class TutorialLevel : CoreLevel
         if (food >= food_objective && wood >= wood_objective)
         {
             OnLevelComplete();
-
-
             return true;
         }
-
         return false;
     }
 
     public override void OnLevelComplete()
     {
-        GameLog.Instance.WriteLine("Task completed sucessfully");
+        GameLog.Instance.WriteLine("Task completed successfully");
     }
 
 }

@@ -5,6 +5,105 @@ using UnityEngine;
 
 public class CoreBug : BugMovement
 {
+    // Save and Load 
+    // ----------------------------
+    [System.Serializable]
+    public class SaveCoreBug
+    {
+        // from bug movement 
+        public float[] target;
+        public float[] position;
+        public int     orientation;
+        public float move_speed;
+        public float slow_penalty_speed;
+        public bool _isDead;
+
+        // from bug 
+        public BugEvolution bug_evolution;
+        public BugTask bug_task;
+        public float health;
+        public float damage;
+        public float extra_damage;
+        public float interraction_range;
+        public int decayOnDeadTimer;
+        public int bug_base_level;
+        public int coalition;
+        public int splash_dmg;
+
+        // bug achievement 
+        public int bug_kill_count;
+        public int bug_task_count;
+
+        // bug special 
+        public LarvaEvolve.SaveBugVariant larva_variant;
+    }
+
+    public SaveCoreBug GetSaveData()
+    {
+        SaveCoreBug data = new SaveCoreBug();
+
+        // from movement
+        data.target = new float[] { this.target.x, this.target.y, this.target.z };
+        data.position = new float[] { this.transform.position.x, this.transform.position.y, this.transform.position.z };
+        data.move_speed = this.move_speed;
+        data.slow_penalty_speed = this.slow_penalty_speed;
+        data._isDead = this._isDead;
+        data.orientation = this.orientation;
+
+        // from bug 
+        data.bug_evolution = this.bug_evolution;
+        data.bug_task = this.bugTask;
+        data.health = this.health;
+        data.damage = this.damage;
+        data.extra_damage = this.extra_damage;
+        data.interraction_range = this.interraction_range;
+        data.decayOnDeadTimer = this.decayOnDeadTimer;
+        data.bug_base_level = this.bug_base_level;
+        data.coalition = this.coalition;
+        data.splash_dmg = this.splash_dmg;
+
+        // bug achievement 
+        data.bug_kill_count = this.bug_kill_count;
+        data.bug_task_count = this.bug_task_count;
+
+        // bug variants 
+        if (this.bug_evolution == BugEvolution.larva_evolve)
+            data.larva_variant = GetComponent<LarvaEvolve>().GetEvolvedSaveData();
+        
+        return data;
+    }
+
+    public void SetSaveData(SaveCoreBug data)
+    {
+        this.target = new Vector3(data.target[0], data.target[1], data.target[2]);
+        this.move_speed = data.move_speed;
+        this.slow_penalty_speed = data.slow_penalty_speed;
+        this._isDead = data._isDead;
+        this.transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
+        this.orientation = data.orientation;
+
+        // from bug 
+        this.bug_evolution = data.bug_evolution;
+        this.bugTask = data.bug_task;
+        this.health = data.health;
+        this.damage = data.damage;
+        this.extra_damage = data.extra_damage;
+        this.interraction_range = data.interraction_range;
+        this.decayOnDeadTimer = data.decayOnDeadTimer;
+        this.bug_base_level = data.bug_base_level;
+        this.coalition = data.coalition;
+        this.splash_dmg = data.splash_dmg;
+
+        // bug achievement 
+        this.bug_kill_count = data.bug_kill_count;
+        this.bug_task_count = data.bug_task_count;
+
+        // is it a special bug
+        if (this.bug_evolution == BugEvolution.larva_evolve)
+            GetComponent<LarvaEvolve>().SetEvolvedSaveData(data.larva_variant);
+
+    }
+
     [HideInInspector]
     public Queue<HiveCell> path = new Queue<HiveCell>();
     [SerializeField]
@@ -18,7 +117,7 @@ public class CoreBug : BugMovement
     [SerializeField]
     public HiveCell underlaying_cell = null;
 
-    public enum BugEvolution { drone, super_drone, warrior, claw, range, cc_bug };
+    public enum BugEvolution { drone, super_drone, warrior, claw, range, cc_bug, larva_evolve };
     public BugEvolution bug_evolution = BugEvolution.drone;
 
     // stats 
@@ -30,9 +129,25 @@ public class CoreBug : BugMovement
     public int   decayOnDeadTimer = 20;
     public int   bug_base_level = 1;
 
-    // bug perfo
+    // bug achievements 
     public int   bug_kill_count = 0;
     public int   bug_task_count = 0;
+
+    // offset to camera above cells 
+    // may not be needed once tiles are replaced with mesh
+    protected Vector3 z_offset = new Vector3(0, 0, -0.1f);
+
+    public enum BugTask { none, fight, salvage, harvesting }
+    public BugTask bugTask = BugTask.none;
+
+    public enum Bug_action { idle, traveling, gathering, fighting, salvaging, returning, dead };
+    [SerializeField] protected Bug_action bug_action = Bug_action.idle;
+
+    public Bug_action GetAction { get => bug_action; }
+
+    public int coalition = 0;
+
+    [SerializeField] protected int splash_dmg = 1;
 
     public void LevelUp() { 
         
@@ -76,21 +191,6 @@ public class CoreBug : BugMovement
         BoostSpeed(speed);
         BoostHealth(health);
     }
-
-    // offset to camera above cells 
-    // may not be needed once tiles are replaced with mesh
-    protected Vector3 z_offset = new Vector3(0, 0, -0.1f);
-
-    public enum BugTask { none, fight, salvage, harvesting }
-    public BugTask bugTask = BugTask.none;
-
-    public enum Bug_action { idle, traveling, gathering, fighting, salvaging, returning, dead };
-    [SerializeField]
-    protected Bug_action bug_action = Bug_action.idle;
-
-    public Bug_action GetAction { get => bug_action; }
-
-    public int coalition = 0;
 
     public virtual void SiegeBug(bool siege) { }
     public virtual bool GetSiegeState() { return false; }
@@ -152,12 +252,12 @@ public class CoreBug : BugMovement
     public virtual void OnInteract(CoreBug otherBug)
     {
      
-        // Debug.Log("we got interraced by " + otherBug.name);
+        // Debug.Log("we got interlaced by " + otherBug.name);
 
-        // override me with appropriate behaviour 
+        // override me with appropriate behavior 
         if (GetState() == BugAnimation.dead)
         {
-            Debug.Log("someone is interracting with a dead enemy");
+            Debug.Log("someone is interacting with a dead enemy");
             Destroy(this.gameObject);
             return;
         }
@@ -175,11 +275,6 @@ public class CoreBug : BugMovement
     public virtual void OnDestinationReach()
     {
         //  Debug.Log("destination reached");
-
-        if (ai_task != null)
-        {
-            ai_task.OnDestinationReach();
-        }
     }
 
     public void OnAIEndDestroy()
@@ -231,22 +326,9 @@ public class CoreBug : BugMovement
         Destroy(this.gameObject);
     }
 
-
     public virtual void OnTargetReach()
     {
       //  Debug.Log("target reached");
-
-        if (ai_task != null)
-        {
-            ai_task.OnTargetReach();
-        }
-
-    }
-    protected EnemyController.AITask ai_task;
-
-    public void SetAITask(EnemyController.AITask task)
-    {
-        ai_task = task;
     }
 
     public override void OnWalk()
@@ -390,7 +472,6 @@ public class CoreBug : BugMovement
         }
     }
 
-
     public void LateDie()
     {
         // unregister bug 
@@ -437,15 +518,12 @@ public class CoreBug : BugMovement
        // multiple enemies at the same time
     }
 
-
     float _interact_t = 0;
     public override void SetTimers()
     {
         _interact_t += Time.deltaTime;
     }
 
-    [SerializeField]
-    protected int splash_dmg = 1;
     public override void DetectEnemy()
     {
         if (bugTask == BugTask.none) return;

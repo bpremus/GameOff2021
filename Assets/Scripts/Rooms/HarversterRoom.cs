@@ -11,7 +11,7 @@ public class HarversterRoom : HiveRoom
     // we can have it for each separate bug
     // or we handle all bugs ate same time
     // we will go with version 2 for now 
-    // later in polish phase we can ajust
+    // later in polish phase we can adjust
     float _gather_t = 0;
 
     public override void Update()
@@ -25,7 +25,7 @@ public class HarversterRoom : HiveRoom
         QueenRoom qr = FindObjectOfType<QueenRoom>();
         if (qr)
         {
-            GameObject bug = qr.GetBugFroTransfer(0);
+            CoreBug bug = qr.GetBugFroTransfer(0);
             assigned_bugs.Add(bug);
             Debug.Log("moving a bug");
         }
@@ -33,7 +33,7 @@ public class HarversterRoom : HiveRoom
     public void SendToCollect()
     {
         int[] hive_size = cell.hiveGenerator.GetSize();
-        gather_destination = cell.hiveGenerator.cells[hive_size[0] - 1][hive_size[1]-1];
+        gather_destination = cell.hiveGenerator.GetGatheringCell();
     }
     public void OnBugReachGatheringSite(CoreBug bug)
     {
@@ -138,7 +138,7 @@ public class HarversterRoom : HiveRoom
                         }
                     }
 
-                    // reched cell
+                    // reached cell
                     if (cb.GetAction == CoreBug.Bug_action.returning)
                     {
                      

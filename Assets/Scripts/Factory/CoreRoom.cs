@@ -14,6 +14,7 @@ public class CoreRoom : MonoBehaviour
         public int   coalition;
 
         // assigned bugs
+        public CoreBug.SaveCoreBug[] assigned_bugs;
     }
 
     public SaveCoreRoom GetSaveData()
@@ -22,6 +23,13 @@ public class CoreRoom : MonoBehaviour
         data.max_asigned_units = this.max_asigned_units;
         data.room_detect_distance = this.room_detect_distance;
         data.coalition = this.coalition;
+
+        data.assigned_bugs = new CoreBug.SaveCoreBug[assigned_bugs.Count];
+        for (int i = 0; i < assigned_bugs.Count; i++)
+        {
+            data.assigned_bugs[i] = assigned_bugs[i].GetSaveData();
+        }
+
         return data;
     }
 
@@ -30,10 +38,22 @@ public class CoreRoom : MonoBehaviour
         this.max_asigned_units = save.max_asigned_units;
         this.room_detect_distance = save.room_detect_distance;
         this.coalition = save.coalition;
+
+        // restore bugs
+        for (int i = 0; i < save.assigned_bugs.Length; i++)
+        {
+             CoreBug.SaveCoreBug bug_data = save.assigned_bugs[i];
+             CoreBug bug = ArtPrefabsInstance.Instance.SpawnBug(bug_data.bug_evolution, this.cell);
+             bug.SetSaveData(bug_data);
+        }
+
+        // spread bugs in the room
+        SpreadBugs();
+
     }
 
     [SerializeField] protected HiveCell parent_cell;
-    [SerializeField] protected List<GameObject> assigned_bugs = new List<GameObject>();
+    [SerializeField] protected List<CoreBug> assigned_bugs = new List<CoreBug>();
     [SerializeField] protected int max_asigned_units = 3;
     [SerializeField] protected float room_detect_distance = 2;
     public HiveCell cell
@@ -79,12 +99,17 @@ public class CoreRoom : MonoBehaviour
     }
     public virtual void DetachBug(CoreBug bug)
     {
-        assigned_bugs.Remove(bug.gameObject);
+        assigned_bugs.Remove(bug);
     }
+    public virtual void SpreadBugs() 
+    {
+        Debug.LogError("Why are you calling the base class?");
+    }
+
     public virtual bool AssignBug(CoreBug bug)
     {
         if (assigned_bugs.Count > max_asigned_units) return false;
-        assigned_bugs.Add(bug.gameObject);
+        assigned_bugs.Add(bug);
         return true;
     }
     public virtual void DetectEnemy()

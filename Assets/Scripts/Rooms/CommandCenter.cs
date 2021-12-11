@@ -14,7 +14,7 @@ public class CommandCenter : WarRoom
         Debug.Log("send hive to collect");
 
         int[] hive_size = cell.hiveGenerator.GetSize();
-        gather_destination = cell.hiveGenerator.cells[hive_size[0] - 1][hive_size[1] - 1];
+        gather_destination = cell.hiveGenerator.GetGatheringCell();
 
         for (int i = 0; i < assigned_bugs.Count; i++)
         {

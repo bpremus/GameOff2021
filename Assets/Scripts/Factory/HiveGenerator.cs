@@ -23,15 +23,22 @@ public class HiveGenerator : MonoBehaviour
         // Save each cell
         //     cell saves room
         //          room saves bugs
+
         data.width = this.width;
         data.height = this.height;
         data.isGameStarted = this.isGameStarted;
 
         List<HiveCell> all_modified_cells = GetAllBuiltRooms();
-        data.saved_cells = new HiveCell.SaveHiveCell[all_modified_cells.Count];
-        for (int i = 0; i < all_modified_cells.Count; i++)
+ 
+        data.saved_cells = new HiveCell.SaveHiveCell[all_modified_cells.Count + 1];
+
+        // Save queen first 
+        data.saved_cells[0] = GetHiveQueenRoom().GetSaveData();
+
+        // Save all other rooms
+        for (int i = 1; i <= all_modified_cells.Count; i++)
         {
-            data.saved_cells[i] = all_modified_cells[i].GetSaveData();
+            data.saved_cells[i] = all_modified_cells[i-1].GetSaveData();
         }
         
         return data;
@@ -42,8 +49,15 @@ public class HiveGenerator : MonoBehaviour
         this.width = data.width;
         this.height = data.height;
         this.isGameStarted = data.isGameStarted;
+        
+        rooms.Clear();
+        hive_entrance.Clear();
+        hive_cell = null;
+
         for (int i = 0; i < data.saved_cells.Length; i++)
         {
+            Debug.Log("loading " + data.saved_cells[i].room_context);
+
             HiveCell.SaveHiveCell cell_data = data.saved_cells[i];
             HiveCell hive_cell = cells[cell_data.x][cell_data.y];
 
@@ -55,10 +69,13 @@ public class HiveGenerator : MonoBehaviour
             {
                 hive_cell.BuildEntrance();
             }
-            else
+            else            
             {
                 hive_cell.BuildRoom(cell_data.room_context);
             }
+
+            // room has been built, now apply saved data to it
+            hive_cell.GetRoom().SetRoomData(cell_data.child_room);
         }
     }
 
@@ -74,15 +91,45 @@ public class HiveGenerator : MonoBehaviour
     [SerializeField]
     float offset = 1.2f;
 
-    public List<List<HiveCell>> cells = new List<List<HiveCell>>();
-    public List<HiveCell> rooms = new List<HiveCell>();
-    public HiveCell hive_cell = null;
-    public List<HiveCell> hive_entrance = new List<HiveCell>();
+    protected List<List<HiveCell>> cells = new List<List<HiveCell>>();
+    protected List<HiveCell> rooms = new List<HiveCell>();
+    protected HiveCell hive_cell = null;
+    protected List<HiveCell> hive_entrance = new List<HiveCell>();
 
+    public List<List<HiveCell>> GetAllCells()
+    {
+        return cells;
+    }
+
+    public void RemoveRoom(HiveCell room)
+    {
+        rooms.Remove(room);
+    }
+
+    public void SetHiveRoom(HiveCell room)
+    {
+        if (rooms.Contains(room) == false)
+            rooms.Add(room);
+    }
+    public void SetHiveEntrance(HiveCell room)
+    {
+        if (hive_entrance.Contains(room) == false)
+            hive_entrance.Add(room);
+    }
+   
     public bool isGameStarted = false;
     public int [] GetSize()
     {
         return new int[] { width, height };
+    }
+
+    public HiveCell GetCell(int x, int y)
+    {
+        return cells[x][y];
+    }
+    public HiveCell GetGatheringCell()
+    {
+        return cells[width -1][height -1];
     }
 
     public List<HiveCell> GetAllBuiltRooms()
@@ -93,11 +140,20 @@ public class HiveGenerator : MonoBehaviour
             for (int j = 0; j < cells[i].Count; j++)
             {
                 HiveCell gs = cells[i][j];
+
+                // queen has a fixed position we didn't built it 
+                if (gs.room_context == HiveCell.RoomContext.hive) continue;
+
                 CoreRoom room = gs.GetRoom();
                 if (room)
                 {
+                    Debug.Log(gs.room_context);
                     if (rooms.Contains(gs) == false)
+                    {
+                        Debug.Log("added");
                         rooms.Add(gs);
+                    }
+                   
                 }
             }
         }
@@ -160,6 +216,12 @@ public class HiveGenerator : MonoBehaviour
             }
         }
         return rooms;
+    }
+
+    public HiveCell GetHiveQueenRoom()
+    {
+       CoreRoom room = FindObjectOfType<QueenRoom>();
+       return room.cell;
     }
 
     public void Start()
@@ -319,7 +381,7 @@ public class HiveGenerator : MonoBehaviour
         cells[d][height - 3].BuildCooridor();
         cells[d][height - 4].BuildCooridor();
         cells[d][height - 5].BuildRoom(HiveCell.RoomContext.hive);
-        hive_entrance.Add(cells[d][height - 2]);
+       // hive_entrance.Add(cells[d][height - 2]);
     }
 
     public HiveCell CreateTile(Vector3 position)

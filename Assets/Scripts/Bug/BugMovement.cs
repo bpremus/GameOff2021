@@ -293,7 +293,7 @@ public class BugMovement : MonoBehaviour
     }
     */
 
-    int orientation = 0;
+    protected int orientation = 0;
     public void FaceBugUp()
     {
         Vector3 pos = transform.position;
@@ -303,8 +303,7 @@ public class BugMovement : MonoBehaviour
         }
         else
         {
-            orientation = 1;
-            
+            orientation = 1;   
         }
     }
 
@@ -321,8 +320,7 @@ public class BugMovement : MonoBehaviour
             if (hc)
             {
                 return hc;
-            }
-                
+            }  
         }
         return null;
     }

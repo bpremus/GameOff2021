@@ -10,7 +10,6 @@ public class LevelManager : MonoBehaviour
     public class SaveLevelManager
     {
         public int level_index;
-
     }
 
     public SaveLevelManager GetSaveData()

@@ -6,6 +6,12 @@ public class QueenRoom : HiveRoom
 {
     // this one is unique and we can have only one
 
+    // Save and Load 
+    // ----------------------------
+ 
+
+
+
     [SerializeField]
     public HiveCell gather_destination;
     public int gather_duration_time = 1;
@@ -22,23 +28,21 @@ public class QueenRoom : HiveRoom
     }
     public override void DetachBug(CoreBug bug)
     {
-        assigned_bugs.Remove(bug.gameObject);
-      //  Debug.Log("deatching a bug from " + this.name);
+        assigned_bugs.Remove(bug);
         SpreadBugs();
-
     }
     public override bool AssignBug(CoreBug bug)
     {
         if (assigned_bugs.Count > max_asigned_units) return false;
-        assigned_bugs.Add(bug.gameObject);
+        assigned_bugs.Add(bug);
         return true;
     }
 
-    public GameObject GetBugFroTransfer(int index)
+    public CoreBug GetBugFroTransfer(int index)
     {
         if (index < assigned_bugs.Count)
         {
-            GameObject g = assigned_bugs[index];
+            CoreBug g = assigned_bugs[index];
             assigned_bugs.RemoveAt(index);
             SpreadBugs();
             return g;
@@ -52,7 +56,7 @@ public class QueenRoom : HiveRoom
         Debug.Log("send hive to collect");
 
         int[] hive_size = cell.hiveGenerator.GetSize();
-        gather_destination = cell.hiveGenerator.cells[hive_size[0] - 1][hive_size[1] - 1];
+        gather_destination = cell.hiveGenerator.GetGatheringCell();
         
         for (int i = 0; i < assigned_bugs.Count; i++)
         {
@@ -73,20 +77,17 @@ public class QueenRoom : HiveRoom
 
     [SerializeField]
     ProgressBar bug_spawn_bar;
-
-    int bug_building = 0;
     protected void BugSpawner()
     {
         if (bugs_to_spawn.Count > 0)
         {
-            // get current bug to be spwaned 
+            // get current bug to be spawned 
             _spawn_t += Time.deltaTime;
             if (_spawn_t > spawn_bug_interval)
             {
                 int bug_type = bugs_to_spawn.Dequeue();
                 PlaceBugOnMap();
                 bug_spawn_bar.HideProgressBar();
-                bug_building = 0;
                 _spawn_t = 0;
 
                 OnDroneSpawn();
@@ -94,16 +95,13 @@ public class QueenRoom : HiveRoom
                 {
                     OnMaxDronesInRoom();
                 }
-
             }
             else
             {
                 // progress bar;
                 bug_spawn_perc = _spawn_t / spawn_bug_interval;
                 bug_spawn_bar.SetProgress(bug_spawn_perc);
-                bug_building = 1;
             }
-
         }
     }
 
@@ -123,9 +121,8 @@ public class QueenRoom : HiveRoom
         if (bug_instance)
         {
 
-            assigned_bugs.Add(bug_instance);
-
             CoreBug cb = bug_instance.GetComponent<CoreBug>();
+            assigned_bugs.Add(cb);
             cb.CurrentPositon(this.parent_cell);
             cb.target = transform.position + move_to * 0.7f;
             cb.asigned_cell = this.parent_cell;
@@ -134,18 +131,7 @@ public class QueenRoom : HiveRoom
             name_index++;
 
             GameController.Instance.OnNewBug();
-
-
-            // HiveCell hc = this.parent_cell;
-            // HiveCell destination = hc.hiveGenerator.rooms[0];
-
-            //cb.target = move_to;
-            //cb.GoTo(destination);
-
-            // if we dont have food return 0
-            // Debug.Log("spawning bug");
         }
-
     }
 
     public void OnDroneSpawn()
@@ -191,8 +177,6 @@ public class QueenRoom : HiveRoom
         GameObject g = Instantiate(food_wood, food_pos, Quaternion.identity);
         bug.harvest_object = g;
     }
-
-
     public void OnBugReachHomeCell(CoreBug bug)
     {
         GameController.Instance.OnBringResources();
@@ -202,7 +186,6 @@ public class QueenRoom : HiveRoom
     {
         ActionLogger.Instance.AddLog(bug.name + " is send to collect resources", 0);
     }
-
 
     public bool SpawnBug()
     {
@@ -228,61 +211,6 @@ public class QueenRoom : HiveRoom
         }
 
         return false;
-
-
-        /*
-        _spawn_t += Time.deltaTime;
-        if (_spawn_t > spawn_bug_interval)
-        {
-            _spawn_t = 0;
-
-            if (assigned_bugs.Count < max_asigned_units)
-            {
-
-                // consume 1 food to build a new drone
-               //if (GameController.Instance.GetFood() > 0)
-               //{
-               //    GameController.Instance.OnConsumeFood();
-               //}
-
-                int i = assigned_bugs.Count;
-                Vector3 move_to = new Vector3(0, -1, 0);
-                move_to = Quaternion.Euler(0, 0, 45 - (180 / max_asigned_units * i)) * move_to;
-                move_to = move_to.normalized;
-
-                // queen consume food to build a drone 
-                // drone is then evolved into higher tier 
-
-                GameObject bug_prefab = ArtPrefabsInstance.Instance.BugsPrefabs[0];
-                GameObject bug_instance = Instantiate(bug_prefab, transform.position, Quaternion.identity);
-                if (bug_instance)
-                {
-
-                    assigned_bugs.Add(bug_instance);
-
-                    CoreBug cb = bug_instance.GetComponent<CoreBug>();
-                    cb.CurrentPositon(this.parent_cell);
-                    cb.target = transform.position + move_to * 0.7f;
-                    cb.asigned_cell = this.parent_cell;
-
-                    cb.name = "Drone"; // "b_" + name_index;
-                    name_index++;
-
-                    GameController.Instance.OnNewBug();
-
-
-                    // HiveCell hc = this.parent_cell;
-                    // HiveCell destination = hc.hiveGenerator.rooms[0];
-
-                    //cb.target = move_to;
-                    //cb.GoTo(destination);
-
-                    // if we dont have food return 0
-                    // Debug.Log("spawning bug");
-                }
-            }
-        }
-        */
     }
 
 

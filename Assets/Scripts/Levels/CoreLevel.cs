@@ -44,8 +44,8 @@ public class CoreLevel : MonoBehaviour
     protected void DrawMask(int offset)
     {
         // get hive position 
-        HiveCell hc = levelManager.hiveGenerator.hive_cell;
-        List<List<HiveCell>> hive_cells = levelManager.hiveGenerator.cells;
+        HiveCell hc = levelManager.hiveGenerator.GetHiveQueenRoom();
+        List<List<HiveCell>> hive_cells = levelManager.hiveGenerator.GetAllCells();
         for (int i = 0; i < hive_cells.Count; i++)
         {
             for (int j = 0; j < hive_cells[i].Count; j++)
@@ -66,7 +66,6 @@ public class CoreLevel : MonoBehaviour
         }
 
        levelManager.hiveGenerator.RedrawGrid();
-
     }
 
 
