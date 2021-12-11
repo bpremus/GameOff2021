@@ -22,7 +22,8 @@ public class SaveController : MonoBehaviour
 
     public void Load(string filename = "")
     {
-        Debug.Log("Saving game");
+        Debug.Log("load game");
+        OnLoadFilename(filename);
     }
 
     public void Continue()
@@ -52,6 +53,17 @@ public class SaveController : MonoBehaviour
         public GameController.SaveGameController gameController;
         public HiveGenerator.SaveHiveGenerator   hiveGenerator;
         public LevelManager.SaveLevelManager     levelManager;
+    }
+
+    public void OnLoadFilename(string filename)
+    {
+        SaveArchiveData save_data = new SaveArchiveData();
+
+        ClarHive();
+        save_data = LoadFromFile(filename);
+        hiveGenerator.SetSaveData(save_data.hiveGenerator);
+        gameController.SetSaveData(save_data.gameController);
+        levelManager.SetSaveData(save_data.levelManager);
     }
 
     public void OnLoad()
