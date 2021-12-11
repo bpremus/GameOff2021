@@ -26,7 +26,11 @@ public class UIController : MonoBehaviour
     {
         buildMenu.GetComponent<UIBuildMenu>().RestrictBuilds(restrictedBuilds); //here just pass it over
     }
-
+    public void RestrictUnits(List<int> restrictedUnits,bool restricted)
+    {
+        DBG_UnitUI.Instance.RestrictUnits(restrictedUnits,restricted);//here just pass it over
+        Debug.Log("unit ui restrict detected");
+    }
     public void EnableUIElement(UIElements ui_elements)
     {
 

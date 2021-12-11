@@ -59,6 +59,10 @@ public class Card_BuildMenu : MonoBehaviour,IPointerEnterHandler,IPointerExitHan
         this.restricted = restricted;
         restrictedOverlay.SetActive(this.restricted);
         button.interactable = !this.restricted;
+        if (!restricted)
+        {
+            ActionLogger.Instance.AddLog(gameObject.name + " is unlocked now!", 1);
+        }
     }
     public void SetCosts()
     {

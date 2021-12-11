@@ -11,6 +11,7 @@ public class TooltipSystem : MonoBehaviour
     {
         current = this;
     }
+    public static bool isActive() { return current.tooltip.gameObject.activeInHierarchy; }
     public static void Show(string content,string header= "")
     {
         current.tooltip.SetText(content, header);

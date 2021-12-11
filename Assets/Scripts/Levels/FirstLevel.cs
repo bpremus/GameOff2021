@@ -5,6 +5,7 @@ using UnityEngine;
 public class FirstLevel : CoreLevel
 {
     [SerializeField] private List<int> restrictedBuilds;
+    [SerializeField] private List<int> restrictedUnits;
     public override void SetGrid()
     {
         Debug.Log("first level started");
@@ -21,6 +22,13 @@ public class FirstLevel : CoreLevel
         GameLog.Instance.WriteLine("Send drones to collect food and wood");
 
     }
+    #region UnitRestriction
+    // limit unit evolution 
+    public override void SetAvialableUnits()
+    {
+        levelManager.uiController.RestrictUnits(restrictedUnits, true);
+    }
+    #endregion
     #region RoomRestrictions
     public override void SetAvialableRooms()
     {

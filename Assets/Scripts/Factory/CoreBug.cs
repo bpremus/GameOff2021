@@ -120,7 +120,7 @@ public class CoreBug : BugMovement
     [SerializeField]
     public HiveCell underlaying_cell = null;
 
-    public enum BugEvolution { drone, super_drone, warrior, claw, range, cc_bug, larva_evolve };
+    public enum BugEvolution { none, drone, super_drone, warrior, claw, range, cc_bug, larva_evolve };
     public BugEvolution bug_evolution = BugEvolution.drone;
 
     // stats 

@@ -15,6 +15,15 @@ public class ButtonAnim : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
    [HideInInspector] public bool displayedCorrectly = false;
     public void OnPointerEnter(PointerEventData eventData)
     {
+        UIBugUpgradeButton uIBugUpgradeButton = GetComponent<UIBugUpgradeButton>();
+        if (uIBugUpgradeButton != null)
+        {
+            if (uIBugUpgradeButton.isRestricted())
+                return;
+        }
+
+
+
         if (ignoreButtonDependency)
         {
             anim = LeanTween.scale(gameObject, targetScale, animInTime);
@@ -26,6 +35,8 @@ public class ButtonAnim : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
                 if (button.interactable) anim = LeanTween.scale(gameObject, targetScale, animInTime);
             }
         }
+
+
 
     }
 
@@ -49,7 +60,8 @@ public class ButtonAnim : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             {
                 if (button.interactable)
                 {
-                    LeanTween.cancel(anim.uniqueId);
+                    if(anim != null)
+                         LeanTween.cancel(anim.uniqueId);
                     LeanTween.scale(gameObject, baseScale, animInTime / 2);
                 }
             }

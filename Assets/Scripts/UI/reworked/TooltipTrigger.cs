@@ -10,7 +10,14 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public string header;
     public void OnPointerEnter(PointerEventData eventData)
     {
-       delay = LeanTween.delayedCall(0.65f, () => 
+        UIBugUpgradeButton uIBugUpgradeButton = GetComponent<UIBugUpgradeButton>();
+        if (uIBugUpgradeButton != null)
+        {
+            if(uIBugUpgradeButton.isRestricted())
+                return;
+        }
+
+       delay = LeanTween.delayedCall(0.3f, () => 
         { 
             TooltipSystem.Show(content, header);
         });
@@ -25,7 +32,7 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void OnMouseEnter()
     {
-        delay = LeanTween.delayedCall(0.8f, () =>
+        delay = LeanTween.delayedCall(0.3f, () =>
         {
             TooltipSystem.Show(content, header);
         });

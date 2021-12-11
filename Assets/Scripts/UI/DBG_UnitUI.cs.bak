@@ -1,0 +1,226 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+public class DBG_UnitUI : MonoBehaviour
+{
+    // changed to singleton 
+    private static DBG_UnitUI _instance;
+    public static DBG_UnitUI Instance
+    {
+        get { return _instance; }
+    }
+
+    private void Awake()
+    {
+
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
+        _instance = this;
+
+
+    }
+
+    [SerializeField]
+    TextMeshProUGUI bug_name;
+    [SerializeField]
+    TextMeshProUGUI bugTask_Txt;
+    [SerializeField]
+    private GameObject levelUpPanel;
+
+
+
+
+    private EvolutionUI evolutionUI;
+    CoreBug bug;
+
+    private void Start()
+    {
+        evolutionUI = levelUpPanel.GetComponent<EvolutionUI>();
+    }
+    public void Show(CoreBug cb)
+    {
+        if (this.transform.GetChild(0).gameObject.activeInHierarchy)
+        {
+            this.transform.GetChild(0).gameObject.GetComponent<UIFader>().Show();
+            levelUpPanel.SetActive(false);
+        }
+        else
+            this.transform.GetChild(0).gameObject.SetActive(true);
+
+        bug = cb;
+        evolutionUI.SetBug(bug);
+        evolutionUI.OnAffordButtonActive();
+        SetTextBugName(cb);
+        SetTextCurrentState(cb);
+
+    }
+    public void ShowLevelUpPanel()
+    {      
+        if (bug)
+        {
+            if (GameController.Instance.IsLevelUpOnly(bug))
+            {
+                levelUpPanel.SetActive(false);
+                evolutionUI.LevelUpBug();
+                
+                return;
+            }
+
+            if (levelUpPanel.activeInHierarchy)
+            {
+                levelUpPanel.SetActive(false);
+                
+            }
+
+            else
+            {
+                levelUpPanel.SetActive(true);
+                
+            }
+               
+
+
+        }
+        
+
+    }
+    public void RestrictUnits(List<int> restrictedUnits,bool restricted)
+    {
+        evolutionUI.SetUnitRestriction(restrictedUnits, restricted);
+
+    }
+    public void Hide()
+    {
+        this.transform.GetChild(0).gameObject.SetActive(false);
+        levelUpPanel.SetActive(false);
+        
+        CellSelectProto.Instance.HideBugSelector();
+        TooltipSystem.Hide();
+    }
+    public void FollowUnit()
+    {
+        FindObjectOfType<CameraController>().SetTarget(bug.transform);
+        Hide();
+    }
+    public void SetTextBugName(CoreBug cb)
+    {
+        bug_name.text = Formatter_BugName.Instance.GetBugName(cb.bug_evolution);
+    }
+    public void SetTextCurrentState(CoreBug cb)
+    {
+        bugTask_Txt.text = Formatter_BugName.Instance.GetBugAction(cb.bugTask);
+    }
+    public void Update()
+    {
+        if (UIController.instance.isBuildMenuActive()) Hide();
+    }
+
+    public void SelectRoomFromBug()
+    {
+        HiveCell cell = bug.asigned_cell;
+        CellSelectProto.Instance.SetRoomSelection(cell);
+    }
+
+    public void AssignBug()
+    {
+        // we have a bug selected 
+        // we need to trigger bug path
+        CellSelectProto.Instance.SetAssignBugState();
+
+
+    }
+
+
+
+<<<<<<< HEAD
+    public void LevelUpBug()
+    {
+        if (bug == null) return;
+        if (GameController.Instance.EvolveBug(bug.bug_evolution))
+        {
+            bug.LevelUp();
+        }
+    }
+    public void OnAffordButtonActive()
+    {
+        warriorUpgrade.GetComponent<Button>().interactable = GameController.Instance.CanAffordUpgrade(CoreBug.BugEvolution.warrior);
+        clawUpgrade.GetComponent<Button>().interactable = GameController.Instance.CanAffordUpgrade(CoreBug.BugEvolution.claw);
+        rangedUpgrade.GetComponent<Button>().interactable = GameController.Instance.CanAffordUpgrade(CoreBug.BugEvolution.range);
+        ccUpgrade.GetComponent<Button>().interactable = GameController.Instance.CanAffordUpgrade(CoreBug.BugEvolution.cc_bug);
+    }
+    public void EvolveBug(int index)
+    {
+        Debug.Log("evolve " + index);
+
+        if (bug == null) return;
+
+        // drone => warrior
+        if (bug.bug_evolution == CoreBug.BugEvolution.drone)
+        {
+            if (GameController.Instance.EvolveBug(CoreBug.BugEvolution.warrior))
+                ArtPrefabsInstance.Instance.EvolveToLarvaFirst(bug, CoreBug.BugEvolution.warrior); // => drone to warrior bug
+            // or drone to super drone 
+           
+        }
+
+        if (bug.bug_evolution == CoreBug.BugEvolution.super_drone)
+        {
+          
+        }
+
+        // warrior => ranged, slow claw 
+        else
+        if (bug.bug_evolution == CoreBug.BugEvolution.warrior)
+        {
+
+            if (index == 1)
+            {
+                if (GameController.Instance.EvolveBug(CoreBug.BugEvolution.claw))
+                    ArtPrefabsInstance.Instance.EvolveBug(bug, 2); // => to warrior to claw 
+            }
+
+            if (index == 2)
+            {
+                if (GameController.Instance.EvolveBug(CoreBug.BugEvolution.range))
+                    ArtPrefabsInstance.Instance.EvolveBug(bug, 4); // => to warrior to ranged
+            }
+                
+            if (index == 3)
+            {
+                if (GameController.Instance.EvolveBug(CoreBug.BugEvolution.cc_bug))
+                    ArtPrefabsInstance.Instance.EvolveBug(bug, 5); // => to warrior to cc
+            }
+
+        }
+        // claw, mele splash => can siege
+        else
+        if (bug.bug_evolution == CoreBug.BugEvolution.claw)
+        {
+
+        }
+        // ranged shoot, mele splash => can siege
+        else
+        if (bug.bug_evolution == CoreBug.BugEvolution.range)
+        {
+
+        }
+        // cc bug bug slow targets => can siege
+        else
+        if (bug.bug_evolution == CoreBug.BugEvolution.cc_bug)
+        {
+
+        }
+
+
+        Hide();
+    }
+=======
+>>>>>>> 55fe714 (update5)
+
+}

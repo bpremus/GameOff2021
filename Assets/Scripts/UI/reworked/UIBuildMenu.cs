@@ -20,11 +20,11 @@ public class UIBuildMenu : MonoBehaviour
         awakeTime = 0;
 
 
-        CheckIfCanAfford();
+      CheckIfCanAfford();
     }
     public void CheckIfCanAfford()
     {
-        Debug.Log("Updating if player can afford to buy ");
+       
         foreach (GameObject room in roomsPanels)
         {
 

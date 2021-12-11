@@ -5,6 +5,18 @@ using UnityEngine;
 public class WarriorLevel : CoreLevel
 {
     [SerializeField] private List<int> restrictedBuilds;
+    [SerializeField] private List<int> restrictedUnits;
+
+
+
+    #region UnitRestriction
+    // limit unit evolution 
+    public override void SetAvialableUnits()
+    {
+        levelManager.uiController.RestrictUnits(restrictedUnits, true);
+    }
+    #endregion
+
     #region RoomRestrictions
     public override void SetAvialableRooms()
     {

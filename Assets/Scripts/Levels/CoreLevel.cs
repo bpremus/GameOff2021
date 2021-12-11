@@ -15,8 +15,10 @@ public class CoreLevel : MonoBehaviour
 
     public virtual void SetCamera() { }
 
+    //0 superworker /1 warrior / 2 claw / 3 range /4 cc
     public virtual void SetAvialableUnits() { }
 
+    // 0 corridor /1 harvester /2 salvage  /3 barracks /4 hatchery
     public virtual void SetAvialableRooms() { }
 
     public virtual void UnlockRestrictedRoom(int roomID) { }
@@ -35,6 +37,7 @@ public class CoreLevel : MonoBehaviour
         SetGrid();
         SetCamera();
         SetAvialableRooms();
+        SetAvialableUnits();
     }
     public void RunLevel()
     {

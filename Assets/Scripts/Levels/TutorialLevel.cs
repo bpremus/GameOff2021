@@ -7,6 +7,7 @@ public class TutorialLevel : CoreLevel
     [SerializeField] int food_objective = 100;
     [SerializeField] int wood_objective = 10;
     [SerializeField] private List<int> restrictedBuilds;
+    [SerializeField] private List<int> restrictedUnits;
 
     public List<int> GetRestrictedList()
     {
@@ -42,9 +43,14 @@ public class TutorialLevel : CoreLevel
         cam_controller.SetFocus(hc);
     }
 
-    // limit unit evolution 
-    public override void SetAvialableUnits() { }
 
+    #region UnitRestriction
+    // limit unit evolution 
+    public override void SetAvialableUnits() 
+    {
+        levelManager.uiController.RestrictUnits(restrictedUnits, true);
+    }
+    #endregion
     #region RoomRestrictions
     public override void SetAvialableRooms() 
     {

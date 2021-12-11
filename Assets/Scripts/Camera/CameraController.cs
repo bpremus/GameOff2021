@@ -25,6 +25,7 @@ public class CameraController : MonoBehaviour
     public float keyboardMovementSpeed = 25f; //speed with keyboard movement
     public float screenEdgeMovementSpeed = 25f; //spee with screen edge movement
     public float followingSpeed = 15f; //speed when following a target
+    public float focusingSpeed = 40f; //speed when setting a focus on specific object (for objectives)
     public float dragMovementSpeed = 35f; // speed when drag and click
 
     #endregion
@@ -67,7 +68,17 @@ public class CameraController : MonoBehaviour
     }
 
     #endregion
-
+    #region Focusing
+    [Header("Focusing camera")]
+    public Transform focusTarget;
+    public bool FocusingTarget
+    {
+        get
+        {
+            return focusTarget != null;
+        }
+    }
+    #endregion
     #region Input
     [Header("Inputs")]
     public float screenEdgeBorder = 25f;
@@ -152,9 +163,9 @@ public class CameraController : MonoBehaviour
 
     public void SetFocus(HiveCell hc)
     {
-        Debug.Log("focus on " + hc.name);
+        Debug.Log("Camera focusing on:  " + hc.name);
         zoomPos = 0.5f;
-        m_Transform.position = hc.transform.position;
+        focusTarget = hc.transform;
 
     }
     public bool IsDragging()
@@ -180,7 +191,12 @@ public class CameraController : MonoBehaviour
             if (Input.GetKeyDown(stopFollowingKey)) UIController.instance.SetDefaultState();
             else
               FollowTarget();
-        }      
+        }   
+        else if (FocusingTarget)
+        {
+            if (Input.GetKeyDown(stopFollowingKey)) { UIController.instance.SetDefaultState();focusTarget = null; }
+            SetFocus();
+        }
         else
             Move();
 
@@ -281,7 +297,13 @@ public class CameraController : MonoBehaviour
         Vector3 targetPos = new Vector3(targetFollow.position.x, targetFollow.position.y, m_Transform.position.z) + targetOffset;
         m_Transform.position = Vector3.MoveTowards(m_Transform.position, targetPos, Time.deltaTime * followingSpeed);
     }
+    private void SetFocus()
+    {
+        Vector3 targetPos = new Vector3(focusTarget.position.x, focusTarget.position.y, m_Transform.position.z) + targetOffset;
+        m_Transform.position = Vector3.MoveTowards(m_Transform.position, targetPos, Time.deltaTime * followingSpeed);
 
+        if (Vector3.Distance(m_Transform.position, targetPos) < 0.2f) focusTarget = null;
+    }
     private void LimitPosition()
     {
         if (!limitEnabled)

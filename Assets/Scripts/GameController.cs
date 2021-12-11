@@ -87,6 +87,9 @@ public class GameController : MonoBehaviour
 
     [SerializeField] int[] bug_return_resources = { 5, 10 };
 
+
+
+    //costs               food wood
     [SerializeField] int[] evolve_drone         = { 5, 0 };
     [SerializeField] int[] evolve_super_drone   = { 25, 10 };
     [SerializeField] int[] evolve_warrior       = { 25, 10 };
@@ -137,12 +140,12 @@ public class GameController : MonoBehaviour
     }
     public bool OnFoodValueChanged()
     {
+        //this gets called only in one frame
         if(lastFoodValue != food)
         {
             int difference = food - lastFoodValue;
             lastFoodValue = food;
             //here we can play animation of food added (+difference)
-            Debug.Log(" [ "+difference + " ] FOOD");
             ValueChangedDisplay.Instance.OnNewValue(difference, 0);
             return true;
         }
@@ -155,7 +158,6 @@ public class GameController : MonoBehaviour
             int difference = wood - lastWoodValue;
             lastWoodValue = wood;
             //here we can play animation of wood added (+difference)
-            Debug.Log(" [ " + difference + " ] WOOD");
             ValueChangedDisplay.Instance.OnNewValue(difference, 1);
 
             return true;
@@ -168,7 +170,7 @@ public class GameController : MonoBehaviour
         {
             int difference = population - lastPopulationValue;
             lastPopulationValue = population;
-            Debug.Log(" [ " + difference + " ] POPULATION");
+            
             ValueChangedDisplay.Instance.OnNewValue(difference, 2);
             return true;
         }
@@ -194,7 +196,7 @@ public class GameController : MonoBehaviour
          
 
     }
-    private int[] GetUpgradeCost(CoreBug.BugEvolution bugEvolution)
+    public int[] GetUpgradeCost(CoreBug.BugEvolution bugEvolution)
     {
         switch (bugEvolution)
         {
@@ -217,10 +219,10 @@ public class GameController : MonoBehaviour
     } 
     public bool CanAffordUpgrade(CoreBug.BugEvolution bugEvolution)
     {
-        int[] cost = GetUpgradeCost(bugEvolution);
-        if (food >= cost[0] && wood >= cost[1]) return true;
-        return false;
+        return DoWeHaveEnoughResources(GetUpgradeCost(bugEvolution));
     }
+
+
     public void OnGameEnd()
     { 
     
@@ -420,6 +422,12 @@ public class GameController : MonoBehaviour
 
     // methods 
     // ------------------------------
+
+    public int[] GetResources()
+    {
+        int[] resources = { food, wood };
+        return resources;
+    }
     public int GetFood()
     {
         return food;
