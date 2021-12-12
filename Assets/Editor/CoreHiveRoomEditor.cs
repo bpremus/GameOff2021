@@ -17,12 +17,6 @@ public class CoreHiveRoomEditor : Editor
             qr.SpawnBug();
         }
 
-        if (GUILayout.Button("Send Bugs to collect"))
-        {
-            QueenRoom qr = (QueenRoom)target;
-            qr.SendToCollect();
-        }
-
         if (GUILayout.Button("Recall Bugs"))
         {
             QueenRoom qr = (QueenRoom)target;

@@ -16,11 +16,5 @@ public class HarvesterRoomEditor : Editor
             hr.GetBugsFromHive();
         }
 
-        if (GUILayout.Button("Send to collect"))
-        {
-            HarversterRoom hr = (HarversterRoom)this.target;
-            hr.SendToCollect();
-        }
-
     }
 }

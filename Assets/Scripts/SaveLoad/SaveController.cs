@@ -8,9 +8,10 @@ using UnityEngine;
 
 public class SaveController : MonoBehaviour
 {
-    [SerializeField] protected HiveGenerator  hiveGenerator;
-    [SerializeField] protected GameController gameController;
-    [SerializeField] protected LevelManager   levelManager;
+    [SerializeField] protected HiveGenerator     hiveGenerator;
+    [SerializeField] protected GameController    gameController;
+    [SerializeField] protected LevelManager      levelManager;
+    [SerializeField] protected WorldMapGenerator worldMapGenerator;
 
     [SerializeField] protected string current_filename = "";
 
@@ -45,14 +46,16 @@ public class SaveController : MonoBehaviour
     //   L HiveCell
     //      L HiveRoom
     //         L CoreBug
+    // WorldMap
 
     [System.Serializable]
     public class SaveArchiveData
     {
         public string filename;
-        public GameController.SaveGameController gameController;
-        public HiveGenerator.SaveHiveGenerator   hiveGenerator;
-        public LevelManager.SaveLevelManager     levelManager;
+        public GameController.SaveGameController  gameController;
+        public HiveGenerator.SaveHiveGenerator    hiveGenerator;
+        public LevelManager.SaveLevelManager      levelManager;
+        public WorldMapGenerator.SaveWorldMapCell worldMap;
     }
 
     public void OnLoadFilename(string filename)
@@ -64,6 +67,7 @@ public class SaveController : MonoBehaviour
         hiveGenerator.SetSaveData(save_data.hiveGenerator);
         gameController.SetSaveData(save_data.gameController);
         levelManager.SetSaveData(save_data.levelManager);
+        worldMapGenerator.SetSaveWorldMapData(save_data.worldMap);
     }
 
     public void OnLoad()
@@ -77,6 +81,7 @@ public class SaveController : MonoBehaviour
             hiveGenerator.SetSaveData(save_data.hiveGenerator);
             gameController.SetSaveData(save_data.gameController);
             levelManager.SetSaveData(save_data.levelManager);
+            worldMapGenerator.SetSaveWorldMapData(save_data.worldMap);
         }
     }
 
@@ -87,6 +92,7 @@ public class SaveController : MonoBehaviour
         save_data.gameController  = gameController.GetSaveData();
         save_data.hiveGenerator   = hiveGenerator.GetSaveData();
         save_data.levelManager    = levelManager.GetSaveData();
+        save_data.worldMap        = worldMapGenerator.GetSaveWorldMapData();
 
         // ready to pass to save
         DateTime utcDate = DateTime.UtcNow;

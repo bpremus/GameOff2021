@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class WorldMapCell : MonoBehaviour
 {
+
     protected WorldMapGenerator generator;
 
     [SerializeField] Sprite[] prefab_icons;
@@ -14,6 +15,7 @@ public class WorldMapCell : MonoBehaviour
     [SerializeField] List<WorldMapCell> borders = new List<WorldMapCell>();
     int x = 0;
     int y = 0;
+    
     public void SetPos(int x, int y, WorldMapGenerator generator)
     {
         this.x = x;
@@ -25,7 +27,12 @@ public class WorldMapCell : MonoBehaviour
     public Cell_type cell_Type = Cell_type.hidden;
     public float peral = 0;
     public float dist = 0;
+    public int uuid = 0;
 
+    public void OnBugVisit()
+    {
+        dist--;
+    }
 
     public void SetNeighbours(List<List<WorldMapCell>> cells)
     {
@@ -124,14 +131,12 @@ public class WorldMapCell : MonoBehaviour
         }
     }
 
-
     public void OnClick()
     {
         if (cell_Type == Cell_type.player_hive)
         {
             return;
         }
-
         generator.SetRoomAsDesitnation(this);
     }
 

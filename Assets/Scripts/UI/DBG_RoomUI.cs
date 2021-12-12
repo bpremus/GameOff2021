@@ -51,12 +51,10 @@ public class DBG_RoomUI : MonoBehaviour
             GameObject g = Instantiate(bug_button_prefab, bug_lis_cell.transform);
             Button b = g.GetComponent<Button>();
             UIBugButton bbc = b.GetComponent<UIBugButton>();
-            bbc.bug = bugs[i]; // button will know how to renderitself
+            bbc.bug = bugs[i]; // button will know how to render itself
             b.onClick.AddListener(delegate { OnBugSelected(bbc); });
             listed_bugs.Add(bugs[i]);
         }
-
-
     }
 
     void OnBugSelected(UIBugButton bugbutton)
@@ -65,7 +63,7 @@ public class DBG_RoomUI : MonoBehaviour
     }
    
 
-
+    /*
     public void Update()
     {
         if (Input.GetKeyDown("1"))
@@ -111,24 +109,12 @@ public class DBG_RoomUI : MonoBehaviour
         room_name.name = hc.GetRoom().name;
 
     }
+
+    */
     public void Hide()
     {
         this.transform.GetChild(0).gameObject.SetActive(false);
     }
 
-    public void SetTaks()
-    {
-        CoreRoom room = hiveCell.GetRoom();
-        if (room)
-        {
-            HarversterRoom hrom = room.GetComponent<HarversterRoom>();
-            if (hrom)
-            {
-                Debug.Log("send gathering");
-                hrom.SendToCollect();
-                OnSendGathering();
-            }
-        }
-    }
 
 }

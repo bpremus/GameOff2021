@@ -73,7 +73,7 @@ public class QueenRoom : HiveRoom
     }
     
     Queue<CoreBug> bugs_on_collect_task = new Queue<CoreBug>();
-    public void SendToCollect()
+    public override void SendToCollect(WorldMapCell gathering_destination)
     {
         Debug.Log("send hive to collect");
 
@@ -87,6 +87,7 @@ public class QueenRoom : HiveRoom
             {
                 if (bugs_on_collect_task.Contains(wb) == false)
                 {
+                    wb.gathering_cell = gathering_destination;
                     bugs_on_collect_task.Enqueue(wb);
                 }
             }
@@ -176,33 +177,14 @@ public class QueenRoom : HiveRoom
         if (bug.harvest_object == null) return;
 
         ActionLogger.Instance.AddLog(bug.name + " has return to harvester",0);
-
         Destroy(bug.harvest_object);
         bug.harvest_object = null;
-
-        OnBugReachHomeCell(bug);
+        WorldMapGenerator.Instance.ReportVisitedCell(bug.gathering_cell);
+        bug.OnBugReachHomeCell();
     }
 
-    public void OnBugReachGatheringSite(CoreBug bug)
-    {
-        Debug.Log("bugs are gathering");
-        
-        if (bug.harvest_object != null)
-        {
-            Destroy(bug.harvest_object);
-            bug.harvest_object = null;
-        }
-
-        int idx = Random.Range(0, ArtPrefabsInstance.Instance.FoodAndWoodPrefabs.Length);
-        GameObject food_wood = ArtPrefabsInstance.Instance.FoodAndWoodPrefabs[idx];
-        Vector3 food_pos = new Vector3(0, 0, -5);
-        GameObject g = Instantiate(food_wood, food_pos, Quaternion.identity);
-        bug.harvest_object = g;
-    }
-    public void OnBugReachHomeCell(CoreBug bug)
-    {
-        GameController.Instance.OnBringResources();
-    }
+ 
+  
 
     public void OnBugDepart(CoreBug bug)
     {
@@ -282,7 +264,7 @@ public class QueenRoom : HiveRoom
                         {
                             // we have reached the destination 
                             // bring back food 
-                            OnBugReachGatheringSite(bug);
+                            bug.OnBugReachGatheringSite();
                             bug.GoTo(this.cell);
                             bug.SetAction(CoreBug.Bug_action.returning);
                         }

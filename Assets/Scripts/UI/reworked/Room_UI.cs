@@ -146,8 +146,8 @@ public class Room_UI : MonoBehaviour
             if (hrom)
             {
                 Debug.Log("send gathering");
-                hrom.SendToCollect();
-              //  OnSendGathering();
+                WorldMapGenerator.Instance.OpenMap(hrom);
+                //  OnSendGathering();
             }
 
             QueenRoom qroom = room.GetComponent<QueenRoom>();

@@ -120,6 +120,9 @@ public class CoreBug : BugMovement
     [SerializeField]
     public HiveCell underlaying_cell = null;
 
+    [SerializeField]
+    public WorldMapCell gathering_cell;
+
     public enum BugEvolution { none, drone, super_drone, warrior, claw, range, cc_bug, larva_evolve };
     public BugEvolution bug_evolution = BugEvolution.drone;
 
@@ -338,7 +341,7 @@ public class CoreBug : BugMovement
     {
         base.OnWalk();
 
-        // we can cary somethign if we have something 
+        // we can carry something if we have something 
         if (harvest_object)
             harvest_object.transform.position = transform.position + transform.up * 0.5f;
 
@@ -593,6 +596,45 @@ public class CoreBug : BugMovement
         {
             _renderer[i].SetPropertyBlock(_block);
         }
+    }
+
+    public void OnBugReachGatheringSite()
+    {
+
+        if (harvest_object != null)
+        {
+            Destroy(harvest_object);
+            harvest_object = null;
+        }
+
+        int idx = 0;
+        if (gathering_cell != null)
+        {
+            if (gathering_cell.cell_Type == WorldMapCell.Cell_type.food)
+            {
+                idx = Random.Range(0, 2);
+            }
+            if (gathering_cell.cell_Type == WorldMapCell.Cell_type.wood)
+            {
+                idx = Random.Range(2, 6);
+            }
+        }
+        else
+        {
+            return;
+        }
+     
+        GameObject food_wood = ArtPrefabsInstance.Instance.FoodAndWoodPrefabs[idx];
+        Vector3 food_pos = new Vector3(0, 0, -5);
+        GameObject g = Instantiate(food_wood, food_pos, Quaternion.identity);
+        harvest_object = g;
+
+    }
+
+    public void OnBugReachHomeCell()
+    {
+        GameController.Instance.OnBringResources(gathering_cell.cell_Type);
+        gathering_cell = null;
     }
 
 }

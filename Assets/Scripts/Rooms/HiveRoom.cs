@@ -49,4 +49,5 @@ public class HiveRoom : CoreRoom
             cb.SetAction(CoreBug.Bug_action.idle);
         }
     }
+    public virtual void SendToCollect(WorldMapCell gathering_destination) { }
 }

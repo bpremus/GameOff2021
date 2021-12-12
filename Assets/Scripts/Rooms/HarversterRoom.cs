@@ -37,6 +37,7 @@ public class HarversterRoom : HiveRoom
     [SerializeField]
     public HiveCell gather_destination;
     public int gather_duration_time = 1;
+    [SerializeField] WorldMapCell gathering_destination;
 
     // we can have it for each separate bug
     // or we handle all bugs ate same time
@@ -58,30 +59,10 @@ public class HarversterRoom : HiveRoom
             Debug.Log("moving a bug");
         }
     }
-    public void SendToCollect()
+    public override void SendToCollect(WorldMapCell gathering_destination)
     {
-        int[] hive_size = cell.hiveGenerator.GetSize();
+        this.gathering_destination = gathering_destination;
         gather_destination = cell.hiveGenerator.GetGatheringCell();
-    }
-    public void OnBugReachGatheringSite(CoreBug bug)
-    {
-        Debug.Log("bugs are gathering");
-        if (bug.harvest_object != null)
-        {
-            Destroy(bug.harvest_object);
-            bug.harvest_object = null;
-        }
-        int idx = Random.Range(0, ArtPrefabsInstance.Instance.FoodAndWoodPrefabs.Length);
-        GameObject food_wood = ArtPrefabsInstance.Instance.FoodAndWoodPrefabs[idx];
-        Vector3 food_pos = new Vector3(0, 0, -5);
-        GameObject g =  Instantiate(food_wood, food_pos, Quaternion.identity);
-        bug.harvest_object = g;
-    }
-
-    public void OnBugReachHomeCell(CoreBug bug)
-    {
-        Debug.Log("bugs returned home");
-        GameController.Instance.OnBringResources();
     }
 
     public override void RecallBugs()
@@ -111,11 +92,9 @@ public class HarversterRoom : HiveRoom
                 WorkerBug cb = assigned_bugs[i].GetComponent<WorkerBug>();
                 if (cb)
                 {
-
                     // set task
                     cb.bugTask = CoreBug.BugTask.harvesting;
-
-
+                    cb.gathering_cell = gathering_destination;
                     // moving to location 
                     if (cb.GetAction == CoreBug.Bug_action.idle)
                     {
@@ -134,7 +113,7 @@ public class HarversterRoom : HiveRoom
                         if (cb.current_cell == gather_destination)
                         {
                             cb.NextAction();
-                            OnBugReachGatheringSite(cb);
+                            cb.OnBugReachGatheringSite();
 
                             // start gathering 
                             _gather_t = 0;
@@ -168,9 +147,10 @@ public class HarversterRoom : HiveRoom
                      
                         if (cb.underlaying_cell == this.cell)
                         {
-                            OnBugReachHomeCell(cb);
-                            cb.NextAction();
 
+                            WorldMapGenerator.Instance.ReportVisitedCell(cb.gathering_cell);
+                            cb.OnBugReachHomeCell();
+                            cb.NextAction();
 
                             Destroy(cb.harvest_object);
                             cb.harvest_object = null;

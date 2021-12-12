@@ -342,6 +342,14 @@ public class GameController : MonoBehaviour
         food += bug_return_resources[0];
         wood += bug_return_resources[1];
     }
+    public void OnBringResources(WorldMapCell.Cell_type cell_type)
+    {
+        if (cell_type == WorldMapCell.Cell_type.food)
+            food += bug_return_resources[0];
+        if (cell_type == WorldMapCell.Cell_type.wood)
+            wood += bug_return_resources[1];
+    }
+
     public void OnStolenFood()
     {
         food -= 1;
