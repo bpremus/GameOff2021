@@ -164,7 +164,7 @@ public class QueenRoom : HiveRoom
 
     public void OnMaxDronesInRoom()
     {
-        ActionLogger.Instance.AddLog("You have reached maximum units in Queen room!", 2);
+        ActionLogger.Instance.AddLog("Queen room is full!", 2);
     }
 
     public void OnNotEnoughResrouces()
@@ -188,7 +188,7 @@ public class QueenRoom : HiveRoom
 
     public void OnBugDepart(CoreBug bug)
     {
-        ActionLogger.Instance.AddLog(bug.name + " is send to collect resources", 0);
+        ActionLogger.Instance.AddLog(Formatter_BugName.Instance.GetBugName(bug.bug_evolution) + " is on its way for resources", 0);
     }
 
     public bool SpawnBug()
@@ -206,11 +206,12 @@ public class QueenRoom : HiveRoom
             else
             {
                 // not enough food 
+                ActionLogger.Instance.AddLog("Not enough resources!", 2);
                 return false;
             }
 
             bugs_to_spawn.Enqueue(0); // drone 
-            ActionLogger.Instance.AddLog("Producing a worker:  " + bugs_to_spawn.Count + " of " + max_asigned_units, 0);
+            ActionLogger.Instance.AddLog("Producing worker:  " + bugs_to_spawn.Count + " of " + max_asigned_units, 0);
             return true;
         }
 

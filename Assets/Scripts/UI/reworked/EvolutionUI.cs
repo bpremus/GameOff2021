@@ -162,6 +162,7 @@ public class EvolutionUI : MonoBehaviour
             bool enoughwood = GameController.Instance.GetWood() >= neededwood ? true : false;
 
             upgradeCostPanel.GetComponent<UIEvolutionCost>().SetCosts(neededfood, neededwood, enoughfood, enoughwood);
+            upgradeCostPanel.GetComponent<UIEvolutionCost>().SetName(desiredEvol);
          }
 
     }
