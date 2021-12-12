@@ -45,6 +45,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   food_objective: 100
   wood_objective: 20
+  restrictedBuilds: 0000000001000000020000000300000004000000
+  restrictedUnits: 
 --- !u!1 &2748802992680419531
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,6 +90,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a21dc492452890541b09a9464a13ac8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  restrictedBuilds: 00000000010000000200000004000000
+  restrictedUnits: 
 --- !u!1 &2748802993061385393
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,6 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08b757b987e5fbc4e95ac21eab935fab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _debugCheats: 1
   hive_generator: {fileID: 0}
   ui_controller: {fileID: 0}
   game_levels:
@@ -184,6 +189,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e72eb2bf526544d4bb65ae6b9a8e72a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  restrictedBuilds: 010000000200000004000000
+  restrictedUnits: 
 --- !u!1 &6732557579074229628
 GameObject:
   m_ObjectHideFlags: 0

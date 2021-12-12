@@ -179,12 +179,12 @@ public class EvolutionUI : MonoBehaviour
             if(desiredEvolution == CoreBug.BugEvolution.warrior)
             {
                 if(GameController.Instance.EvolveBug(desiredEvolution))
-                     ArtPrefabsInstance.Instance.EvolveToLarvaFirst(bug, 3);
+                     ArtPrefabsInstance.Instance.EvolveToLarvaFirst(bug, CoreBug.BugEvolution.warrior);
             }
                
             else if(desiredEvolution == CoreBug.BugEvolution.super_drone)
             {
-                // superdrone evolution
+                // super-drone evolution
             }
         }
         else if(currentEvolution == CoreBug.BugEvolution.warrior)
@@ -218,7 +218,7 @@ public class EvolutionUI : MonoBehaviour
         if (bug.bug_evolution == CoreBug.BugEvolution.drone)
         {
             if (GameController.Instance.EvolveBug(CoreBug.BugEvolution.warrior))
-                ArtPrefabsInstance.Instance.EvolveToLarvaFirst(bug, 3); // => drone to warrior bug
+                ArtPrefabsInstance.Instance.EvolveToLarvaFirst(bug, CoreBug.BugEvolution.warrior); // => drone to warrior bug
                                                                         // or drone to super drone 
 
         }
