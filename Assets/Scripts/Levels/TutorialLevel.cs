@@ -8,14 +8,15 @@ public class TutorialLevel : CoreLevel
     [SerializeField] int wood_objective = 10;
     [SerializeField] private List<int> restrictedBuilds;
     [SerializeField] private List<int> restrictedUnits;
-
+    string objectiveTxt_1;
+    string objectiveTxt_2;
     public List<int> GetRestrictedList()
     {
         return restrictedBuilds;
     }
     private void Awake()
     {
-       
+
     }
     public override void SetGrid() {
         Debug.Log("tutorial started");
@@ -30,9 +31,12 @@ public class TutorialLevel : CoreLevel
         DrawMask(2);
 
         // message to log 
-        GameLog.Instance.WriteLine("New objective");
-        GameLog.Instance.WriteLine("Gather " + food_objective + " food");
-        GameLog.Instance.WriteLine("Gather " + wood_objective + " wood");
+        //   GameLog.Instance.WriteLine("Gather " + food_objective + " food");
+        //   GameLog.Instance.WriteLine("Gather " + wood_objective + " wood");
+        objectiveTxt_1 = "Gather " + food_objective + " food";
+        objectiveTxt_2 = "Gather " + wood_objective + " wood";
+        ObjectiveDisplay.Instance.AddToObjectiveList(objectiveTxt_1,0);
+        ObjectiveDisplay.Instance.AddToObjectiveList(objectiveTxt_2,0);
     }
 
     // focus camera when game start on hive
@@ -106,9 +110,12 @@ public class TutorialLevel : CoreLevel
     // if goal is completed (x food, y wood) go to next level
     public override bool IsTaskCompleted() {
 
+
         int food = GameController.Instance.GetFood();
         int wood = GameController.Instance.GetWood();
 
+        if (food >= food_objective) ObjectiveDisplay.Instance.RemoveFromObjectiveList(objectiveTxt_1);
+        if (wood >= wood_objective) ObjectiveDisplay.Instance.RemoveFromObjectiveList(objectiveTxt_2);
         if (food >= food_objective && wood >= wood_objective)
         {
             OnLevelComplete();
@@ -119,7 +126,7 @@ public class TutorialLevel : CoreLevel
 
     public override void OnLevelComplete()
     {
-        GameLog.Instance.WriteLine("Task completed successfully");
+        ObjectiveDisplay.Instance.AllCompleted();
     }
 
 }
