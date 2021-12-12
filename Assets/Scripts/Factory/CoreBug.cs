@@ -123,7 +123,7 @@ public class CoreBug : BugMovement
     [SerializeField]
     public WorldMapCell gathering_cell;
 
-    public enum BugEvolution { none, drone, super_drone, warrior, claw, range, cc_bug, larva_evolve };
+    public enum BugEvolution { none, drone, super_drone, warrior, claw, range, cc_bug, larva_evolve, ai_scout, ai_warrior };
     public BugEvolution bug_evolution = BugEvolution.drone;
 
     // stats 
@@ -278,7 +278,7 @@ public class CoreBug : BugMovement
         if (health <= 0) LateDie();
     }
 
-    public virtual void OnDestinationReach()
+    public virtual void OnDestinationReach(HiveCell cell)
     {
         //  Debug.Log("destination reached");
     }
@@ -332,7 +332,7 @@ public class CoreBug : BugMovement
         Destroy(this.gameObject);
     }
 
-    public virtual void OnTargetReach()
+    public virtual void OnTargetReach(HiveCell cell)
     {
       //  Debug.Log("target reached");
     }
@@ -456,14 +456,14 @@ public class CoreBug : BugMovement
                 {
                     if (target_cell == underlaying_cell)
                     {
-                        OnTargetReach();
+                        OnTargetReach(target_cell);
                     }
                 }
                 else
                 {
                     current_cell = target_cell;
                     target = current_cell.transform.position + z_offset;
-                    OnDestinationReach();
+                    OnDestinationReach(current_cell);
                 }
                 return;
             }
@@ -631,7 +631,7 @@ public class CoreBug : BugMovement
 
     }
 
-    public void OnBugReachHomeCell()
+    public virtual void OnBugReachHomeCell()
     {
         GameController.Instance.OnBringResources(gathering_cell.cell_Type);
         gathering_cell = null;

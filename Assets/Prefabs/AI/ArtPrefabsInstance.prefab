@@ -58,8 +58,8 @@ MonoBehaviour:
   - {fileID: 1175946443047106057, guid: 8ea5be6810593244a98fc692d3759893, type: 3}
   - {fileID: 1664299985290156309, guid: 10a241a2ba46cf2469690ec88971a584, type: 3}
   - {fileID: 3270396882474652906, guid: e453a1e328baa5a4eb41f8ef43e1c274, type: 3}
-  - {fileID: 8405167607926938731, guid: 088dbabcf83a5f5409ad38b81ab9f289, type: 3}
-  - {fileID: 6348623539465587848, guid: 16c9f6643496e9245b2b58a35c5f3e00, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 5485858880051525833, guid: 5c09c03d148d97c44ab347608b446ec4, type: 3}
   FoodAndWoodPrefabs:
   - {fileID: 6071048527007354161, guid: 95a00b40ca02c7346b0c47bd0292c6ac, type: 3}
@@ -68,3 +68,6 @@ MonoBehaviour:
   - {fileID: 1929718857874232000, guid: 9b6d56a46bff0a54494228a3deb7f569, type: 3}
   - {fileID: 6178142779172050155, guid: 7c94571fcdf4d06429600ec739f7e011, type: 3}
   - {fileID: 1933279571808483582, guid: 9c0c098df875e8040bc434df37e1d581, type: 3}
+  AIBugsPrefabs:
+  - {fileID: 8405167607926938731, guid: 088dbabcf83a5f5409ad38b81ab9f289, type: 3}
+  - {fileID: 6348623539465587848, guid: 16c9f6643496e9245b2b58a35c5f3e00, type: 3}

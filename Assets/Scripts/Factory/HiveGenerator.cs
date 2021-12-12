@@ -27,14 +27,11 @@ public class HiveGenerator : MonoBehaviour
         data.width = this.width;
         data.height = this.height;
         data.isGameStarted = this.isGameStarted;
-
         List<HiveCell> all_modified_cells = GetAllBuiltRooms();
- 
         data.saved_cells = new HiveCell.SaveHiveCell[all_modified_cells.Count + 1];
 
         // Save queen first 
         data.saved_cells[0] = GetHiveQueenRoom().GetSaveData();
-
         // Save all other rooms
         for (int i = 1; i <= all_modified_cells.Count; i++)
         {
@@ -152,8 +149,7 @@ public class HiveGenerator : MonoBehaviour
                     {
                         Debug.Log("added");
                         rooms.Add(gs);
-                    }
-                   
+                    }          
                 }
             }
         }
@@ -177,7 +173,6 @@ public class HiveGenerator : MonoBehaviour
 
                     if (rooms.Contains(gs) == false)
                             rooms.Add(gs);
-                    
                 }
             }
         }
