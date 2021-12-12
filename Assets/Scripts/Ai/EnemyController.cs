@@ -21,6 +21,7 @@ public class EnemyController : MonoBehaviour
         RunnerBug rb = ArtPrefabsInstance.Instance.SpawnAI(task.evolution_type, spawn_cell);
         rb.SetBugColor(0.1f, 0.1f, 0.1f);
         rb.GoToAndBack(spawn_cell, task.destination);
+        rb.coalition = 1;
         return rb;
     }
 
@@ -38,7 +39,6 @@ public class EnemyController : MonoBehaviour
             }
         }
     }
-
 
     // scout single room
     public void SapwnScount(CoreBug.BugEvolution evolution_type, HiveCell desitnation)

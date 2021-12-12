@@ -102,8 +102,11 @@ public class WarriorLevel : CoreLevel
             {
                 WarriorBug wb = bug.GetComponent<WarriorBug>();
                 {
-                    OnLevelComplete();
-                    if (wb) return true; // task completed 
+                    if (wb)
+                    {
+                        OnLevelComplete();
+                        return true; // task completed 
+                    } 
                 }
             }
         }

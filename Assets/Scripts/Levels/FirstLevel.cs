@@ -106,7 +106,7 @@ public class FirstLevel : CoreLevel
 
     public override void OnLevelComplete()
     {
-        GameLog.Instance.WriteLine("Task completed sucessfully");
+        GameLog.Instance.WriteLine("Task completed successfully");
     }
 
 }

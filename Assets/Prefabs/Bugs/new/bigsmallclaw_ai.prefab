@@ -1301,7 +1301,7 @@ GameObject:
   - component: {fileID: 5303903770740140953}
   m_Layer: 7
   m_Name: bigsmallclaw_ai
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1359,17 +1359,22 @@ MonoBehaviour:
   target_cell: {fileID: 0}
   asigned_cell: {fileID: 0}
   underlaying_cell: {fileID: 0}
+  gathering_cell: {fileID: 0}
   bug_evolution: 0
   health: 10
   damage: 1
+  extra_damage: 0
   interraction_range: 1
-  decayOnDeadTimer: 20
+  decayOnDeadTimer: 60
   bug_base_level: 1
+  bug_kill_count: 0
+  bug_task_count: 0
   bugTask: 0
   bug_action: 0
   coalition: 0
-  hitColliders: []
   splash_dmg: 1
+  hitColliders: []
+  walk_animation_adjust: 1
 --- !u!1 &8666403337561147034
 GameObject:
   m_ObjectHideFlags: 0
