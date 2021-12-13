@@ -61,7 +61,7 @@ public class Card_BuildMenu : MonoBehaviour,IPointerEnterHandler,IPointerExitHan
         button.interactable = !this.restricted;
         if (!restricted)
         {
-            ActionLogger.Instance.AddLog(gameObject.name + " is unlocked now!", 1);
+           // ActionLogger.Instance.AddLog(gameObject.name + " is unlocked now!", 1);
         }
     }
     public void SetCosts()

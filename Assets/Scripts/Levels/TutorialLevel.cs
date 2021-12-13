@@ -6,10 +6,13 @@ public class TutorialLevel : CoreLevel
 {
     [SerializeField] int food_objective = 100;
     [SerializeField] int wood_objective = 10;
+    [SerializeField] int population_objective = 5;
     [SerializeField] private List<int> restrictedBuilds;
     [SerializeField] private List<int> restrictedUnits;
-    string objectiveTxt_1;
-    string objectiveTxt_2;
+    [SerializeField] string tasksHeader;
+    [SerializeField] string objective1;
+    [SerializeField] string objective2;
+    [SerializeField] string objective3;
     public List<int> GetRestrictedList()
     {
         return restrictedBuilds;
@@ -30,15 +33,23 @@ public class TutorialLevel : CoreLevel
         // build mask, how far we can build
         DrawMask(2);
 
-        // message to log 
-        //   GameLog.Instance.WriteLine("Gather " + food_objective + " food");
-        //   GameLog.Instance.WriteLine("Gather " + wood_objective + " wood");
-        objectiveTxt_1 = "Gather " + food_objective + " food";
-        objectiveTxt_2 = "Gather " + wood_objective + " wood";
-        ObjectiveDisplay.Instance.AddToObjectiveList(objectiveTxt_1,0);
-        ObjectiveDisplay.Instance.AddToObjectiveList(objectiveTxt_2,0);
-    }
+        SetObjectives();
 
+
+    }
+    private void SetObjectives()
+    {
+        tasksHeader = "New beginnings";
+        objective1 = "Gather " + food_objective + " food";
+        objective2 = "Gather " + wood_objective + " wood";
+        objective3 = "Get to " + population_objective + " population";
+
+        ObjectiveDisplay.Instance.SetTaskHeader(tasksHeader);
+
+        ObjectiveDisplay.Instance.AddObjective(objective3);
+        ObjectiveDisplay.Instance.AddObjective(objective1);
+        ObjectiveDisplay.Instance.AddObjective(objective2);
+    }
     // focus camera when game start on hive
     public override void SetCamera() {
 
@@ -113,10 +124,11 @@ public class TutorialLevel : CoreLevel
 
         int food = GameController.Instance.GetFood();
         int wood = GameController.Instance.GetWood();
-
-        if (food >= food_objective) ObjectiveDisplay.Instance.RemoveFromObjectiveList(objectiveTxt_1);
-        if (wood >= wood_objective) ObjectiveDisplay.Instance.RemoveFromObjectiveList(objectiveTxt_2);
-        if (food >= food_objective && wood >= wood_objective)
+        int population = GameController.Instance.GetPopulation();
+        if (food >= food_objective) ObjectiveDisplay.Instance.ObjectiveCompleted(objective1);
+        if (wood >= wood_objective) ObjectiveDisplay.Instance.ObjectiveCompleted(objective2);
+        if(population >= 5) ObjectiveDisplay.Instance.ObjectiveCompleted(objective3);
+        if (food >= food_objective && wood >= wood_objective && population >= 5)
         {
             OnLevelComplete();
             return true;

@@ -21,7 +21,7 @@ public class UIBugUpgradeButton : MonoBehaviour
         restrictedPanel.SetActive(this.restricted);
         if(!restricted)
         {
-            ActionLogger.Instance.AddLog(Formatter_BugName.Instance.GetBugName(evolveTo) + " evolution is unlocked now!", 1);
+          //  ActionLogger.Instance.AddLog(Formatter_BugName.Instance.GetBugName(evolveTo) + " evolution is unlocked now!", 1);
         }
             
     }
