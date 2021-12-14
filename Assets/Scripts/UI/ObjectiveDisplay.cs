@@ -134,7 +134,18 @@ public class ObjectiveDisplay : MonoBehaviour
             SetObjectiveStateGFX(objective, true);
         }
     }
-
+    private IEnumerator DestroyObjective_Coroutine(GameObject objective)
+    {
+        string objectiveDesc = objective.GetComponentInChildren<TextMeshProUGUI>().text;
+        if (objectiveExist(objectiveDesc))
+        {
+            Destroy(objective.gameObject);
+            activeObjectives.Remove(objective);
+            objectivesDescriptions.Remove(objectiveDesc);
+            Debug.Log("Objective destroyed sucessfully");
+        }
+        yield return null;
+    }
     private void DestroyObjective(GameObject objective)
     {
         string objectiveDesc = objective.GetComponentInChildren<TextMeshProUGUI>().text;
@@ -151,12 +162,9 @@ public class ObjectiveDisplay : MonoBehaviour
     {
         foreach(GameObject objective in activeObjectives)
         {
-            DestroyObjective(objective);
+          //  DestroyObjective(objective);
+            StartCoroutine(DestroyObjective_Coroutine(objective));
         }
-  //      for(int i = 0; i < activeObjectives.Count; i++)
-   //     {
- //          DestroyObjective(activeObjectives[i].gameObject);
-  //      }
         activeObjectives.Clear();
         objectivesDescriptions.Clear();
     }
@@ -165,11 +173,7 @@ public class ObjectiveDisplay : MonoBehaviour
     {
         if (!objectiveDisplay.activeInHierarchy)
         {
-          //  canvasGroup.alpha = 0;
             objectiveDisplay.SetActive(true);
-          //  LeanTween.alphaCanvas(canvasGroup, 1, animTime);
-            Debug.Log("Dispalying");
-
         }
             
     }
@@ -178,8 +182,6 @@ public class ObjectiveDisplay : MonoBehaviour
         if (objectiveDisplay.activeInHierarchy)
         {
             objectiveDisplay.SetActive(false);
-           // LeanTween.alphaCanvas(canvasGroup, 0, animTime).setOnComplete(() => objectiveDisplay.SetActive(false));
-            Debug.Log("Hiding");
         }
     }
 
@@ -195,12 +197,6 @@ public class ObjectiveDisplay : MonoBehaviour
                    return objective;
                 }
             }
-     //       for (int i = 0; i < activeObjectives.Count; i++)
-   //         {
-  //              if (activeObjectives[i].gameObject.GetComponentInChildren<TextMeshProUGUI>().text == objectiveText)
- //               {
- //                   return activeObjectives[i].gameObject;
-//            }
         }
         return null;
     }
