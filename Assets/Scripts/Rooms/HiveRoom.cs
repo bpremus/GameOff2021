@@ -33,7 +33,7 @@ public class HiveRoom : CoreRoom
 
             if (cb.current_cell == this.cell)
             {
-                if (cb.GetAction == CoreBug.Bug_action.idle)
+                if (cb.GetAction == CoreBug.Bug_action.idle ||cb.GetAction == CoreBug.Bug_action.sleeping)
                 {
                     cb.target = transform.position + move_to * 0.6f;
                 }
@@ -49,5 +49,15 @@ public class HiveRoom : CoreRoom
             cb.SetAction(CoreBug.Bug_action.idle);
         }
     }
+    public virtual void SleepnigBugs()
+    {
+        for (int i = 0; i < assigned_bugs.Count; i++)
+        {
+            CoreBug cb = assigned_bugs[i].GetComponent<CoreBug>();
+            cb.GoTo(this.cell);
+            cb.SetAction(CoreBug.Bug_action.sleeping);
+        }
+    }
+
     public virtual void SendToCollect(WorldMapCell gathering_destination) { }
 }

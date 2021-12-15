@@ -4,9 +4,36 @@ using UnityEngine;
 
 public class RunnerBug : CoreBug
 {
-    public override void DetectEnemy()
+    // Runner bugs are enemy AI bug
+
+    public  override void OnBugReachHomeCell()
     {
-        // enemy runner bug, do not stop to fight
+        Debug.Log("OnBugReachHomeCell");
+    }
+
+    public override void OnTargetReach(HiveCell cell)
+    {
+        // steal something 
+        Debug.Log("OnTargetReach");
+
+        int idx = Random.Range(0, 6);
+        GameObject food_wood = ArtPrefabsInstance.Instance.FoodAndWoodPrefabs[idx];
+        Vector3 food_pos = new Vector3(0, 0, -5);
+        GameObject g = Instantiate(food_wood, food_pos, Quaternion.identity);
+        harvest_object = g;
+    }
+
+    public override void OnDestinationReach(HiveCell cell)
+    {
+        Debug.Log("OnDestinationReach");
+        EnemyController.Instance.ReportSucessfulScout(target_cell);
+
+        if(harvest_object != null)
+        {
+            Destroy(harvest_object);
+            harvest_object = null;
+        }
+        OnLateDecay();
     }
 
     [SerializeField]
@@ -31,7 +58,7 @@ public class RunnerBug : CoreBug
             animators[0].speed = 0;
             animators[0].SetInteger("State", 0);
             animators[1].SetInteger("State", 0);
-            animators[2].SetInteger("State", 0);
+            //animators[2].SetInteger("State", 0);
         }
 
         // walking
@@ -41,7 +68,7 @@ public class RunnerBug : CoreBug
             animators[0].speed = move_speed * 2.5f * walk_animation_adjust;
             animators[0].SetInteger("State", 0);
             animators[1].SetInteger("State", 0);
-            animators[2].SetInteger("State", 0);
+            //animators[2].SetInteger("State", 0);
         }
 
         last_pos = transform.position;

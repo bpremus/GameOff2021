@@ -123,7 +123,7 @@ public class CoreBug : BugMovement
     [SerializeField]
     public WorldMapCell gathering_cell;
 
-    public enum BugEvolution { none, drone, super_drone, warrior, claw, range, cc_bug, larva_evolve };
+    public enum BugEvolution { none, drone, super_drone, warrior, claw, range, cc_bug, larva_evolve, ai_scout, ai_warrior };
     public BugEvolution bug_evolution = BugEvolution.drone;
 
     // stats 
@@ -146,7 +146,7 @@ public class CoreBug : BugMovement
     public enum BugTask { none, fight, salvage, harvesting }
     public BugTask bugTask = BugTask.none;
 
-    public enum Bug_action { idle, traveling, gathering, fighting, salvaging, returning, dead };
+    public enum Bug_action { idle, traveling, gathering, fighting, salvaging, returning, dead, sleeping };
     [SerializeField] protected Bug_action bug_action = Bug_action.idle;
 
     public Bug_action GetAction { get => bug_action; }
@@ -278,7 +278,7 @@ public class CoreBug : BugMovement
         if (health <= 0) LateDie();
     }
 
-    public virtual void OnDestinationReach()
+    public virtual void OnDestinationReach(HiveCell cell)
     {
         //  Debug.Log("destination reached");
     }
@@ -308,6 +308,11 @@ public class CoreBug : BugMovement
             underlaying_cell.dCost++; // deadly cell
         }
 
+        if (asigned_cell)
+        {
+            asigned_cell.DetachDrone(this);
+        }
+
         // else 
         bugAnimation = BugAnimation.dead;
         Invoke("OnLateDecay", decayOnDeadTimer);
@@ -332,7 +337,7 @@ public class CoreBug : BugMovement
         Destroy(this.gameObject);
     }
 
-    public virtual void OnTargetReach()
+    public virtual void OnTargetReach(HiveCell cell)
     {
       //  Debug.Log("target reached");
     }
@@ -362,6 +367,29 @@ public class CoreBug : BugMovement
     public void StopPath()
     {
         path.Clear();
+    }
+
+    public void ContinueToAndBack(HiveCell start, HiveCell destination, float wait_timer = 0)
+    {
+        // if (destination_cell == start) return;
+
+        path.Clear();
+        target_cell = destination;
+        destination_cell = start;
+
+        List<HiveCell> move_path = AiController.GetPath(current_cell, destination, coalition); // use different path for enemy 
+        for (int i = 0; i < move_path.Count; i++)
+        {
+            path.Enqueue(move_path[i]);
+        }
+
+        List<HiveCell> move_back = AiController.GetPath(destination, start, coalition); // use different path for enemy 
+        for (int i = 0; i < move_back.Count; i++)
+        {
+            path.Enqueue(move_back[i]);
+        }
+
+        this.target = current_cell.transform.position + z_offset;
     }
 
     public void GoToAndBack(HiveCell start, HiveCell destination, float wait_timer = 0)
@@ -456,14 +484,14 @@ public class CoreBug : BugMovement
                 {
                     if (target_cell == underlaying_cell)
                     {
-                        OnTargetReach();
+                        OnTargetReach(target_cell);
                     }
                 }
                 else
                 {
                     current_cell = target_cell;
                     target = current_cell.transform.position + z_offset;
-                    OnDestinationReach();
+                    OnDestinationReach(current_cell);
                 }
                 return;
             }
@@ -488,7 +516,7 @@ public class CoreBug : BugMovement
     }
 
     [SerializeField]
-    Collider[] hitColliders;
+    protected Collider[] hitColliders;
 
     public virtual void OnCombatStop()
     {
@@ -549,14 +577,12 @@ public class CoreBug : BugMovement
             CoreBug cb = hitCollider.GetComponent<CoreBug>();
             if (cb)
             {
-                // we do not interract with ourself and we dont do anything if we are idle
+                // we do not interact with ourself and we don't do anything if we are idle
                 if (cb == this) continue;
-                
-
                 if (bugTask == BugTask.fight)
                 {
                     // enemy is dead 
-                    if (cb._isDead == true) continue;
+                    if (cb.IsDead() == true) continue;
                     if (cb.coalition == coalition) continue;
                     
                     bug_action = Bug_action.fighting;
@@ -631,7 +657,7 @@ public class CoreBug : BugMovement
 
     }
 
-    public void OnBugReachHomeCell()
+    public virtual void OnBugReachHomeCell()
     {
         GameController.Instance.OnBringResources(gathering_cell.cell_Type);
         gathering_cell = null;

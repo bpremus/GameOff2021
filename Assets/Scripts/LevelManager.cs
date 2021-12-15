@@ -25,7 +25,6 @@ public class LevelManager : MonoBehaviour
         curent_level = null;
     }
 
-
     [SerializeField] private bool _debugCheats;
     [SerializeField]
     HiveGenerator hive_generator;
@@ -36,7 +35,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     CoreLevel[] game_levels;
 
+    [SerializeField] 
     CoreLevel curent_level = null;
+
     private int level_index = 0;
     private void Start()
     {

@@ -39,7 +39,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 70, y: 60}
+  m_SizeDelta: {x: 75, y: 72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8671605769281052358
 CanvasRenderer:
@@ -158,6 +158,7 @@ MonoBehaviour:
   cell_Type: 0
   peral: 0
   dist: 0
+  uuid: 0
 --- !u!1 &5966848856974672152
 GameObject:
   m_ObjectHideFlags: 0

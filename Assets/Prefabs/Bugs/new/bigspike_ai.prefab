@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6348623539465587849}
-  - component: {fileID: 6348623539465587846}
   - component: {fileID: 462769913779436139}
+  - component: {fileID: 6251669045573625588}
   m_Layer: 7
   m_Name: bigspike_ai
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34,42 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6348623539465587846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6348623539465587848}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01d3bd1379fc66847b3e0efe6a436a64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {x: 0, y: 0, z: 0}
-  rotation_speed: 10
-  move_speed: 1.5
-  animators: []
-  Debug_movement_mode: 0
-  stop_distance: 0.05
-  bugAnimation: 0
-  current_cell: {fileID: 0}
-  destination_cell: {fileID: 0}
-  target_cell: {fileID: 0}
-  asigned_cell: {fileID: 0}
-  underlaying_cell: {fileID: 0}
-  bug_evolution: 0
-  health: 10
-  damage: 1
-  interraction_range: 1
-  decayOnDeadTimer: 20
-  bug_base_level: 1
-  bugTask: 0
-  bug_action: 0
-  coalition: 0
-  hitColliders: []
-  splash_dmg: 1
-  walk_animation_adjust: 2
 --- !u!135 &462769913779436139
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -83,6 +47,47 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &6251669045573625588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6348623539465587848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba9ef014c5b74a6429c22672065cc221, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {x: 0, y: 0, z: 0}
+  rotation_speed: 10
+  move_speed: 2
+  animators: []
+  Debug_movement_mode: 0
+  stop_distance: 0.05
+  bugAnimation: 0
+  current_cell: {fileID: 0}
+  destination_cell: {fileID: 0}
+  target_cell: {fileID: 0}
+  asigned_cell: {fileID: 0}
+  underlaying_cell: {fileID: 0}
+  gathering_cell: {fileID: 0}
+  bug_evolution: 9
+  health: 10
+  damage: 5
+  extra_damage: 0
+  interraction_range: 2
+  decayOnDeadTimer: 20
+  bug_base_level: 1
+  bug_kill_count: 0
+  bug_task_count: 0
+  bugTask: 1
+  bug_action: 0
+  coalition: 0
+  splash_dmg: 1
+  hitColliders: []
+  walk_animation_adjust: 1
+  attack_speed: 0.5
 --- !u!1 &6348623539484996235
 GameObject:
   m_ObjectHideFlags: 0

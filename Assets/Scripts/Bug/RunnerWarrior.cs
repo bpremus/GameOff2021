@@ -3,28 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class WarriorBug : CoreBug
+public class RunnerWarrior : RunnerBug
 {
+    
     // do not chase outside zone 
     // do not move if 
-
-    [SerializeField]
-    bool siege_mode = true;
 
     public float attack_speed = 0.5f;
 
     public override void OnWalkStart()
     {
         // Debug.Log("Bug started walking");
+
+
     }
 
     public override void OnIdleStart()
     {
+
         // Debug.Log("Bug is idle");
+
+
     }
 
     public override void OnBugIsDead()
     {
+
+
     }
 
     protected override void Start()
@@ -42,23 +47,57 @@ public class WarriorBug : CoreBug
         AssignToAroom(asigned_cell);
     }
 
+    public override void DetectEnemy()
+    {
+        if (bugTask == BugTask.none) return;
+
+        int layerId = 7; //bugs
+        int layerMask = 1 << layerId;
+
+        hitColliders = Physics.OverlapSphere(transform.position, interraction_range, layerMask);
+        hitColliders = hitColliders.OrderBy((d) => (d.transform.position -
+        transform.position).sqrMagnitude).ToArray();
+
+        List<CoreBug> bugs_to_interract = new List<CoreBug>();
+
+        int cnt = 0;
+        foreach (var hitCollider in hitColliders)
+        {
+            CoreBug cb = hitCollider.GetComponent<CoreBug>();
+            if (cb)
+            {
+                // we do not interact with ourself and we don't do anything if we are idle
+                if (cb == this) continue;
+
+                if (bugTask == BugTask.fight)
+                {
+                    // enemy is dead 
+                    if (cb.IsDead() == true) continue;
+                    if (cb.coalition == coalition) continue;
+
+                    bug_action = Bug_action.fighting;
+                    InteractWithEnemy(cb);
+                    bugs_to_interract.Add(cb);
+                    cnt++;
+
+                }
+            }
+        }
+
+        if (cnt > 0)
+            InteractWithEnemies(bugs_to_interract);
+
+        // if we are here we stop
+        if (bug_action == Bug_action.fighting && cnt == 0)
+        {
+            bug_action = Bug_action.idle;
+            StopInteracitonWithEnemy();
+        }
+    }
+
     protected override void OnDamageBoost()
     {
-        if (siege_mode)
-        {
-            extra_damage = damage * 1.5f;
-            return;
-        }
-        if (asigned_cell.GetRoom().GetComponent<CommandCenter>())
-        {
-            extra_damage = damage * 1.1f;
-            return;
-        }
-        if (asigned_cell.GetRoom().GetComponent<WarRoom>())
-        {
-            extra_damage = damage * 1.1f;
-            return;
-        }
+        
     }
 
     public virtual void SetEvolution()
@@ -101,16 +140,8 @@ public class WarriorBug : CoreBug
     }
 
     public override void MoveToPosition()
-    {
-        if (siege_mode)
-        {
-            // sieged bug will just turn 
-            MoveSiegedBug();
-        }
-        else
-        {
-            base.MoveToPosition();
-        }
+    {   
+        base.MoveToPosition();    
     }
 
     public override void OnInteract(CoreBug otherBug)
@@ -121,29 +152,20 @@ public class WarriorBug : CoreBug
     public override void StopInteracitonWithEnemy()
     {
         bugAnimation = BugAnimation.idle;
+        ContinueToAndBack(destination_cell,target_cell);
     }
 
     public override void InteractWithEnemies(List<CoreBug> othrBugs)
     {
-       // Debug.Log("attacking");
 
-        //target = underlaying_cell.transform.position + z_offset;
         if (othrBugs.Count == 0) return;
-        if (asigned_cell.IsInTheRoomRange(othrBugs[0].transform.position))
-        {
-            if (othrBugs[0].underlaying_cell != underlaying_cell)
-                GoTo(othrBugs[0].underlaying_cell);
-            else
-            {
-                StopPath();
-                target = othrBugs[0].transform.position;
-            }
-        }
-        else
-        {
-            GoTo(asigned_cell);
-        }
-        
+
+        // if distance is less than 1 go for it 
+        // if greater, update the path
+
+        StopPath();
+        target = othrBugs[0].transform.position;
+
         bugAnimation = BugAnimation.idle;
         if (_attack_t > attack_speed)
         {
@@ -151,8 +173,6 @@ public class WarriorBug : CoreBug
         }
         else
             return;
-
-       
 
         for (int i = 0; i < othrBugs.Count; i++)
         {
@@ -177,37 +197,4 @@ public class WarriorBug : CoreBug
         base.SetTimers();
         _attack_t += Time.deltaTime;
     }
-
-    public void MoveSiegedBug()
-    {
-
-        Vector3 direction = target - transform.position;
-        direction.z = 0;
-        Vector3 normal_direction = new Vector3(0, 0, 1);
-        Quaternion look_direction = transform.rotation;
-        if (direction == Vector3.zero)
-        {
-            return;
-        }
-
-        float rot_speed = rotation_speed;
-        if (bug_action == Bug_action.fighting)
-        {
-            rot_speed = 1.5f;
-        }
-
-        look_direction = Quaternion.LookRotation(direction, normal_direction); // replace me with a normal
-        transform.rotation = Quaternion.Slerp(transform.rotation, look_direction, Time.deltaTime * rot_speed);
-
-    }
-
-    public override void SiegeBug(bool siege) 
-    {
-        siege_mode = siege;
-        Debug.Log("Siege mode" + siege_mode);
-    }
-
-
-    public override bool GetSiegeState() { return siege_mode; }
-
 }

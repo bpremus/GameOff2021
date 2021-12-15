@@ -48,7 +48,28 @@ public class HarversterRoom : HiveRoom
     {
         base.Update();
         SendGathering();
+        DayAndNightCycle();
     }
+
+    bool _isNight = true;
+    public void DayAndNightCycle()
+    {
+        bool day = GameController.Instance.ISDayCycle();
+        if (day == false)
+        {
+            SleepnigBugs(); // put bugs to sleep over night 
+            _isNight = true;
+        }
+        else
+        {
+            if (_isNight == day)
+            {
+                _isNight = false;
+                WakeBugsUp(); // wake them up
+            }
+        }
+    }
+
     public void GetBugsFromHive()
     {
         QueenRoom qr = FindObjectOfType<QueenRoom>();
@@ -70,6 +91,12 @@ public class HarversterRoom : HiveRoom
         base.RecallBugs();
         gather_destination = null;
     }
+
+    public void WakeBugsUp()
+    {
+        base.RecallBugs();
+    }
+
 
     public void OnBugDepart(CoreBug bug)
     {
@@ -105,6 +132,11 @@ public class HarversterRoom : HiveRoom
                         cb.NextAction();
                         OnBugDepart(cb);
                         continue;
+                    }
+
+                    if (cb.GetAction == CoreBug.Bug_action.sleeping)
+                    {
+                        SpreadBugs();
                     }
 
                     // reached location
