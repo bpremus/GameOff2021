@@ -26,22 +26,12 @@ public class WarriorLevel : CoreLevel
         GameLog.Instance.WriteLine("Build a warrior bug to protect the hive");
 
         DrawMask(4);
-
-        List<HiveCell> rooms = levelManager.hiveGenerator.GetAllRooms();
-        for (int i = 0; i < rooms.Count; i++)
-        {
-            if (rooms[i].room_context == HiveCell.RoomContext.harvester)
-            {
-                EnemyController.Instance.SapwnScount(CoreBug.BugEvolution.ai_scout, rooms[i]);
-            }
-        }
-        EnemyController.Instance.SapwnScount(CoreBug.BugEvolution.ai_scout, levelManager.hiveGenerator.GetHiveQueenRoom());
-
     }
 
     #region RoomRestrictions
     public override void SetAvialableRooms()
     {
+    
         levelManager.uiController.RestrictBuilds(restrictedBuilds); // <- this solution restricts rooms instead of hiding them
                                                                     //   levelManager.uiController.DisableBuildCards();
                                                                     //   levelManager.uiController.EnableUIElement(UIController.UIElements.build_corridor);
@@ -94,6 +84,9 @@ public class WarriorLevel : CoreLevel
     #endregion
     public override bool IsTaskCompleted()
     {
+
+        return true;
+
         List<HiveCell> corridors = levelManager.hiveGenerator.GetAllCooridors();
         foreach (HiveCell cell in corridors)
         {

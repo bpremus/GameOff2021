@@ -1,5 +1,50 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1672793736
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1672793737}
+  - component: {fileID: 1672793738}
+  m_Layer: 0
+  m_Name: WeHaveBeenScouted
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1672793737
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672793736}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2748802993061385395}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1672793738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672793736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0156ee8e7f1d00146ab75fc7837c4f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedBuilds: 010000000200000004000000
+  restrictedUnits: 
 --- !u!1 &2748802992631486533
 GameObject:
   m_ObjectHideFlags: 0
@@ -46,7 +91,7 @@ MonoBehaviour:
   food_objective: 100
   wood_objective: 20
   restrictedBuilds: 0000000001000000020000000300000004000000
-  restrictedUnits: 
+  restrictedUnits: 0000000001000000020000000300000004000000
 --- !u!1 &2748802992680419531
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,7 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   restrictedBuilds: 00000000010000000200000004000000
-  restrictedUnits: 
+  restrictedUnits: 00000000020000000300000004000000
 --- !u!1 &2748802993061385393
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,6 +168,8 @@ Transform:
   - {fileID: 2748802992631486535}
   - {fileID: 2748802992680419533}
   - {fileID: 2888446230133916956}
+  - {fileID: 1672793737}
+  - {fileID: 2871677115099243743}
   - {fileID: 385927646532338043}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -145,7 +192,55 @@ MonoBehaviour:
   game_levels:
   - {fileID: 2748802992631486532}
   - {fileID: 2748802992680419530}
+  - {fileID: 8760013521194956142}
+  - {fileID: 1672793738}
   - {fileID: 7974282237721685051}
+  curent_level: {fileID: 0}
+--- !u!1 &3829214728757569734
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2871677115099243743}
+  - component: {fileID: 175600210363805088}
+  m_Layer: 0
+  m_Name: FirstNightAttack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2871677115099243743
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3829214728757569734}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 21.153572, y: -0.7382655, z: 1.0384672}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2748802993061385395}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &175600210363805088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3829214728757569734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f500c21b6dc69f4479be3ead3bf62ef9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restrictedBuilds: 
+  restrictedUnits: 
 --- !u!1 &6151887974235238756
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,7 +315,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2748802993061385395}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7974282237721685051
 MonoBehaviour:

@@ -9,6 +9,31 @@ public class WeHaveBeenScounted : CoreLevel
     [SerializeField] private List<int> restrictedBuilds;
     [SerializeField] private List<int> restrictedUnits;
 
+
+    public override void SetGrid()
+    {
+        
+        Debug.Log("WeHaveBeenScounted");
+
+        GameLog.Instance.WriteLine("New objective");
+        GameLog.Instance.WriteLine("Defend the hive");
+
+     //   DrawMask(4);
+
+        //   List<HiveCell> rooms = levelManager.hiveGenerator.GetAllRooms();
+        //   for (int i = 0; i < rooms.Count; i++)
+        //   {
+        //       if (rooms[i].room_context == HiveCell.RoomContext.harvester)
+        //       {
+        //           EnemyController.Instance.SapwnScount(CoreBug.BugEvolution.ai_scout, rooms[i]);
+        //       }
+        //   }
+        //   EnemyController.Instance.SapwnScount(CoreBug.BugEvolution.ai_scout, levelManager.hiveGenerator.GetHiveQueenRoom());
+
+        EnemyController.Instance.SapwnScount(CoreBug.BugEvolution.ai_warrior, levelManager.hiveGenerator.GetHiveQueenRoom());
+
+    }
+
     #region UnitRestriction
     // limit unit evolution 
     public override void SetAvialableUnits()

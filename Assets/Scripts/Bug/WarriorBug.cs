@@ -16,22 +16,15 @@ public class WarriorBug : CoreBug
     public override void OnWalkStart()
     {
         // Debug.Log("Bug started walking");
-
-      
     }
 
     public override void OnIdleStart()
     {
-
         // Debug.Log("Bug is idle");
-
-      
     }
 
     public override void OnBugIsDead()
     {
-
-
     }
 
     protected override void Start()

@@ -36,12 +36,6 @@ public class RunnerBug : CoreBug
         OnLateDecay();
     }
 
- 
-    public override void DetectEnemy()
-    {
-        // enemy runner bug, do not stop to fight
-    }
-
     [SerializeField]
     private float walk_animation_adjust = 1;
 
