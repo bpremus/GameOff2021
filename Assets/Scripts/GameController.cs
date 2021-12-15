@@ -209,9 +209,9 @@ public class GameController : MonoBehaviour
             case CoreBug.BugEvolution.claw:
                 return evolve_claw;
             case CoreBug.BugEvolution.range:
-                return evolve_spike;
-            case CoreBug.BugEvolution.cc_bug:
                 return evolve_slow;
+            case CoreBug.BugEvolution.cc_bug:
+                return evolve_spike;
             default:
                 return evolve_drone;
         }
