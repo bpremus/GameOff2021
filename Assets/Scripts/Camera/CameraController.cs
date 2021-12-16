@@ -30,17 +30,18 @@ public class CameraController : MonoBehaviour
 
     #endregion
 
-    #region Height
-    [Header("Height")]
-    public LayerMask groundMask = -1; //layermask of ground or other objects that affect height
+    #region Zooming
+    [Header("Zooming")]
+    public LayerMask groundMask = -1; //layermask of ground or other objects that affect height / no effect here since we dont have no real height difference
 
-    public float maxHeight = 40f; //max height
-    public float minHeight = 12f; //min height
+    public float maxZoom = 40f; //max cam orthographic size (zoom)
+    public float minZoom = 12f; //min cam orthographic size (zoom)
     public float keyboardZoomingSensitivity = 2f;
     public float scrollWheelZoomingSensitivity = 50f;
-
-    private float zoomPos = 1; 
-
+    private float defaultAutoZoomSpeed = 1f;
+    private float zoomingLevel;
+    private float zoomPos = 1;
+    private bool isAutoZooming = false;
     #endregion
 
     #region MapLimits
@@ -168,6 +169,12 @@ public class CameraController : MonoBehaviour
         focusTarget = hc.transform;
 
     }
+    public void ZoomTo(float zoomlevel)
+    {
+        isAutoZooming = true;
+        zoomlevel = Mathf.Clamp01(zoomingLevel);
+        zoomingLevel = zoomlevel;
+    }
     public bool IsDragging()
     {
         return isDragging;
@@ -181,11 +188,43 @@ public class CameraController : MonoBehaviour
     {
         return zoomPos;
     }
+    public bool isRMBDragOn() { return useRightMouseButtonToDrag; }
+    public bool isKeyboardZoomingOn() { return useKeyboardZooming; }
+    public bool isEdgeScreenScrollingOn() { return useScreenEdgeInput; }
+    public void SwitchEdgeScreenScrolling()
+    {
+        useScreenEdgeInput = !useScreenEdgeInput;
+    }
+    public void SwitchRMBDrag()
+    {
+        useRightMouseButtonToDrag = !useRightMouseButtonToDrag;
+    }
+    public void SwitchKeyboardZooming()
+    {
+        useKeyboardZooming = !useKeyboardZooming;
+    }
+    public void SetRandomZoomDBG()
+    {
+        zoomPos = UnityEngine.Random.Range(0, 1.1f);
+    }
+    public void SetZoom(float level)
+    {
+        if (level > maxZoom || level < minZoom) return;
+        Camera.main.orthographicSize = level;
+    }
     #endregion
 
     #region Private methods
+
     private void CameraUpdate()
     {
+        if (Input.GetKeyDown(KeyCode.L)) SetRandomZoomDBG();
+        if (isAutoZooming)
+        {
+
+        }
+
+
         if (FollowingTarget)
         {
             if (Input.GetKeyDown(stopFollowingKey)) UIController.instance.SetDefaultState();
@@ -200,7 +239,7 @@ public class CameraController : MonoBehaviour
         else
             Move();
 
-        HeightCalculation();
+        Zoom();
         LimitPosition();
     }
 
@@ -278,8 +317,7 @@ public class CameraController : MonoBehaviour
             }
         }
     }
-
-    private void HeightCalculation()
+    private void Zoom()
     {
         if (useScrollwheelZooming)
             zoomPos -= ScrollWheel * Time.deltaTime * scrollWheelZoomingSensitivity;
@@ -287,8 +325,8 @@ public class CameraController : MonoBehaviour
             zoomPos -= ZoomDirection * Time.deltaTime * keyboardZoomingSensitivity;
 
         zoomPos = Mathf.Clamp01(zoomPos);
-        float targetHeight = Mathf.Lerp(minHeight, maxHeight, zoomPos);
-        Camera.main.orthographicSize = targetHeight;
+        float targetZoom = Mathf.Lerp(minZoom, maxZoom, zoomPos);
+        Camera.main.orthographicSize = targetZoom;
     }
 
 

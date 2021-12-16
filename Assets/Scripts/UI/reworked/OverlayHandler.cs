@@ -43,36 +43,36 @@ public class OverlayHandler : MonoBehaviour
     public void EnableBuildButton() =>  ButtonInteractable(buildButton, true);
     public void OpenBuildMenu()
     {
-        if (!uiController.isBuildMenuActive())
+        if (uiController)
         {
             buildMenu.SetActive(true);
             ButtonInteractable(buildButton, false);
+            uiController.EnableBlur();
         }
+        else uiController.CreatePopup(3, "Oh no!", "Something terrible happened!,\nPlease restart your game if it keeps happening");
     }
     public void CloseBuildMenu()
     {
         if (uiController)
         {
-            if (uiController.isBuildMenuActive())
-            {
-                Debug.Log("closing menu");
-                buildMenu.SetActive(false);
-                ButtonInteractable(buildButton, true);
-            }
+            Debug.Log("closing menu");
+            buildMenu.SetActive(false);
+            ButtonInteractable(buildButton, true);
+            uiController.DisableBlur();
         }
-
+        else uiController.CreatePopup(3, "Oh no!", "Something terrible happened!,\nPlease restart your game if it keeps happening");
 
     }
     public void OpenSettingsMenu()
     {
         uiController.HideAllUI();
         settingsMenu.SetActive(true);
-        uiController.gameObject.GetComponent<BlurController>().EnableBlur();
+        uiController.EnableBlur();
     }
     public void CloseSettingsMenu()
     {
         settingsMenu.SetActive(false);
-        uiController.gameObject.GetComponent<BlurController>().DisableBlur();
+        uiController.DisableBlur();
     }
     public bool IsSettingsMenuActive()
     {

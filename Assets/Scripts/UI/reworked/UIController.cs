@@ -89,6 +89,10 @@ public class UIController : MonoBehaviour
         overlayHandler = GetComponent<OverlayHandler>();
         if (mainCanvas == null) Debug.LogError("MAIN CANVAS IS NOT ASSIGNED IN UICONTROLER");
 
+
+
+        if (isBuildMenuActive()) CloseBuildMenu();
+
     }
 
     private void Start()
@@ -113,7 +117,10 @@ public class UIController : MonoBehaviour
 
         //   if (GameController.Instance.OnFoodValueChanged()) { buildMenu.GetComponent<UIBuildMenu>().CheckIfCanAfford(); }   //for some reason function gets called but its not executed(?) 
         //using this instead now
-        if (isBuildMenuActive()) { buildMenu.GetComponent<UIBuildMenu>().CheckIfCanAfford(); } //very inefficient way of doing this
+        if (isBuildMenuActive()) 
+        { 
+            buildMenu.GetComponent<UIBuildMenu>().CheckIfCanAfford(); //very inefficient way of doing this
+        } 
 
 
         if (Camera.main.gameObject.GetComponent<CameraController>().FollowingTarget) uiState = State.Following;
@@ -123,7 +130,7 @@ public class UIController : MonoBehaviour
         ControlUIStates();
 
     }
-
+   
     private void ControlUIStates()
     {
         if (currentState != uiState)
@@ -160,6 +167,8 @@ public class UIController : MonoBehaviour
     public void CloseSettingsMenu() => overlayHandler.CloseSettingsMenu();
     public void HideRoomUI() => Room_UI.Instance.Hide();
     public void HideBugUI() => DBG_UnitUI.Instance.Hide();
+    public void EnableBlur() => blurController.EnableBlur();
+    public void DisableBlur() => blurController.DisableBlur();
     public void HideAllUI() => CellSelectProto.Instance.CloseUI();
     public void ExitBuildingMode() => SetDefaultState();
     public void SetDefaultState()

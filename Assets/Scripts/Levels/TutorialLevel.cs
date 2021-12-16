@@ -13,13 +13,16 @@ public class TutorialLevel : CoreLevel
     [SerializeField] string objective1;
     [SerializeField] string objective2;
     [SerializeField] string objective3;
+
+
+    CameraController cam_controller;
     public List<int> GetRestrictedList()
     {
         return restrictedBuilds;
     }
     private void Awake()
     {
-
+        cam_controller = Camera.main.GetComponent<CameraController>();
     }
     public override void SetGrid() {
         Debug.Log("tutorial started");
@@ -54,7 +57,7 @@ public class TutorialLevel : CoreLevel
     public override void SetCamera() {
 
         HiveCell hc = levelManager.hiveGenerator.GetHiveQueenRoom();
-        CameraController cam_controller = Camera.main.GetComponent<CameraController>();
+
         cam_controller.SetFocus(hc);
     }
 
