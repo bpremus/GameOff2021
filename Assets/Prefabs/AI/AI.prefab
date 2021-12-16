@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6366369276992657659
 Transform:
   m_ObjectHideFlags: 0
@@ -87,14 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4bc2904f4ec53a419db44d759e3963b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  start_cell: {fileID: 0}
-  hive_cell: {fileID: 0}
-  harvester_cells: []
-  salvage_cells: []
-  spawn_timer: 0
-  day_attack_number: 3
-  night_attack_number: 60
-  bug_separation: 1
+  hiveGenerator: {fileID: 0}
 --- !u!1 &6366369278647671221
 GameObject:
   m_ObjectHideFlags: 0

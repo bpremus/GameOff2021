@@ -90,8 +90,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   food_objective: 100
   wood_objective: 20
+  population_objective: 5
   restrictedBuilds: 0000000001000000020000000300000004000000
   restrictedUnits: 0000000001000000020000000300000004000000
+  tasksHeader: 
+  objective1: 
+  objective2: 
+  objective3: 
 --- !u!1 &2748802992680419531
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,6 +142,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   restrictedBuilds: 00000000010000000200000004000000
   restrictedUnits: 00000000020000000300000004000000
+  tasksHeader: Harvesting
+  objective1: Build a harvesting room
+  objective2: Assign 3 workers to harvesting room
+  objective3: Send workers to collect food or wood
 --- !u!1 &2748802993061385393
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,6 +203,7 @@ MonoBehaviour:
   - {fileID: 2748802992680419530}
   - {fileID: 8760013521194956142}
   - {fileID: 1672793738}
+  - {fileID: 175600210363805088}
   - {fileID: 7974282237721685051}
   curent_level: {fileID: 0}
 --- !u!1 &3829214728757569734
