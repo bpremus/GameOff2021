@@ -46,6 +46,8 @@ public class CoreLevel : MonoBehaviour
 
     protected void DrawMask(int offset)
     {
+        return;
+
         // get hive position 
         HiveCell hc = levelManager.hiveGenerator.GetHiveQueenRoom();
         List<List<HiveCell>> hive_cells = levelManager.hiveGenerator.GetAllCells();

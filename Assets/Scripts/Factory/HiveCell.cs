@@ -122,7 +122,7 @@ public class HiveCell : MonoBehaviour
 
     public bool AssignDrone(CoreBug bug)
     {
-        // Debug.Log("assinging a bug to a new room");
+        // Debug.Log("assigning a bug to a new room");
         bugs_to_assign.Enqueue(bug);
         return true;
     }

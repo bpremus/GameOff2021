@@ -308,6 +308,11 @@ public class CoreBug : BugMovement
             underlaying_cell.dCost++; // deadly cell
         }
 
+        if (asigned_cell)
+        {
+            asigned_cell.DetachDrone(this);
+        }
+
         // else 
         bugAnimation = BugAnimation.dead;
         Invoke("OnLateDecay", decayOnDeadTimer);
@@ -362,6 +367,29 @@ public class CoreBug : BugMovement
     public void StopPath()
     {
         path.Clear();
+    }
+
+    public void ContinueToAndBack(HiveCell start, HiveCell destination, float wait_timer = 0)
+    {
+        // if (destination_cell == start) return;
+
+        path.Clear();
+        target_cell = destination;
+        destination_cell = start;
+
+        List<HiveCell> move_path = AiController.GetPath(current_cell, destination, coalition); // use different path for enemy 
+        for (int i = 0; i < move_path.Count; i++)
+        {
+            path.Enqueue(move_path[i]);
+        }
+
+        List<HiveCell> move_back = AiController.GetPath(destination, start, coalition); // use different path for enemy 
+        for (int i = 0; i < move_back.Count; i++)
+        {
+            path.Enqueue(move_back[i]);
+        }
+
+        this.target = current_cell.transform.position + z_offset;
     }
 
     public void GoToAndBack(HiveCell start, HiveCell destination, float wait_timer = 0)
@@ -488,7 +516,7 @@ public class CoreBug : BugMovement
     }
 
     [SerializeField]
-    Collider[] hitColliders;
+    protected Collider[] hitColliders;
 
     public virtual void OnCombatStop()
     {
@@ -549,14 +577,12 @@ public class CoreBug : BugMovement
             CoreBug cb = hitCollider.GetComponent<CoreBug>();
             if (cb)
             {
-                // we do not interract with ourself and we dont do anything if we are idle
+                // we do not interact with ourself and we don't do anything if we are idle
                 if (cb == this) continue;
-                
-
                 if (bugTask == BugTask.fight)
                 {
                     // enemy is dead 
-                    if (cb._isDead == true) continue;
+                    if (cb.IsDead() == true) continue;
                     if (cb.coalition == coalition) continue;
                     
                     bug_action = Bug_action.fighting;

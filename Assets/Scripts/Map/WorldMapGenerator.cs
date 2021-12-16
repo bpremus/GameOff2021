@@ -14,7 +14,7 @@ public class WorldMapGenerator : MonoBehaviour
         public int width;
         public int height;
         public int map_sid;
-        public int[] visited_cells;
+        public int[]visited_cells;
     }
 
     public SaveWorldMapCell GetSaveWorldMapData()
@@ -24,14 +24,28 @@ public class WorldMapGenerator : MonoBehaviour
         data.height = this.height;
         data.map_sid = this.map_sid;
 
-       // int size = this.visited_cells.Count;
-       // data.visited_cells = new int[size];
-       // for (int i = 0; i < this.visited_cells.Count; i++)
-       // {
-       //     data.visited_cells[i] = this.visited_cells[i].uuid;
-       // }
-       // 
+        int size = this.visited_cells.Count;
+        data.visited_cells = new int[size];
+        for (int i = 0; i < this.visited_cells.Count; i++)
+        {
+            data.visited_cells[i] = this.visited_cells[i].uuid;
+            Debug.LogError("does not work");
+        }
+        
         return data;
+    }
+
+    public WorldMapCell GetCellByUID(int uuid)
+    {
+        for (int i = 0; i < cells.Count; i++)
+        {
+            for (int ii = 0; ii < cells.Count; ii++)
+            {
+                WorldMapCell cell = cells[i][ii];
+                if (cell.uuid == uuid) return cell;
+            }
+        }
+        return null;
     }
 
     public void SetSaveWorldMapData(SaveWorldMapCell data)
@@ -40,28 +54,14 @@ public class WorldMapGenerator : MonoBehaviour
         this.height  = data.height;
         this.map_sid = data.map_sid;
 
-      //  // if needed here we can regenerate map
-      //  EnableMap();
-      //
-      //  // continue load 
-      //  int size = data.visited_cells.Length;
-      //  for (int d = 0; d < size; d++)
-      //  {
-      //      for (int i = 0; i < width; i++)
-      //      {
-      //          for (int j = 0; j < height; j++)
-      //          {
-      //              if (cells[i][j].uuid == data.visited_cells[d])
-      //              {
-      //                  ReportVisitedCell(cells[i][j]);
-      //              }
-      //          }
-      //      }
-      //  }
-      //
-      //  CloseMap();
+        visited_cells.Clear();
+        for (int i = 0; i < data.visited_cells.Length; i++)
+        {
+            WorldMapCell cell = GetCellByUID(data.visited_cells[i]);
+            if (cell)
+            visited_cells.Add(cell);
+        }
     }
-
 
     public int width  = 10;
     public int height = 10;
@@ -172,10 +172,16 @@ public class WorldMapGenerator : MonoBehaviour
             }
         }
 
+        for (int i = 0; i < visited_cells.Count; i++)
+        {
+            visited_cells[i].ExpandCell();
+        }
+
         // Place hive
         WorldMapCell hive = cells[width / 2][height / 2];
         hive.cell_Type = WorldMapCell.Cell_type.player_hive;
         hive.ExpandCell();
+
     }
 
     protected WorldMapCell SpawnButton(int x, int y)
