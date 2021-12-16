@@ -162,6 +162,7 @@ public class EvolutionUI : MonoBehaviour
             bool enoughwood = GameController.Instance.GetWood() >= neededwood ? true : false;
 
             upgradeCostPanel.GetComponent<UIEvolutionCost>().SetCosts(neededfood, neededwood, enoughfood, enoughwood);
+            upgradeCostPanel.GetComponent<UIEvolutionCost>().SetName(desiredEvol);
          }
 
     }
@@ -197,7 +198,8 @@ public class EvolutionUI : MonoBehaviour
             if (desiredEvolution == CoreBug.BugEvolution.range)
             {
                 if (GameController.Instance.EvolveBug(desiredEvolution))
-                    ArtPrefabsInstance.Instance.EvolveBug(bug, 4); 
+                    ArtPrefabsInstance.Instance.EvolveBug(bug, 4);
+                Debug.Log("Evolving to range bug");
             }
             if (desiredEvolution == CoreBug.BugEvolution.cc_bug) 
             {

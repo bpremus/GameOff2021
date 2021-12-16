@@ -112,7 +112,7 @@ public class DBG_UnitUI : MonoBehaviour
     }
     public void SetTextCurrentState(CoreBug cb)
     {
-        bugTask_Txt.text = Formatter_BugName.Instance.GetBugAction(cb.bugTask);
+        bugTask_Txt.text = Formatter_BugName.Instance.GetBugTask(cb.bugTask);
     }
     public void Update()
     {

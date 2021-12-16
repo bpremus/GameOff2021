@@ -6,6 +6,12 @@ public class FirstLevel : CoreLevel
 {
     [SerializeField] private List<int> restrictedBuilds;
     [SerializeField] private List<int> restrictedUnits;
+
+
+    [SerializeField] string tasksHeader = "Harvesting";
+    [SerializeField] string objective1 = "Build a harvesting room";
+    [SerializeField] string objective2 = "Assign 3 workers to harvesting room";
+    [SerializeField] string objective3 = "Send workers to collect food or wood";
     public override void SetGrid()
     {
         Debug.Log("first level started");
@@ -15,11 +21,11 @@ public class FirstLevel : CoreLevel
 
         DrawMask(4);
 
-        // message to log 
-        GameLog.Instance.WriteLine("New objective");
-        GameLog.Instance.WriteLine("Build a harvesting room");
-        GameLog.Instance.WriteLine("Assign drones to harvesting room");
-        GameLog.Instance.WriteLine("Send drones to collect food and wood");
+        ObjectiveDisplay.Instance.SetTaskHeader(tasksHeader);
+        ObjectiveDisplay.Instance.AddObjective(objective1);
+        ObjectiveDisplay.Instance.AddObjective(objective2);
+        ObjectiveDisplay.Instance.AddObjective(objective3);
+
 
     }
     #region UnitRestriction
@@ -89,11 +95,14 @@ public class FirstLevel : CoreLevel
             HarversterRoom hr = rooms[i].GetRoom().GetComponent<HarversterRoom>();
             if (hr)
             {
+                ObjectiveDisplay.Instance.ObjectiveCompleted(objective1);
                 List<CoreBug> bugs = hr.GetAssignedBugs();
-                if (bugs.Count > 0)
+                if (bugs.Count > 2)
                 {
+                    ObjectiveDisplay.Instance.ObjectiveCompleted(objective2);
                     if (hr.gather_destination != null)
                     {
+                        ObjectiveDisplay.Instance.ObjectiveCompleted(objective3);
                         OnLevelComplete();
                         return true;
                     }
@@ -106,7 +115,7 @@ public class FirstLevel : CoreLevel
 
     public override void OnLevelComplete()
     {
-        GameLog.Instance.WriteLine("Task completed successfully");
+        ObjectiveDisplay.Instance.AllCompleted();
     }
 
 }

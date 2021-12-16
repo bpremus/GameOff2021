@@ -6,16 +6,23 @@ public class TutorialLevel : CoreLevel
 {
     [SerializeField] int food_objective = 100;
     [SerializeField] int wood_objective = 10;
+    [SerializeField] int population_objective = 5;
     [SerializeField] private List<int> restrictedBuilds;
     [SerializeField] private List<int> restrictedUnits;
+    [SerializeField] string tasksHeader;
+    [SerializeField] string objective1;
+    [SerializeField] string objective2;
+    [SerializeField] string objective3;
 
+
+    CameraController cam_controller;
     public List<int> GetRestrictedList()
     {
         return restrictedBuilds;
     }
     private void Awake()
     {
-       
+        cam_controller = Camera.main.GetComponent<CameraController>();
     }
     public override void SetGrid() {
         Debug.Log("tutorial started");
@@ -29,17 +36,28 @@ public class TutorialLevel : CoreLevel
         // build mask, how far we can build
         DrawMask(2);
 
-        // message to log 
-        GameLog.Instance.WriteLine("New objective");
-        GameLog.Instance.WriteLine("Gather " + food_objective + " food");
-        GameLog.Instance.WriteLine("Gather " + wood_objective + " wood");
-    }
+        SetObjectives();
 
+
+    }
+    private void SetObjectives()
+    {
+        tasksHeader = "New beginnings";
+        objective1 = "Gather " + food_objective + " food";
+        objective2 = "Gather " + wood_objective + " wood";
+        objective3 = "Get to " + population_objective + " population";
+
+        ObjectiveDisplay.Instance.SetTaskHeader(tasksHeader);
+
+        ObjectiveDisplay.Instance.AddObjective(objective3);
+        ObjectiveDisplay.Instance.AddObjective(objective1);
+        ObjectiveDisplay.Instance.AddObjective(objective2);
+    }
     // focus camera when game start on hive
     public override void SetCamera() {
 
         HiveCell hc = levelManager.hiveGenerator.GetHiveQueenRoom();
-        CameraController cam_controller = Camera.main.GetComponent<CameraController>();
+
         cam_controller.SetFocus(hc);
     }
 
@@ -106,10 +124,14 @@ public class TutorialLevel : CoreLevel
     // if goal is completed (x food, y wood) go to next level
     public override bool IsTaskCompleted() {
 
+
         int food = GameController.Instance.GetFood();
         int wood = GameController.Instance.GetWood();
-
-        if (food >= food_objective && wood >= wood_objective)
+        int population = GameController.Instance.GetPopulation();
+        if (food >= food_objective) ObjectiveDisplay.Instance.ObjectiveCompleted(objective1);
+        if (wood >= wood_objective) ObjectiveDisplay.Instance.ObjectiveCompleted(objective2);
+        if(population >= 5) ObjectiveDisplay.Instance.ObjectiveCompleted(objective3);
+        if (food >= food_objective && wood >= wood_objective && population >= 5)
         {
             OnLevelComplete();
             return true;
@@ -119,7 +141,7 @@ public class TutorialLevel : CoreLevel
 
     public override void OnLevelComplete()
     {
-        GameLog.Instance.WriteLine("Task completed successfully");
+        ObjectiveDisplay.Instance.AllCompleted();
     }
 
 }

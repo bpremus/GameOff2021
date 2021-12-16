@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 public class UIEvolutionCost : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI evolutionName;
     [SerializeField] private TextMeshProUGUI foodCost;
     [SerializeField] private TextMeshProUGUI woodCost;
 
@@ -11,9 +12,13 @@ public class UIEvolutionCost : MonoBehaviour
     [SerializeField] private Color cantAfford;
 
 
-
+    public void SetName(CoreBug.BugEvolution evolutionName)
+    {
+        this.evolutionName.text = Formatter_BugName.Instance.GetBugName(evolutionName).ToString();
+    }
     public void SetCosts(int food,int wood,bool enoughFood,bool enoughWood)
     {
+
         foodCost.text = food.ToString();
         woodCost.text = wood.ToString();
 
@@ -22,5 +27,9 @@ public class UIEvolutionCost : MonoBehaviour
         // --           --             --        
         if (enoughWood) woodCost.color = canAfford;
         else woodCost.color = cantAfford;
+
+
+        if (!enoughFood || !enoughWood) evolutionName.color = cantAfford;
+        else evolutionName.color = canAfford;
     }
 }
