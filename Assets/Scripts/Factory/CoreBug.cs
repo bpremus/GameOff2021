@@ -146,7 +146,7 @@ public class CoreBug : BugMovement
     public enum BugTask { none, fight, salvage, harvesting }
     public BugTask bugTask = BugTask.none;
 
-    public enum Bug_action { idle, traveling, gathering, fighting, salvaging, returning, dead };
+    public enum Bug_action { idle, traveling, gathering, fighting, salvaging, returning, dead, sleeping };
     [SerializeField] protected Bug_action bug_action = Bug_action.idle;
 
     public Bug_action GetAction { get => bug_action; }
