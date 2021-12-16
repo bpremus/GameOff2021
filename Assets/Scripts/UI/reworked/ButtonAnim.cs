@@ -10,13 +10,11 @@ public class ButtonAnim : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     [SerializeField] private Vector3 targetScale = Vector3.one;
     [SerializeField] private float animInTime = 0.2f;
     [SerializeField] private bool playOnEnable = false;
-    [SerializeField] private bool disableOnEvents = false;
     private LTDescr anim;
     [SerializeField] private bool ignoreButtonDependency = false;
    [HideInInspector] public bool displayedCorrectly = false;
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (disableOnEvents) return;
         UIBugUpgradeButton uIBugUpgradeButton = GetComponent<UIBugUpgradeButton>();
         if (uIBugUpgradeButton != null)
         {
@@ -51,7 +49,6 @@ public class ButtonAnim : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (disableOnEvents) return;
         if (ignoreButtonDependency)
         {
             LeanTween.cancel(anim.uniqueId);

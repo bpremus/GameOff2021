@@ -69,8 +69,8 @@ MonoBehaviour:
   disapearTime: 0.1
   offsetscaleTime: 0
   timeTostartFade: 0.5
-  moveTo_f: 20
-  moveTo_Time: 1.2
+  moveTo_f: 13
+  moveTo_Time: 1
 --- !u!114 &4753500794580783599
 MonoBehaviour:
   m_ObjectHideFlags: 0
