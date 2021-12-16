@@ -15,6 +15,29 @@ public class SaveController : MonoBehaviour
 
     [SerializeField] protected string current_filename = "";
 
+    public bool _autoload = false;
+    private void Start()
+    {
+        if (_autoload)
+        {
+            StartCoroutine(TriggerLoad());
+        }
+    }
+
+    IEnumerator TriggerLoad()
+    {
+        while (hiveGenerator.isGameStarted == false)
+        {
+            // load progress ...
+
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+
+        Continue();
+
+        yield return null;
+    }
+
     public void Save(string filename = "")
     {
         Debug.Log("Saving game");
@@ -82,6 +105,10 @@ public class SaveController : MonoBehaviour
             gameController.SetSaveData(save_data.gameController);
             levelManager.SetSaveData(save_data.levelManager);
             worldMapGenerator.SetSaveWorldMapData(save_data.worldMap);
+        }
+        else
+        {
+            Debug.Log("nothing to load");
         }
     }
 

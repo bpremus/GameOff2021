@@ -24,8 +24,27 @@ public class ArtPrefabsInstance : MonoBehaviour
     public GameObject[] RoomPrefabs;
     public GameObject[] BugsPrefabs;
     public GameObject[] FoodAndWoodPrefabs;
+    public GameObject[] AIBugsPrefabs;
 
 
+    public RunnerBug SpawnAI(CoreBug.BugEvolution bug_type, HiveCell cell)
+    {
+        int prefab_index = GetBugPrefabIndex(bug_type);
+
+        Vector3 new_pos = cell.transform.position;
+        Quaternion look_dir = Quaternion.Euler(0, -90, -90);
+        GameObject g = Instantiate(AIBugsPrefabs[prefab_index], new_pos, look_dir);
+        if (g)
+        {
+            RunnerBug evolved_bug = g.GetComponent<RunnerBug>();
+            evolved_bug.current_cell = cell;
+            evolved_bug.target = cell.transform.position;
+            SetBugName(evolved_bug);
+            return evolved_bug;
+        }
+
+        return null;
+    }
     // meant for loading 
     public CoreBug SpawnBug(CoreBug.BugEvolution bug_type, HiveCell cell)
     {
@@ -49,8 +68,6 @@ public class ArtPrefabsInstance : MonoBehaviour
 
         return null;
     }
-
-
     public void EvolveToLarvaFirst(CoreBug bug, CoreBug.BugEvolution evolve_to)
     {
         LarvaEvolve larva = EvolveBug(bug, 8).GetComponent<LarvaEvolve>();
@@ -61,7 +78,6 @@ public class ArtPrefabsInstance : MonoBehaviour
             larva.bug_evolution = CoreBug.BugEvolution.larva_evolve;
         }
     }
-
     public CoreBug EvolveBug(CoreBug bug, CoreBug.BugEvolution bug_type)
     {
         int prefab_index = GetBugPrefabIndex(bug_type);
@@ -95,7 +111,6 @@ public class ArtPrefabsInstance : MonoBehaviour
         }
         return null;
     }
-
     public int GetBugPrefabIndex(CoreBug.BugEvolution bug_type)
     {
         int prefab_index = 0;
@@ -124,9 +139,19 @@ public class ArtPrefabsInstance : MonoBehaviour
             prefab_index = 8;
         }
 
+        // AI
+        if (bug_type == CoreBug.BugEvolution.ai_scout)
+        {
+            prefab_index = 0;
+        }
+        if (bug_type == CoreBug.BugEvolution.ai_warrior)
+        {
+            prefab_index = 1;
+        }
+
+
         return prefab_index;
     }
-
     public void SetBugName(CoreBug bug)
     {
 
@@ -155,5 +180,4 @@ public class ArtPrefabsInstance : MonoBehaviour
         bug.name = bug_name;
 
     }
-
 }
