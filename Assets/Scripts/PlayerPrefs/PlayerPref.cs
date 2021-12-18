@@ -43,13 +43,17 @@ public class PlayerPref : MonoBehaviour
         PlayerPrefs.DeleteKey("gamesPlayed");
         gamesPlayed = GetGamesPlayed();
     }
-    [ContextMenu("Reset Sound Settings")]
+    [ContextMenu("Reset All Settings")]
     public void ResetPlayerSettings()
     {
         PlayerPrefs.DeleteKey("mainVolume");
         PlayerPrefs.DeleteKey("musicVolume");
         PlayerPrefs.DeleteKey("sfxVolume");
-        Debug.Log("Deleted player Sound Settings");
+        PlayerPrefs.DeleteKey("rightDrag");
+        PlayerPrefs.DeleteKey("qeZooming");
+        PlayerPrefs.DeleteKey("edgeMovement");
+        PlayerPrefs.DeleteKey("qualitySettings");
+        Debug.Log("Deleted player Settings");
         UpdatePlayerSoundSettings();
     }
     public void IncreaseGamesPlayed()
@@ -80,6 +84,16 @@ public class PlayerPref : MonoBehaviour
         if (!PlayerPrefs.HasKey("mainVolume")) SaveMainVolume(defaultMasterSoundLevel);
         if (!PlayerPrefs.HasKey("musicVolume")) SaveMusicVolume(defaultMusicSoundLeel);
         if (!PlayerPrefs.HasKey("sfxVolume")) SaveSFXVolume(defaultSFXSoundLevel);
+    }
+
+    public void SetDefaultSettings()
+    {
+        ResetPlayerSettings();
+        SaveQualitySettings(3);
+        ApplySavedQualitySettings();
+        SetQEZooming(true);
+        SetRightDrag(false);
+        SetScreenEdgeMovement(false);
     }
     #region Volume settings - Setters and Getters
 
@@ -126,11 +140,19 @@ public class PlayerPref : MonoBehaviour
     }
     public string GetRightDrag()
     {
-        return PlayerPrefs.GetString("rightDrag");
+        return PlayerPrefs.GetString("rightDrag","false");
     }
-
-
-
+    public void SetQEZooming(bool value)
+    {
+        string str;
+        if (value) str = "true";
+        else str = "false";
+        PlayerPrefs.SetString("qeZooming", str);
+    }
+    public string GetQEZooming()
+    {
+        return PlayerPrefs.GetString("qeZooming","true");
+    }
     public void SetScreenEdgeMovement(bool value)
     {
         string str;
@@ -140,9 +162,25 @@ public class PlayerPref : MonoBehaviour
     }
     public string GetScreenEdgeMovement()
     {
-        return PlayerPrefs.GetString("edgeMovment");
+        return PlayerPrefs.GetString("edgeMovment","false");
     }
 
+
+    #endregion
+
+    #region Quality Settings
+    public void ApplySavedQualitySettings()
+    {
+        UnityEngine.QualitySettings.SetQualityLevel(GetQualitySettings());
+    }
+    public void SaveQualitySettings(int level)
+    {
+       PlayerPrefs.SetInt("qualitySettings", level);
+    }
+    public int GetQualitySettings()
+    {
+        return PlayerPrefs.GetInt("qualitySettings", 3);
+    }
 
     #endregion
 }

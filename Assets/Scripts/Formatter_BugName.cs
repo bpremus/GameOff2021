@@ -47,7 +47,7 @@ public class Formatter_BugName : MonoBehaviour
     public string GetBugTask(CoreBug.BugTask bugTask)
     {
         string task;
-        if (bugTask == CoreBug.BugTask.none) task = "Idle";
+        if (bugTask == CoreBug.BugTask.none) task = "Resting";
         else if (bugTask == CoreBug.BugTask.fight) task = "Defending";
         else if (bugTask == CoreBug.BugTask.harvesting) task = "Harvesting";
         else if (bugTask == CoreBug.BugTask.salvage) task = "Salvaging";
@@ -65,6 +65,7 @@ public class Formatter_BugName : MonoBehaviour
         else if (bug_Action == CoreBug.Bug_action.returning) action = "Returning home";
         else if (bug_Action == CoreBug.Bug_action.salvaging) action = "Salvaging";
         else if (bug_Action == CoreBug.Bug_action.traveling) action = "Traveling";
+        else if (bug_Action == CoreBug.Bug_action.sleeping) action = "Sleeping";
         else action = bug_Action.ToString();
         return action;
     }

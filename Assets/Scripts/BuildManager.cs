@@ -47,7 +47,7 @@ public class BuildManager : MonoBehaviour
 
     public bool CanBuildRoom(int _roomInd)
     {
-        return  GameController.Instance.DoWeHaveEnoughResources(GameController.Instance.GetRoomCost(_roomInd));
+        return  GameController.Instance.EnoughResources(GameController.Instance.GetRoomCost(_roomInd));
     }
     public bool TryBuild(int _roomInd)
     {

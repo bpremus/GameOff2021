@@ -112,7 +112,20 @@ public class DBG_UnitUI : MonoBehaviour
     }
     public void SetTextCurrentState(CoreBug cb)
     {
-        bugTask_Txt.text = Formatter_BugName.Instance.GetBugTask(cb.bugTask);
+        string text;
+        string text_Task = Formatter_BugName.Instance.GetBugTask(cb.bugTask);
+
+            if(cb.bug_evolution == CoreBug.BugEvolution.drone || cb.bug_evolution == CoreBug.BugEvolution.super_drone)
+            {
+                 if (!GameController.Instance.ISDayCycle())
+                 {
+                      if (cb.GetAction == CoreBug.Bug_action.idle) text = "Sleeping";
+                 }
+            }
+        
+        if (cb.GetAction == CoreBug.Bug_action.sleeping) text = Formatter_BugName.Instance.GetBugAction(cb.GetAction);
+        else text = text_Task;
+        bugTask_Txt.text = text;
     }
     public void Update()
     {

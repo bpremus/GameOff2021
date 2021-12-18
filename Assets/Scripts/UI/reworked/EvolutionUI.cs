@@ -133,10 +133,10 @@ public class EvolutionUI : MonoBehaviour
     }
     public void OnAffordButtonActive()
     {
-            warriorUpgrade.GetComponent<Button>().interactable = GameController.Instance.CanAffordUpgrade(CoreBug.BugEvolution.warrior);
-            clawUpgrade.GetComponent<Button>().interactable = GameController.Instance.CanAffordUpgrade(CoreBug.BugEvolution.claw);
-            rangedUpgrade.GetComponent<Button>().interactable = GameController.Instance.CanAffordUpgrade(CoreBug.BugEvolution.range);
-            ccUpgrade.GetComponent<Button>().interactable = GameController.Instance.CanAffordUpgrade(CoreBug.BugEvolution.cc_bug);
+            warriorUpgrade.GetComponent<Button>().interactable = GameController.Instance.CanAffordEvolution(CoreBug.BugEvolution.warrior);
+            clawUpgrade.GetComponent<Button>().interactable = GameController.Instance.CanAffordEvolution(CoreBug.BugEvolution.claw);
+            rangedUpgrade.GetComponent<Button>().interactable = GameController.Instance.CanAffordEvolution(CoreBug.BugEvolution.range);
+            ccUpgrade.GetComponent<Button>().interactable = GameController.Instance.CanAffordEvolution(CoreBug.BugEvolution.cc_bug);
     }
     public void SetDesiredEvolution(CoreBug.BugEvolution desiredEvolution) => desiredEvol = desiredEvolution;
     public void UnSelectDesiredEvolution() => desiredEvol = CoreBug.BugEvolution.none;
