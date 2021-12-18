@@ -205,6 +205,17 @@ public class CameraController : MonoBehaviour
     {
         useKeyboardZooming = !useKeyboardZooming;
     }
+    public void UpdateCamPreferences()
+    {
+        if (PlayerPrefs.GetString("rightDrag") == "true") useRightMouseButtonToDrag = true;
+        else useRightMouseButtonToDrag = false;
+
+        if (PlayerPrefs.GetString("qeZooming") == "true") useKeyboardZooming = true;
+        else useKeyboardZooming = false;
+
+        if (PlayerPrefs.GetString("edgeMovement") == "true") useScreenEdgeInput = true;
+        else useScreenEdgeInput = false;
+    }
     public void SetRandomZoomDBG()
     {
         zoomPos = UnityEngine.Random.Range(0, 1.1f);

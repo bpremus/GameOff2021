@@ -203,6 +203,6 @@ public class SalvageRoom : HiveRoom
     {
         Debug.Log(this.name + " selected");
 
-
+        FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Rooms/Selection/SalvageRoom", gameObject);
     }
 }

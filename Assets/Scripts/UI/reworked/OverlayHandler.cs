@@ -39,6 +39,15 @@ public class OverlayHandler : MonoBehaviour
     {
         uiController = GetComponent<UIController>();
     }
+    public void SwitchVisibility(bool active)
+    {
+        buildButton.SetActive(active);
+        optionsListButton.SetActive(active);
+        tutorialButton.SetActive(active);
+        buildMenu.SetActive(active);
+        settingsMenu.SetActive(active);
+        topIndicator.SetActive(active);
+    }
     public void DisableBuildButton() => ButtonInteractable(buildButton, false);
     public void EnableBuildButton() =>  ButtonInteractable(buildButton, true);
     public void OpenBuildMenu()

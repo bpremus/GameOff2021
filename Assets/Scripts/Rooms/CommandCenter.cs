@@ -113,7 +113,7 @@ public class CommandCenter : WarRoom
     {
         Debug.Log(this.name + " selected");
 
-
+        FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Rooms/Selection/Hatchery", gameObject);
     }
 
 

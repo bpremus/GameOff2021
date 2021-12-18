@@ -29,7 +29,7 @@ public class WarRoom : HiveRoom
     {
         Debug.Log(this.name + " selected");
 
-
+        FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Rooms/Selection/Barracks", gameObject);
     }
 
     public void OnBugDepart(CoreBug bug)
