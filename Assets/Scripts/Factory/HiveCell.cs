@@ -203,11 +203,15 @@ public class HiveCell : MonoBehaviour
     public virtual void OnRoomPlaced()
     {
         Debug.Log("Room has been built");
+
+        FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Rooms/Other/Room_Placement", gameObject);
     }
 
     public virtual void OnRoomDestroyed()
     {
         Debug.Log("Room has been destroyed");
+
+        FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Rooms/Other/Room_Destruction", gameObject);
     }
 
     public void BuildEntrance()

@@ -296,29 +296,30 @@ public class CellSelectProto : MonoBehaviour
         {
             case CoreBug.BugEvolution.drone:
                 //your sound or anything
-              
+                FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Bugs/Selection/Selection_Drone", gameObject);
                 break;
             case CoreBug.BugEvolution.super_drone:
                 //your sound or anything
-             
+                
                 break;
             case CoreBug.BugEvolution.warrior:
                 //your sound or anything
-              
+                FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Bugs/Selection/Selection_Warrior", gameObject);
                 break;
             case CoreBug.BugEvolution.claw:
                 //your sound or anything
-               
+                FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Bugs/Selection/Selection_BigClaw", gameObject);
                 break;
             case CoreBug.BugEvolution.range:
                 //your sound or anything
-               
+                FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Bugs/Selection/Selection_Ranged", gameObject);
                 break;
             case CoreBug.BugEvolution.cc_bug:
                 //your sound or anything
-             
+                FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Bugs/Selection/Selection_CC", gameObject);
                 break;
             default:
+                FMODUnity.RuntimeManager.PlayOneShotAttached("event:/Bugs/Selection/Selection_Drone", gameObject);
                 //if somethings happens set default sound here (drone?)
                 break;
         }
