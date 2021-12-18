@@ -7,8 +7,10 @@ public class CameraController : MonoBehaviour
     // Target is reset when player moves camera or uses stopFollowingKey
     //
     #region Variables
-    private Transform m_Transform; //camera tranform
+    private Transform m_Transform; //camera transform
     private PopupController popupController;
+
+    public bool is_in_menu = false;
 
 
     [Header("Main Settings")]
@@ -218,6 +220,9 @@ public class CameraController : MonoBehaviour
 
     private void CameraUpdate()
     {
+
+        if (is_in_menu == true) return; // block camera movement in menu
+
         if (Input.GetKeyDown(KeyCode.L)) SetRandomZoomDBG();
         if (isAutoZooming)
         {
@@ -351,5 +356,9 @@ public class CameraController : MonoBehaviour
     }
 
     #endregion
+
+
+
+    
 
 }
