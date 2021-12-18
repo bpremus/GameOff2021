@@ -550,7 +550,7 @@ MonoBehaviour:
 
 
     You can always display this guide later
-    with buttons
+    using buttons
 
 
     Do you want to see it now?'
@@ -580,7 +580,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28.95
+  m_fontSize: 28.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

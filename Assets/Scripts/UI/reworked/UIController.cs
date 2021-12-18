@@ -149,7 +149,7 @@ public class UIController : MonoBehaviour
                     inBuildingMode = true;
                     break;
                 case State.Following:
-                    overlayHandler.ShowIndicator("Following bug");
+                    overlayHandler.ShowIndicator("Following");
                     inBuildingMode = false;
                     overlayHandler.DisableBuildButton();
                     break;
@@ -170,6 +170,9 @@ public class UIController : MonoBehaviour
     public void EnableBlur() => blurController.EnableBlur();
     public void DisableBlur() => blurController.DisableBlur();
     public void HideAllUI() => CellSelectProto.Instance.CloseUI();
+    public void HideOverlays() => overlayHandler.SwitchVisibility(false);
+    public void ShowOverlays() => overlayHandler.SwitchVisibility(true);
+    public void HideEverything() { HideAllUI();HideOverlays(); }
     public void ExitBuildingMode() => SetDefaultState();
     public void SetDefaultState()
     {

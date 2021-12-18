@@ -6,6 +6,7 @@ using UnityEngine;
 // [ExecuteInEditMode] <- turn on for running this in editor
 public class GameController : MonoBehaviour
 {
+    #region Save and Load
     // Save and Load 
     // ----------------------------
     [System.Serializable]
@@ -42,7 +43,9 @@ public class GameController : MonoBehaviour
         _food_t = 0;
     }
 
+    #endregion
 
+    #region Stats,variables
     // Stats 
     // -----------------------------
     [SerializeField]
@@ -66,17 +69,9 @@ public class GameController : MonoBehaviour
     private int lastFoodValue;
     private int lastWoodValue;
     private int lastPopulationValue;
-    public void ResetGame()
-    {
-        food = 20;
-        wood = 20;
-        population = 2;
-        day_count = 0;
-
-        // we need to rest AI 
-
-    }
-
+    #endregion
+  
+    #region Room and evolution costs
 
     // costs                 wood, food 
     [SerializeField] int[] room_corridor_cost = { 5, 1 };
@@ -97,29 +92,9 @@ public class GameController : MonoBehaviour
     [SerializeField] int[] evolve_spike         = { 200, 20 };
     [SerializeField] int[] evolve_slow          = { 150, 20 };
 
-    // consume resources
+    #endregion
 
-    public bool DoWeHaveEnoughResources(int[] cost)
-    {
-
-        // food 
-        bool can_consume = true;
-        if (food < cost[0])
-        {
-            can_consume = false;
-        }
-
-        // wood 
-        if (wood < cost[1])
-        {
-            can_consume = false;
-        }
-
-        // we can add minimal population if needed
-
-
-        return can_consume;
-    }
+    #region Spending and retrieving resources
     bool SpendResources(int[] cost)
     {
         food -= cost[0];
@@ -138,6 +113,10 @@ public class GameController : MonoBehaviour
         wood += (int)(((float)(cost[1])) *0.3f);
         return true;
     }
+
+    #endregion
+
+    #region Check if value of resource changed
     public bool OnFoodValueChanged()
     {
         //this gets called only in one frame
@@ -176,6 +155,25 @@ public class GameController : MonoBehaviour
         }
         return false;
     }
+    #endregion
+
+    #region Get costs of rooms/evolutions and check if  player has enough
+    public bool EnoughResources(int[] cost)
+    {
+        // food 
+        bool can_consume = true;
+        if (food < cost[0])
+        {
+            can_consume = false;
+        }
+        // wood 
+        if (wood < cost[1])
+        {
+            can_consume = false;
+        }
+        // we can add minimal population if needed
+        return can_consume;
+    }
     public int[] GetRoomCost(int roomIndex)
     {
         switch (roomIndex)
@@ -195,6 +193,27 @@ public class GameController : MonoBehaviour
         }
          
 
+    }
+    public bool CanBuild(HiveCell.RoomContext room)
+    {
+        // define cost of each buildning 
+        if (room == HiveCell.RoomContext.corridor)
+        {
+            return EnoughResources(room_corridor_cost);
+        }
+        if (room == HiveCell.RoomContext.harvester)
+        {
+            return EnoughResources(room_harvester_cost);
+        }
+        if (room == HiveCell.RoomContext.salvage)
+        {
+            return EnoughResources(room_salvage_cost);
+        }
+        if (room == HiveCell.RoomContext.war)
+        {
+            return EnoughResources(room_war_cost);
+        }
+        return false;
     }
     public int[] GetUpgradeCost(CoreBug.BugEvolution bugEvolution)
     {
@@ -217,89 +236,80 @@ public class GameController : MonoBehaviour
         }
 
     } 
-    public bool CanAffordUpgrade(CoreBug.BugEvolution bugEvolution)
+    public bool CanAffordEvolution(CoreBug.BugEvolution bugEvolution)
     {
-        return DoWeHaveEnoughResources(GetUpgradeCost(bugEvolution));
+        return EnoughResources(GetUpgradeCost(bugEvolution));
     }
+    #endregion
 
+    public void ResetGame()
+    {
+        food = 20;
+        wood = 20;
+        population = 2;
+        day_count = 0;
 
+        // we need to rest AI 
+
+    }
     public void OnGameEnd()
     { 
     
     }
 
     public void OnGameRestart()
-    { 
-      
+    {
+
     }
 
-    public void OnRooomBuild(HiveCell.RoomContext context)
+    #region On Room  Build / Destroy
+    public void OnRooomBuild(HiveCell.RoomContext room)
     {
-        // define cost of each buildning 
-        if (context == HiveCell.RoomContext.corridor)
+        if (room == HiveCell.RoomContext.corridor)
         {
             SpendResources(room_corridor_cost);
         }
-        if (context == HiveCell.RoomContext.harvester)
+        if (room == HiveCell.RoomContext.harvester)
         {
             SpendResources(room_harvester_cost);
         }
-        if (context == HiveCell.RoomContext.salvage)
+        if (room == HiveCell.RoomContext.salvage)
         {
             SpendResources(room_salvage_cost);
         }
-        if (context == HiveCell.RoomContext.war)
+        if (room == HiveCell.RoomContext.war)
         {
             SpendResources(room_war_cost);
         }
-        if(context == HiveCell.RoomContext.queen)
+        if(room == HiveCell.RoomContext.queen)
         {
             SpendResources(room_queen_cost);
         }
     }
     // bring back some resources
-    public void OnRoomDestroyed(HiveCell.RoomContext context)
+    public void OnRoomDestroyed(HiveCell.RoomContext room)
     {
         // define cost of each buildning 
-        if (context == HiveCell.RoomContext.corridor)
+        if (room == HiveCell.RoomContext.corridor)
         {
-            RetrieveResources(room_corridor_cost);
+            SellBuilding(room_corridor_cost);
         }
-        if (context == HiveCell.RoomContext.harvester)
+        if (room == HiveCell.RoomContext.harvester)
         {
-            RetrieveResources(room_harvester_cost);
+            SellBuilding(room_harvester_cost);
         }
-        if (context == HiveCell.RoomContext.salvage)
+        if (room == HiveCell.RoomContext.salvage)
         {
-            RetrieveResources(room_salvage_cost);
+            SellBuilding(room_salvage_cost);
         }
-        if (context == HiveCell.RoomContext.war)
+        if (room == HiveCell.RoomContext.war)
         {
-            RetrieveResources(room_war_cost);
+           SellBuilding(room_war_cost);
         }
     }
-    public bool CanBuild(HiveCell.RoomContext context)
-    {
-        // define cost of each buildning 
-        if (context == HiveCell.RoomContext.corridor)
-        {
-            return DoWeHaveEnoughResources(room_corridor_cost);
-        }
-        if (context == HiveCell.RoomContext.harvester)
-        {
-            return DoWeHaveEnoughResources(room_harvester_cost);
-        }
-        if (context == HiveCell.RoomContext.salvage)
-        {
-            return DoWeHaveEnoughResources(room_salvage_cost);
-        }
-        if (context == HiveCell.RoomContext.war)
-        {
-            return DoWeHaveEnoughResources(room_war_cost);
-        }
-        return false;
-    }
+    #endregion
 
+    #region Events
     // Events 
     // ------------------------------
 
@@ -426,8 +436,9 @@ public class GameController : MonoBehaviour
 
         return false;
     }
+    #endregion
 
-
+    #region Methods
     // methods 
     // ------------------------------
 
@@ -479,7 +490,9 @@ public class GameController : MonoBehaviour
         OnWoodValueChanged();
         OnPopulationValueChanged();
     }
+    #endregion
 
+    #region Protected
     // Protected
     // ------------------------------
 
@@ -547,6 +560,7 @@ public class GameController : MonoBehaviour
     private void Start()
     {
 
+
          // fire first day or night 
          if (isDay)
              OnDayStart();
@@ -561,6 +575,7 @@ public class GameController : MonoBehaviour
         //player's inits
         PlayerPref.Instance.IncreaseGamesPlayed();
         PlayerPref.Instance.UpdatePlayerSoundSettings();
+        PlayerPref.Instance.ApplySavedQualitySettings();
     }
-
+    #endregion
 }
