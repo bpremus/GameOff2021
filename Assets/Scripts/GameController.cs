@@ -317,12 +317,22 @@ public class GameController : MonoBehaviour
 
     private FMOD.Studio.EventInstance NightAmbience;
 
+    private FMOD.Studio.EventInstance DayMusic;
+
+    private FMOD.Studio.EventInstance NightMusic;
+
     public void OnDayStart() 
     {
         DayAmbience = FMODUnity.RuntimeManager.CreateInstance("event:/Ambience/Ambience_Day");
         DayAmbience.start();
         NightAmbience.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         NightAmbience.release();
+
+
+        DayMusic = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Day_Music");
+        DayMusic.start();
+        NightMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        NightMusic.release();
 
         day_count++;
     }
@@ -332,6 +342,12 @@ public class GameController : MonoBehaviour
         NightAmbience.start();
         DayAmbience.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         DayAmbience.release();
+
+
+        NightMusic = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Night_Music");
+        NightMusic.start();
+        DayMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        DayMusic.release();
     }
     public void OnAttackStart()
     { 

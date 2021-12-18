@@ -3109,11 +3109,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1b1e121e188fc44b8efce59d86197ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cell_prefab: {fileID: 4738200789068448637, guid: 27143e290afd82444918b9a40886f7ee, type: 3}
+  cell_mesh_prefabs: []
   width: 10
   height: 10
   offset: 1.1
-  cell_prefab: {fileID: 4738200789068448637, guid: 27143e290afd82444918b9a40886f7ee, type: 3}
-  cell_mesh_prefabs: []
+  isGameStarted: 0
 --- !u!1001 &821763165
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4119,63 +4120,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1142343844}
   m_Mesh: {fileID: 366030010377996055, guid: 81cb4141886871046a7997ae7b02d05e, type: 3}
---- !u!1 &1174986985
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1174986987}
-  - component: {fileID: 1174986986}
-  m_Layer: 0
-  m_Name: WwiseGlobal
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1174986986
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1174986985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a20690529029a5640ac2290fe839a2c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InitializationSettings: {fileID: 11400000, guid: 2b8368addf7a5b3449d2cd2b07d51062, type: 2}
-  basePath: 
-  language: 
-  defaultPoolSize: 0
-  lowerPoolSize: 0
-  streamingPoolSize: 0
-  memoryCutoffThreshold: 0
-  monitorPoolSize: 0
-  monitorQueuePoolSize: 0
-  callbackManagerBufferSize: 0
-  spatialAudioPoolSize: 0
-  maxSoundPropagationDepth: 0
-  diffractionFlags: 11
-  engineLogging: 0
---- !u!4 &1174986987
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1174986985}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 27
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1179618372
 GameObject:
   m_ObjectHideFlags: 0
@@ -6590,15 +6534,17 @@ MonoBehaviour:
   useDragInput: 1
   useKeyboardZooming: 1
   useScrollwheelZooming: 1
+  useRightMouseButtonToDrag: 0
   keyboardMovementSpeed: 25
   screenEdgeMovementSpeed: 25
   followingSpeed: 15
+  focusingSpeed: 40
   dragMovementSpeed: 35
   groundMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  maxHeight: 40
-  minHeight: 12
+  maxZoom: 40
+  minZoom: 12
   keyboardZoomingSensitivity: 2
   scrollWheelZoomingSensitivity: 50
   limitEnabled: 0
@@ -6609,6 +6555,7 @@ MonoBehaviour:
   limitZ: 10
   targetFollow: {fileID: 0}
   targetOffset: {x: 0, y: 0, z: 0}
+  focusTarget: {fileID: 0}
   screenEdgeBorder: 25
   horizontalAxis: Horizontal
   verticalAxis: Vertical
@@ -8052,6 +7999,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 821834ac4c30639418547fcf645a0df4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  food: 20
+  wood: 100
+  population: 2
+  day_night_duration: 1
+  isDay: 1
+  dayDuration: 0
+  day_count: 0
+  room_corridor_cost: 0500000001000000
+  room_harvester_cost: 0a00000003000000
+  room_salvage_cost: 0a00000005000000
+  room_war_cost: 0a00000005000000
+  room_queen_cost: 140000000a000000
+  bug_return_resources: 050000000a000000
+  evolve_drone: 0500000000000000
+  evolve_super_drone: 190000000a000000
+  evolve_warrior: 190000000a000000
+  evolve_claw: 6400000014000000
+  evolve_spike: c800000014000000
+  evolve_slow: 9600000014000000
 --- !u!4 &2050323478
 Transform:
   m_ObjectHideFlags: 0
