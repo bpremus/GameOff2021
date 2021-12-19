@@ -358,8 +358,8 @@ MonoBehaviour:
   RealChannelSettings: []
   Plugins: []
   MasterBanks:
-  - Desktop/InGame
-  - Desktop/MainMenu
+  - InGame
+  - MainMenu
   Banks: []
   BanksToLoad: []
   LiveUpdatePort: 9264

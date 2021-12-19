@@ -5,17 +5,17 @@ using UnityEngine;
 public class PlayerPref : MonoBehaviour
 {
     [Header("Audio settings")]
-    [Range(0,100)]
-    [SerializeField] private float defaultMasterSoundLevel = 80f;
-    [Range(0, 100)]
-    [SerializeField] private float defaultMusicSoundLeel = 80f;
-    [Range(0, 100)]
-    [SerializeField] private float defaultSFXSoundLevel = 80f;
+    [Range(0,1)]
+    [SerializeField] private float defaultMasterSoundLevel = .7f;
+    [Range(0, 1)]
+    [SerializeField] private float defaultMusicSoundLeel = .7f;
+    [Range(0, 1)]
+    [SerializeField] private float defaultSFXSoundLevel = .7f;
 
     [SerializeField] private int gamesPlayed = 0;
-    [SerializeField]  private MasterVolumeSlider masterVolumeSlider;
-    [SerializeField] private MusicVolumeSlider musicVolumeSlider;
-    [SerializeField] private SfxVolumeSlider sfxVolumeSlider;
+    [SerializeField]  private VolumeSlider masterVolumeSlider;
+    [SerializeField] private VolumeSlider musicVolumeSlider;
+    [SerializeField] private VolumeSlider sfxVolumeSlider;
     private static PlayerPref _instance;
 
     public static PlayerPref Instance
@@ -55,6 +55,8 @@ public class PlayerPref : MonoBehaviour
         PlayerPrefs.DeleteKey("qualitySettings");
         Debug.Log("Deleted player Settings");
         UpdatePlayerSoundSettings();
+
+
     }
     public void IncreaseGamesPlayed()
     {
@@ -63,21 +65,21 @@ public class PlayerPref : MonoBehaviour
     }
     public int GetGamesPlayed()
     {
-        return PlayerPrefs.GetInt("gamesPlayed");
+        return PlayerPrefs.GetInt("gamesPlayed",0);
     }
     public void UpdatePlayerSoundSettings()
     {
         if (!masterVolumeSlider || !musicVolumeSlider || !sfxVolumeSlider) { Debug.LogError("ASSIGN VOLUME SLIDERS IN PLAYERPREFS!"); return; }
 
         CheckIfDefaultVolumeSettings();
-        ApplySavedVolumesToSlider();
+        ResetVolumeSettingsSlider();
     }
 
-    private void ApplySavedVolumesToSlider()
+    private void ResetVolumeSettingsSlider()
     {
-        masterVolumeSlider.SetSavedLevel();
-        musicVolumeSlider.SetSavedLevel();
-        sfxVolumeSlider.SetSavedLevel();
+        masterVolumeSlider.GetSavedVolume();
+        musicVolumeSlider.GetSavedVolume();
+        sfxVolumeSlider.GetSavedVolume();
     }
     private void CheckIfDefaultVolumeSettings()
     {
@@ -94,32 +96,25 @@ public class PlayerPref : MonoBehaviour
         SetQEZooming(true);
         SetRightDrag(false);
         SetScreenEdgeMovement(false);
+
+
     }
     #region Volume settings - Setters and Getters
 
     public void SaveMainVolume(float value) 
     {
-        if (value > 100) value = 100;
-        else if (value < 0) value = 0;
-
         PlayerPrefs.SetFloat("mainVolume", value);
     }
     public float GetMainVolume() { return PlayerPrefs.GetFloat("mainVolume"); }
 
     public void SaveMusicVolume(float value) 
     {
-        if (value > 100) value = 100;
-        else if (value < 0) value = 0;
-
         PlayerPrefs.SetFloat("musicVolume", value); 
     }
     public float GetMusicVolume() { return PlayerPrefs.GetFloat("musicVolume"); }
 
     public void SaveSFXVolume(float value) 
     {
-        if (value > 100) value = 100;
-        else if (value < 0) value = 0;
-        
         PlayerPrefs.SetFloat("sfxVolume", value); 
     }
     public float GetSFXVolume() { return PlayerPrefs.GetFloat("sfxVolume");}

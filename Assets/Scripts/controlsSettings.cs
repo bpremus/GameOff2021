@@ -40,17 +40,34 @@ public class controlsSettings : MonoBehaviour
     }
     private void UpdateStateDrag()
     {
+        if (!settings)
+        {
+            settingActive.SetActive(!settingActive.activeInHierarchy);
+            PlayerPref.Instance.SetRightDrag(settingActive.activeInHierarchy);
+            return;
+        }
         if (settings.isRMBDragOn()) settingActive.SetActive(true);
         else settingActive.SetActive(false);
     }
     private void UpdateStateZoom()
     {
+        if (!settings)
+        {
+            settingActive.SetActive(!settingActive.activeInHierarchy);
+            PlayerPref.Instance.SetQEZooming(settingActive.activeInHierarchy);
+            return;
+        }
         if (settings.isKeyboardZoomingOn()) settingActive.SetActive(true);
         else settingActive.SetActive(false);
     }
     private void UpdateStateScrolling()
     {
-
+        if (!settings)
+        {
+            settingActive.SetActive(!settingActive.activeInHierarchy);
+            PlayerPref.Instance.SetScreenEdgeMovement(settingActive.activeInHierarchy);
+            return;
+        }
         if (settings.isEdgeScreenScrollingOn()) settingActive.SetActive(true);
         else settingActive.SetActive(false);
     }

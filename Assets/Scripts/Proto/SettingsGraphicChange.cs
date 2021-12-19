@@ -8,7 +8,6 @@ public class SettingsGraphicChange : MonoBehaviour
     [SerializeField] private Color normalColor;
     [SerializeField] private Color activeColor;
 
-   [SerializeField] private controlsSettings ControlsSettings;
     private void Start()
     { 
         OnUpdate();
@@ -16,7 +15,8 @@ public class SettingsGraphicChange : MonoBehaviour
     public void SetDefaultSettings()
     {
         PlayerPref.Instance.SetDefaultSettings();
-        Camera.main.GetComponent<CameraController>().UpdateCamPreferences();
+        if(Camera.main.GetComponent<CameraController>() != null)
+             Camera.main.GetComponent<CameraController>().UpdateCamPreferences();
         OnUpdate();
     }
     private void OnUpdate()
