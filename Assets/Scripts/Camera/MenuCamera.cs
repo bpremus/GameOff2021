@@ -35,6 +35,7 @@ public class MenuCamera : MonoBehaviour
     [SerializeField]
     GameObject[] cover_entities_cover;
 
+    [SerializeField]
     protected bool is_in_menu = false;
 
     Vector3 _camera_menu_position;
