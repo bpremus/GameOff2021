@@ -77,11 +77,18 @@ public class OverlayHandler : MonoBehaviour
         uiController.HideAllUI();
         settingsMenu.SetActive(true);
         uiController.EnableBlur();
+
+        // scene 
+        MenuCamera.Instance.OpenMenu();
+
     }
     public void CloseSettingsMenu()
     {
         settingsMenu.SetActive(false);
         uiController.DisableBlur();
+
+        // scene 
+        MenuCamera.Instance.CloseMenu();
     }
     public bool IsSettingsMenuActive()
     {
