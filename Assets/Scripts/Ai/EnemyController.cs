@@ -13,7 +13,6 @@ public class EnemyController : MonoBehaviour
         public HiveCell destination;
     }
     Queue<BugTask> bugs_to_create = new Queue<BugTask>();
-
     private RunnerBug PlaceBug(BugTask task)
     {
         // we spawn only runner bugs and classes that inherit runner bugs

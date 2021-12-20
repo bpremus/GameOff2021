@@ -4,19 +4,16 @@ using UnityEngine;
 
 public class WeHaveBeenScounted : CoreLevel
 {
-    private const string NLS_OnSuccess = "Task completed successfully";
 
     [SerializeField] private List<int> restrictedBuilds;
     [SerializeField] private List<int> restrictedUnits;
+    [SerializeField] string tasksHeader;
+    [SerializeField] string objective1;
 
-
+    private CoreBug enemyScout;
     public override void SetGrid()
     {
         
-        Debug.Log("WeHaveBeenScounted");
-
-        GameLog.Instance.WriteLine("New objective");
-        GameLog.Instance.WriteLine("Defend the hive");
 
      //   DrawMask(4);
 
@@ -32,8 +29,22 @@ public class WeHaveBeenScounted : CoreLevel
 
         EnemyController.Instance.SapwnScount(CoreBug.BugEvolution.ai_warrior, levelManager.hiveGenerator.GetHiveQueenRoom());
 
+        SetObjectives();
     }
+    private void SetObjectives()
+    {
 
+        ObjectiveDisplay.Instance.DisplayNewObjectiveIndicator(tasksHeader);
+
+
+
+        ObjectiveDisplay.Instance.SetTaskHeader(tasksHeader);
+        ObjectiveDisplay.Instance.AddObjective(objective1);
+
+
+        HiveCell hc = levelManager.hiveGenerator.GetAllEntrances()[0];
+        Camera.main.GetComponent<CameraController>().SetFocus(hc);
+    }
     #region UnitRestriction
     // limit unit evolution 
     public override void SetAvialableUnits()
@@ -96,13 +107,13 @@ public class WeHaveBeenScounted : CoreLevel
     #endregion
     public override bool IsTaskCompleted()
     {
-        
        
-        return false;
+       
+        return true;
     }
 
     public override void OnLevelComplete()
     {
-        GameLog.Instance.WriteLine(NLS_OnSuccess);
+        ObjectiveDisplay.Instance.AllCompleted();
     }
 }

@@ -232,7 +232,15 @@ public class CameraController : MonoBehaviour
     private void CameraUpdate()
     {
 
-        if (is_in_menu == true) return; // block camera movement in menu
+
+        if (is_in_menu == true)
+        {
+            Camera.main.orthographic = false;
+            UIController.instance.IntroFadeOUT();
+            return;
+        }// block camera movement in menu
+        Camera.main.orthographic = true;
+        UIController.instance.IntroFadeIN();
 
         if (Input.GetKeyDown(KeyCode.L)) SetRandomZoomDBG();
         if (isAutoZooming)

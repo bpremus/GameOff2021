@@ -47,8 +47,11 @@ public class TutorialLevel : CoreLevel
         objective2 = "Gather " + wood_objective + " wood";
         objective3 = "Get to " + population_objective + " population";
 
-        ObjectiveDisplay.Instance.SetTaskHeader(tasksHeader);
 
+        ObjectiveDisplay.Instance.DisplayNewObjectiveIndicator(tasksHeader);
+
+
+        ObjectiveDisplay.Instance.SetTaskHeader(tasksHeader);
         ObjectiveDisplay.Instance.AddObjective(objective3);
         ObjectiveDisplay.Instance.AddObjective(objective1);
         ObjectiveDisplay.Instance.AddObjective(objective2);

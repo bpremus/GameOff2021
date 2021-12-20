@@ -12,7 +12,7 @@ public class OverlayHandler : MonoBehaviour
     private GameObject optionsListButton;
 
     [SerializeField]
-    private GameObject tutorialButton;
+    private GameObject objectivesDisplay;
 
     [SerializeField]
     private GameObject buildMenu;
@@ -43,7 +43,7 @@ public class OverlayHandler : MonoBehaviour
     {
         buildButton.SetActive(active);
         optionsListButton.SetActive(active);
-        tutorialButton.SetActive(active);
+        objectivesDisplay.SetActive(active);
         buildMenu.SetActive(active);
         settingsMenu.SetActive(active);
         topIndicator.SetActive(active);
@@ -64,7 +64,6 @@ public class OverlayHandler : MonoBehaviour
     {
         if (uiController)
         {
-            Debug.Log("closing menu");
             buildMenu.SetActive(false);
             ButtonInteractable(buildButton, true);
             uiController.DisableBlur();

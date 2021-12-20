@@ -16,10 +16,10 @@ public class FirstLevel : CoreLevel
     {
         Debug.Log("first level started");
 
-        GameLog.Instance.WriteLine("New objective");
-        GameLog.Instance.WriteLine("Build Harvesting building");
 
         DrawMask(4);
+
+        ObjectiveDisplay.Instance.DisplayNewObjectiveIndicator(tasksHeader);
 
         ObjectiveDisplay.Instance.SetTaskHeader(tasksHeader);
         ObjectiveDisplay.Instance.AddObjective(objective1);

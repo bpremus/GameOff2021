@@ -601,7 +601,6 @@ public class CellSelectProto : MonoBehaviour
     public void CloseUI()
     {
         if (UIController.instance.GetUIState() == UIController.State.Building) UIController.instance.SetDefaultState();
-        Debug.Log("Closing All UI elements");
         selection_state = SelectState.none;
         UIController.instance.HideRoomUI();
         UIController.instance.CloseBuildMenu();

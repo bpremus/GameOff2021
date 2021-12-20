@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
+
 public class ObjectiveDisplay : MonoBehaviour
 {
     #region Variables
     [SerializeField] private GameObject objectiveDisplay;
-    [SerializeField] private GameObject normalObjectiveHolder;
+    [SerializeField] private GameObject newObjectiveIndicator;
+    [SerializeField] private GameObject objectivePrefab;
     [SerializeField] private TextMeshProUGUI tasksHeader;
     [SerializeField] private Transform parent;
 
@@ -52,14 +55,13 @@ public class ObjectiveDisplay : MonoBehaviour
     #endregion
     public bool areObjectivesDisplayed() { return objectiveDisplay.activeInHierarchy; }
 
-
+    private void Start()
+    {
+        HideObjectivesPanel();
+    }
     private void Update()
     {
-        if (activeObjectives.Count > 0)
-        {
-            DisplayObjectivesPanel();
-        }
-        else HideObjectivesPanel();
+        if (activeObjectives.Count == 0) HideObjectivesPanel();
     }
     [ContextMenu("Toggle panel")]
     public void ToggleObjectiveDisplayPanel()
@@ -84,7 +86,7 @@ public class ObjectiveDisplay : MonoBehaviour
     {
         if (objectiveExist(objectiveText)) return;
 
-        GameObject obj = Instantiate(normalObjectiveHolder, parent);
+        GameObject obj = Instantiate(objectivePrefab, parent);
         activeObjectives.Add(obj);
         string description = obj.GetComponentInChildren<TextMeshProUGUI>().text = objectiveText;
         objectivesDescriptions.Add(description);
@@ -94,6 +96,32 @@ public class ObjectiveDisplay : MonoBehaviour
         StartCoroutine(FadeInObjective(obj));
 
         //
+    }
+
+    public void DisplayNewObjectiveIndicator(string text = default)
+    {
+        
+        //setup objective text 
+        if (text == "") text = "New Objectives";
+        newObjectiveIndicator.transform.GetChild(0).transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = text;
+
+        //hide current objectives panel
+        HideObjectivesPanel();
+        //display objective indicator
+        newObjectiveIndicator.SetActive(true);
+
+        // after certain time hide this indicator and enable (already setted up) objectives panel
+        StartCoroutine(ProceedObjectiveIndicator());
+
+        
+
+
+    }
+    private IEnumerator ProceedObjectiveIndicator()
+    {
+        yield return new WaitForSeconds(3f);
+        newObjectiveIndicator.SetActive(false);
+        DisplayObjectivesPanel();
     }
     private IEnumerator FadeInObjective(GameObject obj)
     {
@@ -108,22 +136,22 @@ public class ObjectiveDisplay : MonoBehaviour
         //completed task
         if (completed)
         {
-            objective.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = completedSprite;
-            objective.gameObject.transform.GetChild(0).GetComponent<Image>().color = completedColor;
-            objective.gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Strikethrough;
+            objective.gameObject.transform.GetChild(1).GetComponent<Image>().sprite = completedSprite;
+            objective.gameObject.transform.GetChild(1).GetComponent<Image>().color = completedColor;
+            objective.gameObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Strikethrough;
         }
         else //not completed
         {
-            objective.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = notCompletedSprite;
+            objective.gameObject.transform.GetChild(1).GetComponent<Image>().sprite = notCompletedSprite;
             if (importanceLevel != 0)
             {
                 if(importanceLevel < customDescriptionColor.Length)
-                    objective.gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().color = customDescriptionColor[importanceLevel];
-                else objective.gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().color = customDescriptionColor[0];
+                    objective.gameObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>().color = customDescriptionColor[importanceLevel];
+                else objective.gameObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>().color = customDescriptionColor[0];
             }
-            else objective.gameObject.transform.GetChild(0).GetComponent<Image>().color = defaultColor;
+            else objective.gameObject.transform.GetChild(1).GetComponent<Image>().color = defaultColor;
 
-            objective.gameObject.transform.GetChild(1).GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Normal;
+            objective.gameObject.transform.GetChild(2).GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Normal;
         }
     }
     public void ObjectiveCompleted(string objectiveText)
@@ -174,6 +202,8 @@ public class ObjectiveDisplay : MonoBehaviour
         if (!objectiveDisplay.activeInHierarchy)
         {
             objectiveDisplay.SetActive(true);
+            objectiveDisplay.GetComponent<CanvasGroup>().alpha = 0;
+            LeanTween.alphaCanvas(objectiveDisplay.GetComponent<CanvasGroup>(), 1, 0.5f);
         }
             
     }

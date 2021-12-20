@@ -21,14 +21,25 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private Card_BuildMenu[] menu_cards;
 
+    private CanvasGroup canvasGroup;
+
+
+    public void IntroFadeIN()
+    {
+        canvasGroup.alpha = 1;
+    }
+    public void IntroFadeOUT()
+    {
+        canvasGroup.alpha = 0;
+    }
 
     public void RestrictBuilds(List<int> restrictedBuilds)
     {
-        buildMenu.GetComponent<UIBuildMenu>().RestrictBuilds(restrictedBuilds); //here just pass it over
+        buildMenu.GetComponent<UIBuildMenu>().RestrictBuilds(restrictedBuilds);
     }
     public void RestrictUnits(List<int> restrictedUnits,bool restricted)
     {
-        DBG_UnitUI.Instance.RestrictUnits(restrictedUnits,restricted);//here just pass it over
+        DBG_UnitUI.Instance.RestrictUnits(restrictedUnits,restricted);
         Debug.Log("unit ui restrict detected");
     }
     public void EnableUIElement(UIElements ui_elements)
@@ -87,6 +98,7 @@ public class UIController : MonoBehaviour
         blurController = GetComponent<BlurController>();
         popupsHandler = GetComponent<PopupsHandler>();
         overlayHandler = GetComponent<OverlayHandler>();
+        canvasGroup = mainCanvas.GetComponent<CanvasGroup>();
         if (mainCanvas == null) Debug.LogError("MAIN CANVAS IS NOT ASSIGNED IN UICONTROLER");
 
 
@@ -160,7 +172,7 @@ public class UIController : MonoBehaviour
 
         currentState = uiState;
     }
-
+    #region References Functions
     public void CreatePopup(int id, string header = default, string content = default,GameObject callbackObj = null) => popupsHandler.CreateNewPopup(id,mainCanvas,header,content,callbackObj);
     public void OpenBuildMenu() => overlayHandler.OpenBuildMenu();
     public void CloseBuildMenu() => overlayHandler.CloseBuildMenu();
@@ -174,6 +186,7 @@ public class UIController : MonoBehaviour
     public void ShowOverlays() => overlayHandler.SwitchVisibility(true);
     public void HideEverything() { HideAllUI();HideOverlays(); }
     public void ExitBuildingMode() => SetDefaultState();
+    #endregion
     public void SetDefaultState()
     {
         if (uiState == State.Following) Camera.main.gameObject.GetComponent<CameraController>().ResetTarget();

@@ -4,11 +4,29 @@ using UnityEngine;
 
 public class WarriorLevel : CoreLevel
 {
-    private const string NLS_OnSuccess = "Task completed successfully";
-
-
     [SerializeField] private List<int> restrictedBuilds;
     [SerializeField] private List<int> restrictedUnits;
+    [SerializeField] string tasksHeader;
+    [SerializeField] string objective1;
+
+
+    public override void SetGrid()
+    {
+        Debug.Log("warrior level started");
+
+        DrawMask(4);
+        SetObjectives();
+    }
+    private void SetObjectives()
+    {
+        ObjectiveDisplay.Instance.DisplayNewObjectiveIndicator(tasksHeader);
+
+
+        ObjectiveDisplay.Instance.SetTaskHeader(tasksHeader);
+        ObjectiveDisplay.Instance.AddObjective(objective1);
+    }
+
+
 
     #region UnitRestriction
     // limit unit evolution 
@@ -17,17 +35,6 @@ public class WarriorLevel : CoreLevel
         levelManager.uiController.RestrictUnits(restrictedUnits, true);
     }
     #endregion
-
-    public override void SetGrid()
-    {
-        Debug.Log("first level started");
-
-        GameLog.Instance.WriteLine("New objective");
-        GameLog.Instance.WriteLine("Build a warrior bug to protect the hive");
-
-        DrawMask(4);
-    }
-
     #region RoomRestrictions
     public override void SetAvialableRooms()
     {
@@ -84,9 +91,6 @@ public class WarriorLevel : CoreLevel
     #endregion
     public override bool IsTaskCompleted()
     {
-
-        return true;
-
         List<HiveCell> corridors = levelManager.hiveGenerator.GetAllCooridors();
         foreach (HiveCell cell in corridors)
         {
@@ -107,7 +111,7 @@ public class WarriorLevel : CoreLevel
     }
     public override void OnLevelComplete()
     {
-        GameLog.Instance.WriteLine(NLS_OnSuccess);
+        ObjectiveDisplay.Instance.AllCompleted();
     }
 
 }

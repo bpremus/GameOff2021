@@ -4,25 +4,43 @@ using UnityEngine;
 
 public class NightAttack : CoreLevel
 {
-    private const string NLS_OnSuccess = "Task completed successfully";
 
     [SerializeField] private List<int> restrictedBuilds;
     [SerializeField] private List<int> restrictedUnits;
 
+    [SerializeField] string tasksHeader;
+    [SerializeField] string objective1;
 
     public override void SetGrid()
     {
         Debug.Log("NightAttack to start started");
 
-        GameLog.Instance.WriteLine("New objective");
-        GameLog.Instance.WriteLine("Survive the night");
-
         DrawMask(4);
 
 
 
-    }
+        if (GameController.Instance.ISDayCycle())
+        {
+            objective1 = "Prepare for night";
+        }
+        else
+        {
+            objective1 = "Survive night";
+        }
+        SetObjectives();
 
+    }
+    private void Update()
+    {
+
+    }
+    private void SetObjectives()
+    {
+        ObjectiveDisplay.Instance.DisplayNewObjectiveIndicator(tasksHeader);
+
+        ObjectiveDisplay.Instance.SetTaskHeader(tasksHeader);
+        ObjectiveDisplay.Instance.AddObjective(objective1);
+    }
 
     #region UnitRestriction
     // limit unit evolution 
@@ -83,6 +101,8 @@ public class NightAttack : CoreLevel
 
 
     float _t_spread = 0;
+
+    #endregion
     public void SpawnNightAttack()
     {
         _t_spread += Time.deltaTime;
@@ -107,19 +127,18 @@ public class NightAttack : CoreLevel
 
     }
 
-    #endregion
     public override bool IsTaskCompleted()
     {
-       // if (GameController.Instance.ISDayCycle() == false)
-       // {
-       //     SpawnNightAttack();
-       // }
+        if (GameController.Instance.ISDayCycle() == false)
+        {
+            SpawnNightAttack();
+        }
 
         return false;
     }
 
     public override void OnLevelComplete()
     {
-        GameLog.Instance.WriteLine(NLS_OnSuccess);
+        ObjectiveDisplay.Instance.AllCompleted();
     }
 }
