@@ -69,6 +69,9 @@ public class GameController : MonoBehaviour
     private int lastFoodValue;
     private int lastWoodValue;
     private int lastPopulationValue;
+
+
+    [SerializeField] private VolumeSlider[] volumeSliders;
     #endregion
   
     #region Room and evolution costs
@@ -592,6 +595,12 @@ public class GameController : MonoBehaviour
         PlayerPref.Instance.IncreaseGamesPlayed();
         PlayerPref.Instance.UpdatePlayerSoundSettings();
         PlayerPref.Instance.ApplySavedQualitySettings();
+
+        //set sound 
+        foreach(VolumeSlider volume in volumeSliders)
+        {
+            volume.InitializeSound();
+        }
     }
     #endregion
 }

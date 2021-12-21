@@ -352,7 +352,15 @@ public class CameraController : MonoBehaviour
         float targetZoom = Mathf.Lerp(minZoom, maxZoom, zoomPos);
         Camera.main.orthographicSize = targetZoom;
     }
-
+    private void CalculateMaxBoundaries()
+    {
+        ///////
+        ////
+        ////
+        /////
+        ////
+        /////
+    }
 
     private void FollowTarget()
     {

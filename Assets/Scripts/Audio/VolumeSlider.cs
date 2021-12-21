@@ -9,22 +9,24 @@ public class VolumeSlider : MonoBehaviour
 
     private FMOD.Studio.VCA vca;
     public string VcaPath;
-    public float value;
     private void Start()
     {
-        vca = FMODUnity.RuntimeManager.GetVCA(VcaPath);
-        GetSavedVolume();
+        InitializeSound();
     }
-
+    public void InitializeSound()
+    {
+        vca = FMODUnity.RuntimeManager.GetVCA(VcaPath);
+        vca.setVolume(GetSavedVolume());
+    }
     public void SetVolume(float volume)
     {
-        value = volume;
         vca.setVolume(volume);
 
         SaveVolume(volume);
     }
-    public void GetSavedVolume()
+    public float GetSavedVolume()
     {
+        float value = 0;
         if (VcaPath == "vca:/Master")
         {
             value = PlayerPref.Instance.GetMainVolume();
@@ -42,6 +44,7 @@ public class VolumeSlider : MonoBehaviour
             Debug.LogError("VcaPath error on get");
         }
         GetComponent<Slider>().value = value;
+        return value;
     }
     public void SaveVolume(float volume)
     {

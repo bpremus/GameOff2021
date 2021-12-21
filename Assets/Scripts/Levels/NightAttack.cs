@@ -10,10 +10,9 @@ public class NightAttack : CoreLevel
 
     [SerializeField] string tasksHeader;
     [SerializeField] string objective1;
-
+    private bool hasNightStarted = false;
     public override void SetGrid()
     {
-        Debug.Log("NightAttack to start started");
 
         DrawMask(4);
 
@@ -32,7 +31,10 @@ public class NightAttack : CoreLevel
     }
     private void Update()
     {
-
+        if (GameController.Instance.ISDayCycle() == false)
+        {
+            hasNightStarted = true;
+        }
     }
     private void SetObjectives()
     {
@@ -106,7 +108,7 @@ public class NightAttack : CoreLevel
     public void SpawnNightAttack()
     {
         _t_spread += Time.deltaTime;
-        if (_t_spread > 1)
+        if (_t_spread > 5)
         {
             _t_spread = 0;
         }
@@ -129,9 +131,18 @@ public class NightAttack : CoreLevel
 
     public override bool IsTaskCompleted()
     {
-        if (GameController.Instance.ISDayCycle() == false)
+        if (hasNightStarted)
         {
-            SpawnNightAttack();
+
+            if (GameController.Instance.ISDayCycle())
+            {
+                OnLevelComplete();
+                return true;
+            }
+            else
+            {
+                SpawnNightAttack();
+            }
         }
 
         return false;

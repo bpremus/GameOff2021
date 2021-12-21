@@ -8,6 +8,7 @@ public class WarriorLevel : CoreLevel
     [SerializeField] private List<int> restrictedUnits;
     [SerializeField] string tasksHeader;
     [SerializeField] string objective1;
+    [SerializeField] string objective2;
 
 
     public override void SetGrid()
@@ -24,6 +25,7 @@ public class WarriorLevel : CoreLevel
 
         ObjectiveDisplay.Instance.SetTaskHeader(tasksHeader);
         ObjectiveDisplay.Instance.AddObjective(objective1);
+        ObjectiveDisplay.Instance.AddObjective(objective2);
     }
 
 
@@ -91,6 +93,11 @@ public class WarriorLevel : CoreLevel
     #endregion
     public override bool IsTaskCompleted()
     {
+         int population = GameController.Instance.GetPopulation();
+        if(population >= 6)
+        {
+            ObjectiveDisplay.Instance.ObjectiveCompleted(objective1);
+        }
         List<HiveCell> corridors = levelManager.hiveGenerator.GetAllCooridors();
         foreach (HiveCell cell in corridors)
         {
@@ -101,8 +108,12 @@ public class WarriorLevel : CoreLevel
                 {
                     if (wb)
                     {
-                        OnLevelComplete();
-                        return true; // task completed 
+                        ObjectiveDisplay.Instance.ObjectiveCompleted(objective2);
+                        if (population >= 6)
+                        {
+                            OnLevelComplete();
+                            return true; // task completed 
+                        }
                     } 
                 }
             }

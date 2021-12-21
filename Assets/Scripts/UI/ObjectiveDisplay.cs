@@ -103,7 +103,7 @@ public class ObjectiveDisplay : MonoBehaviour
         
         //setup objective text 
         if (text == "") text = "New Objectives";
-        newObjectiveIndicator.transform.GetChild(0).transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = text;
+        newObjectiveIndicator.transform.GetChild(1).transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = text;
 
         //hide current objectives panel
         HideObjectivesPanel();

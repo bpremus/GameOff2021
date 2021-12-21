@@ -45,8 +45,7 @@ public class TutorialLevel : CoreLevel
         tasksHeader = "New beginnings";
         objective1 = "Gather " + food_objective + " food";
         objective2 = "Gather " + wood_objective + " wood";
-        objective3 = "Get to " + population_objective + " population";
-
+        objective3 = "Create "+ (population_objective - GameController.Instance.GetPopulation()) +" workers";
 
         ObjectiveDisplay.Instance.DisplayNewObjectiveIndicator(tasksHeader);
 
